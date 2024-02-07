@@ -1,0 +1,28 @@
+.client-styles{
+    div.ant-row.ant-form-item-row > div.ant-col.ant-form-item-control > div.ant-form-item-control-input > div > span > span{
+        position: relative;
+        bottom: 3px;
+    }
+    div.ant-form-item{
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 5px;
+    }   
+    label{
+        min-width: 170px!important;
+    }
+    .ex-btn{
+        background-color: rgb(6, 150, 172) !important;
+        padding: 4px 8px 4px 8px;
+        color: white;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    .charges-box{
+        border: 1px solid silver;
+    }
+    .field-box{
+        border: 1px solid silver;
+    }
+}

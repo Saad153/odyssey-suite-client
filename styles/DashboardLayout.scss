@@ -1,0 +1,128 @@
+.dashboard-styles{
+  .base-page-layout{
+    background-color: white;
+    padding: 15px;
+    height: 85vh;
+    overflow-y: auto;
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+    transition-duration: 300ms;
+    color: rgb(40, 40, 40)!important;
+    font-weight: 500;
+  }
+  .bloc-tabs {
+    display: flex;
+  }
+  .tabs {
+    font-size: 13px;
+    font-weight: 900!important;
+    padding: 2px 10px 2px 10px;
+    text-align: center;
+    background: rgba(128, 128, 128, 0.075);
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+    border-left: 1px solid rgba(0, 0, 0, 0.274);
+    border-right: 1px solid rgba(0, 0, 0, 0.274);
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+  }
+  .tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    background: rgba(0, 0, 0, 0.274);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+  }
+  .tabs:not(:last-child){
+    border-right: 1px solid rgba(0, 0, 0, 0.274);
+  }
+  
+  .active-tabs  {
+    transition-duration: 300ms;
+    background: white;
+    border-bottom: 1px solid transparent;
+    border-left:1px solid white;
+    border-right:1px solid white;
+  }
+  
+  .active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    background: rgb(40, 40, 40);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+  }
+  button {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  .content-tabs {
+    flex-grow : 1;
+  }
+  .content {
+    background: white;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  .content h2 {
+    padding: 0px 0 5px 0px;
+  }
+  .content hr {
+    width: 100px;
+    height: 2px;
+    background: #222;
+    margin-bottom: 5px;
+  }
+  .content p {
+    width: 100%;
+    height: 100%;
+  }
+  .active-content {
+    display: block;
+  }
+
+  .clos-btn{
+    color: black;
+    font-size: 8px;
+    position: relative;
+    bottom: 3px;
+    left: 4px;
+    padding: 3px;
+  }
+  .clos-btn:hover{
+    transition-duration: 300ms;
+    background-color: rgb(193, 37, 37);
+    color: white;
+    border-radius: 25px;
+  }
+  .green-txt{
+    color: green;
+  }
+
+  .party-types{
+    background-color: rgba(111, 152, 196, 0.293);
+    padding:3px;
+    font-size: 12px;
+    margin: 2px;
+    border-radius: 5px;
+    white-space: nowrap;
+    text-align: center;
+  }
+}

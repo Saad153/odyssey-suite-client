@@ -1,0 +1,17 @@
+.invoice-styles{
+    .inv-label{
+        font-weight: 500;
+        color: grey;
+    }
+    .inv-value{
+        font-weight: 600;
+        color: rgb(52, 138, 159);
+    }
+    .inv-paras{
+        line-height: 5px !important;
+    }
+    .inv-box{
+        border: 1px solid grey!important;
+        padding: 2px!important;
+    }
+}

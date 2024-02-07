@@ -1,0 +1,18 @@
+.dashboard-home-styles{
+    .bar{
+        box-shadow: 10px 10px 24px -14px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 24px -14px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 24px -14px rgba(0,0,0,0.75);
+        background-color: rgb(227, 251, 251);
+        border-radius: 15px;
+        padding: 20px;
+        cursor: pointer;
+    }
+    .bar:hover{
+        transition-duration: 300ms;
+        background-color: rgb(163, 223, 223);
+        box-shadow: 10px 10px 24px -14px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 24px -14px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 24px -14px rgba(0,0,0,0.75);
+    }
+}

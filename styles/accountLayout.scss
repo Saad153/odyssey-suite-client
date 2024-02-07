@@ -1,0 +1,28 @@
+.account-styles{
+    .parent {
+        padding: 5px;
+        margin: 1px;
+    }
+    .child {
+        display: inline-block;
+    }
+    .icon{
+        cursor: pointer;
+        position: relative;
+        bottom: 2px;
+        margin: 10px;
+    }
+    .icon:hover{
+        color: rgba(27, 141, 156, 0.972);
+    }
+    .edit-icon{
+        cursor: pointer;
+        position: relative;
+        bottom: 2px;
+        left: 5px;
+        margin: 10px;
+    }
+    .edit-icon:hover{
+        color: rgba(27, 141, 156, 0.972);
+    }
+}

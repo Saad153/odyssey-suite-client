@@ -1,0 +1,10 @@
+{
+    "ports": [
+        {"label":"BAGS"   , "value":"BAGS"},
+        {"label":"BALES"  , "value":"BALES"},
+        {"label":"BARRELS", "value":"BARRELS"},
+        {"label":"CARTONS", "value":"CARTONS"},
+        {"label":"BLOCKS" , "value":"BLOCKS"},
+        {"label":"BOATS"  , "value":"BOATS"}
+    ]
+}
