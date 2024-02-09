@@ -111,71 +111,105 @@ const JobBalancingReport = ({ result, query }) => {
         <>
         {!load &&
         <>
-            {currentRecords?.length > 0 &&
+            {records?.length > 0 &&
                 <>
-                    <PrintTopHeader company={query.company} />
-                    <hr className='mb-2' />
-                    <div className='table-sm-1' style={{ maxHeight: overflow ? 530 : "50%", overflowY: 'auto' }}>
-                        <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
-                            <thead>
-                                <tr>
-                                    <th className='text-center'>#</th>
-                                    <th className='text-center'>Inv. No</th>
-                                    <th className='text-center'>Date</th>
-                                    <th className='text-center'>HBL/HAWB</th>
-                                    <th className='text-center'>Name</th>
-                                    <th className='text-center'>F. Dest</th>
-                                    <th className='text-center'>F/Tp</th>
-                                    <th className='text-center'>Curr</th>
-                                    <th className='text-center'>Debit</th>
-                                    <th className='text-center'>Credit</th>
-                                    <th className='text-center'>Paid/Rcvd</th>
-                                    <th className='text-center'>Balance</th>
-                                    <th className='text-center'>Age</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currentRecords?.map((x, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <td style={{ maxWidth: 30 }}>{i + 1}</td>
-                                            <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
-                                                onClick={async ()=>{
-                                                    console.log(x)
-                                                    await Router.push(`/reports/invoice/${x.id}`)
-                                                    dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
-                                                }}
-                                            >{x.invoice_No}</td>
-                                            <td style={{}}>{x.createdAt}</td>
-                                            <td style={{}}>{x.hbl}</td>
-                                            <td style={{}}>{x.party_Name}</td>
-                                            <td style={{ maxWidth: 90 }}>{x.fd}</td>
-                                            <td style={{}}>{x.freightType}</td>
-                                            <td style={{}}>{x.currency}</td>
-                                            <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
-                                            <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
-                                            <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
-                                            <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
-                                            <td style={{ textAlign: 'center' }}>{x.age}</td>
-                                        </tr>
-                                    )
-                                })}
-                                {currentPage === noOfPages && (
-                                    <tr>
-                                        <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
-                                        <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
-                                        <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
-                                        <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
-                                        <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
-                                        <td style={{ textAlign: 'center' }}>-</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </Table>
-                    </div>
-                    <div className="d-flex justify-content-end mt-4">
-                        <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-                    </div>
+                <PrintTopHeader company={query.company} />
+                <hr className='mb-2' />
+                <div className='table-sm-1' style={{ maxHeight: overflow ? 530 : "50%", overflowY: 'auto' }}>
+                <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
+                    <thead>
+                        <tr>
+                            <th className='text-center'>#</th>
+                            <th className='text-center'>Inv. No</th>
+                            <th className='text-center'>Date</th>
+                            <th className='text-center'>HBL/HAWB</th>
+                            <th className='text-center'>Name</th>
+                            <th className='text-center'>F. Dest</th>
+                            <th className='text-center'>F/Tp</th>
+                            <th className='text-center'>Curr</th>
+                            <th className='text-center'>Debit</th>
+                            <th className='text-center'>Credit</th>
+                            <th className='text-center'>Paid/Rcvd</th>
+                            <th className='text-center'>Balance</th>
+                            <th className='text-center'>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {overflow ? currentRecords.map((x,i)=>{
+                            return (
+                                <>
+                            <tr key={i}>
+                                <td style={{ maxWidth: 30 }}>{i + 1}</td>
+                                <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
+                                    onClick={async ()=>{
+                                        console.log(x)
+                                        await Router.push(`/reports/invoice/${x.id}`)
+                                        dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
+                                    }}
+                                >{x.invoice_No}</td>
+                                <td style={{}}>{x.createdAt}</td>
+                                <td style={{}}>{x.hbl}</td>
+                                <td style={{}}>{x.party_Name}</td>
+                                <td style={{ maxWidth: 90 }}>{x.fd}</td>
+                                <td style={{}}>{x.freightType}</td>
+                                <td style={{}}>{x.currency}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
+                                <td style={{ textAlign: 'center' }}>{x.age}</td>
+                            </tr>
+                            </>)
+                        }) : records.map((x, i) => {
+                            return (
+                            <tr key={i}>
+                                <td style={{ maxWidth: 30 }}>{i + 1}</td>
+                                <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
+                                    onClick={async ()=>{
+                                        await Router.push(`/reports/invoice/${x.id}`)
+                                        dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
+                                    }}
+                                >{x.invoice_No}</td>
+                                <td style={{}}>{x.createdAt}</td>
+                                <td style={{}}>{x.hbl}</td>
+                                <td style={{}}>{x.party_Name}</td>
+                                <td style={{ maxWidth: 90 }}>{x.fd}</td>
+                                <td style={{}}>{x.freightType}</td>
+                                <td style={{}}>{x.currency}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
+                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
+                                <td style={{ textAlign: 'center' }}>{x.age}</td>
+                            </tr>
+                            )
+                        })}
+                        {overflow && currentPage === noOfPages && (
+                            <tr>
+                                <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
+                                <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
+                                <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
+                                <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
+                                <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
+                                <td style={{ textAlign: 'center' }}>-</td>
+                            </tr>
+                        )}
+                        {!overflow && (
+                            <tr>
+                                <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
+                                <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
+                                <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
+                                <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
+                                <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
+                                <td style={{ textAlign: 'center' }}>-</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
+                </div>
+                {overflow && <div className="d-flex justify-content-end mt-4">
+                    <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+                </div>}
                 </>
             }
             {records.length == 0 && <>No Similar Record</>}
@@ -189,7 +223,14 @@ const JobBalancingReport = ({ result, query }) => {
     const gridRef = useRef();
     const [columnDefs, setColumnDefs] = useState([
         { headerName: '#', field: 'no', width: 50 },
-        { headerName: 'Inv. No', field: 'invoice_No', filter: true },
+        { headerName: 'Inv. No', field: 'invoice_No', filter: true,
+            cellRenderer: params => {
+                return <span style={{cursor:"pointer"}} onClick={ async()=>{
+                    await Router.push(`/reports/invoice/${params.data.id}`)
+                    dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${params.data.id}` }))
+                }}>{params.data.invoice_No}</span>;
+            }
+        },
         { headerName: 'Date', field: 'createdAt', filter: true },
         { headerName: 'HBL/HAWB', field: 'hbl', filter: true },
         { headerName: 'Name', field: 'party_Name', width: 224, filter: true },
