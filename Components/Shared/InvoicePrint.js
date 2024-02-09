@@ -317,7 +317,7 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
         </tr>
     </thead>
     <tbody>
-    {records.map((x, index) => {
+    {records?.map((x, index) => {
     return (
     <tr key={index} className='table-row-center-singleLine' style={{border:'1px solid black', fontSize:9}}>
         <td className='text-center p-0'>{index + 1}</td>

@@ -132,6 +132,7 @@ const InvoiceBalaincing = () => {
                         <Select defaultValue="" style={{ width: '100%', marginBottom: 5 }} size='small'
                             onChange={(e) => setOverseasAgent(e)}
                             showSearch
+                            allowClear
                             filterOption={filterOption}
                             options={values?.vendor?.overseasAgent.map((x) => { return { value: x.id, label: x.name } })}
                         />

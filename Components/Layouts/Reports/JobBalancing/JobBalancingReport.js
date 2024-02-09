@@ -7,14 +7,17 @@ import Cookies from "js-cookie";
 import moment from 'moment';
 import { AgGridReact } from 'ag-grid-react';
 import { CSVLink } from "react-csv";
+import { incrementTab } from '/redux/tabs/tabSlice';
+import { useDispatch } from 'react-redux';
+import Router from 'next/router';
+import Pagination from "../../../Shared/Pagination";
 
 const JobBalancingReport = ({ result, query }) => {
-
     let inputRef = useRef(null);
     const [load, setLoad] = useState(true);
     const [records, setRecords] = useState([]);
     const [username, setUserName] = useState("");
-
+    const dispatch = useDispatch();
     const commas = (a) => a ? parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") : '0.0';
 
     const getTotal = (type, list) => {
@@ -60,7 +63,6 @@ const JobBalancingReport = ({ result, query }) => {
     }
 
     useEffect(() => {
-        console.log(query)
         getValues(result);
         getUserName();
         async function getUserName() {
@@ -97,16 +99,23 @@ const JobBalancingReport = ({ result, query }) => {
         setLoad(false)
     }
 
+    const [currentPage,setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(20);
+    const indexOfLast = currentPage * recordsPerPage ;
+    const indexOfFirst = indexOfLast - recordsPerPage;
+    const currentRecords = records ? records.slice(indexOfFirst,indexOfLast) : [];
+    const noOfPages = records ? Math.ceil(records.length / recordsPerPage) : 0 ;
+
     const TableComponent = ({overflow}) => {
         return (
         <>
         {!load &&
         <>
-            {records.length > 0 &&
+            {currentRecords?.length > 0 &&
                 <>
                     <PrintTopHeader company={query.company} />
                     <hr className='mb-2' />
-                    <div className='table-sm-1' style={{ maxHeight: overflow ? 600 : "100%", overflowY: 'auto' }}>
+                    <div className='table-sm-1' style={{ maxHeight: overflow ? 530 : "50%", overflowY: 'auto' }}>
                         <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
                             <thead>
                                 <tr>
@@ -126,11 +135,17 @@ const JobBalancingReport = ({ result, query }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {records.map((x, i) => {
+                                {currentRecords?.map((x, i) => {
                                     return (
                                         <tr key={i}>
                                             <td style={{ maxWidth: 30 }}>{i + 1}</td>
-                                            <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3 }}>{x.invoice_No}</td>
+                                            <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
+                                                onClick={async ()=>{
+                                                    console.log(x)
+                                                    await Router.push(`/reports/invoice/${x.id}`)
+                                                    dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
+                                                }}
+                                            >{x.invoice_No}</td>
                                             <td style={{}}>{x.createdAt}</td>
                                             <td style={{}}>{x.hbl}</td>
                                             <td style={{}}>{x.party_Name}</td>
@@ -145,16 +160,21 @@ const JobBalancingReport = ({ result, query }) => {
                                         </tr>
                                     )
                                 })}
-                                <tr>
-                                    <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
-                                    <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
-                                    <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
-                                    <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
-                                    <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
-                                    <td style={{ textAlign: 'center' }}>-</td>
-                                </tr>
+                                {currentPage === noOfPages && (
+                                    <tr>
+                                        <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
+                                        <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
+                                        <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
+                                        <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
+                                        <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
+                                        <td style={{ textAlign: 'center' }}>-</td>
+                                    </tr>
+                                )}
                             </tbody>
                         </Table>
+                    </div>
+                    <div className="d-flex justify-content-end mt-4">
+                        <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
                     </div>
                 </>
             }

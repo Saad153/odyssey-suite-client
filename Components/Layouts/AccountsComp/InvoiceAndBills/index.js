@@ -4,12 +4,14 @@ import axios from "axios";
 import { Row, Col, Spinner, Table } from 'react-bootstrap';
 import { Input, Empty, Radio, Modal } from 'antd';
 import openNotification from '../../../Shared/Notification';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { incrementTab } from '/redux/tabs/tabSlice';
+import Router from "next/router"
 
 const InvoiceAndBills = ({invoiceData}) => {
 
   const companyId = useSelector((state) => state.company.value);
-
+  const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(false);
@@ -109,7 +111,11 @@ const InvoiceAndBills = ({invoiceData}) => {
             {
             records.map((x, index) => {
             return (
-              <tr key={index} className='f row-hov' onClick={()=>searchInvoice(x.invoice_No)}>
+              <tr key={index} className='f row-hov' onClick={async ()=>{
+                // searchInvoice(x.invoice_No)
+                await Router.push(`/reports/invoice/${x.id}`)
+                dispatch(incrementTab({"label":"Invoice details", "key":"2-11", "id":`${x.id}`}))
+              }}>
                 <td>{index + 1}</td>
                 <td><span className='blue-txt fw-7'>{x.invoice_No}</span></td>
                 <td><span className='blue-txt fw-7'>{x.SE_Job?.jobNo}</span></td>

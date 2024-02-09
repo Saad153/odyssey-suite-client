@@ -21,7 +21,6 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
   //pagination states
   const [currentPage,setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(20);
-  console.log(jobsData);
 
   const indexOfLast = currentPage * recordsPerPage;
   const indexOfFirst = indexOfLast - recordsPerPage;

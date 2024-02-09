@@ -143,7 +143,7 @@ const BlInfo = ({control, id, register, state, useWatch, dispatch, reset, type, 
             </Col>
             <Col md={12}>
             <div className="mt-2" style={{lineHeight:1.35}}>Consignee *</div>
-            <div className='dummy-input'>{allValues.consignee}</div>
+            <div className='dummy-input overflow-hidden'>{allValues.consignee}</div>
             </Col>
             <Col md={12}>
                 <div className='mt-2'>Notify Party #1 *</div>

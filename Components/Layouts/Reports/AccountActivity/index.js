@@ -7,6 +7,7 @@ import { Row, Col, Table, Spinner, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setFilterValues } from '../../../../redux/filters/filterSlice';
+import Pagination from '../../../Shared/Pagination';
 
 const AccountActivity = () => {
 
@@ -20,7 +21,7 @@ const AccountActivity = () => {
   const [from, setFrom] = useState(moment("2023-07-01").format("YYYY-MM-DD"));
   const [to, setTo] = useState(moment().format("YYYY-MM-DD"));
   const dispatch = useDispatch()
-  
+
   const commas = (a) => { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") }
 
   const stateValues = {
@@ -41,20 +42,20 @@ const AccountActivity = () => {
     return result;
   }
 
-  const filterValues = useSelector(state=>state.filterValues);
-  const filters = filterValues.find(page=>page.pageName==="accountActivity");
-  const values = filters ? filters.values : null ;
+  const filterValues = useSelector(state => state.filterValues);
+  const filters = filterValues.find(page => page.pageName === "accountActivity");
+  const values = filters ? filters.values : null;
 
   useEffect(() => { getRecords(); }, [company])
-  useEffect(()=>{
-    if(filters){
+  useEffect(() => {
+    if (filters) {
       setFrom(values.from),
-      setTo(values.to),
-      setCompany(values.company),
-      setDebitAccount(values.debitAccount),
-      setCreditAccount(values.creditAccount)
+        setTo(values.to),
+        setCompany(values.company),
+        setDebitAccount(values.debitAccount),
+        setCreditAccount(values.creditAccount)
     }
-  },[filters]);
+  }, [filters]);
 
   const getRecords = async () => {
     await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_ALL_CHILD_ACCOUNTS, {
@@ -83,10 +84,22 @@ const AccountActivity = () => {
       setVisible(true);
     })
     dispatch(setFilterValues({
-      pageName:"accountActivity",
-      values:stateValues
+      pageName: "accountActivity",
+      values: stateValues
     }))
   }
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(20);
+  const indexOfLast = currentPage * recordsPerPage;
+  const indexOfFirst = indexOfLast - recordsPerPage;
+  const currentRecords = voucherRecords ? voucherRecords.slice(indexOfFirst, indexOfLast) : [];
+  const noOfPages = voucherRecords ? Math.ceil(voucherRecords.length / recordsPerPage) : 0;
+
+  console.log("currentPage:", currentPage);
+  console.log("indexOfLast:", indexOfLast);
+  console.log("indexOfFirst:", indexOfFirst);
+  console.log("currentRecords:", currentRecords);
 
   return (
     <div className='base-page-layout'>
@@ -154,14 +167,15 @@ const AccountActivity = () => {
       <button className='btn-custom' disabled={load ? true : false} onClick={handleSubmit}>
         {load ? <Spinner size='sm' className='mx-3' /> : "Search"}
       </button>
+      {/* modal open  */}
       <Modal open={visible} width={"80%"} onOk={() => setVisible(false)}
         onCancel={() => { setVisible(false); setVoucherRecords([]); }}
         footer={false} maskClosable={false}
         title={`Account Activity`}
       >
-        {voucherRecords.length > 0 &&
-          <div style={{ maxHeight: 660, overflowY: 'auto', overflowX: 'hidden' }}>
-            {voucherRecords.map((z, i) => {
+        {currentRecords.length > 0 &&
+          <div style={{ maxHeight: 500, overflowY: 'auto', overflowX: 'hidden' }}>
+            {currentRecords.map((z, i) => {
               return (
                 <div className='table-sm-1' key={i}>
                   <Row style={{ fontSize: 15 }} className="mb-2">
@@ -215,6 +229,9 @@ const AccountActivity = () => {
             })}
           </div>
         }
+        <div className='d-flex justify-content-end items-end my-4' style={{ maxWidth: "100%" }} >
+          <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </div>
       </Modal>
     </div>
   )

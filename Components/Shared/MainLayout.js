@@ -82,8 +82,7 @@ const MainLayout = ({children}) => {
     }
     if(newRouter.pathname.includes("/clearanceJobs/import/air/[id]")){
       setToggleState('9-2');
-    }
-    
+    }   
     if(newRouter.pathname.includes("/clearanceJobs/export/sea/[id]")){
       setToggleState('8-4');
     }
@@ -98,6 +97,9 @@ const MainLayout = ({children}) => {
     }
     if(newRouter.pathname.includes("/reports/ledgerReport/[id]")){
       setToggleState('5-7');
+    }
+    if(newRouter.pathname.includes("/reports/invoice/[id]")){
+      setToggleState('2-11');
     }
     if(newRouter.pathname.includes("/reports/jobPLReport/report")){
       setToggleState('5-4-1');
@@ -376,6 +378,7 @@ const MainLayout = ({children}) => {
     else if(x.key=='5-6'){ Router.push('/reports/invoiceBalancing') }
     else if(x.key=='5-8'){ Router.push(`/reports/invoiceBalancing/${setKey(x)}`) }
     else if(x.key=='5-7'){ Router.push(`/reports/ledgerReport/${setKey(x)}`) }
+    else if(x.key=='2-11'){ Router.push(`/reports/invoice/${setKey(x)}`) }
     else if(x.key=='6-1'){ Router.push('/tasks/riders') }
     else if(x.key=='6-2'){ Router.push(`/tasks/riders/riderAssign/${setKey(x)}`) }
     else if(x.key=='7-1'){ Router.push('/airJobs/aeJobList') }
@@ -427,6 +430,7 @@ const MainLayout = ({children}) => {
 
   return (
   <Layout className="main-dashboard-layout">
+      {/* sidebar  */}
     {!load && 
     <Sider trigger={null} collapsible collapsed={collapsed} 
       className='side-menu-styles' 

@@ -11,7 +11,7 @@ import { useQueryClient } from '@tanstack/react-query';
 const { TextArea } = Input;
 
 const InvoiceCharges = ({data, companyId}) => {
-
+  console.log(data)
   const commas = (a) =>  { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")}
 
   let inputRef = useRef(null);
