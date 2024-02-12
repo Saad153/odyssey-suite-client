@@ -33,10 +33,9 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
     }
     const commas = (a) =>  { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")}
 
-    // useEffect(() => {
-    //     console.log(invoice.SE_Job)
-    //     console.log(invoice.operation)
-    // }, [invoice])
+    useEffect(() => {
+        console.log(invoice.SE_Job)
+    }, [invoice])
     
     const paraStyles = { lineHeight:1.2, fontSize:11 }
     const heading = { lineHeight:1, fontSize:11, fontWeight:'800', paddingBottom:5 };
@@ -160,9 +159,14 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                     <div style={heading}>{(invoice.operation=="SI"|| invoice.operation=="AI")?"Arrival Date":"Departure Date"}</div>
                     <div style={paraStyles}>
                         {
-                            (invoice.operation=="SE"||invoice.operation=="SI") ?
-                            moment(invoice.SE_Job?.eta).format("DD-MMM-YYYY"):
-                            moment(invoice.SE_Job?.etd).format("DD-MMM-YYYY")
+                            (invoice.operation=="AI"||invoice.operation=="SI") ?
+                            <>
+                                {moment(invoice.SE_Job?.arrivalDate).format("DD-MMM-YYYY")}
+                            </>
+                            :
+                            <>
+                                {moment(invoice.SE_Job?.departureDate).format("DD-MMM-YYYY")}
+                            </>
                         }
                     </div>
                 </Col>
