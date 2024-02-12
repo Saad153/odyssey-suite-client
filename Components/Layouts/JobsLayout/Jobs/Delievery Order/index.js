@@ -17,7 +17,7 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
   const calculate = () => {
     let receivable = 0
     let recieved = 0
-    console.log(state.InvoiceList)
+    // console.log(state.InvoiceList)
     state.InvoiceList.forEach((x)=>{
       if(x.payType=="Recievable"){
         receivable = receivable + parseFloat(x.total);
@@ -25,7 +25,7 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
       }
     })
     recieved = recieved?recieved:0
-    console.log(receivable, recieved)
+    // console.log(receivable, recieved)
     return {receivable, recieved}
   }
 
