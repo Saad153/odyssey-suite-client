@@ -12,9 +12,9 @@ import TimeComp from "../../../../Shared/Form/TimeComp";
 const Column2 = ({register, control, state, jobData, clearingAgents}) => {
 
   let deliverTo = jobData.consigneeId && state.fields.party.consignee.filter((x) => x.id == jobData.consigneeId);
-
+  
   useEffect(() => {
-    console.log(state.fields.party.consignee)
+    // console.log(state.fields.party.consignee)
   }, [])
   
   return (

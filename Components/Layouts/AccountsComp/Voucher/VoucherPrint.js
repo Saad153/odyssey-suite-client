@@ -48,7 +48,7 @@ const VoucherPrint = ({ compLogo, voucherData }) => {
                             <div>SHIPPING & LOGISTICS</div>
                         </>
                     }
-                    {compLogo == "2" &&
+                    {compLogo == "3" &&
                         <>
                             <img src={'/aircargo-logo.png'} style={{ filter: `invert(0.5)` }} height={100} />
                         </>

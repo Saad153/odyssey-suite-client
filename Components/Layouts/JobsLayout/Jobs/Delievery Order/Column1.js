@@ -10,7 +10,6 @@ const Column1 = ({register, control, state, jobData, allValues, calculatePrice})
   let exporter = jobData.shipperId &&  state.fields.party.shipper?.filter((x) => x.id == jobData.shipperId)
   let importer = jobData.consigneeId && state.fields.party.consignee?.filter((x) => x.id == jobData.consigneeId)
   let vessel = jobData.vesselId && state.fields.vessel?.filter((x) => x.id == jobData.vesselId)
-
   return (
     <div>
       <Row md={6}>

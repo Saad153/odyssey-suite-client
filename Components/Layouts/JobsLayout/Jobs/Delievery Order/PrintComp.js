@@ -1,190 +1,312 @@
 import React, { useRef, useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Table } from "react-bootstrap";
 import ReactToPrint from "react-to-print";
 import moment from "moment";
 
-const PrintComp = ({allValues, state}) => {
-    let inputRef = useRef(null);
-    let border = "1px solid";
-    const heading = border ? "grey-txt" : "wh-txt";
-    const line = "1px solid";
+const DoPrint = ({ allValues, state, companyId }) => {
+  const data = state.selectedRecord;
+  let importer = data.consigneeId && state.fields.party.consignee?.filter((x) => x.id == data.consigneeId);
+  let commodity = data.commodityId && state.fields.commodity?.filter((x) => x.id == data.commodityId);
+  let shipper = data.shipperId && state.fields.party.shipper?.filter((x) => x.id == data.shipperId);
 
-    useEffect(() => {
-      console.log(state)
-    }, [])
+  const paraStyles = { lineHeight: 1.2, fontSize: 11 }
+  const Line = () => <div style={{ backgroundColor: "grey", height: 1, position: 'relative', top: 12 }}></div>
 
-    const getVales = (value) => {
-      let str="";
-      let ourSubstring = "(";
-      str = value.indexOf(ourSubstring);
-      str = value.slice(0,str-1);
-      return str
-    }
+  useEffect(() => {
+
+  }, [])
 
   return (
-    <div style={{ width: "30%" }}>
-      <ReactToPrint
-        content={() => inputRef}
-        trigger={() => (<div className="div-btn-custom text-center p-2" style={{minWidth:100}}>Go</div>)}
-      />
-      <div style={{ display: "none" }}>
-        <div ref={(response) => (inputRef = response)} style={{ padding: "30px" }}>
-          <div className="d-flex justify-content-center" style={{ position:"relative", borderBottom: "2px solid" }}>
-            <img src="/seanet-logo.png" height={40} className="invert" style={{ position:"absolute", left:"0"}}/>
-            <div style={{ textAlign: "center" }}>
-              <p className="fs-16" style={{ lineHeight: "5px" }}>
-                SEA NET SHIPPING & LOGISTICS
-              </p>
-              <p className="fs-13" style={{ lineHeight: "5px" }}>
-                House# D-213 DMCHS, Siraj Ud Daula Road, Karachi
-              </p>
-              <p className="fs-13" style={{ lineHeight: "5px" }}>
-                Tel: 9221 34395444-55-66 Fax 9221 34385001
-              </p>
-              <p className="fs-13" style={{ lineHeight: "5px" }}>
-                Email: info@seanetpk.com Web www.seanetpk.com
-              </p>
-            </div>
-            <p style={{ position: "absolute", top: "62px", right: "50px", background: "white", padding: "2px"}}>
-              Loading Progress
-            </p>
+    <div className='pb-5 px-5 pt-4'>
+      <Row>
+        <Col md={4} className='text-center'>
+          {companyId == "1" ?
+            <>
+              <img src={'/seanet-logo.png'} style={{ filter: `invert(0.5)` }} height={100} />
+              <div>SHIPPING & LOGISTICS</div>
+            </>
+            :
+            <>
+              <img src={'/aircargo-logo.png'} style={{ filter: `invert(0.5)` }} height={100} />
+            </>
+          }
+        </Col>
+        <Col className='mt-4'>
+          <div className='text-center '>
+            <div style={{ fontSize: 20 }}><b>{companyId == "1" ? "SEA NET SHIPPING & LOGISTICS" : "AIR CARGO SERVICES"}</b></div>
+            <div style={paraStyles}>House# D-213, DMCHS, Siraj Ud Daula Road, Karachi</div>
+            <div style={paraStyles}>Tel: 9221 34395444-55-66   Fax: 9221 34385001</div>
+            <div style={paraStyles}>Email: {companyId == "1" ? "info@seanetpk.com" : "info@acs.com.pk"}   Web: {companyId == "1" ? "www.seanetpk.com" : "www.acs.com.pk"}</div>
+            <div style={paraStyles}>NTN # {companyId == "1" ? "8271203-5" : "0287230-7"}</div>
           </div>
-          <div className="mt-3" style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-            <div>
-              <p className="fs-13" style={{ lineHeight: "5px" }}>The Assistant Traffic Manager</p>
-              <p className="fs-13" style={{ lineHeight: "5px" }}>PICT</p>
-              <p className="fs-13" style={{ lineHeight: "5px" }}>Karachi</p>
-            </div>
-            <table className="table table-bordered" style={{ width: "300px", height: "40px" }}>
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Book #</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{state.selectedRecord.jobDate?moment(state.selectedRecord.jobDate).format("DD/MM/YYYY"):""}</td>
-                  <td>{state.selectedRecord.jobNo}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        </Col>
+      </Row>
 
-          <div>
-            <p>Dear Sir</p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-              }}
-            >
-              <p>C.V : </p>
-              <p style={{ width: "150px", borderBottom: "1px solid" }}>
-                {state.fields.vessel[state.fields?.vessel?.findIndex((x)=>state.selectedRecord?.Voyage?.VesselId==x.id)]?.name}
-              </p>
-              <p>Voyage : </p>
-              <p style={{ width: "100px", borderBottom: "1px solid" }}>
-                {state.selectedRecord.Voyage.voyage}
-              </p>
-              <p>EGM No : </p>
-              <p style={{ width: "100px", borderBottom: "1px solid" }}>
-                {allValues.egm}
-              </p>
-              <p>Berth No : </p>
-              <p style={{ width: "100px", borderBottom: "1px solid" }}>
-              {allValues.berth} 
+      <Row className="my-2">
+        <Col md="4"><Line /></Col>
+        <Col md="4">
+          <div className="text-center fs-15" >
+            <strong>Delivery Order</strong>
+          </div>
+        </Col>
+        <Col md="4"><Line /></Col>
+      </Row>
 
-              </p>
-              <p className="d-flex">
-                <p>WHARF : </p>
-                <p style={{ width: "180px", borderBottom: "1px solid" }}>
-                  {allValues.wharf} 
-                </p>
-              </p>
-            </div>
-          </div>
+      <Row className="my-2">
+        <Col md="12">
+          <label className=' mt-2 me-2 font-bold fs-10'>Delivery Req To :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "85%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={allValues?.deliveryReqTo}
+          />
+        </Col>
+      </Row>
 
-          <div>
-            <p style={{lineHeight:"5px"}}>We have requested for the following cargo to be alongside :</p>
-            <Row>
-              <Col style={{ margin: 0, border: border, padding: 0, minWidth: "100%" }}>
-                <Row style={{ position: "relative", left: 10 }}>
-                  <Col style={{ maxWidth: "25%", margin:0, borderBottom:border, borderRight:border, paddingTop:7, paddingBottom:3 }} className="fs-12 text-center"
-                  >Shipper / Clearing Agent
-                  </Col>
-                  <Col style={{ maxWidth: "15%", margin: 0, borderBottom: border, borderRight: border, paddingTop: 7, paddingBottom: 3 }}
-                    className="fs-12 text-center">
-                    Pkgs / No. of Cont.
-                  </Col>
-                  <Col style={{ maxWidth:"25%", borderBottom:border, borderRight:border, paddingTop:7, paddingBottom:3 }} className={`fs-12 px-4 m-0`}>
-                    Description Of Goods
-                  </Col>
-                  <Col style={{ maxWidth:"15%", borderBottom: border, borderRight: border, paddingTop: 7, paddingBottom: 3}} className={`fs-12 px-4 m-0`} >
-                    Date & Time Required
-                  </Col>
-                  <Col style={{ maxWidth: "17%", margin: 0, borderBottom: border, paddingTop: 7, paddingBottom: 3 }} className="fs-12 px-4">
-                    Destination
-                  </Col>
-                </Row>
-                <div
-                  style={{ height: 1, width: "100%", backgroundColor: line }}
-                ></div>
-                <Row style={{ position: "relative", left: 10 }}>
-                  <Col style={{ maxWidth:"25%", margin:0, borderRight:border, paddingTop:7, paddingBottom:3}} className={`${heading} fs-12`}>
-                    <div className="mb-3">
-                      Shipper:<br />
-                      {state?.selectedRecord?.shipperId && getVales(state.fields?.party?.shipper[state.fields.party.shipper.findIndex((x)=>x.id==state?.selectedRecord?.shipperId)]?.name)} 
-                    </div>
-                    <div className="mt-3 mb-1">
-                      Clearing Agent :<br />
-                      {state?.selectedRecord?.customAgentId && getVales(state.fields?.vendor?.chaChb[state.fields.vendor.chaChb.findIndex((x)=>x.id==state?.selectedRecord?.customAgentId)]?.name)}  
-                    </div>
-                  </Col>
-                  <Col style={{ maxWidth:"15%", margin:0, borderRight: border, paddingTop:7, paddingBottom:3}} className={`${heading} fs-12 text-center`}>
-                    {state.selectedRecord.pcs} <br /> {state.selectedRecord.pkgUnit}
-                  </Col>
-                  <Col style={{ maxWidth:"25%", margin:0, borderRight: border, paddingTop:7, paddingBottom:3 }} className={`${heading} fs-12 px-4`}>
-                    {state?.selectedRecord?.commodityId && getVales(state.fields?.commodity[state.fields.commodity.findIndex((x)=>state.selectedRecord.commodityId==x.id)]?.name)}
-                  </Col>
-                  <Col style={{ maxWidth:"15%", margin:0, borderRight: border, paddingTop:7, paddingBottom:3 }} className={`${heading} fs-12 px-4`}>
-                    {allValues.loadingDate?moment(allValues.loadingDate).format("DD/MM/YYYY"):""}
-                    <br />
-                    {allValues.loadingTime?moment(allValues.loadingTime).format("hh:mm a"):""}
-                  </Col>
-                  <Col style={{ maxWidth: "17%", margin: 0, paddingTop: 7, paddingBottom: 3 }} className={`${heading} fs-12 px-4`}>
-                    Discharge Port:
-                    <br />
-                    {state.selectedRecord.pod}
-                  </Col>
-                </Row>
-              </Col>
-              <Col style={{ margin:0, borderLeft:"none", maxWidth:"54%", paddingLeft:1, paddingRight:1, paddingTop:0, paddingBottom:5}}>
-              </Col>
-            </Row>
-            <p className="fs-15 mt-2" style={{lineHeight:"15px"}}>
-              {allValues.instruction}
-            </p>
-          </div>
-          <div style={{display:"flex", justifyContent:"space-between"}}>
-            <div style={{width:"40%"}}>
-                <p className="fs-13">Kindly allow the cargo to pass throught accordingly</p>
-                <br/>
-                <hr/>
-                <p><b>For : For SEA NET SHIPPING & LOGISTICS</b></p>
-                <p style={{textAlign:"center"}}><b>As Agent</b></p>
-            </div>
-            <div style={{width:"40%"}}>
-                <p className="fs-13"> <i>C.C:</i></p>
-                <br/>
-                <p>{state?.selectedRecord?.shipperId && getVales(state.fields?.party?.shipper[state.fields.party.shipper.findIndex((x)=>x.id==state.selectedRecord.shipperId)]?.name)}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Date :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={moment(allValues?.date).format("MMM Do YY")}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>No :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={data?.jobNo}
+          />
+        </Col>
+      </Row>
+
+      <Row style={{ marginTop: "40px" }}>
+        <Col md="12">
+          <label className=' mt-2 me-2 font-bold fs-10'>Please Deliver to Mrs/Messers <br /> Consignment Described here in :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "70%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={importer && importer[0]?.name}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>MAWB No :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={data?.Bl?.mbl}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>{(data.operation == "SI" || data.operation == "AI")
+            ? "Arrival Date :" : "Departure Date"
+          }</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={
+              (data.operation == "SI" || data.operation == "AI")
+                ? data.arrivalDate ? moment(data?.arrivalDate).format("ll") : ""
+                : data.arrivalDate ? moment(data?.etd).format("ll") : ""
+            }
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>HAWB No :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={data?.Bl?.hbl}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>IGM #</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+          // defaultValue={voucherData.voucher_Id}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>No of Pkg :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={data?.pcs}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Flight #</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={data?.flightNo}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Weight :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={data?.weight}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Index #</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+          // defaultValue={voucherData.voucher_Id}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Contents :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={commodity && commodity[0]?.name}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Original D/O No :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={allValues?.doNo}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Shipper :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={shipper && shipper[0].name}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Sub Index :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={"01"}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Commodity :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+            defaultValue={commodity && commodity[0]?.name}
+          />
+        </Col>
+        <Col md="6">
+          <label className=' mt-2 me-2 font-bold fs-10'>Shade No :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "60%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+          // defaultValue={voucherData.voucher_Id}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-2">
+        <Col md="12">
+          <label className=' mt-2 me-2 font-bold fs-10'>Remarks :</label>
+          <input
+            readOnly
+            style={{ outline: "none", width: "80%" }}
+            type='text'
+            className='border-top-0 border-start-0 border-end-0 fs-10'
+          // defaultValue={voucherData.voucher_Id}
+          />
+        </Col>
+      </Row>
+
+      <Row className="my-4">
+        <Col>
+          <span className="fs-10">Yours Faithfully,</span>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <span className="fs-12">
+            <strong>
+              {companyId == "1" ? "SEA NET SHIPPING & LOGISTICS" : "AIR CARGO SERVICE"}
+            </strong>
+          </span>
+        </Col>
+      </Row>
+
+      <Row style={{ marginTop: "30px" }}>
+        <Col>
+          <span className="fs-12"><strong>IMPORT DEPARTMENT</strong></span><br />
+          <span className="fs-10" style={{ marginTop: "-10px" }}>
+            {"(Authorize Signature & Seal)"}
+          </span>
+        </Col>
+      </Row>
+
+    </div >
   );
 };
 
-export default PrintComp;
+export default DoPrint;

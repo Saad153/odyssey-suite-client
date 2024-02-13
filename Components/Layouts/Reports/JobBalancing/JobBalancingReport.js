@@ -135,6 +135,7 @@ const JobBalancingReport = ({ result, query }) => {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* without print  */}
                         {overflow ? currentRecords.map((x,i)=>{
                             return (
                                 <>
@@ -160,7 +161,9 @@ const JobBalancingReport = ({ result, query }) => {
                                 <td style={{ textAlign: 'center' }}>{x.age}</td>
                             </tr>
                             </>)
-                        }) : records.map((x, i) => {
+                        }) : 
+                        // print mode 
+                        records.map((x, i) => {
                             return (
                             <tr key={i}>
                                 <td style={{ maxWidth: 30 }}>{i + 1}</td>
@@ -184,7 +187,8 @@ const JobBalancingReport = ({ result, query }) => {
                             </tr>
                             )
                         })}
-                        {overflow && currentPage === noOfPages && (
+                        {/* in print */}
+                        {!overflow && (
                             <tr>
                                 <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
                                 <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
@@ -194,7 +198,8 @@ const JobBalancingReport = ({ result, query }) => {
                                 <td style={{ textAlign: 'center' }}>-</td>
                             </tr>
                         )}
-                        {!overflow && (
+                        {/* showing total in the last page  */}
+                        {overflow && currentPage === noOfPages && (
                             <tr>
                                 <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
                                 <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>

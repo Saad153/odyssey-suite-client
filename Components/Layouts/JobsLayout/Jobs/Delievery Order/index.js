@@ -1,14 +1,16 @@
 import openNotification from "/Components/Shared/Notification";
 import { useForm, useWatch } from "react-hook-form";
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoadingForm from "./LoadingForm";
 import { initialState } from "./states";
 import moment from "moment";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import ReactToPrint from 'react-to-print';
+import DoPrint from './PrintComp';
+import { useSelector} from 'react-redux';
 
 const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
-
+  let inputRef = useRef(null);
   const [load, setLoad] = useState(false);
   const companyId = useSelector((state) => state.company.value);
   const { register, control, handleSubmit, reset } = useForm({});
@@ -18,15 +20,15 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
     let receivable = 0
     let recieved = 0
     // console.log(state.InvoiceList)
-    state.InvoiceList.forEach((x)=>{
-      if(x.payType=="Recievable"){
+    state.InvoiceList.forEach((x) => {
+      if (x.payType == "Recievable") {
         receivable = receivable + parseFloat(x.total);
-        recieved = recieved + parseFloat(x.recieved)*parseFloat(x.ex_rate);
+        recieved = recieved + parseFloat(x.recieved) * parseFloat(x.ex_rate);
       }
     })
-    recieved = recieved?recieved:0
+    recieved = recieved ? recieved : 0
     // console.log(receivable, recieved)
-    return {receivable, recieved}
+    return { receivable, recieved }
   }
 
   const onSubmit = async (data) => {
@@ -37,16 +39,16 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
     data.id == "" ? delete data.id : data.id;
     data.type = data.type?.toString()
     await axios.post(process.env.NEXT_PUBLIC_CLIMAX_UPSERT_DELIVER_ORDER, {
-        ...data,
-        SEJobId,
-    }).then((x)=>{
-      if(x.data.status=="success"){
-        if(!data.id){
+      ...data,
+      SEJobId,
+    }).then((x) => {
+      if (x.data.status == "success") {
+        if (!data.id) {
           console.log(x.data.result[0]);
-          reset({...data, doNo:x.data.result[0].doNo});
+          reset({ ...data, doNo: x.data.result[0].doNo });
         }
         openNotification("Success", "Loading Program Saved!", "Green")
-      }else{
+      } else {
         openNotification("Error", "Something Went Wrong, please try again", "red")
       }
     }).catch((e) => console.log(e.message))
@@ -58,7 +60,7 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
     getValues()
   }, []);
 
-  async function getValues(){
+  async function getValues() {
     await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_DELIVER_ORDER, {
       headers: { id: jobData.id },
     }).then((res) => {
@@ -66,22 +68,36 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
         let deliveryOrder = res.data.result;
         reset({
           ...deliveryOrder,
-          date:deliveryOrder?.date ==""?"":moment(deliveryOrder.date),
-          validDate:deliveryOrder?.validDate ==""?"":moment(deliveryOrder.validDate),
-          expDate:deliveryOrder?.expDate ==""?"":moment(deliveryOrder.expDate),
-          type:deliveryOrder?.type?.length>0?deliveryOrder.type.split(","):[]
+          date: deliveryOrder?.date == "" ? "" : moment(deliveryOrder.date),
+          validDate: deliveryOrder?.validDate == "" ? "" : moment(deliveryOrder.validDate),
+          expDate: deliveryOrder?.expDate == "" ? "" : moment(deliveryOrder.expDate),
+          type: deliveryOrder?.type?.length > 0 ? deliveryOrder.type.split(",") : []
         })
       } else {
         reset(initialState.values)
       }
     })
   }
-  
+
   return (
-    <LoadingForm onSubmit={onSubmit} register={register} control={control} handleSubmit={handleSubmit}
-      load={load} allValues={allValues} state={state} jobData={jobData} clearingAgents={clearingAgents}
-      calculatePrice={calculatePrice}
-    />
+    <>
+      <LoadingForm onSubmit={onSubmit} register={register} control={control} handleSubmit={handleSubmit}
+        load={load} allValues={allValues} state={state} jobData={jobData} clearingAgents={clearingAgents}
+        calculatePrice={calculatePrice}
+      />
+      <button type="button">
+      <ReactToPrint content={() => inputRef} trigger={() => <div className='div-btn-custom text-center p-2'>Go</div>} />
+      </button>
+
+      {/* Printing Component */}
+      <div style={{
+        display: "none"
+      }}>
+        <div ref={(response) => (inputRef = response)}>
+          <DoPrint companyId={companyId} state={state} allValues={allValues}/>
+        </div>
+      </div>
+    </>
   );
 };
 

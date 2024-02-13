@@ -27,7 +27,6 @@ import FullScreenLoader from '/Components/Shared/FullScreenLoader';
 import { useQueryClient } from '@tanstack/react-query';
 
 const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) => {
-
   const queryClient = useQueryClient();
   const {register, control, handleSubmit, reset, formState:{errors}, watch } = useForm({
     resolver:yupResolver(SignupSchema), defaultValues:state.values
