@@ -5,14 +5,11 @@ import LoadingForm from "./LoadingForm";
 import { initialState } from "./states";
 import moment from "moment";
 import axios from "axios";
-import ReactToPrint from 'react-to-print';
-import DoPrint from './PrintComp';
-import { useSelector} from 'react-redux';
+
 
 const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
-  let inputRef = useRef(null);
+
   const [load, setLoad] = useState(false);
-  const companyId = useSelector((state) => state.company.value);
   const { register, control, handleSubmit, reset } = useForm({});
   const allValues = useWatch({ control });
 
@@ -51,7 +48,7 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
       } else {
         openNotification("Error", "Something Went Wrong, please try again", "red")
       }
-    }).catch((e) => console.log(e.message))
+    }).catch((e) => console.log(e))
     setLoad(false)
   };
   const calculatePrice = React.useMemo(() => calculate(state.InvoiceList), [state.InvoiceList]);
@@ -85,18 +82,6 @@ const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
         load={load} allValues={allValues} state={state} jobData={jobData} clearingAgents={clearingAgents}
         calculatePrice={calculatePrice}
       />
-      <button type="button">
-      <ReactToPrint content={() => inputRef} trigger={() => <div className='div-btn-custom text-center p-2'>Go</div>} />
-      </button>
-
-      {/* Printing Component */}
-      <div style={{
-        display: "none"
-      }}>
-        <div ref={(response) => (inputRef = response)}>
-          <DoPrint companyId={companyId} state={state} allValues={allValues}/>
-        </div>
-      </div>
     </>
   );
 };

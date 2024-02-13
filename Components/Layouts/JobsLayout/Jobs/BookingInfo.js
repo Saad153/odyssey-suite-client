@@ -362,7 +362,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             />
           </div>
           <hr />
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
+          {id != "new" && <div style={{ display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
             <button className='btn-custom px-4' type="button"
               onClick={
                 async () => {
@@ -408,7 +408,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { loadingProgram: 1, tabState: "6" } })}
             >Loading Program</button>
             <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { do: 1, tabState: "7" } })}>DO</button>
-          </div>
+          </div>}
         </Col>
       </Row>
       {(state.voyageVisible && approved[0] != "1") &&
