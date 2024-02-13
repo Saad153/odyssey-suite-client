@@ -34,10 +34,9 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
     }
     const commas = (a) =>  { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")}
 
-    // useEffect(() => {
-    //     console.log(invoice.SE_Job)
-    //     console.log(invoice.operation)
-    // }, [invoice])
+    useEffect(() => {
+        console.log(invoice.SE_Job)
+    }, [invoice])
     
     const paraStyles = { lineHeight:1.2, fontSize:11 }
     const heading = { lineHeight:1, fontSize:11, fontWeight:'800', paddingBottom:5 };
