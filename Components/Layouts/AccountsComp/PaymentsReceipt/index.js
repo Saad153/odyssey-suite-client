@@ -169,7 +169,7 @@ const PaymentsReceipt = () => {
                         setSearch("");
                     }} 
                 >
-                    <Radio value={"Payble"}>Payble</Radio>
+                    <Radio value={"Payble"}>Payable</Radio>
                     <Radio value={"Recievable"}>Receivable</Radio>
                 </Radio.Group>
             </Col>
