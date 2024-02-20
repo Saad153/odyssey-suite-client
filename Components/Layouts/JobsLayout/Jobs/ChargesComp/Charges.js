@@ -180,6 +180,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
                 let tempChargeList = [...chargeList];
                 state.fields.chargeList.forEach(async (y, i) => {
                 if (y.code == e) {
+                    console.log(y)
                     tempChargeList[index] = {
                         ...tempChargeList[index],
                         charge: e,

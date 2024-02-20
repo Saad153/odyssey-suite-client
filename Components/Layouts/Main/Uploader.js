@@ -20,6 +20,11 @@ const Uploader = () => {
     transformHeader: header => header.toLowerCase().replace(/\W/g, '_')
   }
 
+  const test = async(data) => {
+
+    console.log({data})
+
+  }
   const handleCA = async(data) => {
     let Assets = [];
     let Liability = [];
@@ -166,8 +171,12 @@ const Uploader = () => {
     </div>
     <CSVReader cssClass="csv-reader-input" onFileLoaded={handleCA} parserOptions={parserOptions} 
       inputId="ObiWan" inputName="ObiWan"
-    /> */}
+    /> 
+*/}
 
+        <CSVReader cssClass="csv-reader-input" onFileLoaded={test} parserOptions={parserOptions} 
+        inputId="ObiWan" inputName="ObiWan"
+        /> 
 
     {/* <div className='mt-4'>
       <b>Opening Balances Upload</b>
@@ -178,7 +187,7 @@ const Uploader = () => {
 
     <button onClick={uploadVouchers} className='btn-custom mt-5'>Upload Opening Balances</button> */}
 
-    <button onClick={uploadInvoices} className='btn-custom mt-5'>Upload Invoices</button>
+    {/* <button onClick={uploadInvoices} className='btn-custom mt-5'>Upload Invoices</button> */}
 
     </>
     }

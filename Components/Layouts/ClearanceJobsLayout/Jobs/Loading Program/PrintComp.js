@@ -4,6 +4,7 @@ import ReactToPrint from "react-to-print";
 import moment from "moment";
 
 const PrintComp = ({allValues, state}) => {
+  console.log(allValues)
     let inputRef = useRef(null);
     let border = "1px solid";
     const heading = border ? "grey-txt" : "wh-txt";

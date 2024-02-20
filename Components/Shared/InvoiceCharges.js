@@ -8,6 +8,7 @@ import FullScreenLoader from './FullScreenLoader';
 import InvoicePrint from './InvoicePrint';
 import { Checkbox, Popover, Input, Radio, Select } from 'antd';
 import { useQueryClient } from '@tanstack/react-query';
+import CLPrint from './CLPrint';
 const { TextArea } = Input;
 
 const InvoiceCharges = ({data, companyId}) => {
@@ -553,7 +554,8 @@ return (
             display:"none"
         }}>
         <div ref={(response)=>(inputRef=response)}>
-            {invoice && 
+            {invoice && companyId !== "2" 
+            ?
                 <InvoicePrint 
                     logo={logo} 
                     compLogo={compLogo} 
@@ -563,6 +565,8 @@ return (
                     invoice={invoice} 
                     calculateTotal={calculateTotal} 
                 /> 
+            :
+            <CLPrint records={records} invoice={invoice} />
             }
         </div>
     </div>

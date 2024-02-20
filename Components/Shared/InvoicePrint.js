@@ -7,7 +7,6 @@ import inWords from '/functions/numToWords';
 import Cookies from 'js-cookie';
 
 const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calculateTotal}) => {
-    console.log(invoice)
     const getPort = (id) => {
         const index = ports.ports.findIndex(element => element.id == id);
         let value = "";
