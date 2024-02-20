@@ -38,9 +38,7 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
           </QueryClientProvider>
         </Provider>
       }
-      { router.pathname =='/login' &&
-        <Component {...pageProps} />
-      }
+      {router.pathname =='/login' && <Component {...pageProps} /> }
     </>
   )
 }
