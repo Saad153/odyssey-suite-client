@@ -146,7 +146,7 @@ const CLPrint = ({ records, invoice }) => {
                                     {(invoice.operation == "CAE" || invoice.operation == "CSE")
                                         ? "Departure Date" : "Arrival Date"
                                     } # :</span><br />
-                                <span className='fs-10 pe-3 fw-bold'>Form 'E' # :</span><br />
+                                <span className='fs-10 pe-3 fw-bold'>Form E # :</span><br />
                                 <span className='fs-10 pe-3 fw-bold'>Form E Date # :</span><br />
                             </div>
                             <div className='text-start'>
