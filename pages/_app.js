@@ -23,13 +23,12 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   Router.events.on("routeChangeStart", () => { setLoading(true) });
   Router.events.on("routeChangeComplete", () => { setLoading(false)});
 
   return (
     <>
-      { router.pathname !='/login' &&
+      {router.pathname !='/login' &&
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
             <MainLayout>
@@ -39,9 +38,7 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
           </QueryClientProvider>
         </Provider>
       }
-      { router.pathname =='/login' &&
-        <Component {...pageProps} />
-      }
+      {router.pathname =='/login' && <Component {...pageProps} /> }
     </>
   )
 }
