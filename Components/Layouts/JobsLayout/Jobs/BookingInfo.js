@@ -297,6 +297,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
           <SelectSearchComp register={register} name='salesRepresentatorId' control={control} label='Sales Representator' disabled={getStatus(approved)}
             options={state.fields.sr} width={"100%"} />
         </Col>
+        
         <Col md={3}><Space />
           <div className='custom-link mt-2' onClick={() => pageLinking("vendor", overseasAgentId)} >Overseas Agent *</div>
           <SelectSearchComp register={register} name='overseasAgentId' control={control} label='' disabled={getStatus(approved)} options={state.fields.vendor.overseasAgent} width={"100%"} />

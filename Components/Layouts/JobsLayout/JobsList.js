@@ -8,6 +8,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Pagination from '../../Shared/Pagination';
 import { Input } from 'antd';
 import moment from 'moment';
+import JobsBackupData from './Backup/BackupModal';
 
 const SEJobList = ({ jobsData, sessionData, type }) => {
   const queryClient = useQueryClient();
@@ -15,6 +16,7 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
   const companyId = useSelector((state) => state.company.value);
   const [records, setRecords] = useState([]);
   const dispatch = useDispatch();
+  const [isOpen,setIsOpen] = useState(false);
   //search state
   const [query, setQuery] = useState("");
   const keys = ["jobNo","weight","Client","name"]
@@ -57,13 +59,18 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
       {companyId != '' &&
         <div className='base-page-layout'>
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <h5>
                 {type == "SE" ? "SEA Export" : type == "SI" ? "SEA Import" : type == "AE" ? "AIR Export" : type == "AI" ? "AIR Import" : ""} Job List
               </h5>
             </Col>
             <Col md={4}>
               <Input type="text" placeholder="Enter client,wieght or voucher no" size='sm' onChange={e => setQuery(e.target.value)} />
+            </Col>
+            <Col md={2} className='text-end'>
+              <button className='btn-custom left px-4' onClick={()=>setIsOpen(true)}
+              >Old Jobs</button>
+              {isOpen && <JobsBackupData isOpen={isOpen} onClose={()=>setIsOpen(false)} type={type}/>}
             </Col>
             <Col md={1}>
               <button className='btn-custom left px-4'
