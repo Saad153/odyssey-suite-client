@@ -47,8 +47,8 @@ const Column2 = ({register, control, state, jobData, clearingAgents}) => {
         <Col className='mt-1 mb-1'>
           <SelectSearchComp width="100%" name="deliveryReqTo" 
             options={[
-              {id:"1", name:"THE SUPRETENDENT OF CUSTOMS, KARACHI, PAKISTAN"}, 
-              {id:"2", name:"Karachi"}]} 
+              {id:"THE SUPRETENDENT OF CUSTOMS, KARACHI, PAKISTAN", name:"THE SUPRETENDENT OF CUSTOMS, KARACHI, PAKISTAN"}, 
+              {id:"KARACHI", name:"Karachi"}]} 
             control={control} register={register} label="Delivery Req To"
           />
           {/* <TextAreaComp width="100%" name="deliveryReqTo" control={control} register={register} label="Delivery Req To"/> */}
