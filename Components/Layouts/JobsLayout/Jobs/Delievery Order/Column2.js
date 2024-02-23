@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputComp from "../../../../Shared/Form/InputComp";
 import TextAreaComp from "../../../../Shared/Form/TextAreaComp";
 import RadioComp  from "../../../../Shared/Form/RadioComp";
@@ -12,7 +12,7 @@ import TimeComp from "../../../../Shared/Form/TimeComp";
 const Column2 = ({register, control, state, jobData, clearingAgents}) => {
 
   let deliverTo = jobData.consigneeId && state.fields.party.consignee.filter((x) => x.id == jobData.consigneeId);
-  
+
   useEffect(() => {
     // console.log(state.fields.party.consignee)
   }, [])
@@ -44,8 +44,14 @@ const Column2 = ({register, control, state, jobData, clearingAgents}) => {
             control={control} register={register} label="Local Custom"
           />
         </Col>
-        <Col className='mt-1'>
-          <TextAreaComp width="100%" name="deliveryReqTo" control={control} register={register} label="Delivery Req To"/>
+        <Col className='mt-1 mb-1'>
+          <SelectSearchComp width="100%" name="deliveryReqTo" 
+            options={[
+              {id:"1", name:"THE SUPRETENDENT OF CUSTOMS, KARACHI, PAKISTAN"}, 
+              {id:"2", name:"Karachi"}]} 
+            control={control} register={register} label="Delivery Req To"
+          />
+          {/* <TextAreaComp width="100%" name="deliveryReqTo" control={control} register={register} label="Delivery Req To"/> */}
         </Col>
 
         <Row>

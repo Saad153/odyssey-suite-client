@@ -149,8 +149,8 @@ if(groupBy) {
                       </td>
                       <td className="text-center py-1 px-1"></td>
                       <td className="text-center py-1 px-1" style={{whiteSpace:"nowrap"}}>
-                      {y.shipper.name }
-                      {y.consignee.name }
+                      {y?.shipper?.name }
+                      {y?.consignee?.name }
                       </td>
                       <td className="text-center py-1 px-1" style={{whiteSpace:"nowrap"}}>{y?.shipping_line?.name}</td>
                       <td className="text-center py-1 px-1" style={{whiteSpace:"nowrap"}}>{y?.local_vendor?.name}</td>

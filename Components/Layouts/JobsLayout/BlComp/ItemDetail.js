@@ -157,7 +157,7 @@ return (
                 <th>Kg/Lb</th>
                 <th>R/Class</th>
                 <th>Item No</th>
-                <th>Chargable WT</th>
+                <th>Chargeable WT</th>
                 <th>Rate/Charge</th>
                 <th>Total</th>
                 <th><b>Line Weight</b></th>

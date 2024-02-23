@@ -8,8 +8,6 @@ const DoPrint = ({ allValues, state, companyId }) => {
   let importer = data.consigneeId && state.fields.party.consignee?.filter((x) => x.id == data.consigneeId);
   let commodity = data.commodityId && state.fields.commodity?.filter((x) => x.id == data.commodityId);
   let shipper = data.shipperId && state.fields.party.shipper?.filter((x) => x.id == data.shipperId);
-  console.log(allValues)
-  console.log(data)
   const paraStyles = { lineHeight: 1.2, fontSize: 11 }
   const Line = () => <div style={{ backgroundColor: "grey", height: 1, position: 'relative', top: 12 }}></div>
 

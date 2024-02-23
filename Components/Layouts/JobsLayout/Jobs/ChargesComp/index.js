@@ -87,7 +87,7 @@ const ChargesComp = ({state, dispatch, type, allValues}) => {
         </Row>
         <Row className='my-1'>
           <Col style={{maxWidth:100}} className="py-4">
-            Payble:
+            Payable:
           </Col>
           <Col>
             <div className='text-center'>PP</div>

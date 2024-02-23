@@ -7,7 +7,7 @@ import moment from "moment";
 import axios from "axios";
 
 
-const DeliveryOrder = ({ state, jobData, clearingAgents }) => {
+const DeliveryOrder = ({ state, jobData, clearingAgents, companyId }) => {
 
   const [load, setLoad] = useState(false);
   const { register, control, handleSubmit, reset } = useForm({});

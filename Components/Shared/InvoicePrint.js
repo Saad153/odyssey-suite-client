@@ -180,7 +180,18 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                 </Col>
                 <Col md={5}>
                     <div style={heading}>Invoice Date</div>
-                    <div style={paraStyles}>{moment(invoice.createdAt).format("DD-MMM-YYYY")}</div>
+                    <div style={paraStyles}>
+                        {
+                            (invoice.operation=="AI"||invoice.operation=="SI") ?
+                            <>
+                                {moment(invoice.SE_Job?.arrivalDate).format("DD-MMM-YYYY")}
+                            </>
+                            :
+                            <>
+                                {moment(invoice.SE_Job?.departureDate).format("DD-MMM-YYYY")}
+                            </>
+                        }
+                    </div>
                 </Col>
             </Row>
         </Col>
