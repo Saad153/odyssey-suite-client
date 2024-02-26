@@ -65,7 +65,7 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
               </h5>
             </Col>
             <Col md={4}>
-              <Input type="text" placeholder="Enter client,wieght or voucher no" size='sm' onChange={e => setQuery(e.target.value)} />
+              <Input type="text" placeholder="Enter client,wieght or Job no" size='sm' onChange={e => setQuery(e.target.value)} />
             </Col>
             <Col md={2} className='text-end'>
               <button className='btn-custom left px-4' onClick={()=>setIsOpen(true)}

@@ -406,9 +406,13 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
               <button type="button" className="btn-custom">Invoice/Bills {`(${state.InvoiceList.length})`}</button>
             </Popover>
 
+            {(type=="AE" || type=="SE") && 
             <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { loadingProgram: 1, tabState: "6" } })}
-            >Loading Program</button>
-            <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { do: 1, tabState: "7" } })}>DO</button>
+            >Loading Program</button>}
+
+            {(type=="AI" || type=="SI") && <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { do: 1, tabState: "7" } })}>
+              DO
+            </button>}
           </div>}
         </Col>
       </Row>
