@@ -160,7 +160,15 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
       createdById: Cookies.get("loginId"),
       notification: approved[0] == '1' ?  `Job No ${data.jobNo} Approved`: `Job No ${data.jobNo} Dispproved`
     }
-
+    axios.post('https://app.nativenotify.com/api/notification',{
+      "appId": 20066,
+      "appToken": "6QD0cTOyCmXeUb7Q6okftL",
+      "title": `${type} JOB`,
+      "body": approved[0] == '1' ?  `Job No ${data.jobNo} Approved`: `Job No ${data.jobNo} Dispproved`,
+      "dateSent": "3-8-2024 0:17AM",
+      "pushData": { "yourProperty": "yourPropertyValue" },
+      "bigPictureURL": "Big picture URL as a string"
+    })
     setTimeout(async() => {
       await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_EDIT_SEAJOB,{data}).then((x)=>{
         if(x.data.status=='success'){
