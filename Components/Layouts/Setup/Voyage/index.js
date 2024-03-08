@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Row, Col, Table, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { Modal } from 'antd';
@@ -10,6 +10,7 @@ import { delay } from "/functions/delay";
 import Router from 'next/router';
 import { getJobValues } from '/apis/jobs';
 import { useQuery } from '@tanstack/react-query';
+import { Input } from 'antd';
 
 function recordsReducer(state, action){
     switch (action.type) {
@@ -77,11 +78,15 @@ const initialState = {
     values:baseValues,
     selectedRecord:{},
     selectedId:'',
+    searchRecords:[]
 };
 const Voyage = ({vesselsData}) => {
 
   const [ state, dispatch ] = useReducer(recordsReducer, initialState);
   const set = (a, b) => dispatch({type:'toggle', fieldName:a, payload:b});
+  const [query, setQuery] = useState("");
+  const keys = ["name","code"];
+
   const { refetch } = useQuery({
     queryKey:['values'],
     queryFn:getJobValues
@@ -106,7 +111,26 @@ const Voyage = ({vesselsData}) => {
     set('load', false);
   }
 
-  useEffect(()=>{set('records',vesselsData)}, [])
+  useEffect(()=>{
+    set('records',vesselsData);
+    set('searchRecords',vesselsData);
+  }, [])
+
+  useEffect(()=>{
+    if(state.searchRecords){
+      const filterData = onSearch(state.searchRecords);
+      set("records",filterData)
+    }
+  },[query, state.searchRecords])
+
+  const onSearch = (data) => {
+    return data.filter(item=>{
+      return keys.some( key => {
+        return typeof item[key] === "string" && 
+        item[key]?.toUpperCase()?.includes(query.toUpperCase())
+      })
+    })
+  }
   
   const onSubmit = async(data) => {
     set('submitLoad', true);
@@ -148,11 +172,16 @@ const Voyage = ({vesselsData}) => {
   return (
     <div className='base-page-layout'>
     <Row>
-      <Col md={12}>
-      <button className='btn-custom' 
-        onClick={()=>Router.push("/setup/vessel")}
-      >View Vessels
-      </button>
+      <Col md={8}>
+        <button className='btn-custom' 
+          onClick={()=>Router.push("/setup/vessel")}
+        >View Vessels
+        </button>
+      </Col>
+      <Col md="4">
+        <div className='d-flex justify-content-end'>
+          <Input type="text" placeholder="Enter Vessel Name" size='sm' onChange={e => setQuery(e.target.value)} />
+        </div>
       </Col>
     </Row>
     <hr/>
@@ -160,21 +189,21 @@ const Voyage = ({vesselsData}) => {
     <Col md={4}>
       <div className='mt-3' style={{maxHeight:500, overflowY:'auto'}}>
         <Table className='tableFixHead'>
-        <thead><tr><th>Sr.</th><th>Code</th><th>Name</th></tr></thead>
-        <tbody>
-        {
-        state.records.map((x, index) => {
-        return (
-        <tr key={index} className={`f row-hov ${x.id==state.selectedRecord.id?"bg-blue-selected":""}`} onClick={()=>findVoyages(x)} >
-          <td>{index + 1}</td>
-          <td className='blue-txt fw-7'> {x.code}</td>
-          <td style={{minWidth:150}}>
-            <div style={{fontSize:14,lineHeight:1}}>{x.name}</div>
-            <div style={{fontSize:12,color:'grey'}}>{x.carrier}</div>
-          </td>
-        </tr>
-        )})}
-        </tbody>
+          <thead><tr><th>Sr.</th><th>Code</th><th>Name</th></tr></thead>
+            <tbody>
+            {
+              state.records.map((x, index) => {
+              return (
+                <tr key={index} className={`f row-hov ${x.id==state.selectedRecord.id?"bg-blue-selected":""}`} onClick={()=>findVoyages(x)} >
+                  <td>{index + 1}</td>
+                  <td className='blue-txt fw-7'> {x.code}</td>
+                  <td style={{minWidth:150}}>
+                    <div style={{fontSize:14,lineHeight:1}}>{x.name}</div>
+                    <div style={{fontSize:12,color:'grey'}}>{x.carrier}</div>
+                  </td>
+                </tr>
+            )})}
+            </tbody>
         </Table>
       </div>
     </Col>
