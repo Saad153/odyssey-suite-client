@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
 import { Spinner, Table } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { incrementTab } from '/redux/tabs/tabSlice';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 
 const Sheet = ({state, overflow, fontSize}) => {
+
+    const router = useRouter();
+    const dispatch = useDispatch();
 
     const setCommas = (val) => {
         if(val){
@@ -35,11 +41,23 @@ const Sheet = ({state, overflow, fontSize}) => {
             </tr>
         </thead>
         <tbody>
-        {state.records.map((x,index)=>{
+        {state?.records?.map((x,index)=>{
         return (
         <tr key={index} className='f fs-10 text-center'>
             {/* <td>{index + 1}</td> */}
-            <td>{x.jobNo}</td>
+            <td className='row-hov blue-txt'
+                onClick={()=>{
+                    let type = x.operation;
+                    dispatch(incrementTab({
+                        "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
+                        "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
+                        "id":x.id
+                    }));
+                    router.push(type=="SE"?`/seaJobs/export/${x.id}`:type=="SI"?`/seaJobs/import/${x.id}`:
+                        type=="AE"?`/airJobs/export/${x.id}`:`/airJobs/import/${x.id}`
+                    )
+                }}
+            >{x.jobNo}</td>
             <td>{moment(x.createdAt).format("MM/DD/YY")}</td>
             <td>{x.Client.name}</td>
             <td style={{width:80}}>{x.fd}</td>

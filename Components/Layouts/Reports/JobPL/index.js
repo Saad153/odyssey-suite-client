@@ -9,7 +9,7 @@ import { incrementTab } from '/redux/tabs/tabSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Router from "next/router";
-import { setFilterValues } from '../../../../redux/filters/filterSlice';
+import { setFilterValues } from '/redux/filters/filterSlice';
 
 const JobPL = () => {
 
@@ -35,6 +35,7 @@ const JobPL = () => {
 
   useEffect(() => {
     // setting default values from Redux state when component remounts
+    console.log(values.client)
     if (filters) {
       set({
         from: values ? values.from : '',
@@ -89,7 +90,7 @@ const JobPL = () => {
         <Row className='mt-3'>
           <Col md={3}>
             <div>Client</div>
-            <AdvanceSearch getChild={(value) => set({ client: value })} placeholder={"Search"} style={{ width: "100%" }} type={"client"} />
+            <AdvanceSearch getChild={(value) => set({ client: value })} placeholder={"Search"} value={state.client} style={{ width: "100%" }} type={"client"} />
           </Col>
           <Col md={8}></Col>
           <Col md={2} style={{ border: '1px solid silver', marginLeft: 12, paddingRight: 40 }} className='py-1 mt-3'>
@@ -103,7 +104,7 @@ const JobPL = () => {
         <button className='btn-custom mt-3'
           onClick={() => {
             //handleSubmit(set,state)
-            const { to, from, client, company, jobType, overseasagent, salesrepresentative } = state
+            const { to, from, client, company, jobType, overseasagent, salesrepresentative, reportType } = state
             dispatchNew(setFilterValues({
               pageName:"jobPLreport",
               values:stateValues
@@ -111,19 +112,28 @@ const JobPL = () => {
             Router.push({
               pathname: `/reports/jobPLReport/report`,
               query: {
-                to: state.to,
-                from: state.from,
-                client: state.client,
-                company: state.company,
-                jobtype: state.jobType,
-                overseasagent: state.overseasagent,
-                salesrepresentative: state.salesrepresentative,
-                report: state.reportType
+                to: to,
+                from: from,
+                client: client,
+                company: company,
+                jobtype: jobType,
+                overseasagent: overseasagent,
+                salesrepresentative: salesrepresentative,
+                report: reportType
               }
             });
+            let url = `?to=${state.to}&from=${state.from}`;
+            client? url = url + `&client=${client}`: null;
+            company? url = url + `&company=${company}`: null;
+            jobType? url = url + `&jobtype=${jobType}`: null;
+            salesrepresentative? url = url + `&salesrepresentative=${salesrepresentative}`: null;
+            reportType? url = url + `&report=${reportType}`: null;
+            overseasagent? url = url + `&overseasagent=${overseasagent}`: null;
+            overseasagent? url = url + `&overseasagent=${overseasagent}`: null;
+            
             dispatchNew(incrementTab({
               "label": "Job Profit & Loss", "key": "5-4-1",
-              "id": `?to=${to}&from=${from}&client=${client}&company=${company}&jobtype=${jobType}&overseasagent=${overseasagent}&salesrepresentative=${salesrepresentative}&report=${state.reportType}`
+              "id": url //`?to=${state.to}&from=${state.from}&client=${state.client}&company=${state.company}&jobtype=${state.jobType}&overseasagent=${state.overseasagent}&salesrepresentative=${state.salesrepresentative}&report=${state.reportType}`
             }));
           }}
           disabled={state.load}

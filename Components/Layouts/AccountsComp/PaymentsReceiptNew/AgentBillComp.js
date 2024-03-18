@@ -387,15 +387,17 @@ const AgentBillComp = ({companyId, state, dispatch}) => {
             <td style={{width:30}}>{index + 1}</td>
             <td style={{width:100}} className='row-hov blue-txt' onClick={()=>{
                 let type = x.operation;
-                dispatchNew(incrementTab({
-                "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
-                "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
-                "id":x.SE_Job.id
-                }))
-                router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
-                    type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
-                )}
-            }> <b>{x?.SE_Job?.jobNo}</b> </td>
+                if(x?.SE_Job?.jobNo){
+                    dispatchNew(incrementTab({
+                    "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
+                    "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
+                    "id":x.SE_Job.id
+                    }))
+                    router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
+                        type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
+                    )}
+                }
+            }> <b>{x?.SE_Job?.jobNo}</b></td>
             <td style={{width:100}}>{x.invoice_No}</td>
             <td>HBL</td>
             <td>MBL</td>
