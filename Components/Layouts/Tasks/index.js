@@ -41,6 +41,7 @@ const Employees = () => {
   const getEmployees = async() => {
     await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_RIDERS).then((x)=>{
       if(x.data.status=='success'){
+        console.log(x.data)
         dispatch({type : "SET_DATA" , payload:  {riders: x.data.result}});
       }
     })
@@ -49,8 +50,6 @@ const Employees = () => {
   useEffect(() => {
     getEmployees()
   }, [])
-
-
 
   return (
   <div className='dashboard-styles'>

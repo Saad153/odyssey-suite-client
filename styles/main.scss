@@ -458,14 +458,11 @@
   color: rgb(23, 140, 153);
 }
 .row-hov{
-  transition-duration: 300ms;
-  background-color: white;
   cursor: pointer;
 }
 .row-hov:hover{
   transition-duration: 300ms;
-  background-color: rgb(208, 236, 239);
-  cursor: pointer;
+  background-color: rgb(208, 236, 239)!important;
 }
 
 .cur{
@@ -619,15 +616,24 @@ div.rc-virtual-list > div.rc-virtual-list-holder > div > div{
 }
 
 .notificationSide {
-  height: 780px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  background: rgba(0,0,0,0.05);
-  flex: 0.5; 
-  padding: 1rem;
+  // max-height: 600px;
+  // overflow-y: scroll;
+  // overflow-x: hidden;
+  // background: rgba(0,0,0,0.05);
+  // flex: 0.5; 
+  // padding: 1rem;
+  padding: 20px;
 }
 
 .notifications {
+  padding: 15px 15px;
+  margin: 5px;
+  width : 100%;
+  border: 1px solid silver;
+  cursor: pointer;
+}
+
+.tasks {
   padding: 15px 15px;
   margin: 5px;
   width : 100%;

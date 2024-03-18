@@ -175,7 +175,7 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
           openNotification('Success', `Job Updated!`, 'green')
           createNotification(notification)
           refetch();
-        }else{
+        } else {
           openNotification('Error', `An Error occured Please Try Again!`, 'red')
         }
         dispatch({type:'toggle', fieldName:'load', payload:false});
@@ -243,7 +243,7 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
           {state.load?<Spinner animation="border" size='sm' className='mx-3' />:'Save Job'}
         </button>
         <button type="button" disabled={allValues.approved==1?true:false} 
-        className={allValues.approved==1?"btn-red-disabled mt-3 mx-3":"btn-red mt-3 mx-3"}
+          className={allValues.approved==1?"btn-red-disabled mt-3 mx-3":"btn-red mt-3 mx-3"}
           onClick={()=>{
             PopConfirm("Confirmation", "Are You Sure You Want To Delete This Job?",
               () => {

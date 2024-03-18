@@ -6,12 +6,13 @@ import CreateOrEdit from './CreateOrEdit';
 import { useSelector } from 'react-redux';
 import { Input } from 'antd';
 
-const Employees = ({}) => {
+const Employees = () => {
+
   const [employeeList, setEmployeeList] = useState([]);
   const [visible, setVisible] = useState(false);
   const [edit, setEdit] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState({});
-  const [query,setQuery] = useState("");
+  const [query, setQuery] = useState("");
   const [originalEmployeeList, setOriginalEmployeeList] = useState([]);
   const keys = ["name"]
 
@@ -25,11 +26,9 @@ const Employees = ({}) => {
 
   useEffect(() => {
     getEmployees();
-    return () => { }
   }, [])
 
   const getEmployees = async() => {
-    console.log("Function Hit")
     await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_ALL_EMPLOYEES).then((x)=>{
       if(x.data.status=='success'){
         setEmployeeList(x.data.result);
@@ -41,7 +40,7 @@ const Employees = ({}) => {
   useEffect(()=>{
     const filteredData = search(originalEmployeeList);
     setEmployeeList(filteredData)
-  },[query,originalEmployeeList])
+  },[query, originalEmployeeList])
 
   const updateUser = (x) => {
     let tempState = [...employeeList];
@@ -52,20 +51,9 @@ const Employees = ({}) => {
 
   const appendClient = (x, levels) => {
     let tempState = [...employeeList];
-    console.log(x)
     x.Access_Levels=levels
     tempState.unshift(x);
     setEmployeeList(tempState);
-  }
-
-  const getCompanyName = (id) => {
-    let name = '';
-    company.forEach(x => {
-      if(id==x.id){
-        name=x.title
-      }
-    });
-    return name
   }
 
   return (
@@ -74,11 +62,11 @@ const Employees = ({}) => {
       <Row>
       <Col md={12}>
         <Row>
-        <Col md="6"><h5>Employees</h5></Col>
-        <Col md="4">
+          <Col md="6"><h5>Employees</h5></Col>
+          <Col md="4">
             <Input type="text" placeholder="Enter Name" size='sm' onChange={e => setQuery(e.target.value)} />
-        </Col>
-        <Col md="2"><button className='btn-custom' onClick={()=>setVisible(true)} style={{float:'left'}}>Create</button></Col>
+          </Col>
+          <Col md="2"><button className='btn-custom' onClick={()=>setVisible(true)} style={{float:'left'}}>Create</button></Col>
         </Row>
         <div className='my-2' style={{backgroundColor:'silver', height:1}}></div>
         <MediumModal visible={visible} setVisible={setVisible} setEdit={setEdit} width={800}>

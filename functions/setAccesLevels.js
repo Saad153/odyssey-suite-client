@@ -179,27 +179,32 @@ function setAccesLevels(dispatch, collapsed){
     ]
     )
     const tasks = getParentItem('Tasks', '6', <UnorderedListOutlined  />,
-    [
-      getItem('Riders List', '6-1',<></>, null, {
-        label: `Riders List`,
-        key: '6-1',
-        children: `Content of Tab Pane 2`,
-      }),
-    ]
+      [
+        getItem('Riders List', '6-1',<></>, null, {
+          label: `Riders List`,
+          key: '6-1',
+          children: `Content of Tab Pane 2`,
+        }),
+        getItem('Task List', '6-3',<></>, null, {
+          label: `Task List`,
+          key: '6-3',
+          children: `Content of Tab Pane 2`,
+        }),
+      ]
     )
     const exportJobs = getParentItem('Export Jobs', '8', <span className=''><RiShipLine /><IoMdArrowDropleft className='flip' /></span>,
-    [
-      getItem('Air Export Jobs List', '8-1',<></>, null, {
-        label: `Air Export Jobs List`,
-        key: '8-1',
-        children: `Content of Tab Pane 2`,
-      }),
-      getItem('Sea Export Jobs List', '8-3',<></>, null, {
-        label: `Sea Export Jobs List`,
-        key: '8-3',
-        children: `Content of Tab Pane 2`,
-      }),
-    ]
+      [
+        getItem('Air Export Jobs List', '8-1',<></>, null, {
+          label: `Air Export Jobs List`,
+          key: '8-1',
+          children: `Content of Tab Pane 2`,
+        }),
+        getItem('Sea Export Jobs List', '8-3',<></>, null, {
+          label: `Sea Export Jobs List`,
+          key: '8-3',
+          children: `Content of Tab Pane 2`,
+        }),
+      ]
     )
     const importJobs = getParentItem('Import Jobs', '9', <span className=''><RiShipLine /><IoMdArrowDropleft className='flip' /></span>,
       [
@@ -215,7 +220,6 @@ function setAccesLevels(dispatch, collapsed){
         }),
       ]
     )
-
     function getParentItem(label, key, icon, children) {
       return { key, icon, children, label}
     }
