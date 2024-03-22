@@ -11,6 +11,7 @@ import { incrementTab } from '/redux/tabs/tabSlice';
 import { useDispatch } from 'react-redux';
 import Router from 'next/router';
 import Pagination from "../../../Shared/Pagination";
+import exportExcelFile from "../../../../functions/exportExcelFile";
 
 const JobBalancingReport = ({ result, query }) => {
     let inputRef = useRef(null);
@@ -40,7 +41,7 @@ const JobBalancingReport = ({ result, query }) => {
             }
         })
         total = Received - paid
-        return total > 0 ? commas(total) : `(${commas(total * -1)})`;
+        return total > 0 ? commas(total) : (`${commas(total * -1)}`);
     }
 
     const balanceTotal = (list) => {
@@ -52,7 +53,7 @@ const JobBalancingReport = ({ result, query }) => {
                 balance = balance + parseFloat(x.balance)
             }
         })
-        return balance > 0 ? commas(balance) : `(${commas(balance * -1)})`;
+        return balance > 0 ? commas(balance) : (`${commas(balance * -1)}`);
     }
 
     const getAge = (date) => {
@@ -82,15 +83,21 @@ const JobBalancingReport = ({ result, query }) => {
             y.total = (parseFloat(y.total)) + parseFloat(y.roundOff)
             y.paid = (parseFloat(y.paid)) + parseFloat(y.roundOff)
             y.recieved = (parseFloat(y.recieved)) + parseFloat(y.roundOff)
-            y.age = getAge(y.createdAt)
-            // y.total =    commas(y.total)
-            // y.paid =     commas(y.paid)
-            // y.recieved = commas(y.recieved)
-            // y.balance =  commas(y.balance)
+            y.age = getAge(y.createdAt);
             y.freightType = y?.SE_Job?.freightType == "Prepaid" ? "PP" : "CC"
             y.fd = y?.SE_Job?.fd;
             y.createdAt = moment(y.createdAt).format("DD-MMM-YYYY")
             y.hbl = y?.SE_Job?.Bl?.hbl
+            
+            y.recievable = y.payType == "Recievable" ? commas(y.total) : "-";
+            y.payble = y.payType != "Recievable" ? commas(y.total) : "-";
+            y.balanced = y.payType == "Recievable" ? commas(y.recieved) : commas(y.paid);
+            y.finalBalance = y.payType != "Recievable" ? (`${commas(y.balance)}`) : commas(y.balance)
+
+            // <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
+            // <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
+            // <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
+            // <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? (${x.balance}) : x.balance}</td>
         })
         setRecords(newArray);
       } else {}
@@ -140,9 +147,8 @@ const JobBalancingReport = ({ result, query }) => {
                     <td style={{ maxWidth: 30 }}>{i + 1}</td>
                     <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
                         onClick={async ()=>{
-                            console.log(x)
                             await Router.push(`/reports/invoice/${x.id}`)
-                            dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
+                            dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}`}))
                         }}
                     >{x.invoice_No}</td>
                     <td style={{}}>{x.createdAt}</td>
@@ -151,10 +157,11 @@ const JobBalancingReport = ({ result, query }) => {
                     <td style={{ maxWidth: 90 }}>{x.fd}</td>
                     <td style={{}}>{x.freightType}</td>
                     <td style={{}}>{x.currency}</td>
-                    <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
-                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
-                    <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
-                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
+
+                    <td style={{ textAlign: 'right' }} >{x.recievable}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payble}</td>
+                    <td style={{ textAlign: 'right' }} >{x.balanced}</td>
+                    <td style={{ textAlign: 'right' }} >{x.finalBalance}</td>
                     <td style={{ textAlign: 'center' }}>{x.age}</td>
                 </tr>
             )}) : 
@@ -178,7 +185,7 @@ const JobBalancingReport = ({ result, query }) => {
                     <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
                     <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
                     <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
-                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? (`${x.balance}`) : x.balance}</td>
                     <td style={{ textAlign: 'center' }}>{x.age}</td>
                 </tr>
                 )
@@ -218,7 +225,7 @@ const JobBalancingReport = ({ result, query }) => {
     }
     {load && <div className='text-center py-5 my-5'> <Spinner /> </div>}
     </>
-  )}
+    )}
 
     const gridRef = useRef();
     const [columnDefs, setColumnDefs] = useState([
@@ -263,15 +270,27 @@ const JobBalancingReport = ({ result, query }) => {
         },
         { headerName: 'Age', field: 'age', filter: true },
     ]);
+    const defaultColDef = useMemo(() => ({ sortable: true, resizable: true }));
+    const getRowHeight = 38;
 
-    const defaultColDef = useMemo(() => ({
-        sortable: true,
-        resizable: true,
-    }));
-
-    const getRowHeight = useCallback(() => {
-        return 38;
-    }, []);
+    const exportData = () => {
+        exportExcelFile(
+            currentRecords,
+            [
+                { header: "Invoice No.", key: "invoice_No", width: 18, height:10 },
+                { header: "Date", key: "createdAt", width: 15, height:10 },
+                { header: "HBL/MBL", key: "hbl", width: 32, height:10 },
+                { header: "Party", key: "party_Name", width: 32, height:10 },
+                { header: "F/Tp", key: "freightType", width: 12, height:10 },
+                { header: "Currency", key: "currency", width: 12, height:10 },
+                { header: "Debit", key: "recievable", width: 32, height:10 },
+                { header: "Credit", key: "payble", width: 32, height:10 },
+                { header: "Paid/Rcvd", key: "balanced", width: 32, height:10 },
+                { header: "Balance", key: "finalBalance", width: 32, height:10 },
+                { header: "Age", key: "age", width: 12, height:10 },
+            ]
+        )
+    }
 
   return (
     <div className='base-page-layout'>
@@ -280,9 +299,7 @@ const JobBalancingReport = ({ result, query }) => {
             <ReactToPrint content={() => inputRef} trigger={() => <AiFillPrinter className="blue-txt cur fl-r" size={30} />} />
             {/* <---- Excel Download button ----> */}
             <div className="d-flex justify-content-end " >
-                <CSVLink data={result.result} className="btn-custom mx-2 fs-11 text-center" style={{ width: "110px", float: 'left' }}>
-                    Excel
-                </CSVLink>
+                <button className="btn-custom mx-2 px-3 fs-11 text-center" onClick={exportData}>To Excel</button>
             </div>
         </>
         )}
@@ -313,6 +330,6 @@ const JobBalancingReport = ({ result, query }) => {
         </div>
     </div>
   )
-}
+};
 
 export default React.memo(JobBalancingReport)

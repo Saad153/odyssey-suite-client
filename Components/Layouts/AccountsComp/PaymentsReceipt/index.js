@@ -88,7 +88,6 @@ const PaymentsReceipt = () => {
             }
         }).then((x)=>{
             if(x.data.status=="success"){
-                console.log(x.data)
                 setOldInvoices(x.data.result.invoices)
                 setTransaction(x.data.result.result)
                 setOffset(x.data.result.offset)

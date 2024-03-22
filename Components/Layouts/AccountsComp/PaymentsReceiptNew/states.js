@@ -139,6 +139,7 @@ const getInvoices = async(state, companyId, dispatch) => {
           accountData = z;
         }
       })
+      
       temp = temp.map((y, index)=>{
         // console.log(y.Charge_Heads[0].ex_rate)
         // console.log(y.ex_rate)

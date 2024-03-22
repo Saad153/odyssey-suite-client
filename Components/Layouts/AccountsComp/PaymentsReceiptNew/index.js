@@ -107,7 +107,10 @@ const PaymentsReceiptNew = ({id, voucherData}) => {
 
     const ListComp = ({data}) => {
     return(
-    <List size="small" bordered dataSource={data}
+    <List 
+        size="small" 
+        bordered 
+        dataSource={data}
         renderItem={(item)=>
         <List.Item key={item.id} className='searched-item' onClick={() => {
             Router.push({
@@ -124,13 +127,14 @@ const PaymentsReceiptNew = ({id, voucherData}) => {
             }))
             setAll({selectedParty:{id:item.id, name:item.name}, tranVisible:true, search:""});
         }}>{item.name}</List.Item>} 
-    />)}
+    />
+    )}
 
     const gridRef = useRef(); 
     const [columnDefs, setColumnDefs] = useState([
         {headerName: '#', field:'no', width: 50 },
         {headerName: 'Voucher No.', field:'voucher_Id', filter: true},
-        {headerName: 'Name', field:'partyName', filter: true},
+        {headerName: 'Name', field:'partyName', flex:1, filter: true},
         {headerName: 'Party', field:'partyType', filter: true},
         {headerName: 'Type', field:'vType', width:124, filter: true},
         {headerName: 'Date', field:'tranDate', filter: true},

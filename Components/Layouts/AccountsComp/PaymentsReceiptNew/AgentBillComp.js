@@ -26,7 +26,8 @@ const AgentBillComp = ({companyId, state, dispatch}) => {
     useEffect(() => { if(state.invoices.length>0){
         set('totalrecieving', totalRecieveCalc(state.invoices));
         //if(!state.autoOn){
-            calculateTransactions(); 
+            calculateTransactions();
+            // console.log(state.invoices)
         //}
     } }, [state.invoices, state.manualExRate, state.exRate, state.autoOn]);
 
@@ -206,6 +207,15 @@ const AgentBillComp = ({companyId, state, dispatch}) => {
         }})
     }
 
+    const getContainers = (data) => {
+        let result = "";
+        data?.SE_Job?.Bl?.Container_Infos &&
+        data?.SE_Job?.Bl?.Container_Infos.forEach((x)=>{
+            result = result + x.no + ', '
+        });
+        return result||'none'
+    }
+
   return (
     <>
     <Row>
@@ -366,17 +376,18 @@ const AgentBillComp = ({companyId, state, dispatch}) => {
         <Table className='tableFixHead' bordered>
         <thead>
             <tr className='fs-12'>
-            <th>Sr.</th>
+            <th></th>
             <th>Job #</th>
             <th>Inv/Bill #</th>
             <th>HBL</th>
             <th>MBL</th>
-            <th>Currency</th>
-            <th>Ex. Rate</th>
+            <th>Curr</th>
+            <th>Ex.</th>
+            <th>Type</th>
             <th>{state.payType=="Recievable"? 'Inv':'Bill'} Bal</th>
             <th>{state.payType=="Recievable"? 'Receiving Amount':'Paying Amount'}</th>
             <th>Balance</th>
-            <th>Select</th>
+            <th className='text-center'>-</th>
             <th>Container</th>
             </tr>
         </thead>
@@ -385,7 +396,7 @@ const AgentBillComp = ({companyId, state, dispatch}) => {
         return (
         <tr key={index} className='f fs-12' style={{backgroundColor:state.edit?'#E4EEF6':'white'}}>
             <td style={{width:30}}>{index + 1}</td>
-            <td style={{width:100}} className='row-hov blue-txt' onClick={()=>{
+            <td style={{width:100, paddingLeft:4, paddingTop:8}} className='row-hov blue-txt' onClick={()=>{
                 let type = x.operation;
                 if(x?.SE_Job?.jobNo){
                     dispatchNew(incrementTab({
@@ -399,10 +410,11 @@ const AgentBillComp = ({companyId, state, dispatch}) => {
                 }
             }> <b>{x?.SE_Job?.jobNo}</b></td>
             <td style={{width:100}}>{x.invoice_No}</td>
-            <td>HBL</td>
-            <td>MBL</td>
-            <td style={{width:100}}>{x.currency}</td>
-            <td style={{width:100}}>{x.ex_rate}</td>
+            <td>{x.SE_Job.Bl.hbl||'none'}</td>
+            <td>{x.SE_Job.Bl.mbl||'none'}</td>
+            <td style={{width:50}}>{x.currency}</td>
+            <td style={{width:50}}>{x.ex_rate.toFixed(2)}</td>
+            <td className='blue-txt' style={{width:30}}><b>{x.payType=="Payble"?"CN":"DN"}</b></td>
             <td>{commas(x.inVbalance)}</td>
             <td style={{padding:3, width:150}}>
                 <InputNumber style={{height:30, width:140, fontSize:12}} value={x.receiving} min="0.00" max={`${x.remBalance}`} stringMode  disabled={state.autoOn}
@@ -433,7 +445,7 @@ const AgentBillComp = ({companyId, state, dispatch}) => {
                 set('invoices', tempState);
             }}/>
             </td>
-            <td></td>
+            <td>{getContainers(x)}</td>
         </tr>
         )})}
         </tbody>

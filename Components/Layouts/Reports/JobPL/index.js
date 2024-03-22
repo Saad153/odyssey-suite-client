@@ -1,4 +1,4 @@
-import { recordsReducer, initialState, companies, handleSubmit, plainOptions } from './states';
+import { recordsReducer, initialState, companies, plainOptions } from './states';
 import { Row, Col, Form, Spinner } from "react-bootstrap";
 import { Select, Checkbox, Modal, Radio } from 'antd';
 import React, { useEffect, useReducer } from 'react';
@@ -35,7 +35,6 @@ const JobPL = () => {
 
   useEffect(() => {
     // setting default values from Redux state when component remounts
-    console.log(values.client)
     if (filters) {
       set({
         from: values ? values.from : '',
