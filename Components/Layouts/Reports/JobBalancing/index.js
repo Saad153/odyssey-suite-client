@@ -24,7 +24,7 @@ const JobBalancing = () => {
     const [ currency, setCurrency ] = useState("");
     const [ jobTypes, setJobTypes ] = useState([]);
     const [ values, setValues ] = useState({});
-    const [ payType, setPayType ] = useState("Payble");
+    const [ payType, setPayType ] = useState("All");
     const { data, status } = useQuery({ queryKey:['values'], queryFn:getJobValues });
     
     const stateValues = {

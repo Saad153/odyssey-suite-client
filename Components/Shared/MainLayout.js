@@ -32,9 +32,6 @@ const MainLayout = ({children}) => {
 
   useEffect(() => { 
     getCompanies(); 
-  }, [])
-
-  useEffect(()=>{
     if(items.length>0){
       let newTemp = [];
       items.forEach((x)=>{
@@ -46,7 +43,7 @@ const MainLayout = ({children}) => {
       })
       setSearchingList(newTemp);
     }
-  }, [])
+  }, []);
 
   async function getCompanies(){
     let companyValue = await Cookies.get('companyId');
@@ -433,9 +430,12 @@ const MainLayout = ({children}) => {
   <Layout className="main-dashboard-layout">
       {/* sidebar  */}
     {!load && 
-    <Sider trigger={null} collapsible collapsed={collapsed} 
+    <Sider 
+      trigger={null} 
+      collapsible 
+      collapsed={collapsed} 
       className='side-menu-styles' 
-      style={{maxHeight:'100vh',overflowY:'auto'}}>
+      style={{maxHeight:'100vh', overflowY:'auto'}}>
       <div className={!collapsed ? 'big-logo' : 'small-logo'}>
         <span>
           <img src={company=='1'?'/seanet-logo.png':company=='3'?'/aircargo-logo.png':company=='2'?'/cargolinkers-logo.png':null}/>
@@ -443,7 +443,12 @@ const MainLayout = ({children}) => {
         </span>
       </div>
       {!collapsed && <div className='px-3'>
-        <Select showSearch style={{  width: "101%" }} placeholder="Search to Select" optionFilterProp="children" onChange={searchPages}
+        <Select 
+          showSearch 
+          style={{ width: "101%" }} 
+          placeholder="Search to Select" 
+          optionFilterProp="children" 
+          onChange={searchPages}
           filterOption={(input, option) => (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())}
           filterSort={(optionA, optionB) => (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase()) }
           options={searchingList.map((x)=>{

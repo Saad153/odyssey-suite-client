@@ -72,31 +72,29 @@ const JobBalancingReport = ({ result, query }) => {
     }, [])
 
     async function getValues(value) {
-        if (value.status == "success") {
-            let newArray = [...value.result];
-            await newArray.forEach((y, i) => {
-                y.no = i + 1;
-                y.balance = y.payType == "Recievable" ?
-                    (parseFloat(y.total) + parseFloat(y.roundOff) - parseFloat(y.recieved)) :
-                    (parseFloat(y.total) + parseFloat(y.roundOff) - parseFloat(y.paid));
-                y.total = (parseFloat(y.total)) + parseFloat(y.roundOff)
-                y.paid = (parseFloat(y.paid)) + parseFloat(y.roundOff)
-                y.recieved = (parseFloat(y.recieved)) + parseFloat(y.roundOff)
-                y.age = getAge(y.createdAt)
-                // y.total =    commas(y.total)
-                // y.paid =     commas(y.paid)
-                // y.recieved = commas(y.recieved)
-                // y.balance =  commas(y.balance)
-                y.freightType = y?.SE_Job?.freightType == "Prepaid" ? "PP" : "CC"
-                y.fd = y?.SE_Job?.fd;
-                y.createdAt = moment(y.createdAt).format("DD-MMM-YYYY")
-                y.hbl = y?.SE_Job?.Bl?.hbl
-            })
-            setRecords(newArray);
-        } else {
-
-        }
-        setLoad(false)
+      if (value.status == "success") {
+        let newArray = [...value.result];
+        await newArray.forEach((y, i) => {
+            y.no = i + 1;
+            y.balance = y.payType == "Recievable" ?
+                (parseFloat(y.total) + parseFloat(y.roundOff) - parseFloat(y.recieved)) :
+                (parseFloat(y.total) + parseFloat(y.roundOff) - parseFloat(y.paid));
+            y.total = (parseFloat(y.total)) + parseFloat(y.roundOff)
+            y.paid = (parseFloat(y.paid)) + parseFloat(y.roundOff)
+            y.recieved = (parseFloat(y.recieved)) + parseFloat(y.roundOff)
+            y.age = getAge(y.createdAt)
+            // y.total =    commas(y.total)
+            // y.paid =     commas(y.paid)
+            // y.recieved = commas(y.recieved)
+            // y.balance =  commas(y.balance)
+            y.freightType = y?.SE_Job?.freightType == "Prepaid" ? "PP" : "CC"
+            y.fd = y?.SE_Job?.fd;
+            y.createdAt = moment(y.createdAt).format("DD-MMM-YYYY")
+            y.hbl = y?.SE_Job?.Bl?.hbl
+        })
+        setRecords(newArray);
+      } else {}
+      setLoad(false)
     }
 
     const [currentPage,setCurrentPage] = useState(1);
@@ -106,124 +104,121 @@ const JobBalancingReport = ({ result, query }) => {
     const currentRecords = records ? records.slice(indexOfFirst,indexOfLast) : [];
     const noOfPages = records ? Math.ceil(records.length / recordsPerPage) : 0 ;
 
-    const TableComponent = ({overflow}) => {
-        return (
+  const TableComponent = ({overflow}) => {
+    return (
+    <>
+    {!load &&
+      <>
+      {records?.length > 0 &&
         <>
-        {!load &&
-        <>
-            {records?.length > 0 &&
-                <>
-                <PrintTopHeader company={query.company} />
-                <hr className='mb-2' />
-                <div className='table-sm-1' style={{ maxHeight: overflow ? 530 : "50%", overflowY: 'auto' }}>
-                <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
-                    <thead>
-                        <tr>
-                            <th className='text-center'>#</th>
-                            <th className='text-center'>Inv. No</th>
-                            <th className='text-center'>Date</th>
-                            <th className='text-center'>HBL/HAWB</th>
-                            <th className='text-center'>Name</th>
-                            <th className='text-center'>F. Dest</th>
-                            <th className='text-center'>F/Tp</th>
-                            <th className='text-center'>Curr</th>
-                            <th className='text-center'>Debit</th>
-                            <th className='text-center'>Credit</th>
-                            <th className='text-center'>Paid/Rcvd</th>
-                            <th className='text-center'>Balance</th>
-                            <th className='text-center'>Age</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* without print  */}
-                        {overflow ? currentRecords.map((x,i)=>{
-                            return (
-                                <>
-                            <tr key={i}>
-                                <td style={{ maxWidth: 30 }}>{i + 1}</td>
-                                <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
-                                    onClick={async ()=>{
-                                        console.log(x)
-                                        await Router.push(`/reports/invoice/${x.id}`)
-                                        dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
-                                    }}
-                                >{x.invoice_No}</td>
-                                <td style={{}}>{x.createdAt}</td>
-                                <td style={{}}>{x.hbl}</td>
-                                <td style={{}}>{x.party_Name}</td>
-                                <td style={{ maxWidth: 90 }}>{x.fd}</td>
-                                <td style={{}}>{x.freightType}</td>
-                                <td style={{}}>{x.currency}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
-                                <td style={{ textAlign: 'center' }}>{x.age}</td>
-                            </tr>
-                            </>)
-                        }) : 
-                        // print mode 
-                        records.map((x, i) => {
-                            return (
-                            <tr key={i}>
-                                <td style={{ maxWidth: 30 }}>{i + 1}</td>
-                                <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
-                                    onClick={async ()=>{
-                                        await Router.push(`/reports/invoice/${x.id}`)
-                                        dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
-                                    }}
-                                >{x.invoice_No}</td>
-                                <td style={{}}>{x.createdAt}</td>
-                                <td style={{}}>{x.hbl}</td>
-                                <td style={{}}>{x.party_Name}</td>
-                                <td style={{ maxWidth: 90 }}>{x.fd}</td>
-                                <td style={{}}>{x.freightType}</td>
-                                <td style={{}}>{x.currency}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
-                                <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
-                                <td style={{ textAlign: 'center' }}>{x.age}</td>
-                            </tr>
-                            )
-                        })}
-                        {/* in print */}
-                        {!overflow && (
-                            <tr>
-                                <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
-                                <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
-                                <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
-                                <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
-                                <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
-                                <td style={{ textAlign: 'center' }}>-</td>
-                            </tr>
-                        )}
-                        {/* showing total in the last page  */}
-                        {overflow && currentPage === noOfPages && (
-                            <tr>
-                                <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
-                                <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
-                                <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
-                                <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
-                                <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
-                                <td style={{ textAlign: 'center' }}>-</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
-                </div>
-                {overflow && <div className="d-flex justify-content-end mt-4">
-                    <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-                </div>}
-                </>
-            }
-            {records.length == 0 && <>No Similar Record</>}
+        <PrintTopHeader company={query.company} />
+        <hr className='mb-2' />
+        <div className='table-sm-1' style={{ maxHeight: overflow ? 530 : "50%", overflowY: 'auto' }}>
+        <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
+        <thead>
+            <tr>
+            <th className='text-center'>#</th>
+            <th className='text-center'>Inv. No</th>
+            <th className='text-center'>Date</th>
+            <th className='text-center'>HBL/HAWB</th>
+            <th className='text-center'>Name</th>
+            <th className='text-center'>F. Dest</th>
+            <th className='text-center'>F/Tp</th>
+            <th className='text-center'>Curr</th>
+            <th className='text-center'>Debit</th>
+            <th className='text-center'>Credit</th>
+            <th className='text-center'>Paid/Rcvd</th>
+            <th className='text-center'>Balance</th>
+            <th className='text-center'>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {/* without print  */}
+            {overflow ? currentRecords.map((x,i)=>{
+            return (
+                <tr key={i}>
+                    <td style={{ maxWidth: 30 }}>{i + 1}</td>
+                    <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
+                        onClick={async ()=>{
+                            console.log(x)
+                            await Router.push(`/reports/invoice/${x.id}`)
+                            dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
+                        }}
+                    >{x.invoice_No}</td>
+                    <td style={{}}>{x.createdAt}</td>
+                    <td style={{}}>{x.hbl}</td>
+                    <td style={{}}>{x.party_Name}</td>
+                    <td style={{ maxWidth: 90 }}>{x.fd}</td>
+                    <td style={{}}>{x.freightType}</td>
+                    <td style={{}}>{x.currency}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
+                    <td style={{ textAlign: 'center' }}>{x.age}</td>
+                </tr>
+            )}) : 
+            // print mode 
+            records.map((x, i) => {
+                return (
+                <tr key={i}>
+                    <td style={{ maxWidth: 30 }}>{i + 1}</td>
+                    <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
+                        onClick={async ()=>{
+                            await Router.push(`/reports/invoice/${x.id}`)
+                            dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}` }))
+                        }}
+                    >{x.invoice_No}</td>
+                    <td style={{}}>{x.createdAt}</td>
+                    <td style={{}}>{x.hbl}</td>
+                    <td style={{}}>{x.party_Name}</td>
+                    <td style={{ maxWidth: 90 }}>{x.fd}</td>
+                    <td style={{}}>{x.freightType}</td>
+                    <td style={{}}>{x.currency}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.total : "-"}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? x.total : "-"}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType == "Recievable" ? x.recieved : x.paid}</td>
+                    <td style={{ textAlign: 'right' }} >{x.payType != "Recievable" ? `(${x.balance})` : x.balance}</td>
+                    <td style={{ textAlign: 'center' }}>{x.age}</td>
+                </tr>
+                )
+            })}
+            {/* in print */}
+            {!overflow && (
+                <tr>
+                    <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
+                    <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
+                    <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
+                    <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
+                    <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
+                    <td style={{ textAlign: 'center' }}>-</td>
+                </tr>
+            )}
+            {/* showing total in the last page  */}
+            {overflow && currentPage === noOfPages && (
+                <tr>
+                    <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
+                    <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
+                    <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
+                    <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
+                    <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
+                    <td style={{ textAlign: 'center' }}>-</td>
+                </tr>
+            )}
+        </tbody>
+        </Table>
+        </div>
+        {overflow && <div className="d-flex justify-content-end mt-4">
+            <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+        </div>}
         </>
-        }
-        {load && <div className='text-center py-5 my-5'> <Spinner /> </div>}
-        </>
-        )
+      }
+      {records.length == 0 && <>No Similar Record</>}
+      </>
     }
+    {load && <div className='text-center py-5 my-5'> <Spinner /> </div>}
+    </>
+  )}
 
     const gridRef = useRef();
     const [columnDefs, setColumnDefs] = useState([
@@ -278,46 +273,46 @@ const JobBalancingReport = ({ result, query }) => {
         return 38;
     }, []);
 
-    return (
-        <div className='base-page-layout'>
-            {query.report == "viewer" && (
-                <>
-                    <ReactToPrint content={() => inputRef} trigger={() => <AiFillPrinter className="blue-txt cur fl-r" size={30} />} />
-                    {/* <---- Excel Download button ----> */}
-                    <div className="d-flex justify-content-end " >
-                        <CSVLink data={result.result} className="btn-custom mx-2 fs-11 text-center" style={{ width: "110px", float: 'left' }}>
-                            Excel
-                        </CSVLink>
-                    </div>
-                </>
-            )}
-            {/* <---- Reports View only ----> */}
-            {query.report == "viewer" && <TableComponent overflow={true}/>}
-            {/* <---- list View only with filteration ----> */}
-            {query.report != "viewer" &&
-                <div className="ag-theme-alpine" style={{ width: "100%", height: '72vh' }}>
-                    <AgGridReact
-                        ref={gridRef} // Ref for accessing Grid's API
-                        rowData={records} // Row Data for Rows
-                        columnDefs={columnDefs} // Column Defs for Columns
-                        defaultColDef={defaultColDef} // Default Column Properties
-                        animateRows={true} // Optional - set to 'true' to have rows animate when sorted
-                        rowSelection='multiple' // Options - allows click selection of rows
-                        getRowHeight={getRowHeight}
-                    />
-                </div>
-            }
-            {/* <---- Component that will be displaying in print mode  ----> */}
-            <div style={{ display: 'none' }}>
-                <div className="pt-5 px-3" ref={(response) => (inputRef = response)}>
-                    {/* <---- Setting overflow true while in printing ----> */}
-                    <TableComponent overflow={false}/>
-                    <div style={{ position: 'absolute', bottom: 10 }}>Printed On: {`${moment().format("YYYY-MM-DD")}`}</div>
-                    <div style={{ position: 'absolute', bottom: 10, right: 10 }}>Printed By: {username}</div>
-                </div>
+  return (
+    <div className='base-page-layout'>
+        {query.report == "viewer" && (
+        <>
+            <ReactToPrint content={() => inputRef} trigger={() => <AiFillPrinter className="blue-txt cur fl-r" size={30} />} />
+            {/* <---- Excel Download button ----> */}
+            <div className="d-flex justify-content-end " >
+                <CSVLink data={result.result} className="btn-custom mx-2 fs-11 text-center" style={{ width: "110px", float: 'left' }}>
+                    Excel
+                </CSVLink>
+            </div>
+        </>
+        )}
+        {/* <---- Reports View only ----> */}
+        {query.report == "viewer" && <TableComponent overflow={true}/>}
+        {/* <---- list View only with filteration ----> */}
+        {query.report != "viewer" &&
+        <div className="ag-theme-alpine" style={{ width: "100%", height: '72vh' }}>
+            <AgGridReact
+                ref={gridRef} // Ref for accessing Grid's API
+                rowData={records} // Row Data for Rows
+                columnDefs={columnDefs} // Column Defs for Columns
+                defaultColDef={defaultColDef} // Default Column Properties
+                animateRows={true} // Optional - set to 'true' to have rows animate when sorted
+                rowSelection='multiple' // Options - allows click selection of rows
+                getRowHeight={getRowHeight}
+            />
+        </div>
+        }
+        {/* <---- Component that will be displaying in print mode  ----> */}
+        <div style={{ display: 'none' }}>
+            <div className="pt-5 px-3" ref={(response) => (inputRef = response)}>
+                {/* <---- Setting overflow true while in printing ----> */}
+                <TableComponent overflow={false}/>
+                <div style={{ position: 'absolute', bottom: 10 }}>Printed On: {`${moment().format("YYYY-MM-DD")}`}</div>
+                <div style={{ position: 'absolute', bottom: 10, right: 10 }}>Printed By: {username}</div>
             </div>
         </div>
-    )
+    </div>
+  )
 }
 
 export default React.memo(JobBalancingReport)
