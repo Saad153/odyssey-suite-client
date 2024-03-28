@@ -10,10 +10,10 @@ const report = ({query}) => {
 export default report
 
 export async function getServerSideProps(context) {
-    const { query } = context;
-    return{ 
-        props: {
-            query
-        }
+  const { query } = context;
+  return{ 
+    props: {
+      query
     }
+  }
 }

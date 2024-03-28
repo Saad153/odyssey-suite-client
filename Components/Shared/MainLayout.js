@@ -95,6 +95,9 @@ const MainLayout = ({children}) => {
     if(newRouter.pathname.includes("/reports/ledgerReport/[id]")){
       setToggleState('5-7');
     }
+    if(newRouter.pathname.includes("/reports/trialBalance/report")){
+      setToggleState('5-10');
+    }
     if(newRouter.pathname.includes("/reports/invoice/[id]")){
       setToggleState('2-11');
     }
@@ -193,6 +196,8 @@ const MainLayout = ({children}) => {
     ledgerReport:false,
     invoiceBalancing:false,
     invoiceBalancingReport:false,
+    trialBalance:false,
+    trialBalanceReport:false,
     nonGlParties:false,
     aeJobList:false,
     aeJob:false,
@@ -267,6 +272,8 @@ const MainLayout = ({children}) => {
         else if(tabs.key=='5-6'){ tempTabActive.invoiceBalancing=true }
         else if(tabs.key=='5-8'){ tempTabActive.invoiceBalancingReport=true }
         else if(tabs.key=='5-7'){ tempTabActive.ledgerReport=true }
+        else if(tabs.key=='5-9'){ tempTabActive.trialBalance=true }
+        else if(tabs.key=='5-10'){ tempTabActive.trialBalanceReport=true }
         else if(tabs.key=='6-1'){ tempTabActive.riders=true }
         else if(tabs.key=='6-1'){ tempTabActive.riderAssign=true }
         else if(tabs.key=='7-1'){ tempTabActive.aeJobList=true }
@@ -373,8 +380,10 @@ const MainLayout = ({children}) => {
     else if(x.key=='5-4-1'){ Router.push(`/reports/jobPLReport/report${setKey(x)}`) }
     else if(x.key=='5-5'){ Router.push('/reports/ledger') }
     else if(x.key=='5-6'){ Router.push('/reports/invoiceBalancing') }
-    else if(x.key=='5-8'){ Router.push(`/reports/invoiceBalancing/${setKey(x)}`) }
     else if(x.key=='5-7'){ Router.push(`/reports/ledgerReport/${setKey(x)}`) }
+    else if(x.key=='5-8'){ Router.push(`/reports/invoiceBalancing/${setKey(x)}`) }
+    else if(x.key=='5-9'){ Router.push(`/reports/trialBalance`) }
+    else if(x.key=='5-10'){ Router.push(`/reports/trialBalance/report`) }
     else if(x.key=='2-11'){ Router.push(`/reports/invoice/${setKey(x)}`) }
     else if(x.key=='6-1'){ Router.push('/tasks/riders') }
     else if(x.key=='6-2'){ Router.push(`/tasks/riders/riderAssign/${setKey(x)}`) }
