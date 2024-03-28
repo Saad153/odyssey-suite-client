@@ -383,7 +383,7 @@ const MainLayout = ({children}) => {
     else if(x.key=='5-7'){ Router.push(`/reports/ledgerReport/${setKey(x)}`) }
     else if(x.key=='5-8'){ Router.push(`/reports/invoiceBalancing/${setKey(x)}`) }
     else if(x.key=='5-9'){ Router.push(`/reports/trialBalance`) }
-    else if(x.key=='5-10'){ Router.push(`/reports/trialBalance/report`) }
+    else if(x.key=='5-10'){ Router.push(`/reports/trialBalance/report/${setKey(x)}`) }
     else if(x.key=='2-11'){ Router.push(`/reports/invoice/${setKey(x)}`) }
     else if(x.key=='6-1'){ Router.push('/tasks/riders') }
     else if(x.key=='6-2'){ Router.push(`/tasks/riders/riderAssign/${setKey(x)}`) }

@@ -100,7 +100,6 @@ const MainTable = ({ ledger, closing, opening, name, company, currency, from, to
     )
   }
 
-
   useEffect(() => {
     getUserName();
     async function getUserName() {

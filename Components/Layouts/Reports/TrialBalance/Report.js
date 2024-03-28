@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import PrintTopHeader from "/Components/Shared/PrintTopHeader";
 import { Table } from "react-bootstrap";
+import exportExcelFile from "/functions/exportExcelFile";
+import Pagination from "/Components/Shared/Pagination";
 
 const Report = ({query, result}) => {
 
@@ -92,9 +94,38 @@ const Report = ({query, result}) => {
       setTotal(temp)
     }
 
+    const exportData = () => {
+      // console.log(records[0])
+      // console.log(records[1])
+      let temp = [...records];
+      temp.push({title:'', ...total})
+      exportExcelFile(
+        temp,
+        [
+          { header: "Account", key: "title", width: 30, height:10 },
+          { header: "Opening Dr.", key: "opDebit", width: 25, height:10 },
+          { header: "Opening Cr.", key: "opCredit", width: 25, height:10 },
+          { header: "Transaction Dr.", key: "trDebit", width: 25, height:10 },
+          { header: "Transaction Cr.p", key: "trCredit", width: 25, height:10 },
+          { header: "Closing Dr.", key: "clDebit", width: 25, height:10 },
+          { header: "Closing Cr.", key: "clCredit", width: 25, height:10 },
+        ]
+      )
+    }
+
+    const [currentPage,setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(20);
+    const indexOfLast = currentPage * recordsPerPage ;
+    const indexOfFirst = indexOfLast - recordsPerPage;
+    const currentRecords = records ? records.slice(indexOfFirst,indexOfLast) : [];
+    const noOfPages = records ? Math.ceil(records.length / recordsPerPage) : 0 ;
+
   const TableComponent = ({overFlow}) => {
     return (
       <div className="">
+        <div className="d-flex justify-content-end " >
+            <button className="btn-custom mx-2 px-3 fs-11 text-center" onClick={exportData}>To Excel</button>
+        </div>
         <PrintTopHeader company={query.company} from={query.from} to={query.to} />
         {/* <hr className="" /> */}
         <div className="printDiv mt-2" style={{ maxHeight: overFlow ? "60vh" : "100%", overflowY: "auto", overflowX: "hidden" , height:"auto" }}>
@@ -102,13 +133,13 @@ const Report = ({query, result}) => {
             <Table className="tableFixHead" bordered>
               <thead>
                 <tr className="custom-width">
-                  <th className="class-1">Account Title</th>
+                  <th className="class-1"></th>
                   <th className="class-1" colSpan={2}>Opening</th>
                   <th className="class-1" colSpan={2}>Transaction</th>
                   <th className="class-1" colSpan={2}>Closing</th>
                 </tr>
                 <tr className="custom-width">
-                  <th className="class-1"></th>
+                  <th className="class-1">Account Title</th>
                   <th className="class-1">Debit </th>
                   <th className="class-1">Credit</th>
                   <th className="class-1">Debit </th>
@@ -118,7 +149,7 @@ const Report = ({query, result}) => {
                 </tr>
               </thead>
               <tbody>
-                {records.map((x, i) => {
+                {currentRecords.map((x, i) => {
                   if(x.type=="parent"){
                     return(
                     <tr key={i}>
@@ -150,6 +181,11 @@ const Report = ({query, result}) => {
               </tbody>
             </Table>
           </div>
+          {overFlow && 
+          <div className="d-flex justify-content-end mt-4">
+            <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+          </div>
+          }
         </div>
       </div>
     )

@@ -10,8 +10,8 @@ import { CSVLink } from "react-csv";
 import { incrementTab } from '/redux/tabs/tabSlice';
 import { useDispatch } from 'react-redux';
 import Router from 'next/router';
-import Pagination from "../../../Shared/Pagination";
-import exportExcelFile from "../../../../functions/exportExcelFile";
+import Pagination from "/Components/Shared/Pagination";
+import exportExcelFile from "/functions/exportExcelFile";
 
 const JobBalancingReport = ({ result, query }) => {
     let inputRef = useRef(null);

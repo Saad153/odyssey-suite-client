@@ -62,20 +62,8 @@ const TrialBalance = () => {
     dispatch(incrementTab({
       "label": "Trial Balance Report",
       "key": "5-10",
-      "id": `${debitAccount}?from=${from}&to=${to}&name=${name[0]}&company=${company}&currency=${currency}`
+      "id": `?from=${from}&to=${to}&company=${company}&currency=${currency}`
     }))
-    // await axios.get(process.env.NEXT_PUBLIC_CLIMAX_MISC_GET_TRIAL_BALANCE, {
-    //   headers: {
-    //     debitAccount,
-    //     to
-    //   }
-    // }).then((x) => {
-    //   console.log(x.data.result);
-    // })
-    // dispatch(setFilterValues({
-    //   pageName: "trialBalance",
-    //   values: stateValues
-    // }))
   }
 
   return (
