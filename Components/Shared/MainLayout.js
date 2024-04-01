@@ -98,6 +98,9 @@ const MainLayout = ({children}) => {
     if(newRouter.pathname.includes("/reports/trialBalance/report")){
       setToggleState('5-10');
     }
+    if(newRouter.pathname.includes("/reports/incomeStatement/report")){
+      setToggleState('5-12');
+    }
     if(newRouter.pathname.includes("/reports/invoice/[id]")){
       setToggleState('2-11');
     }
@@ -180,6 +183,7 @@ const MainLayout = ({children}) => {
     jobBalancingReport:false,
     accountActivity:false,
     balanceSheet:false,
+    balanceSheetReport:false,
     voucherSys:false,
     voucherList:false,
     officeVoucherList:false,
@@ -196,8 +200,13 @@ const MainLayout = ({children}) => {
     ledgerReport:false,
     invoiceBalancing:false,
     invoiceBalancingReport:false,
+
     trialBalance:false,
     trialBalanceReport:false,
+
+    incomeStatement:false,
+    incomeStatementReport:false,
+
     nonGlParties:false,
     aeJobList:false,
     aeJob:false,
@@ -266,6 +275,7 @@ const MainLayout = ({children}) => {
         else if(tabs.key=='5-1-1'){ tempTabActive.jobBalancingReport=true }
         else if(tabs.key=='5-2'){ tempTabActive.accountActivity=true }
         else if(tabs.key=='5-3'){ tempTabActive.balanceSheet=true }
+        else if(tabs.key=='5-3-1'){ tempTabActive.balanceSheetReport=true }
         else if(tabs.key=='5-4'){ tempTabActive.jobPlReport=true }
         else if(tabs.key=='5-4-1'){ tempTabActive.jobPlReportPage=true }
         else if(tabs.key=='5-5'){ tempTabActive.ledger=true }
@@ -274,6 +284,8 @@ const MainLayout = ({children}) => {
         else if(tabs.key=='5-7'){ tempTabActive.ledgerReport=true }
         else if(tabs.key=='5-9'){ tempTabActive.trialBalance=true }
         else if(tabs.key=='5-10'){ tempTabActive.trialBalanceReport=true }
+        else if(tabs.key=='5-11'){ tempTabActive.incomeStatement=true }
+        else if(tabs.key=='5-12'){ tempTabActive.incomeStatementReport=true }
         else if(tabs.key=='6-1'){ tempTabActive.riders=true }
         else if(tabs.key=='6-1'){ tempTabActive.riderAssign=true }
         else if(tabs.key=='7-1'){ tempTabActive.aeJobList=true }
@@ -376,6 +388,7 @@ const MainLayout = ({children}) => {
     else if(x.key=='5-1-1'){ Router.push(`/reports/jobBalancing/${setKey(x)}`) }
     else if(x.key=='5-2'){ Router.push('/reports/accountActivity') }
     else if(x.key=='5-3'){ Router.push('/reports/balanceSheet') }
+    else if(x.key=='5-3-1'){ Router.push('/reports/balanceSheet/Report') }
     else if(x.key=='5-4'){ Router.push('/reports/jobPLReport') }
     else if(x.key=='5-4-1'){ Router.push(`/reports/jobPLReport/report${setKey(x)}`) }
     else if(x.key=='5-5'){ Router.push('/reports/ledger') }
@@ -384,6 +397,8 @@ const MainLayout = ({children}) => {
     else if(x.key=='5-8'){ Router.push(`/reports/invoiceBalancing/${setKey(x)}`) }
     else if(x.key=='5-9'){ Router.push(`/reports/trialBalance`) }
     else if(x.key=='5-10'){ Router.push(`/reports/trialBalance/report/${setKey(x)}`) }
+    else if(x.key=='5-11'){ Router.push(`/reports/incomeStatement`) }
+    else if(x.key=='5-12'){ Router.push(`/reports/incomeStatement/report/${setKey(x)}`) }
     else if(x.key=='2-11'){ Router.push(`/reports/invoice/${setKey(x)}`) }
     else if(x.key=='6-1'){ Router.push('/tasks/riders') }
     else if(x.key=='6-2'){ Router.push(`/tasks/riders/riderAssign/${setKey(x)}`) }

@@ -143,6 +143,11 @@ function setAccesLevels(dispatch, collapsed){
       key: '5-9',
       children: `Content of Tab Pane 3`,
     }),
+    getItem('Income statement', '5-11',<></>, null, {
+      label: `Income statement`,
+      key: '5-11',
+      children: `Content of Tab Pane 3`,
+    }),
   ]
   )
   const seaJobs = getParentItem('Sea Jobs', '4', <span className=''><RiShipLine /><IoMdArrowDropleft className='flip' /></span>,
