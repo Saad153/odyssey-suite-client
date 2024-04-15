@@ -132,7 +132,7 @@ const PaymentsReceiptNew = ({id, voucherData}) => {
 
     const gridRef = useRef(); 
     const [columnDefs, setColumnDefs] = useState([
-        {headerName: '#', field:'no', width: 50 },
+        {headerName: '#', field:'no', width: 50, filter:false },
         {headerName: 'Voucher No.', field:'voucher_Id', filter: true},
         {headerName: 'Name', field:'partyName', flex:1, filter: true},
         {headerName: 'Party', field:'partyType', filter: true},
@@ -140,7 +140,9 @@ const PaymentsReceiptNew = ({id, voucherData}) => {
         {headerName: 'Date', field:'tranDate', filter: true},
     ]);
     const defaultColDef = useMemo( ()=> ({
-        sortable: true
+        sortable: true,
+        filter: "agTextColumnFilter",
+        floatingFilter: true,
     }));
 
     const cellClickedListener = useCallback((e)=> {
@@ -181,11 +183,11 @@ const PaymentsReceiptNew = ({id, voucherData}) => {
             </Radio.Group>
         </Col>
         <Col md={4}>
-                <b>Pay Type: </b>
-                <Radio.Group className='mt-1' value={state.payType} onChange={(e)=> setAll({search:"", payType:e.target.value})} >
-                    <Radio value={"Payble"}>Payable</Radio>
-                    <Radio value={"Recievable"}>Receivable</Radio>
-                </Radio.Group>
+            <b>Pay Type: </b>
+            <Radio.Group className='mt-1' value={state.payType} onChange={(e)=> setAll({search:"", payType:e.target.value})} >
+                <Radio value={"Payble"}>Payable</Radio>
+                <Radio value={"Recievable"}>Receivable</Radio>
+            </Radio.Group>
         </Col>
         <Col className='text-end'>
             <button className='btn-custom' style={{fontSize:11}}
@@ -228,11 +230,15 @@ const PaymentsReceiptNew = ({id, voucherData}) => {
         <Col md={12}><hr className='p-0 my-3' /></Col>
     </Row>
     {state.tranVisible && <AgentBillComp companyId={companyId} state={state} dispatch={dispatch} />}
-    <Modal open={state.oldVouchers} width={'80%'}
-        onOk={()=>{setAll({oldVouchers:false})}} 
-        onCancel={()=>{ setAll({oldVouchers:false}) }}
-        footer={false} maskClosable={false}
-        title={ <>Old Vouchers</>}
+    <Modal 
+        width={'80%'}
+        open={state.oldVouchers}
+        onOk={()=>setAll({oldVouchers:false})}
+        onCancel={()=> setAll({oldVouchers:false})}
+        footer={false}
+        centered
+        maskClosable={false}
+        title={<>Old Vouchers</>}
     >   
     {state.oldVouchers &&
     <div className="ag-theme-alpine" style={{width:"100%", height:'72vh'}}>

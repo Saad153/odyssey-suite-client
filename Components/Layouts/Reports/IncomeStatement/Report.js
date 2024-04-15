@@ -28,11 +28,11 @@ const Report = ({query, result}) => {
         transactions.debit = parseFloat(x.amount):
         transactions.credit = parseFloat(x.amount)
     });
-
+    
     let amount = transactions.debit - transactions.credit
     amount>0?
       transactions.debit = parseFloat(amount):
-      transactions.credit = parseFloat(amount)*-1
+      transactions.credit = parseFloat(amount)*-1;
 
     return transactions
   }
@@ -54,6 +54,7 @@ const Report = ({query, result}) => {
               title:z.title,
               index:i,
               type:'child',
+              // createdAt:z.Voucher_Heads.createdAt,
               ...makeTransaction(z.Voucher_Heads)
             });
           })
@@ -62,7 +63,30 @@ const Report = ({query, result}) => {
     })
     makeTotal(temp)
     setRecords(temp)
+    // monthWise(result)
   }, []);
+
+  const checkMonth = (date) => {
+    return moment(date).format("MMM, YYYY")
+  }
+
+  const monthWise = (data) => {
+    console.log(data.result)
+    let dates = [];
+    data.result.forEach((account)=>{
+      account.Parent_Accounts.forEach((pAccount)=>{
+        pAccount.Child_Accounts.forEach((cAccount)=>{
+          cAccount.Voucher_Heads.forEach((voucher)=>{
+            let tempDate = checkMonth(voucher.createdAt)
+            dates.includes(tempDate)?
+              null:
+              dates.push(tempDate);
+          })
+        })
+      })
+    })
+    console.log(dates)
+  }
 
   const makeTotal = (data) => {
     let temp = {
@@ -165,12 +189,12 @@ const Report = ({query, result}) => {
       </div>
     )
   }
-    
+
   return (
-    <div className='p-3'>
-      <TableComponent overFlow={true}/>
-    </div>
+  <div className='p-3'>
+    <TableComponent overFlow={true}/>
+  </div>
   )
 }
 
-export default Report
+export default React.memo(Report)
