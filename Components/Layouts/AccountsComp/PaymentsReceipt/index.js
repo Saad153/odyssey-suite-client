@@ -1,228 +1,260 @@
-import React, { useEffect, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Input, List, Radio, Modal, Select } from 'antd';
 import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import axios from 'axios';
+import { Input, List, Radio, Modal, Select } from 'antd';
+import { recordsReducer, initialState } from './states';
+import { useSelector, useDispatch } from 'react-redux';
+import { incrementTab } from '/redux/tabs/tabSlice';
+import { Row, Col } from 'react-bootstrap';
+import Router, { useRouter } from 'next/router';
 import BillComp from './BillComp';
-import AgentBillComp from './AgentBillComp';
-import { useSelector } from 'react-redux';
-import { BackwardOutlined, FastBackwardFilled, FastForwardFilled, ForwardFilled } from '@ant-design/icons';
-import History from './History';
+import moment from 'moment';
+import axios from 'axios';
+import React, { useState, useRef, useEffect, useMemo, useCallback, useReducer} from 'react';
+import { AgGridReact } from 'ag-grid-react';
 
-const PaymentsReceipt = () => {
+const PaymentsReceipt = ({id, voucherData}) => {
 
-    const [visible, setVisible] = useState(false);
-    const [search, setSearch] = useState("");
-    const [partytype, setPartyType] = useState("client");
-    const [payType, setPayType] = useState("Recievable");
-    const [invoiceCurrency, setInvoiceCurrency] = useState("USD");
-    const [partyOptions, setPartyOptions] = useState([]);
-    const [selectedParty, setSelectedParty] = useState({id:'', name:''});
+    const dispatchNew = useDispatch();
+    const [ state, dispatch ] = useReducer(recordsReducer, initialState);
+    const setAll = (x) => dispatch({type:'setAll', payload:x})
+    const router = useRouter()
     const companyId = useSelector((state) => state.company.value);
 
-    const [history, setHistory] = useState(false);
-    const [offset, setOffset] = useState(0);
-    const [count, setCount] = useState(0);
-    const [transaction, setTransaction] = useState({});
-    const [oldOnvoices, setOldInvoices] = useState([]);
+    useEffect(() => {
+        if(router?.query?.id=='undefined') {
+            Router.push({pathname:"/accounts/paymentReceipt/new"}, undefined,{shallow:true});
+            dispatchNew(incrementTab({
+                "label": "Payment / Receipt",
+                "key": "3-4",
+                "id":"new"
+            }))
+        } else if (router.query.name!='undefined' && router.query.partyid!='undefined' && router.query.partyid){
+            setAll({ 
+                selectedParty:{id:router.query.partyid, name:router.query.name}, 
+                partytype:router.query.type,
+                payType:router.query.paytype,
+                invoiceCurrency:router.query.currency,
+                tranVisible:true
+            })
+        }else if(router?.query?.id!='undefined'&&router?.query?.id!='new') {
+            let payAcc = {}, partyAcc = {}, taxAc = {acc:{}, amount:0}, bankAc = {acc:{}, amount:0}, gainLoss = {acc:{}, amount:0}
+            voucherData?.Voucher_Heads.forEach((x)=>{
+                if(x.accountType=='payAccount'){
+                    payAcc = x.Child_Account
+                }
+                if(x.accountType=="partyAccount"){
+                    partyAcc = x.Child_Account
+                }
+                if(x.accountType=="Tax"){
+                    taxAc.acc = x.Child_Account
+                    taxAc.amount = x.amount
+                }
+                if(x.accountType=="BankCharges"){
+                    bankAc.acc = x.Child_Account
+                    bankAc.amount = x.amount
+                }
+                if(x.accountType=="gainLoss"){
+                    gainLoss.acc = x.Child_Account
+                }
+            });
+            setAll({
+                voucherHeads:voucherData.Voucher_Heads,
+                id:id,
+                createdAt:voucherData.createdAt,
+                edit:true,
+                oldInvoices:voucherData.invoices,
+                selectedParty:{id:voucherData.partyId, name:voucherData.partyName}, 
+                partytype:voucherData.partyType,
+                payType:voucherData.vType=="BRV"?
+                    "Recievable":
+                    voucherData.vType=="CRV"?"Recievable":"Payble",
+                invoiceCurrency:voucherData.currency,
+                tranVisible:true,
+                transaction:
+                    (voucherData.vType=="BRV"||voucherData.vType=="BPV")?"Bank":
+                    (voucherData.vType=="CRV"||voucherData.vType=="CPV")?"Cash":"Adjust",
+                date:moment(voucherData.tranDate),
+                checkNo:voucherData.chequeNo,
+                payAccountRecord:payAcc,
+                partyAccountRecord:partyAcc,
+                bankChargesAccountRecord:bankAc.acc,
+                bankCharges:bankAc.amount,
+                taxAccountRecord:taxAc.acc,
+                taxAmount:taxAc.amount,
+                gainLossAccountRecord:gainLoss.acc,
+                onAccount:voucherData.onAccount,
+                drawnAt:voucherData.drawnAt,
+                manualExRate:voucherData.exRate,
+                subType:voucherData.subType
+            })
+        }
+    }, [router]);
 
-    useEffect(() => { searchParties() }, [search]);
+    useEffect(() => { searchParties() }, [state.search]);
 
     const searchParties = async() => {
-        if(search.length>2){
-            await axios.post(process.env.NEXT_PUBLIC_CLIMAX_MISC_GET_PARTIES_BY_SEARCH, { search, type:partytype })
-            .then((x)=> {
-                if(x.data.status=="success"){
-                    setPartyOptions(x.data.result)
-                }else{
-                    setPartyOptions([])
-                }
-            })
+        if(state.search.length>2){
+        await axios.post(process.env.NEXT_PUBLIC_CLIMAX_MISC_GET_PARTIES_BY_SEARCH, 
+            { search:state.search, type:state.partytype }
+        ).then((x)=> {
+            if(x.data.status=="success"){
+                setAll({partyOptions:x.data.result})
+            } else {
+                setAll({partyOptions:[]})
+            }
+        })
         }
     }
 
     const ListComp = ({data}) => {
-        return(
-            <List size="small" bordered
-                dataSource={data}
-                renderItem={(item)=>
-                    <List.Item key={item.id} 
-                        className='searched-item' 
-                        onClick={()=>{
-                            setSelectedParty({id:"", name:""});
-                            setSelectedParty({id:item.id, name:item.name});
-                            setVisible(true);
-                        }}
-                    >
-                        {item.name}
-                    </List.Item>
+    return(
+    <List 
+        size="small" 
+        bordered 
+        dataSource={data}
+        renderItem={(item)=>
+        <List.Item key={item.id} className='searched-item' onClick={() => {
+            Router.push({
+                pathname:"/accounts/paymentReceipt/new", 
+                query:{
+                    name:item.name, partyid:item.id, type:state.partytype,
+                    paytype:state.payType, currency:state.invoiceCurrency
                 }
-            />
-        )
-    }
+            }, undefined,{shallow:true});
+            dispatchNew(incrementTab({
+                "label": "Payment / Receipt",
+                "key": "3-4",
+                "id":`new?name=${item.name}&partyid=${item.id}&type=${state.partytype}&paytype=${state.payType}&currency=${state.invoiceCurrency}`
+            }))
+            setAll({selectedParty:{id:item.id, name:item.name}, tranVisible:true, search:""});
+        }}>{item.name}</List.Item>} 
+    />
+    )}
 
-    const onHandleClick = (type) => {
-        let tempOffest=0, tempType=type, tempHistory=history, go=false;
-        if(history){
-            if(type=="first"){
-                tempOffest = 0;
-                go=true
-            } else if(type=="back"&&offset!=0){
-                tempOffest = parseInt(offset)-1
-                go=true
-            } else if(type=="front" && (parseInt(offset)+1<count)){
-                tempOffest = parseInt(offset) + 1
-                go=true
-            } else if(type=="last"){
-                tempOffest = count - 1
-                go=true
-            }
-        } else {
-            go=true
-        }
-        go?axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_TRANSACTION_HISTORY, {
-            headers:{
-                offset:tempOffest,
-                type:tempType,
-                history:`${tempHistory}`
-            }
-        }).then((x)=>{
-            if(x.data.status=="success"){
-                setOldInvoices(x.data.result.invoices)
-                setTransaction(x.data.result.result)
-                setOffset(x.data.result.offset)
-                if(!history){
-                    setCount(x.data.result.count);
-                    setHistory(true);
-                }else{
-                    
-                }
-            }
-        }):null
-    }
+    const gridRef = useRef(); 
+    const [columnDefs, setColumnDefs] = useState([
+        {headerName: '#', field:'no', width: 50, filter:false },
+        {headerName: 'Voucher No.', field:'voucher_Id', filter: true},
+        {headerName: 'Name', field:'partyName', flex:1, filter: true},
+        {headerName: 'Party', field:'partyType', filter: true},
+        {headerName: 'Type', field:'vType', width:124, filter: true},
+        {headerName: 'Date', field:'tranDate', filter: true},
+    ]);
+    const defaultColDef = useMemo( ()=> ({
+        sortable: true,
+        filter: "agTextColumnFilter",
+        floatingFilter: true,
+    }));
 
-    const basestyle = {borderBottom:'1px solid silver', paddingBottom:5, marginBottom:10}
-    const Header = () => {
-        return(
-            <Row className='p-0 m-0'>
-                <Col style={{maxWidth:30}} className='p-0 m-0'>
-                    <div className='round-icon-cont' onClick={()=>onHandleClick('first')}>
-                        <FastBackwardFilled />
-                    </div>
-                </Col>
-                <Col style={{maxWidth:30}} className='p-0 m-0'>
-                    <div className='round-icon-cont' onClick={()=>onHandleClick('back')}>
-                        <BackwardOutlined />
-                    </div>
-                </Col>
-                <Col style={{maxWidth:30}} className='p-0 m-0'>
-                    <div className='round-icon-cont' onClick={()=>onHandleClick('front')}>
-                        <ForwardFilled />
-                    </div>
-                </Col>
-                <Col style={{maxWidth:30}} className='p-0 m-0'>
-                    <div className='round-icon-cont' onClick={()=>onHandleClick('last')}>
-                        <FastForwardFilled />
-                    </div>
-                </Col>
-                <Col>
-                {!history?`${selectedParty.name} Invoices/Bills`:transaction.partyName}
-                </Col>
-            </Row>
-        )
-    }
+    const cellClickedListener = useCallback((e)=> {
+        dispatchNew(incrementTab({"label": "Payment / Receipt","key": "3-4","id":e.data.id}))
+        Router.push(`/accounts/paymentReceipt/${e.data.id}`)
+    }, []);
+
+    const getRowHeight = useCallback(() => {
+        return 38;
+    }, []);
+
   return (
     <div className='base-page-layout'>
-        <Row>
-            <Col md={12} xs={12}><h4 className='fw-7'>Payments / Receipts</h4></Col>
-            <Col md={2}>
-                <div><b>Select Party Type</b></div>
-                <Radio.Group className='mt-1' 
-                    value={partytype}
-                    onChange={(e)=>{
-                        setPartyType(e.target.value);
-                        if(e.target.value=="vendor"){
-                            setPayType("Payble");
-                        }else if(e.target.value=="client"){
-                            setPayType("Recievable");
-                        }else if(e.target.value=="agent"){
-                            setPayType("Payble");
-                        }
-                        setSearch("");
-                    }} 
-                >
-                    <Radio value={"client"}>Client</Radio>
-                    <Radio value={"vendor"}>Vendor</Radio>
-                    <Radio value={"agent"}>Agent</Radio>
-                </Radio.Group>
-            </Col>
-
-        </Row>
-        <Row className='mt-3'>
-            <Col md={2}>
-                <b>Payment</b>
-                <Radio.Group className='mt-1' 
-                    value={payType}
-                    onChange={(e)=>{
-                        setPayType(e.target.value);
-                        setSearch("");
-                    }} 
-                >
-                    <Radio value={"Payble"}>Payable</Radio>
-                    <Radio value={"Recievable"}>Receivable</Radio>
-                </Radio.Group>
-            </Col>
-            <Col md={2}>
-            <b>Currency</b>
-                <Select size='small'
-                    disabled={partytype!="agent"?true:false}
-                    defaultValue={invoiceCurrency}
-                    onChange={(e)=> setInvoiceCurrency(e)}
-                    style={{ width:'100%' }}
-                    options={[
-                        { value:'PKR', label:'PKR' },
-                        { value:'USD', label:'USD' },
-                        { value:'GBP', label:'GBP' },
-                        { value:'EUR', label:'EUR' },
-                        { value:'Multi', label:'Multi' },
-                    ]}
-                />
-            </Col>
-        </Row>
-        <Row>
-            <Col style={{maxWidth:400}} className='mt-3'>
-                <b>Search</b>
-                <Input style={{ width: 500 }} placeholder="Search" 
-                    suffix={search.length>2?<CloseCircleOutlined onClick={()=>setSearch("")} />:<SearchOutlined/>} 
-                    value={search} onChange={(e)=>setSearch(e.target.value)}
-                />
-                {search.length>2 &&
-                    <div style={{position:"absolute", zIndex:10}}>
-                        <ListComp data={partyOptions} />
-                    </div>
+    <Row>
+        <Col md={4}>
+            <b>Type: </b>
+            <Radio.Group className='mt-1' size='small' value={state.partytype}
+                onChange={(e) => {
+                let value="", TempInvoiceCurrency = "";
+                if(e.target.value=="vendor"){
+                    value="Payble"
+                    TempInvoiceCurrency="PKR"
+                } else if(e.target.value=="client"){
+                    value="Recievable";
+                    TempInvoiceCurrency="PKR"
+                } else if(e.target.value=="agent"){
+                    value="Payble";
+                    TempInvoiceCurrency="USD"
                 }
-            </Col>
-            <Col md={12}><hr/></Col>
-        </Row>
-        <Modal 
-            open={visible} 
-            width={'100%'}
-            onOk={()=>{setVisible(false); setHistory(false)}} 
-            onCancel={()=>{ setVisible(false); setSelectedParty({id:'', name:''}); setHistory(false)}}
-            footer={false} maskClosable={false}
-            title={ <Header/> }
-        >   
-        {!history &&<>
-            {(selectedParty.id!=''&& partytype!="agent") && <BillComp      selectedParty={selectedParty} payType={payType} partytype={partytype} companyId={companyId} invoiceCurrency={"PKR"} />}
-            {(selectedParty.id!=''&& partytype=="agent") && <AgentBillComp selectedParty={selectedParty} payType={payType} partytype={partytype} companyId={companyId} invoiceCurrency={invoiceCurrency} />}
-        </>}
-        {
-            history &&
-            <>
-                <History transaction={transaction} oldOnvoices={oldOnvoices} payType={payType} />
-            </>
-        }
-        </Modal>
+                setAll({
+                    selectedParty:{id:"", name:""}, partytype:e.target.value, 
+                    search:"", payType:value, invoiceCurrency:TempInvoiceCurrency
+                })
+            }}>
+                <Radio value={"client"}>Client</Radio>
+                <Radio value={"vendor"}>Vendor</Radio>
+                <Radio value={"agent"} >Agent </Radio>
+            </Radio.Group>
+        </Col>
+        <Col md={4}>
+            <b>Pay Type: </b>
+            <Radio.Group className='mt-1' value={state.payType} onChange={(e)=> setAll({search:"", payType:e.target.value})} >
+                <Radio value={"Payble"}>Payable</Radio>
+                <Radio value={"Recievable"}>Receivable</Radio>
+            </Radio.Group>
+        </Col>
+        <Col className='text-end'>
+            <button className='btn-custom' style={{fontSize:11}}
+                onClick={()=>{
+                    axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS)
+                    .then((x)=>{
+                        let tempData = []
+                        x.data.result.forEach((y, i)=>{
+                            tempData.push({...y, no:i+1})
+                        })
+                        setAll({oldVouchers:true, oldVouchersList:tempData});
+                    })
+                }}
+            >Show Old</button>
+        </Col>
+        <Col md={6} className='mt-3'>
+            <Input placeholder="Search" size='small'
+                suffix={state.search.length>2?<CloseCircleOutlined onClick={()=>setAll({search:""})} />:<SearchOutlined/>} 
+                value={state.search} onChange={(e)=>setAll({search:e.target.value})}
+            />
+            {state.search.length>2 &&
+                <div style={{position:"absolute", zIndex:10}}>
+                    <ListComp data={state.partyOptions} />
+                </div>
+            }
+        </Col>
+        <Col md={1} className='mt-3'>
+            <Select disabled={state.partytype!="agent"?true:false} value={state.invoiceCurrency} size='small'
+                onChange={(e)=> setAll({invoiceCurrency:e})}
+                options={[
+                    { value:'PKR', label:'PKR' },
+                    { value:'USD', label:'USD' },
+                    { value:'GBP', label:'GBP' },
+                    { value:'EUR', label:'EUR' },
+                    { value:'Multi', label:'Multi' },
+                ]}
+            />
+        </Col>
+        <Col md={4} className='mt-3'style={{border:'1px solid silver'}}>{state.selectedParty.name}</Col>
+        <Col md={12}><hr className='p-0 my-3' /></Col>
+    </Row>
+    {state.tranVisible && <BillComp companyId={companyId} state={state} dispatch={dispatch} />}
+    <Modal 
+        width={'80%'}
+        open={state.oldVouchers}
+        onOk={()=>setAll({oldVouchers:false})}
+        onCancel={()=> setAll({oldVouchers:false})}
+        footer={false}
+        centered
+        maskClosable={false}
+        title={<>Old Vouchers</>}
+    >   
+    {state.oldVouchers &&
+    <div className="ag-theme-alpine" style={{width:"100%", height:'72vh'}}>
+        <AgGridReact
+          ref={gridRef} // Ref for accessing Grid's API
+          rowData={state.oldVouchersList} // Row Data for Rows
+          columnDefs={columnDefs} // Column Defs for Columns
+          defaultColDef={defaultColDef} // Default Column Properties
+          animateRows={true} // Optional - set to 'true' to have rows animate when sorted
+          rowSelection='multiple' // Options - allows click selection of rows
+          onCellClicked={cellClickedListener} 
+          getRowHeight={getRowHeight}
+        />
+    </div>
+    }
+    </Modal>
     </div>
   )
 }

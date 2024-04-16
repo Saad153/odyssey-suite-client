@@ -1,9 +1,9 @@
 import React from 'react';
-import PaymentsReceiptNew from '/Components/Layouts/AccountsComp/PaymentsReceiptNew';
+import PaymentsReceipt from '/Components/Layouts/AccountsComp/PaymentsReceipt';
 import axios from 'axios';
 
 const paymentReceipt = ({id, voucherData}) => {
-  return <PaymentsReceiptNew id={id} voucherData={voucherData} />
+  return <PaymentsReceipt id={id} voucherData={voucherData} />
 }
 export default paymentReceipt
 

@@ -48,14 +48,12 @@ const AccountSelection = ({state, dispatch, companyId}) => {
                         [`${state.variable}`]:x, 
                         visible:false
                     });
-                    // set(state.variable, x);
-                    // set('visible', false);
                 }}
             >
                 <td>{index + 1}</td>
                 <td>{x.title} ~ {getCompanyName(x.Parent_Account.CompanyId)}</td>
                 <td>{x.Parent_Account.title}</td>
-                <td>{x.Parent_Account.Account.title}</td> 
+                <td>{x.Parent_Account.Account?.title}</td> 
             </tr>
             )
         })}

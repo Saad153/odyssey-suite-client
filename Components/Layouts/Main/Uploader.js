@@ -20,11 +20,6 @@ const Uploader = () => {
     transformHeader: header => header.toLowerCase().replace(/\W/g, '_')
   }
 
-  const test = async(data) => {
-
-    console.log({data})
-
-  }
   const handleCA = async(data) => {
     let Assets = [];
     let Liability = [];
@@ -108,7 +103,7 @@ const Uploader = () => {
   }
 
   const handleOpeningBalances = (data) => {
-    console.log(data.length)
+    console.log(data)
     let list = [];
     data.forEach(async(x, i) => {
       if(i<data.length && x.particular!=null) {
@@ -120,7 +115,7 @@ const Uploader = () => {
     // Company Id Must to be set in backend API also !!!
     // PKR USD EUR GBP AED BDT OMR CHF
     axios.post("http://localhost:8081/voucher/getChildAccountIds", {
-        list:newItem, company:3, currency:"GBP"
+        list:newItem, company:3, currency:"EUR"
     }).then((x)=>{
         console.log(x.data.result.newList);
         let total = 0
@@ -165,29 +160,29 @@ const Uploader = () => {
   return (
   <>
     {false!=true && <>
-
     {/* <div className='mt-4'>
       <b>Chart Of Account Loader</b>
     </div>
-    <CSVReader cssClass="csv-reader-input" onFileLoaded={handleCA} parserOptions={parserOptions} 
-      inputId="ObiWan" inputName="ObiWan"
-    /> 
-*/}
-
-        <CSVReader cssClass="csv-reader-input" onFileLoaded={test} parserOptions={parserOptions} 
-        inputId="ObiWan" inputName="ObiWan"
-        /> 
+    <CSVReader 
+      cssClass="csv-reader-input" 
+      onFileLoaded={handleCA} 
+      parserOptions={parserOptions} 
+      inputId="ObiWan" 
+      inputName="ObiWan"
+    /> */}
 
     {/* <div className='mt-4'>
       <b>Opening Balances Upload</b>
     </div>
-    <CSVReader cssClass="csv-reader-input" onFileLoaded={handleOpeningBalances} parserOptions={parserOptions} 
-      inputId="ObiWan" inputName="ObiWan"
+    <CSVReader cssClass="csv-reader-input" 
+      onFileLoaded={handleOpeningBalances} 
+      parserOptions={parserOptions} 
+      inputId="ObiWan" 
+      inputName="ObiWan"
     />
-
     <button onClick={uploadVouchers} className='btn-custom mt-5'>Upload Opening Balances</button> */}
 
-    {/* <button onClick={uploadInvoices} className='btn-custom mt-5'>Upload Invoices</button> */}
+    <button onClick={uploadInvoices} className='btn-custom mt-5'>Upload Invoices</button>
 
     </>
     }

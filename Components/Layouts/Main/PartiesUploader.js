@@ -102,7 +102,7 @@ const ParitesUploader = () => {
     let clientList = [], vendorList = [], nonGlList = [], unKnownList = [];
     let clientVendor = [];
     data.forEach((x, i) => {
-    if(i<data.length-1) {
+    if(i<data.length) {
       let records = {
         oldId:x.id,
         code:x.party_code,
@@ -126,8 +126,7 @@ const ParitesUploader = () => {
           , x.shipper=="Yes"?'Shipper, ':''
           , x.notify=="Yes"?'Notify, ':''
           , x.potential_customer=="Yes"?'Potential Customer, ':''
-        //   , x.isnonoperationalparty==1?'Non operational Party, ':''
-
+          //x.isnonoperationalparty==1?'Non operational Party, ':''
           , x.forwarder_coloader=="Yes"?'Forwarder/Coloader, ':''
           , x.local_vendor=="Yes"?'Local Vendor, ':''
           , x.overseas_agent=="Yes"?'Overseas Agent, ':''
@@ -150,13 +149,12 @@ const ParitesUploader = () => {
           , x.buyer=="Yes"?'Buyer, ':''
           , x.billing_party=="Yes"?'Invoice Party, ':''
           , x.slotoperator=="Yes"?'Slot Operator':''),
-          partytypeid:"Client"
         //partytype:x.partytypeid==1?'Client':x.partytypeid==2?'Vendor':x.partytypeid==2?'Customer/Vendor':'Non-Gl'
       }
-    //  clientVendor.push(records)
+     clientVendor.push(records)
     //  vendorList.push(records)
     //  clientList.push(records)
-    nonGlList.push(records)
+    // nonGlList.push(records)
 
     //   if(x.partytypeid==1) {
     //     clientList.push(records);
@@ -171,7 +169,7 @@ const ParitesUploader = () => {
     //   }
     }
     });
-    //console.log({vendorList, clientList, clientVendor, nonGlList, unKnownList});
+    // console.log({vendorList, clientList, clientVendor, nonGlList, unKnownList});
 
     // clientVendor.forEach((x)=>{
     //   if(x.types.includes('Consignee') || x.types.includes('Shipper') || x.types.includes('Notify') || x.types.includes('Potential Customer') || x.types.includes('Non operational Party')){
@@ -181,7 +179,7 @@ const ParitesUploader = () => {
     //   }
     // })
 
-    console.log({vendorList, clientList, nonGlList, unKnownList});
+    console.log({vendorList, clientList, nonGlList, unKnownList, clientVendor});
   }
 
   const uploadParties = async() => {
@@ -189,18 +187,18 @@ const ParitesUploader = () => {
     // let clientWithNoAc = [];
     // let tempClients = [...parties.clientList];
     // await tempClients.forEach((x, i) => {
-    //     let name = x.name;
-    //     let accountsTempList = [...accountsList.Liability, ...accountsList.Assets]
-    //     accountsTempList.forEach((y, j) => {
-    //       y.childAccounts.forEach((z, k) => {
-    //         if(z.account_title==name){
-    //           delete tempClients[i]
-    //           clientWithAc.push({...x, account:{...z, parent:y.account_title}})
-    //         } else {
-    //           // clientWithNoAc.push(x)
-    //         }
-    //       })
-    //     })
+    //   let name = x.name;
+    //   let accountsTempList = [...accountsList.Liability, ...accountsList.Assets]
+    //   accountsTempList.forEach((y, j) => {
+    //     y.childAccounts.forEach((z, k) => {
+    //       if(z.account_title==name){
+    //         delete tempClients[i]
+    //         clientWithAc.push({...x, account:{...z, parent:y.account_title}})
+    //       } else {
+    //         // clientWithNoAc.push(x)
+    //       }
+    //     });
+    //   });
     // });
     // // console.log(parties.clientList.length);
     // console.log('with accounts',clientWithAc);
@@ -209,7 +207,6 @@ const ParitesUploader = () => {
     // .then((x)=>{
     //     console.log(x.data)
     // })
-
 
 
     // let vendorWithAc = [];
@@ -235,8 +232,6 @@ const ParitesUploader = () => {
     // .then((x)=>{
     //   console.log(x.data)
     // })
-
-
 
     // let nonGl = [];
     // let tempNonGl = [...parties.nonGlList];
@@ -269,6 +264,3270 @@ export default ParitesUploader
 let parties = {
   "vendorList":[
     {
+        "code": 3,
+        "name": "QATAR AIRWAYS",
+        "citycode": "QADOH",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 182,
+        "name": "AIR ARABIA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 183,
+        "name": "AIR CHINA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 184,
+        "name": "ALLIED LOGISTICS PVT LTD",
+        "citycode": "PKKHI",
+        "address": "SUITE # 114 - 1ST FLOOR, CLIFTON CENTER, BLOCK-5, CLIFTON, KARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": "info@allied-logistic.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 185,
+        "name": "ANCHORAGE SHIPPING LINE",
+        "citycode": "PKKHI",
+        "address": "OFFICE# 102 PARK AVENUE, SHAHRAH-E-FAISAL, KARACHI PAKISTAN \n+92-213-4388011-15  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 186,
+        "name": "BRITISH AIRWAYS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 187,
+        "name": "CMA CGM PAKISTAN (PVT.) LTD",
+        "citycode": "PKKHI",
+        "address": "24 THIRD, TIMBER POND, PAK SHAHEEN AVENUE, KEAMARI, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 188,
+        "name": "COMBINED FREIGHT INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 189,
+        "name": "COSCO-SAEED KARACHI (PVT.) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 190,
+        "name": "COURIER - MR. INTERSAR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 191,
+        "name": "CP WORLD.",
+        "citycode": "PKKHI",
+        "address": "1st FLOOR 85-C, 11TH COMMERCIAL STREET,\nPHASE-II DHA, KARACHI, PAKISTAN.\nTEL #: +92 21 35315929-32 (EXT:317).\nFAX #: +92 21 35315925.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 192,
+        "name": "DHL AIRWAYS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 193,
+        "name": "DIAMOND SHIPPING SERVICES (PVT.) LT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 194,
+        "name": "DYNAMIC SHIPPING AGENCIES (PVT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 195,
+        "name": "ECU LINE PAKISTAN (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 196,
+        "name": "EITHAD AIRWAYS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 197,
+        "name": "EMIRATES AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 198,
+        "name": "EMIRATES SHIPPING LINE DMCEST",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 199,
+        "name": "ETHIOPIAN AIRLINES",
+        "citycode": "PKKHI",
+        "address": "INTER-FREIGHT\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 200,
+        "name": "ETIHAD AIRLINE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 202,
+        "name": "FITS AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 203,
+        "name": "Fly-dubai",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 204,
+        "name": "GAM Supply Chain (Pvt) Ltd",
+        "citycode": "PKKHI",
+        "address": "A-301, 3rd Floor, Fortune Towers,Razi \nRoad,  Main Shahrah-e-Faisal, Karachi, Pakistan.  ",
+        "website": null,
+        "infoMail": "rnk@gamsc.ltd",
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 206,
+        "name": "GREENPAK SHIPPING (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 207,
+        "name": "GULF AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 208,
+        "name": "HAPAG-LLOYD CONTAINER LINE",
+        "citycode": "PKKHI",
+        "address": "SEEDAT CHAMBERS DR. ZIAUDDIN AHMED ROAD, KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 210,
+        "name": "INTER-FREIGHT CONSOLIDATORS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 211,
+        "name": "LAUREL NAVIGATION LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 212,
+        "name": "MAERSK LINE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 213,
+        "name": "MSC PAKISTAN (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 215,
+        "name": "OMAN AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 216,
+        "name": "ONE LINE",
+        "citycode": "PKKHI",
+        "address": "C/O NYK LINE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 217,
+        "name": "OOCL PAKISTAN (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Forwarder/Coloader, Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 218,
+        "name": "PEGASUS AIR LINE",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 219,
+        "name": "QATAR AIR WAYS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 220,
+        "name": "Ranks Logistics Pakistan (Pvt) Ltd",
+        "citycode": "PKKHI",
+        "address": "M-1, QUEEN'S CENTRE, MT. KHAN ROAD, KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, Sea Import, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 221,
+        "name": "SAUDI ARABIAN AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 223,
+        "name": "SEA SHORE LOGISTICS.",
+        "citycode": "PKKHI",
+        "address": "SUITE # 713, 7TH FLOOR, CHAPAL PLAZA, HASRAT MOHANI ROAD, KARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 224,
+        "name": "SHARAF SHIPPING AGENCY (PVT.)",
+        "citycode": "PKKHI",
+        "address": "LTD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 225,
+        "name": "SHIPCO TRANSPORT PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 226,
+        "name": "SRILANKA AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 227,
+        "name": "Silk Way Airlines",
+        "citycode": "PKKHI",
+        "address": "PO Box 123058,\nFreight Center, Cargo Terminal - 2, \nOffice # 614 & 613 \nSharjah International Airport, Sharjah, UAE\n SAIFZONE Office:\nQ1-05-119/C\nSharjah Airport Freezone, Sharjah, UAE\nWebsite: www.skybizz.ae ",
+        "website": null,
+        "infoMail": "SAM <ceo@skybizz.ae>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 228,
+        "name": "THAI AIRWAYS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 229,
+        "name": "TURKISH AIRWAYS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 230,
+        "name": "UNITED ARAB SHIPPING AGENCY COMPANY",
+        "citycode": "PKKHI",
+        "address": "PAKISTAN (PVT.) LTD.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 231,
+        "name": "UNITED MARINE AGENCIES (PVT) L",
+        "citycode": "PKKHI",
+        "address": "1ST FLOOR, 22 WEST WHARF ROAD, KARACHI-74000  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 232,
+        "name": "UNITED MARINE AGENCIES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 234,
+        "name": "UPS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 236,
+        "name": "YANG MING LINE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 237,
+        "name": "YTO CARGO AIRLINES CO.,LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 287,
+        "name": "AMIR BHAI / CARGO LINKERS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 288,
+        "name": "ANIS @ EVERGREEN",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 289,
+        "name": "ANJUM - TAJ IND",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 290,
+        "name": "AQEEL AGRO HUB",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 291,
+        "name": "ARJUN - UNITED TOWEL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 292,
+        "name": "CMA - CS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 293,
+        "name": "EUR LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 294,
+        "name": "FARHAN YML",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 295,
+        "name": "IRFAN TURKISH",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 296,
+        "name": "JAMAL UZAIR INT'L",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 297,
+        "name": "MAHSIM (SOUTHERN AGENCIES)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 298,
+        "name": "NADEEM (SULTEX IND)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 299,
+        "name": "NIAZ @ AL KARAM TOWEL IND",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 300,
+        "name": "NOMAN MILESTONE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 301,
+        "name": "SALEEM SB (C/O.ELS)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 302,
+        "name": "SALMAN ELS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 303,
+        "name": "SHAHID (HUSSAIN LEATHER)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 305,
+        "name": "CARGO CORPORATION.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 309,
+        "name": "CLEAR AIDS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 313,
+        "name": "F. K. ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 315,
+        "name": "H. A & SONS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 318,
+        "name": "MARFANI BROTHERS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 321,
+        "name": "PAK EXPRESS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 325,
+        "name": "RAAZIQ INTERNATIONAL PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 326,
+        "name": "RABI ENTERPREISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 328,
+        "name": "REGENT SERVICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 331,
+        "name": "S.M. ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 335,
+        "name": "SELF",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 336,
+        "name": "SHARWANI TRADERS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 340,
+        "name": "UNION ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 350,
+        "name": "ACE Airline",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 354,
+        "name": "AIR ASTANA",
+        "citycode": "PKKHI",
+        "address": "KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 355,
+        "name": "AIR BERLIN",
+        "citycode": "PKKHI",
+        "address": "LUFTVERKEHRS KG, SAATWINKLER DAMM 42-43, 13627 BERLIN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 357,
+        "name": "AIR CANADA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 367,
+        "name": "ALLIED LOGISTIC (SMC-PVT.) LTD",
+        "citycode": "PKKHI",
+        "address": "UITE # 3-4, 1ST FLOOR, GSA HOUSE, 19 TIMBER POND KEAMARI KARACHI-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 369,
+        "name": "AMERICAN AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 381,
+        "name": "AZTEC AIRWAYS",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 391,
+        "name": "CARGO LUX",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 395,
+        "name": "CATHAY PACIFIC",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 398,
+        "name": "CHINA SOUTHERN",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 409,
+        "name": "COPA AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 415,
+        "name": "CSS LINE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 423,
+        "name": "DHL EXPRESS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 425,
+        "name": "DOLPHIN AIR",
+        "citycode": "PKKHI",
+        "address": "DUBAI AIRPORT CARGO VILLAGE, P.O BOX 4878 DUBAI, U.A.E  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 441,
+        "name": "ETIHAD AIR CARGO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Local Vendor, CHA/CHB, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 446,
+        "name": "FACILITIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Forwarder/Coloader, Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 448,
+        "name": "FEDEX",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 458,
+        "name": "GLOBAL FREIGHT SOLUTIONS FZE",
+        "citycode": "PKKHI",
+        "address": "SHARJAH SAIF ZONE, SHARJAH, UAE P.O.BOX NO. 122568  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 506,
+        "name": "MIDEX AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 513,
+        "name": "Middle East Airlines",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 530,
+        "name": "P & S CARGO SERVICES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 538,
+        "name": "PEGASUS AIRLINE",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 559,
+        "name": "SAFMARINE PAKISTAN PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 560,
+        "name": "SALAM AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 563,
+        "name": "SAUDI ARABIAN AIRLINE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 578,
+        "name": "SKY NET",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 586,
+        "name": "SWISS AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 612,
+        "name": "United Airline",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 615,
+        "name": "VIRGIN ATLANTIC CARGO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 616,
+        "name": "VISION AIR",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1144,
+        "name": "ACTIVE FREIGHT SERVICES (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1145,
+        "name": "ACUMEN FREIGHT SOLUTIONS BUSINES",
+        "citycode": "PKKHI",
+        "address": "SUITE 504, FIFTH FLOOR\nI.I CHUNDRIGAR ROAD, \nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1146,
+        "name": "ADAM SHIPPING (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1147,
+        "name": "AERO EXPRESS INT'L",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1148,
+        "name": "AIR BLUE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1149,
+        "name": "AIR EUROPA CARGO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1150,
+        "name": "AJ WORLD WIDE SERVICES PAKISTAN PVT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1151,
+        "name": "AL JAZEERA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1152,
+        "name": "APL LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1153,
+        "name": "APL PAKISTAN (PVT.) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1154,
+        "name": "Aas Moving Sergvices",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1155,
+        "name": "Air Serbia",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1156,
+        "name": "CAPITAL SHIPPING AGENCY",
+        "citycode": "PKKHI",
+        "address": "International Freight & Logistics Management\nSuite No. 413, 4/F, Chapal Plaza | Hasrat Mohani Road\nOff. I.I.Chundrigar Road | Karachi | Pakistan.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1157,
+        "name": "CARGO CARE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1158,
+        "name": "CARGO SHIPPING & LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "OFFICE# B-704 ,7TH FLOOR,\nSAIMA TRADE TOWER, II CHUNDRIGAR ROAD,KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "operation@cslogistics.com.pk",
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1159,
+        "name": "CHAM WINGS AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1160,
+        "name": "CHINA CONTAINER LINE",
+        "citycode": "PKKHI",
+        "address": "SUITE: 107, TRADE TOWER, ABDULLAH HAROON ROAD, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1161,
+        "name": "CIM SHIPPING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1162,
+        "name": "CLEAR FREIGHT INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1164,
+        "name": "CSS PAKISTAN PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1165,
+        "name": "DELTA TRANSPORT PVT. LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1166,
+        "name": "DYNAMIC SHIPPING AGENCIES PVT. LTD.",
+        "citycode": "PKKHI",
+        "address": "SUITE#301, PROGRESSIVE SQUARE, BLOCK 6, P.E.C.H.S., KARACHI -(PAKISTAN).  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1167,
+        "name": "Delta Cargo",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1168,
+        "name": "E2E SUPPLY CHAIN MANAGEMENT (PVT.)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1169,
+        "name": "ERITREAN AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1170,
+        "name": "GLOBAL FREIGHT SOLUTION",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1171,
+        "name": "Globelink Pakistan (Pvt.) Ltd.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1172,
+        "name": "HANJIN SHIPPING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1173,
+        "name": "INFINITY SHIPPING SERVICES",
+        "citycode": "PKKHI",
+        "address": "SUITE # 108, 1ST FLOOR IBRAHIM TRADE TOWER,\nPLOT NO.1, BLOCK-7/8, MAQBOOLABAD\nMAIN SHAHRAH-E-FAISAL P.E.C.H.S\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": "HIBA KHAN <cs.exp@infinitysnl.",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1174,
+        "name": "INSERVEY PAKISTAN (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1175,
+        "name": "INTERNATIONAL AIR & SEA (SALEEM)",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1176,
+        "name": "INTERNATIONAL FREIGHT & AVIATION",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1177,
+        "name": "K L M",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1178,
+        "name": "KL SHIPPING & LOGISTIC",
+        "citycode": "PKKHI",
+        "address": "KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1179,
+        "name": "KLM CARGO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1180,
+        "name": "LUFTHANSA AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1181,
+        "name": "MAERSK LOGISTICS PAKISTAN (PVT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1182,
+        "name": "MALAYSIAN AIRLINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1183,
+        "name": "MARINE SERVICES PVT. LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1184,
+        "name": "MEGA IMPEX",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1185,
+        "name": "MEHR CARGO (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1186,
+        "name": "MITSUI O.S.K. LINES PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1187,
+        "name": "NEW WORLD LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1188,
+        "name": "NYK LINE PAKISTAN (PVT.) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1189,
+        "name": "P I A",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1190,
+        "name": "PACIFIC DELTA SHIPPING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1191,
+        "name": "PACIFIC FREIGHT SYSTEM",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1192,
+        "name": "PACIFIC SHIPPING LINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1193,
+        "name": "PAKLINK SHIPPING SERVICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1194,
+        "name": "PIA INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1195,
+        "name": "QUICK FREIGHT MANAGEMENT PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "SUITE # 105, 1ST FLOOR, PARSA TOWERS MAIN SHARAH-E-FAISAL, KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "customerservices@quick-fm.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1196,
+        "name": "RIAZEDA PVT. LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1197,
+        "name": "RWAYS CONTAINER LINE L.L.C",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1198,
+        "name": "SAMUDERA SHIPPING LINE LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1199,
+        "name": "SEA EXPERT SHIPPING & LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "SUITE #1312, 13TH FLOOR, SAIMA TRADE TOWER “B” OPP:\nJANG PRESS I.I. CHUNDRIGAR ROAD KARACHI, PAKISTAN,  ",
+        "website": null,
+        "infoMail": "sales_support@seaexpertgroup.c",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1201,
+        "name": "SEAGOLD (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "51 - TIMBER POND, KEAMARI 75620, KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1202,
+        "name": "SEALOG PVT. LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1203,
+        "name": "SEAWAYS LOGISTICS SERVICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1204,
+        "name": "SERVOTECH SHIPPING (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "SUITE NO. 208-210, 2ND FLOOR  CHAPAL PLAZA HASRAT MOHANI ROAD\nKARACHI -74000 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1205,
+        "name": "SIS LOGISTICAL SYSTEMS LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1206,
+        "name": "SOFTWARE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1207,
+        "name": "TRADESIA SHIPPING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1208,
+        "name": "VALUE LOGISTICS PVT LTD",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1209,
+        "name": "VERTEX CONTAINER LINE PVT LTD",
+        "citycode": "PKKHI",
+        "address": "SHAHRAH E FAISAL PECHS SOCIETY PROGRESSIVE CENTER\n                         SUIT NO 309 KARACHI PAKISTAN\n  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1210,
+        "name": "WORLD SHIPPING & CONSOLIDATORS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1211,
+        "name": "YASEEN SHIPPING LINES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1318,
+        "name": "AHAD UNITEX",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1319,
+        "name": "ARIF (NOVA LEATHER)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1320,
+        "name": "ARSHAD HAFEEZ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1321,
+        "name": "CLI",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1322,
+        "name": "CMA CGM",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1323,
+        "name": "CMA-CS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1324,
+        "name": "DALER",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1325,
+        "name": "DARYL T JOHN",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1326,
+        "name": "DELTA IMRAN JAMEEL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1327,
+        "name": "ERRY-PIA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1328,
+        "name": "FARHAN CONTINENTAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1329,
+        "name": "FAROOQ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1330,
+        "name": "HAIDER BHAI",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1331,
+        "name": "HAMID",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1332,
+        "name": "HAMID (LOJISTICA)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1333,
+        "name": "I.A.K",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1334,
+        "name": "IMRAN JAMIL (HAPAG)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1335,
+        "name": "JOONAID CO - SOHAIL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1336,
+        "name": "KAMRAN OMAN AIR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1337,
+        "name": "LUTUF ULLAH (PIA)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1338,
+        "name": "MAMUN BHAI (UASC)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1339,
+        "name": "ASIF SB (MN TEXTILE)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Import, ",
+        "types": "Consignee, Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1340,
+        "name": "FAWAD QR",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1341,
+        "name": "NADEEM (AIR PORT)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1342,
+        "name": "NADEEM - COMPAINION SERVICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1343,
+        "name": "NAEEM SHAH (BNI INKS)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1344,
+        "name": "NASEER (HAFIZ TANNERY)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1345,
+        "name": "NASIR  (IMRAN BROS)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1346,
+        "name": "ORIENT CARGO SER.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1347,
+        "name": "QASIM (ASS MOVING)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1348,
+        "name": "QAZI (UNIVERSAL SHIPPING)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1349,
+        "name": "RAFIQ ROOPANI (HBL)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1350,
+        "name": "SALEEM SB (SMSCHEMICAL)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1351,
+        "name": "SHAHID BHAI (ACS)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1352,
+        "name": "SHAHZAD APP RIAZ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1353,
+        "name": "SHAHZAIB UNISHIP",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1354,
+        "name": "STAR ONE SHIPPING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1355,
+        "name": "SUNNY ENT (OLD A/C)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1356,
+        "name": "TAIMOR (WIEGHT DIFF CARGES)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1357,
+        "name": "TARIQ NOVA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1358,
+        "name": "TARIQ PIAC",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1359,
+        "name": "TEX LINE BUYING HOUSE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1360,
+        "name": "UNIQUE ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1361,
+        "name": "VAKIL @ HONEST FOOD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1362,
+        "name": "WAJID NIZAM (FAIZ CARGO)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1363,
+        "name": "FARAZ SHER",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1364,
+        "name": "WASIM COSCO SAEED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1365,
+        "name": "ZEESHAN (PELLE)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1375,
+        "name": "EXPRESS FREIGHT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1382,
+        "name": "HUSSAIN SONS",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1383,
+        "name": "IFK ENTERPRICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1391,
+        "name": "S.A. REHMAT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1396,
+        "name": "TRADE LINKER.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1796,
+        "name": "QASIM INTERNATIONAL FREIGHT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1798,
+        "name": "QICT WHARFAGE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1799,
+        "name": "PICT WHARFAGE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1800,
+        "name": "BAY WEST PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010119,
+        "name": "ADVANCE KICT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010120,
+        "name": "SEA NET TRANSPORT ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010121,
+        "name": "AL-AWAN TRANSPORT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010134,
+        "name": "INTERASIA LINE SINGAPORE.",
+        "citycode": "SGSIN",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010165,
+        "name": "TransNet Shipping (Pvt) Ltd.",
+        "citycode": "PKKHI",
+        "address": "M-1, QUEEN'S CENTRE, MT. KHAN ROAD, KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Forwarder/Coloader, Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010186,
+        "name": "MUHAMMAD BILAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, Air Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010195,
+        "name": "MERCHANT SHIPPING (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010228,
+        "name": "CARGO LINKERS.",
+        "citycode": "PKKHI",
+        "address": "House# D-213, DMCHS, Siraj ud Daula Road,  Karachi, Pakistan.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Export, Sea Import, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010248,
+        "name": "ARSLANI CLEARING A",
+        "citycode": "PKLHE",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, Local Vendor, Transporter, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010315,
+        "name": "ORION SHIPPING AGENCY",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010325,
+        "name": "Syed Muhammad Ali Jillani",
+        "citycode": "PKLHE",
+        "address": "LAHORE OFFICE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010326,
+        "name": "MAK LOGISTICS",
+        "citycode": "PKLHE",
+        "address": "OFF NO 2  & 3 1ST FLOOR SHARJHA CENTRE SHADMAN MARKET LAHORE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010336,
+        "name": "CAA NOC",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010368,
+        "name": "NLC MARINE & AIR SERVICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, Sea Import, ",
+        "types": "Local Vendor, Transporter, CHA/CHB, Trucking, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010397,
+        "name": "GREEN BOX PVT LTD",
+        "citycode": "PKKHI",
+        "address": "Plot # 244, Sector 6 – A, Next to Alamgir Institute, Mehran Town, Korangi. Karachi – Pakistan  ",
+        "website": "WWW.GREENBOX.PK",
+        "infoMail": "BDO@greenbox.pk",
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010411,
+        "name": "NEXT AVIATION SYSTEMS",
+        "citycode": "PKLHE",
+        "address": "E-1/3, D-37, Lane-W, Street No: 6, Ext-Cavalry Ground, Lahore-Pakistan.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010456,
+        "name": "Jawed All Steady Enterprises",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010508,
+        "name": "MAFHH AVIATION",
+        "citycode": "PKLHE",
+        "address": "43/1 , BLOCK KHUDA BAKHSH COLONY NEW AIRPORT ROAD LAHORE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010541,
+        "name": "CLIPPERS FREIGHT SERVICES.",
+        "citycode": "PKKHI",
+        "address": "Suite No. 204 Marine Tower, 2nd Floor Block-4, Clifton, Karachi – Pakistan. TEL : +92 21 35377533",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010587,
+        "name": "ABID @ YAASEEN SHIPPING LINES ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010749,
+        "name": "FLY NAS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010834,
+        "name": "INSHIPPING (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "KARACHI   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010838,
+        "name": "MEGATECH PVT LTD - YML",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010860,
+        "name": "ECOM LOGISTIX PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010869,
+        "name": "MERIDIAN SHIPPING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010888,
+        "name": "Mr. Masood (PIA)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010894,
+        "name": "TAP AIR ",
+        "citycode": "BDDAC",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010929,
+        "name": "Transways Supply chain ",
+        "citycode": "PKKHI",
+        "address": "KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010984,
+        "name": "AMIR KHAN DHL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010989,
+        "name": "TROY CONTAINER LINE, LTD.",
+        "citycode": "MYBGU",
+        "address": "603-606, BLOCK A, KELANA BUSINESS CENTRE, 97, JALAN SS7/2, KELANA JAYA, 47301 PETALING JAYA, MALAYSIA.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011038,
+        "name": "WISE FREIGHT SERVICES",
+        "citycode": "PKSKT",
+        "address": "KASHMIR MALL KASHMIR ROAD SIALKOT   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011044,
+        "name": "REHMAN (AJJ PAPER)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Export, Sea Import, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011047,
+        "name": "AMIR NISAR NEW IOU",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011048,
+        "name": "ADVANCE  QICT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011085,
+        "name": "ZAHID (RIZVI)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011164,
+        "name": "KALEEM (ESSATEX IND)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, Commission Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011176,
+        "name": "NZ TRANSPORT SERVICE",
+        "citycode": "PKLHE",
+        "address": "STREET NO 7 MEHMOOD ABAD BEGUM PURA LAHORE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Local Vendor, Transporter, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011201,
+        "name": "PHILLIPINE AIRLINE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011210,
+        "name": "VITAL TRADERS",
+        "citycode": "PKMUX",
+        "address": "HOUSE NO-06 STREET NO.01A OPP TIMBER MARKEET BHUTTA COLONY VEHARI ROAD MULTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
         "code": 49,
         "name": "DYNAMIC PACKAGING PVT LTD",
         "citycode": "PKKHI",
@@ -278,7 +3537,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 181,
@@ -290,7 +3549,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 201,
@@ -302,7 +3561,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 205,
@@ -314,7 +3573,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 209,
@@ -326,7 +3585,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 222,
@@ -338,7 +3597,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 235,
@@ -350,7 +3609,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 238,
@@ -362,7 +3621,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 239,
@@ -374,7 +3633,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 240,
@@ -386,7 +3645,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 241,
@@ -398,7 +3657,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 242,
@@ -410,7 +3669,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 243,
@@ -420,9 +3679,9 @@ let parties = {
         "website": null,
         "infoMail": "onur.aksaray@borusanlogistics.",
         "strn": null,
-        "operations": "Air Export, Sea Export, ",
+        "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 244,
@@ -434,7 +3693,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 245,
@@ -446,7 +3705,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Local Vendor, Overseas Agent, CHA/CHB, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 246,
@@ -458,7 +3717,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 247,
@@ -470,7 +3729,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 248,
@@ -482,7 +3741,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 249,
@@ -494,7 +3753,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 250,
@@ -506,7 +3765,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 251,
@@ -518,7 +3777,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 252,
@@ -530,7 +3789,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 253,
@@ -542,7 +3801,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 254,
@@ -554,7 +3813,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 255,
@@ -566,7 +3825,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 256,
@@ -578,7 +3837,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 257,
@@ -590,7 +3849,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 258,
@@ -602,7 +3861,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 259,
@@ -614,7 +3873,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 260,
@@ -626,7 +3885,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 261,
@@ -638,7 +3897,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 262,
@@ -650,7 +3909,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 263,
@@ -662,7 +3921,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 264,
@@ -674,7 +3933,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 265,
@@ -686,7 +3945,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 266,
@@ -698,7 +3957,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 267,
@@ -710,7 +3969,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 268,
@@ -722,7 +3981,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 269,
@@ -732,9 +3991,9 @@ let parties = {
         "website": null,
         "infoMail": "EMAIL SARAH.BERG@NNRUK.COM",
         "strn": null,
-        "operations": "Air Export, Sea Export, ",
+        "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 270,
@@ -746,7 +4005,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 271,
@@ -758,7 +4017,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 272,
@@ -770,19 +4029,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 273,
@@ -794,7 +4041,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 274,
@@ -806,7 +4053,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 275,
@@ -818,7 +4065,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 276,
@@ -830,7 +4077,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 277,
@@ -842,7 +4089,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 278,
@@ -854,7 +4101,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 279,
@@ -866,7 +4113,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 280,
@@ -878,7 +4125,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 281,
@@ -890,7 +4137,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 282,
@@ -902,7 +4149,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 283,
@@ -914,7 +4161,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 284,
@@ -926,7 +4173,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 285,
@@ -938,7 +4185,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 286,
@@ -950,7 +4197,19 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 323,
+        "name": "PRIME CARGO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Local Vendor, CHA/CHB, ",
+        "partytypeid": "Vendor"
     },
     {
         "code": 427,
@@ -962,7 +4221,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 566,
@@ -974,7 +4233,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 599,
@@ -986,7 +4245,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, ",
         "types": "Local Vendor, Air Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1163,
@@ -998,7 +4257,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Local Vendor, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1200,
@@ -1010,7 +4269,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Local Vendor, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1213,
@@ -1022,7 +4281,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1214,
@@ -1034,7 +4293,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1215,
@@ -1046,7 +4305,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1216,
@@ -1058,7 +4317,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1217,
@@ -1070,7 +4329,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1218,
@@ -1082,7 +4341,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1219,
@@ -1094,7 +4353,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1220,
@@ -1106,7 +4365,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1221,
@@ -1118,7 +4377,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1222,
@@ -1130,7 +4389,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1223,
@@ -1142,7 +4401,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1224,
@@ -1154,7 +4413,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1225,
@@ -1166,7 +4425,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1226,
@@ -1178,7 +4437,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1227,
@@ -1190,7 +4449,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1228,
@@ -1202,7 +4461,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1229,
@@ -1214,7 +4473,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1230,
@@ -1226,7 +4485,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1231,
@@ -1238,7 +4497,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1232,
@@ -1250,7 +4509,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1233,
@@ -1262,7 +4521,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1234,
@@ -1274,7 +4533,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1235,
@@ -1286,7 +4545,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1236,
@@ -1298,7 +4557,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1237,
@@ -1310,19 +4569,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1238,
@@ -1334,7 +4581,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1239,
@@ -1346,7 +4593,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1240,
@@ -1358,7 +4605,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1241,
@@ -1370,7 +4617,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1242,
@@ -1382,7 +4629,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1243,
@@ -1394,7 +4641,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1244,
@@ -1406,7 +4653,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1245,
@@ -1418,7 +4665,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1246,
@@ -1430,7 +4677,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1247,
@@ -1442,7 +4689,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1248,
@@ -1454,7 +4701,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1249,
@@ -1466,7 +4713,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1250,
@@ -1478,7 +4725,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1251,
@@ -1490,7 +4737,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1252,
@@ -1502,7 +4749,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1253,
@@ -1514,7 +4761,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1254,
@@ -1526,7 +4773,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1255,
@@ -1538,7 +4785,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1256,
@@ -1550,7 +4797,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1257,
@@ -1562,7 +4809,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1258,
@@ -1574,7 +4821,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1259,
@@ -1586,7 +4833,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1260,
@@ -1598,7 +4845,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1261,
@@ -1610,7 +4857,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1262,
@@ -1622,7 +4869,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1263,
@@ -1634,7 +4881,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1264,
@@ -1646,7 +4893,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1265,
@@ -1658,7 +4905,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1266,
@@ -1670,7 +4917,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1267,
@@ -1682,7 +4929,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1268,
@@ -1694,7 +4941,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1269,
@@ -1706,7 +4953,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1270,
@@ -1718,7 +4965,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1271,
@@ -1730,7 +4977,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1272,
@@ -1742,7 +4989,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1273,
@@ -1754,7 +5001,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1274,
@@ -1766,7 +5013,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1275,
@@ -1778,7 +5025,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1276,
@@ -1790,7 +5037,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1277,
@@ -1802,7 +5049,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1278,
@@ -1814,7 +5061,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1279,
@@ -1826,7 +5073,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1280,
@@ -1838,7 +5085,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1281,
@@ -1850,7 +5097,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1282,
@@ -1862,7 +5109,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1283,
@@ -1874,7 +5121,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1284,
@@ -1886,7 +5133,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1285,
@@ -1898,7 +5145,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1286,
@@ -1910,7 +5157,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1287,
@@ -1922,7 +5169,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1288,
@@ -1934,7 +5181,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1289,
@@ -1946,7 +5193,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1290,
@@ -1958,7 +5205,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1291,
@@ -1970,7 +5217,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1292,
@@ -1982,7 +5229,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1293,
@@ -1994,7 +5241,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1294,
@@ -2006,7 +5253,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1295,
@@ -2018,7 +5265,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1296,
@@ -2030,7 +5277,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1297,
@@ -2042,19 +5289,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1298,
@@ -2066,7 +5301,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1299,
@@ -2078,7 +5313,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1300,
@@ -2090,7 +5325,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1301,
@@ -2102,7 +5337,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1302,
@@ -2114,7 +5349,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1303,
@@ -2126,7 +5361,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1304,
@@ -2138,7 +5373,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1305,
@@ -2150,7 +5385,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1306,
@@ -2162,7 +5397,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1307,
@@ -2174,7 +5409,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1308,
@@ -2186,7 +5421,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1309,
@@ -2198,7 +5433,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1310,
@@ -2210,7 +5445,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1311,
@@ -2222,7 +5457,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1312,
@@ -2234,7 +5469,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1313,
@@ -2246,7 +5481,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1314,
@@ -2258,7 +5493,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1315,
@@ -2270,7 +5505,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1316,
@@ -2282,7 +5517,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1317,
@@ -2294,7 +5529,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1403,
@@ -2306,7 +5541,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, ",
         "types": "Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1761,
@@ -2318,7 +5553,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1772,
@@ -2330,7 +5565,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1776,
@@ -2342,7 +5577,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1779,
@@ -2354,7 +5589,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1785,
@@ -2366,7 +5601,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1793,
@@ -2378,7 +5613,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1794,
@@ -2390,7 +5625,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1811,
@@ -2402,7 +5637,7 @@ let parties = {
         "strn": null,
         "operations": "",
         "types": "Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010161,
@@ -2414,7 +5649,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010182,
@@ -2426,7 +5661,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Local Vendor, Overseas Agent, CHA/CHB, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010203,
@@ -2438,7 +5673,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010213,
@@ -2450,7 +5685,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010214,
@@ -2462,7 +5697,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010219,
@@ -2474,7 +5709,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010244,
@@ -2486,7 +5721,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010293,
@@ -2498,7 +5733,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010301,
@@ -2510,7 +5745,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010304,
@@ -2522,7 +5757,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010313,
@@ -2534,7 +5769,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010324,
@@ -2546,7 +5781,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010332,
@@ -2558,7 +5793,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010334,
@@ -2570,7 +5805,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010355,
@@ -2582,7 +5817,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010358,
@@ -2594,19 +5829,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010359,
@@ -2618,7 +5841,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010376,
@@ -2630,7 +5853,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010406,
@@ -2642,7 +5865,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010418,
@@ -2654,7 +5877,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010426,
@@ -2666,7 +5889,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010429,
@@ -2678,7 +5901,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010436,
@@ -2690,7 +5913,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010457,
@@ -2702,7 +5925,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010460,
@@ -2714,7 +5937,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010466,
@@ -2726,7 +5949,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010471,
@@ -2738,7 +5961,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010486,
@@ -2750,7 +5973,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010520,
@@ -2762,7 +5985,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010547,
@@ -2772,9 +5995,9 @@ let parties = {
         "website": null,
         "infoMail": null,
         "strn": null,
-        "operations": "Sea Export, ",
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010552,
@@ -2786,7 +6009,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010556,
@@ -2798,7 +6021,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010559,
@@ -2810,7 +6033,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010563,
@@ -2822,7 +6045,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Forwarder/Coloader, Local Vendor, CHA/CHB, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010567,
@@ -2834,7 +6057,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010574,
@@ -2846,7 +6069,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010596,
@@ -2858,7 +6081,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010599,
@@ -2870,7 +6093,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010610,
@@ -2882,7 +6105,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010611,
@@ -2894,7 +6117,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010648,
@@ -2906,7 +6129,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010683,
@@ -2918,7 +6141,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010697,
@@ -2930,7 +6153,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010702,
@@ -2942,7 +6165,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010783,
@@ -2954,19 +6177,19 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010846,
-        "name": "LAMAIGNERE CARGO ",
-        "citycode": "DOSDQ",
-        "address": "Edificio Balboa Office Center, piso 12 oficina F ubicado en Avenida Balboa y Calle 27 Este, Corregimiento  de Bella Vista .;.Ciudad de Panamá.PA  ",
+        "name": "LAMAIGNERE CARGO, S.L.",
+        "citycode": "ESA2C",
+        "address": "AVDA. REPUBLICA ARGENTINA, 21B, PLANTA 1, C1, 41011 SEVILLA, SPAIN, VAT# B91239103  ",
         "website": null,
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010853,
@@ -2978,7 +6201,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010896,
@@ -2990,7 +6213,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010936,
@@ -3002,7 +6225,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010941,
@@ -3014,7 +6237,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010949,
@@ -3026,7 +6249,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010965,
@@ -3038,7 +6261,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010983,
@@ -3050,7 +6273,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12011012,
@@ -3062,7 +6285,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Import, ",
         "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12011017,
@@ -3074,7 +6297,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12011024,
@@ -3086,10 +6309,8662 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011089,
+        "name": "SPEEDMARK TRANSPORTATION, INC/NYC",
+        "citycode": "USNYC",
+        "address": "230-59 INTERNATIONAL AIRPORT CENTER BLVD, SUITE 282 SPRINFIELD GARDENS, NY 11413  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Overseas Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011111,
+        "name": "PANAF LOGISTICS LTD",
+        "citycode": "KENBO",
+        "address": "Industrial Area, Road A, P.O. Box 5216 – 00506 Nairobi, Kenya  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Overseas Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011135,
+        "name": "Parisi Grand Smooth Logistics Ltd – Ningbo Branch",
+        "citycode": "CNNBO",
+        "address": "Room 2103-2104, New world Ningbo Tower No. 51 Sanyangiao Street, Yinzhou,  Ningbo, China  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Overseas Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011153,
+        "name": "EASY LOAD INTERNATIONAL FREIGHT",
+        "citycode": "BRSAO",
+        "address": "LTDA CNPJ: 44.266.133/0001-80 ADDRESS RUA ALICE DE SOUZA LIMA 303 CEP: 04.2830-470 - SAO PAULO CARLOS.TONI@EASYLOAD.COM.BR CNPJ/CPF: 44266133000180 ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Overseas Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011168,
+        "name": "DSV AIR & SEA",
+        "citycode": "USPR7",
+        "address": "Lot 3-4C, A Street, Sabana Gardens Industrial Park Carolina PR 00983 PR  ",
+        "website": "www.dsv.com",
+        "infoMail": "Sol.Hernandez@us.dsv.com",
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Local Vendor, Overseas Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011169,
+        "name": "DSV AIR & SEA PAKISTAN (SMC-PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "3-4/F, Citi View, PECHS Block 3 Shaheed-e-Millat Road 74880 Karachi Sindh Pakista  ",
+        "website": "www.pk.dsv.com",
+        "infoMail": "info@pk.dsv.com",
+        "strn": null,
+        "operations": "Air Import, Sea Import, ",
+        "types": "Local Vendor, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011175,
+        "name": "BLUE PORT SP Z O O",
+        "citycode": "PLWAW",
+        "address": "UL WIECZORYNKI 43 60-193 POZNAN NIP 7792414197  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Overseas Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011181,
+        "name": "CARGO FLY S.R.O.",
+        "citycode": "CZBKE",
+        "address": "KAPROVA 42/14 110 00 PRAHA 1, CZECH REPUBLIC  ",
+        "website": null,
+        "infoMail": "OPS@CARGOFLY.CZ,",
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Overseas Agent, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011217,
+        "name": "ACE FREIGHT LIMITED",
+        "citycode": "GBLHR",
+        "address": "BADGE CODE DIF UNIT 4 LOMBARD TRADING ESTATE 51 ANCHOR AND HOPE LANE LONDON SE77SN TEL:+44 0 208 858 8877  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Overseas Agent, ",
+        "partytypeid": "Vendor"
     }
   ],
   "clientList":[
+    {
+        "code": 1,
+        "name": "BILAL AND CO",
+        "citycode": "PKKHI",
+        "address": "H NO D-2 800 DOST MUHAMMAD JUNJHAR GOTH NEAR NEW STAR SABZI MANDI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 4,
+        "name": "PACIFIC FREIGHT SYSTEMS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 5,
+        "name": "A. L. GARMENTS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 9, ST 13-1, SECTOR 6-B\nNORTH KARACHI INDUSTRIAL AREA\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "selfkhurram@gmail.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 6,
+        "name": "A.H TRADERS",
+        "citycode": "PKKHI",
+        "address": "B.11 Abbas Town Gulshan-e-Iqbal \nKarachi-Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 7,
+        "name": "A.I.R INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO F495 PORTION C GROUND FLOOR SITE KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 8,
+        "name": "A.J WORLDWIDE SERVICE PAKISTAN (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "39-C/D, Block-6, P.E.C.H.S,\nMain Shahrah-e-Faisal, Opp. Citi Bank,\nKarachi-75400 Pakistan  ",
+        "website": null,
+        "infoMail": "exports1@ajwwpk.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 9,
+        "name": "A.O ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "403/1, SUMYA APARTMENT, BLOCK 3, C.P BERAR SOCIETY, SHARFABAD,\nKARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": "'OSAMA MUHAMMAD SIDDIQ' <osama@ao-enterprises.com>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 10,
+        "name": "AFRAZ KNIT & STITCH PVT LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 157/D SECTOR 24\nKORANGI INDUSTRIAL AREA\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 11,
+        "name": "AGRO HUB INTERNATIONAL (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "SIDDIQSONS TOWER 6TH FLOOR MAIN \nSHAHRA-E-FAISAL KARACHI, PAKISTAN\nTEL: +92-21-34325161-63, FAX: +92-21-34325164  ",
+        "website": null,
+        "infoMail": "ABDUL REHMAN <arehman.agrohub@gmail.com>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12,
+        "name": "AL AMIN EXPORT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 13,
+        "name": "AL KARAM TOWEL INDUSTRIES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "D-7 S.I.T.E SUPERHIGHWAY SCHEME 33 \t\nKARACHI PAKISTAN\t  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 14,
+        "name": "AL-HAMDOLILLAH EXPORTS",
+        "citycode": "PKKHI",
+        "address": "51-52 WAHDAT TOWN, SATIANA ROAD.\nFAISALABAD (PAKISTAN)  ",
+        "website": null,
+        "infoMail": "asrar.buttz@gmail.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 15,
+        "name": "ALI TRADING COMPANY (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "6 KM DASKA ROAD SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 17,
+        "name": "AMANIA SUPPORT SERVICES SMC (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "OFFICE # 1 2ND FLOOR AMANA TOWER\nPECO ROAD LAHORE  ",
+        "website": null,
+        "infoMail": "konainraza_503@outlook.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 20,
+        "name": "ARMS SNACKS FOODS",
+        "citycode": "PKKHI",
+        "address": "B-19,S.I.T.E.SUPER HIGHWAY \nKARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": "BD@SBRNCO.COM,",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 21,
+        "name": "ARSHAD CORPORATION (PVT)LTD",
+        "citycode": "PKKHI",
+        "address": "1088/2, JAIL ROAD, FAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 22,
+        "name": "ARTISTIC DENIM MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 7, 8, 9 SECTOR NO.16,\nKORANGI INDUSTRIAL AREA,\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 23,
+        "name": "ARTISTIC FABRIC MILLS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 24,
+        "name": "ARTISTIC GARMENTS INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 25,
+        "name": "AYOOB TEX.",
+        "citycode": "PKKHI",
+        "address": "A-16/A, S.I.T.E., \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 26,
+        "name": "AYOOB TEXTILE MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "A-16/A, S.I.T.E., \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 27,
+        "name": "AZ APPAREL CHAK",
+        "citycode": "PKKHI",
+        "address": "117\nJ. B NEAR PAHARANG DRAINAGE MILLAT ROAD DHONALA, FAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 28,
+        "name": "AZGARD NINE LIMITED",
+        "citycode": "PKKHI",
+        "address": "ISMAIL AIWAN-E-SCIENCE OFF\nSHAHRAH-E-ROOMI LAHORE 54600 PAKISTAN  ",
+        "website": null,
+        "infoMail": "Waqas.Mansoor@azgard9.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 29,
+        "name": "BARAKA TEXTILES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 72 SECTOR 15 KORANGI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 30,
+        "name": "BARI TEXTILE MILLS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "D-107 TEXTILE AVENUE S..I.T.E.\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 31,
+        "name": "BATLASONS,",
+        "citycode": "PKKHI",
+        "address": "ADD: A-54, S.M.C.H.S KARACHI - PAKISTAN\nNTN- 0676322-0  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 33,
+        "name": "BESTWAY CEMENT LIMITED",
+        "citycode": "PKKHI",
+        "address": "BESTWAY BUILDING, 19-A F-7 MARKAZ\nISLAMABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 34,
+        "name": "BHANERO TEXTILE MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "UMER HOUSE 23/1 SECTOR 23 S.M FAROOQ ROAD KORANGI INDUSTRIAL AREA KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 36,
+        "name": "CAAV GROUP",
+        "citycode": "PKSKT",
+        "address": "KARIM LODGE OPP. LABOUR COLONY,\nPASRUR ROAD, NIZAMABAD,\nSIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 37,
+        "name": "CAMBRIDGE GARMENT INDUSTRIES(PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "B-53, ESTATE AVENUE,\nS.I.T.E.,KARACHI-75700  PAKISTAN\n  ",
+        "website": null,
+        "infoMail": "'Yousuf' <yousuf@cambridge.com.pk>",
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 38,
+        "name": "CARE LOGISTICS PVT LTD",
+        "citycode": "PKKHI",
+        "address": "1/2 G, Block- 06,  PECHS, \nKarachi - Pakistan.  ",
+        "website": null,
+        "infoMail": "cs@carelogistics.com.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 40,
+        "name": "CENTURY ENGINEERING INDUSTRIES (PVT)LTD.",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.B-35,36 S.I.T.E-II,SUPER HIGHWAY,\nKARACHI-75350,PAKISTAN N.T.N NO.3670025-8  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 41,
+        "name": "CHAWALA ENTERPRISES TEXTILES MANUFA",
+        "citycode": "PKKHI",
+        "address": "P-219,YARN MARKET MONTGOMERY BAZR,\nFAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 42,
+        "name": "CONVENIENCE FOOD INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "(PVT) LTD L-06, BLOCK-\n21, FEDERAL B.INDUSTRIAL AREA\nPO BOX 13731 KARACHI 75950 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 43,
+        "name": "CRESCENT COTTON MILLS LIMITED",
+        "citycode": "PKKHI",
+        "address": "NISHATABAD FAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": "mailto:saleem@askshipping.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 44,
+        "name": "D.K INDUSTRIES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "M.SAIDPUR GONDAL ROAD\nSIALKOT, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 47,
+        "name": "DIAMOND FABRICS LIMITED",
+        "citycode": "PKKHI",
+        "address": "7 A/K MAIN BOULEVARD GULBERD II  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 48,
+        "name": "DOUBLE \"A\" INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "BUSINESS CENTER ROOM NO 809,813,814 \n8TH FLOOR I.I.CHUNDRIGAR ROAD\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 50,
+        "name": "EMBASSY OF DENMARK",
+        "citycode": "PKKHI",
+        "address": "H. 16, STREET 21, F-6/2 P.O. BOX 1118\nISLAMABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": "isbamb@um.dk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 53,
+        "name": "FAZAL & CO.",
+        "citycode": "PKKHI",
+        "address": "OFFICE NO 5, MEZZANINE FLOOR,BOMBAY PLAZA,BOHRI, ROAD,OPP.CUSTOM HOUSE,KARACHI.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 54,
+        "name": "FEROZE1888 MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "H-23, LANDHI INDUSTRIAL AREA,\nKARACHI, SINDH,  73120, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 55,
+        "name": "FINE GROUP INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "TOORABAD DASKA ROAD SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 56,
+        "name": "FIRST AMERICAN CORPORATION (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "MAIN DASKA ROAD SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 57,
+        "name": "FOURTEX APPARELS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.25/7 1st FLOOR , SECTOR 12C INDUSTRIAL AREA,\nNORTH KARACHI , KARACHI CENTRAL NORTH KARACHI TOWN.  ",
+        "website": null,
+        "infoMail": "kashif.jamil@logisticsservices.com.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 59,
+        "name": "G.I.ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "C-3/1,AL-HAMRA SQAURE,FL-10,BLOCK-E NORTH MAZIMABAD,KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": "Ali Zaidi <alizaidi@gienterprises.com.pk>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 60,
+        "name": "GLOBAL TECHNOLOGIES & SERVICES",
+        "citycode": "PKKHI",
+        "address": "6-L, Block-6, P.E.C.H.S., Shahrah-e-Faisal,\nKarachi-75400. Pakistan.  ",
+        "website": null,
+        "infoMail": "cis@globaltech.biz",
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 61,
+        "name": "GUJRANWAL FOOD INDUSTRIES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "53/55-A S.I.E NO.2, GUJRANWAL PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 62,
+        "name": "H & H MARINE PRODUCTS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 63,
+        "name": "HAMID LEATHER (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 32 SECTOR 7-A KORANGI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 64,
+        "name": "HAYAT KIMYA PAKISTAN (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "PARK LANE TOWERS MALL OF LAHORE 1.FLOOR NO: 4,5,\n7, 172. TUFAIL ROAD CANTONTMENT LAHORE, PAKISTAN  ",
+        "website": null,
+        "infoMail": "'Sajid Bashir' <sbashir@hayatkimya.pk>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 65,
+        "name": "HEALTHY SALT INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "STREET NO 2, MOHALLA AHMAD PURA\nMURIDKE, PAKISTAN  ",
+        "website": null,
+        "infoMail": "tahira@healthysaltintl.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 66,
+        "name": "HERBION PAKISTAN (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 30, SECTOR 28 KORANGI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 67,
+        "name": "HOM QUALITY FOODS (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "42-S DR.MAHMOOD HUSSAIN ROAD,\nP.E.C.H.S BLOCK\"6\", KARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": "sales.operation@habiboil.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 68,
+        "name": "HUB-PAK SALT REFINERY",
+        "citycode": "PKKHI",
+        "address": "C-206 HUB INDUSTRIAL TRADING\nESTATE HUB\nBALOCHISTAN PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 69,
+        "name": "HUSSAIN LEATHER CRAFT",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 21 SECTOR 7-A KORANGI KARACHI 74900 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 70,
+        "name": "INDUS HOME LIMITED",
+        "citycode": "PKKHI",
+        "address": "174 ABU-BAKAR BLOCK \nNEW GARDEN TOWN LAHORE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 72,
+        "name": "INTERNATIONAL BUSINESS HUB.",
+        "citycode": "PKKHI",
+        "address": "OFFICE NO 204 2ND FLOOR JALLANI TOWER M.N TOWER,\nM.A JINNAH ROAD KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": "INFO@IBHPVT.COM",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 73,
+        "name": "INTERNATIONAL TEXTILE LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 75,
+        "name": "J.B CORPORATION",
+        "citycode": "PKKHI",
+        "address": "D-232/A METROVILLE SITE\nKARACHI PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 76,
+        "name": "JAFFSON ENTERPRISES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "P.O.BOX 553 SALEEM TOWN\nPASRUR RAOD\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 77,
+        "name": "JAWA INDUSTRY",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. MII E 98, BLOCK B, SHER SHAH KARACHI,\nKARACHI WEST SITE TOWN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 78,
+        "name": "JB INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO D-62 AND D-65 SINDH INDUSTRIAL TRADING ESTATE KARACHI 75700 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 79,
+        "name": "JK SPINNING MILLS LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 81,
+        "name": "JUBILEE KNITWEAR INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT # 10, SECTOR C-III, \nPHASE-1, EPZ,\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 82,
+        "name": "KARSAZ TEXTILE INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT 181, SECTOR 23, KORANGI INDUSTRIAL AREA, KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 83,
+        "name": "KHADIJA INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "SUITE # 1113, 11TH FLOOR,CHAPPAL PLAZA\nHASRAT MOHANI ROAD KARACHI-PAKISTAN\nPhone: 9221-32428841 Fax: 9221- 32419751  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 84,
+        "name": "KOHINOOR MILLS LIMITED (DYING DIV)",
+        "citycode": "PKKHI",
+        "address": "DIVISION) \n8-KM MANGA RAIWIND ROAD,\nLAHORE - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 85,
+        "name": "KZ HOSIERY",
+        "citycode": "PKKHI",
+        "address": "B-30 BLOCK B KHANDU GOAT \nNORTHNIZAMABAD KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 87,
+        "name": "LEATHER FIELD (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "CHEEMA SQUARE CAPTIAL ROAD,\nSIALKOT 51310- PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 88,
+        "name": "LIBERMANN INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "PO BOX NO 1166 HARRAR WAZIRABAD ROAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 89,
+        "name": "LONGVIEW (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 90,
+        "name": "LOTTE KOLSON (PVT.) LIMITED",
+        "citycode": "PKKHI",
+        "address": "L-14, BLOCK-21, RASHID MINHAS ROAD, SCHEME # 16, FEDERAL B INDUSTRIAL AREA, KARACHI, Karachi Central Gulberg Town  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 91,
+        "name": "LUCKY TEXTILE MILLS",
+        "citycode": "PKKHI",
+        "address": "L/8 BLOCK 21 F.B. INDUSTRIAL AREA\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 92,
+        "name": "M. MAQSOOD CORPORATION",
+        "citycode": "PKKHI",
+        "address": "DEFENCE ROAD HADI TOWN NEAR\nBUTT FOOT WEAR (PVT) LTD SIALKOT- PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 93,
+        "name": "M.K KNITS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 25/7,BASEMENT\nSECTOR 12-C., NORTH KARACHI INDUSTRIAL AREA\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": "tanveer@mkknits.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 94,
+        "name": "MAGNACRETE PVT LTD",
+        "citycode": "PKKHI",
+        "address": "OFFICE NO 218 2ND FLOOR PLOT NO G-7 \nBLOCK 9 NEAR 2 TALWAR 75600 CLIFTON KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 97,
+        "name": "MASOOD TEXTILE MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 98,
+        "name": "MASS APPARELS & FABRICS (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "PLOT #: 9 SECTOR 12-B NORTH KARACHI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 99,
+        "name": "MASTER MOTORS CORP (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.D-58&59 N.W I ZONE, PORT QASIM\nKARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": "Noman.qureshi@mmcl.com.pk",
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 100,
+        "name": "MEHRAN MARBLE INDUSTRIES.",
+        "citycode": "PKKHI",
+        "address": "1-D 9/3 MANGHOPIR ROAD, QASBA, METROVILLE,\nKARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 101,
+        "name": "MEHRAN MARMI INDUSTRIES PVT.",
+        "citycode": "PKKHI",
+        "address": "LTD. \nPLOT NO. 1-D 9/3 QASBA METROVILLE,\nMANGHOPIR ROAD KARACHI, PAKISTAN\nTEL: 0092-21-6697600-6693333. FAX: 0092-21-6697400  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 102,
+        "name": "MEHRAN SPICE & INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 14 &15 SECTOR 24,\nKORANGI INDUSTRIAL AREA \nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 103,
+        "name": "METALLOGEN (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "175-S,QUAID-E-AZAM INDUSTRIAL ESTATE\nKOT LAKHPAT,TOWNSHIP,LAHORE,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 104,
+        "name": "METROTEX INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "F-61 - C, S.I.T.E., KARACHI - PAKISTAN TEL #  021-256 9646, ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 106,
+        "name": "MN TEXTILES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT LX-5 SCHEME 3&4 LANDI INDUSTRIAL ESTATE KARACHI 74200 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 107,
+        "name": "MUSTAQIM DYEING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 109,
+        "name": "NATIONAL REFINERY LIMITED",
+        "citycode": "PKKHI",
+        "address": "7-BKORANGI INDUSTRIAL AREA KORANGI 74900 KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 110,
+        "name": "NAVEENA INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 111,
+        "name": "NAZEER APPARELS",
+        "citycode": "PKKHI",
+        "address": "2ND FLOOR F-2 Z1 SITE\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 112,
+        "name": "NETWORK ASIA LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "701-704 UNI PLAZA 11 CHUNDRIGAR ROAD KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 113,
+        "name": "NEW MALIK & ASSOCIATES",
+        "citycode": "PKKHI",
+        "address": "OFFICE # 26 C. 4TH COMMERCIAL LANE ZAMZAMA COMMERCIAL DHA PHASE V. KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 115,
+        "name": "NISHAT MILLS LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 116,
+        "name": "NIZAMIA APPAREL",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 117,
+        "name": "NUTRALFA AGRICOLE",
+        "citycode": "PKKHI",
+        "address": "27-E, MAIN KHAYABAN-E-JAMI,\nDHA PHASE II-EXT,\nKARACHI-75500, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 118,
+        "name": "NUTRALFA PRIVATE LIMITED",
+        "citycode": "PKKHI",
+        "address": "20-C MAIN KHAYABAN E SHAHBAZ DHA \nPHASE VI KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 121,
+        "name": "PAK ARAB PIPELINE COMPANY LTD.",
+        "citycode": "PKKHI",
+        "address": "Corporate Headquarters, Korangi Creek Road, Karachi  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 122,
+        "name": "PAK SUZUKI MOTOR CO LTD",
+        "citycode": "PKKHI",
+        "address": "DSU 13 PAKISTAN STEEL  INDUSTRIAL ESTATE BIN QASIM KARACHI 75000 TAX ID  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 123,
+        "name": "PAKISTAN ONYX MARBLE",
+        "citycode": "PKKHI",
+        "address": "SUIT # 383, 3RD FLOOR, AL RAWEEM TOWER SHARAH-E-LIAQUAT, \nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 124,
+        "name": "PAXAR PAKISTAN (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "PLOT C26 SECTOR 24 KORANGI INDUSTRIAL AREA KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 125,
+        "name": "PELIKAN KNITWEAR",
+        "citycode": "PKKHI",
+        "address": "F-4/D, S.I.T.E., KARACHI PIPE MILLS COMPOUND, KARACHI -PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 127,
+        "name": "PROCESS INDUSTRY PROCUREMENT CONSULTANTS PVT LTD",
+        "citycode": "PKKHI",
+        "address": "Formerly: E&P Equipments Marketing Company (Pvt.) Limited\nR18, Karakoram Enclave 2 Sector F-11/1  Islamabad-44000 Pakistan \n  ",
+        "website": null,
+        "infoMail": "javed@pipcpl.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 128,
+        "name": "RAUF UNIVERSAL SHIPPING",
+        "citycode": "PKKHI",
+        "address": "C-252, Block-6, P.E.C.H.S.,\nOff : Shahrah-e-Faisal,\nKarachi - Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 129,
+        "name": "REEMAXE GROUP OF INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "DASKA ROAD, SIALKOT,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 130,
+        "name": "REVEL INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "LANGREALI KINGRA ROAD SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 132,
+        "name": "ROYAL TREND",
+        "citycode": "PKKHI",
+        "address": "PLOT # C-153 SECTOR 6-F, MEHRAN TOWN\nKORANGI INDUSTRIAL AREA\nKARACHI-PAKISTAN NTN # 1150877-8  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 134,
+        "name": "S.AHMED GARMENTS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 135,
+        "name": "S.M. TRADERS",
+        "citycode": "PKKHI",
+        "address": "D-11, SOUTH AVENUE, S.I.T.E.,\nKARACHI-75700 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 136,
+        "name": "SAMI RAGS ENTERPRISES 74",
+        "citycode": "PKKHI",
+        "address": "\t\t\nPlot # E2 Office # 101,102, First Floor S.I.T.E Avenue Road, \nDhedhi Business Avenue Karachi, Karachi West Site Town.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 137,
+        "name": "SANALI SPORTS",
+        "citycode": "PKKHI",
+        "address": "Muzafarpur ugoki Road sialkot Pakistan  ",
+        "website": null,
+        "infoMail": "michael@thecampspot.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 138,
+        "name": "SAPPHIRE FIBRES LTD",
+        "citycode": "PKKHI",
+        "address": "3.5KM MANGA RAIWIND ROAD, RAIWIND, 54010 LAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 139,
+        "name": "SAPPHIRE FINISHING MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "7/AK MAIN BOULEVARD GULBERG II\nLAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 140,
+        "name": "SARENA INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "ADDRESS | 22 KM SHEIKHPURA ROAD LAHORE\nTEL | (+92) 423 7168901-8 EXT (164)\nFAX (+92) 423 7168909\nCELL: | (+92) 0321-4400328, 321 7223823  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 141,
+        "name": "SCANZA ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "ANWAR KHAWAJA CHOWK\nHAJIPURA ROAD 51310\nSIALKOT, PAKISTAN  ",
+        "website": null,
+        "infoMail": "info@mufreight.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 143,
+        "name": "SEA BLUE LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "SUITE #608 CHAPAL PLAZA HASRAT MOHANI ROAD\nI.I.CHUNDIGAR ROAD KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 144,
+        "name": "SESIL PVT LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 145,
+        "name": "SHADDAN ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "D-150 / A, S.I.T.E,\nKARACHI (PAKISTAN).  ",
+        "website": null,
+        "infoMail": "Waqar <waqar@shaddanent.com>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 146,
+        "name": "SHAFI GLUCOCHEM (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "SHAFI\nHOUSE, 35-A/3, MT KHAN ROAD,\nOPP BEACH LUXURY HOTEL KARACHI\n74000, PAKISTAN & PLOT NO.B-22 TO\nTO 26 & B-38 TO 42 H.I.T.E,\nDISTT. LASBELLA, BALOCHISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 148,
+        "name": "SHIP THROUGH LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "SUITE # 1007 10TH FLOOR PARK AVENUE BLOCK-6 P.E.C.H.S KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 149,
+        "name": "SK STONES (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "SK CASA, 390, POTOHAR ROAD (ST:16), I-9/3,\nISLAMABAD - PAKISTAN  ",
+        "website": null,
+        "infoMail": "Amir Malik <malik@skstones.com>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 150,
+        "name": "SOLEHRE BROTHERS INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "S.I.E BILAL PURA, ST NO. 6 UGOKI ROAD, SIALKOT 51310, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 153,
+        "name": "STELLA SPORTS,",
+        "citycode": "PKKHI",
+        "address": "PAKKI KOTLI, DASKA ROAD, SIALKOT 51310, PAKISTAN  ",
+        "website": null,
+        "infoMail": "Javed  marketing@stellasports.com.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 154,
+        "name": "STUDIO MARK",
+        "citycode": "PKKHI",
+        "address": "39C/D PECHS BLOCK 5, 75400\nKARACHI PAKISTAN\n\nC/O A.J WORLDWIDE SERVICE PAKISTAN (PVT) LTD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 155,
+        "name": "SULTAN C/O MR. FAISAL",
+        "citycode": "PKKHI",
+        "address": "KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 156,
+        "name": "SULTEX INDUSTRIES.",
+        "citycode": "PKKHI",
+        "address": "PLOT # 17/2, SECTOR  12-C  NORTH  KARACHI  INDUSTRIAL  AREA             KARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 157,
+        "name": "SUNTEX APPAREL INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 158,
+        "name": "SUPREME RICE MILLS",
+        "citycode": "PKKHI",
+        "address": "3-KM KASUR ROAD, ELLAH ABAD - 55230\nDISTRICT KASUR, PUNJAB, PAKISTAN.  ",
+        "website": null,
+        "infoMail": "safian@supremerice.com.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 159,
+        "name": "SURGICON LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 160,
+        "name": "SYNERGY LOGISTICS PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "Suite # 617, 6th Floor, Trade Avenue, Hasrat Mohani Road, I. I. Chundrighar, Karachi - 74000, Pakistan.  ",
+        "website": null,
+        "infoMail": "sales@synergypakistan.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 161,
+        "name": "TAJ INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. B-12/C STATE AVENUE \nS.I.T.E KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 162,
+        "name": "TALON SPORTS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "DASKA ROAD, ADDAH\nSIALKOT - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 163,
+        "name": "TRANDS APPAREL",
+        "citycode": "PKKHI",
+        "address": "CD-374,SECTOR-16/B GLOBAL TOWN, NEW YORK KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 164,
+        "name": "Thread Experts",
+        "citycode": "PKKHI",
+        "address": "209 RB JARANWALA ROAD\nRoad, Faisalabad, Pakistan  ",
+        "website": null,
+        "infoMail": "ahmadriaz76@gmail.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 165,
+        "name": "UNITED TOWEL EXPORTERS(PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 2 & 17, SECTOR 20,\nKORANGI INDUSTRIAL AREA,\nKARACHI-74900 [PAKISTAN]  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 166,
+        "name": "URWA INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "AHMAD PURA KHAN MAHAL ROAD\nSIALKOT-51310 PAKISTAN.  ",
+        "website": null,
+        "infoMail": "sales@urwaind.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 167,
+        "name": "USMAN & SONS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. DP-7 SECTOR 12 - C\t\t\t\nNORTH KARACHI INDUSTRIAL AREA\t\t\t\nKARACHI - PAKISTAN\t\t\t  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 168,
+        "name": "USSK TEX",
+        "citycode": "PKKHI",
+        "address": "MALIK STREET CAPITAL ROAD\nSILAKOT, PAKISTAN, TEL : 00923328700817\nNTN: 7967599-7  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 169,
+        "name": "UTOPIA INDUSTRIES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT #, C.16/A, S.I.T.E. SUPPER HIGHWAY SCHEME 33, PHASE-1,\nKARACHI CENTRAL NORTH KARACHI TOWN, KARACHI.PAKISTAN  ",
+        "website": null,
+        "infoMail": "muhammad.sajid@utopia.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 170,
+        "name": "UZAIR INTERNAITONAL",
+        "citycode": "PKKHI",
+        "address": "plot # 457 pmb colony near wazir manssion maripur road karachi  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 171,
+        "name": "Universal Logistics Services (Pvt.) Ltd.",
+        "citycode": "PKKHI",
+        "address": "Office No. 9 & 9A, 2nd Floor, Services Club Extension Building Mereweather Road Karachi - Pakistan.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 172,
+        "name": "VISION TECHNOLOGIES CORPORATION PVT LTD",
+        "citycode": "PKKHI",
+        "address": "TECHNOLOGY DRIVE 14 KM PASRUR ROAD \nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 173,
+        "name": "YASHA TRADERS",
+        "citycode": "PKKHI",
+        "address": "MASHALLAH RUBI APPERTMENT PLOT NO 20/9 5TH FLOOR NO 21 CANADIO VILLAGE PUNJAB CHORANGI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 174,
+        "name": "Z.R SPORTS COMPANY",
+        "citycode": "PKKHI",
+        "address": "HAIDER STREET NEKA PURA SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 176,
+        "name": "ZAHABIYA CHEMICAL INDUSTRIES.",
+        "citycode": "PKKHI",
+        "address": "PLOT-14, SECTOR B-VIII, EXPORT \nPROCESSING ZONE , P.O BOX : 18685\nKARACHI-75150, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 178,
+        "name": "ZENITH TEXTILE",
+        "citycode": "PKKHI",
+        "address": "C-152, BLOCK \"A\" NORTH\nNAZIMABAD , KARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 179,
+        "name": "ZEPHYR TEXTILES.",
+        "citycode": "PKLHE",
+        "address": "3rd Floor IEP Building 97 B/D-1 Gulberg 111 Lahore   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 180,
+        "name": "ZUBISMA APPARLE",
+        "citycode": "PKKHI",
+        "address": "PLOT NO: 25 SECTOR 12-C NORTH KARACHI INDUSTRIAL  AREA KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 691,
+        "name": "A.K ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "HOUSE NO 111 C-2/11 NAZIMABAD \nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 692,
+        "name": "A.Y LEATHER",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 322 2ND FLOOR LANE NO5 SECTOR A AKTHAR COLONY  KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 694,
+        "name": "AAS MOVING",
+        "citycode": "PKKHI",
+        "address": "COURIER COMPANY KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 695,
+        "name": "ABDUR RAHMAN CORPORATION (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "P-214, MUSLIM TOWN NO.1 SARGODHA\nROAD FAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 696,
+        "name": "ABID TEXTILE",
+        "citycode": "PKKHI",
+        "address": "PLOT NO, 284 SECTOR 27, K.I.A\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 698,
+        "name": "ADNAN APPAREL",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. L-20C, BLOCK-22\nFEDERAL B AREA, KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 699,
+        "name": "AERO EXPRESS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 700,
+        "name": "AERTEX ENTERPRISES.",
+        "citycode": "PKKHI",
+        "address": "343-CAPT, SAROSH RD, MODEL TOWN\nSIALKOT 51310, PAKISTAN. PH: +92 52 355 0839.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 701,
+        "name": "AFINO TEXTILE MILLS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 703,
+        "name": "AFROZE TEXTILE IND (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "LA-7/1-7, BLOCK-22, FEDERAL\"B\"AREA, KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 704,
+        "name": "AIR BLUE LTD",
+        "citycode": "PKKHI",
+        "address": "BAY 70/71, JINNAH TERMINAL KARACHI SD 75200 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 706,
+        "name": "AIRSIAL ENGINEERING & MAINTENANCE",
+        "citycode": "PKKHI",
+        "address": "BAY 72 JINNAH INTERNATIONAL  AIRPORT\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 712,
+        "name": "AL HUSNAIN ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 714,
+        "name": "AL HUSSAIN TRADRES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 715,
+        "name": "AL MASAOOD OIL INDUSTRY SUPPLIES & SERVICES CO",
+        "citycode": "PKKHI",
+        "address": "Address: Plot # 212, Service Road East,\nSector I-10/3. Islamabad, Pakistan.\nIslamabad-44000, Pakistan  ",
+        "website": null,
+        "infoMail": "waqas@amoilgas.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 717,
+        "name": "AL REHMAN GLOBAL TEX (PVT) LIMITED,",
+        "citycode": "PKKHI",
+        "address": "P-265/3 D NEAR BLESSING HOME SCHOOL MAQBOOL ROAD, FAISALABAD,  PAKISTAN,\nPH NO. 0092 41 8540681,8724681,  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 718,
+        "name": "AL SUBUK ENGINEERING ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "ADDRESS : F-130, CITI CENTER, \nMAIN SHAHRA E FAISAL \nKARACHI.  ",
+        "website": null,
+        "infoMail": "info@alsubuk.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 721,
+        "name": "AL-AZEEM ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "GROUND MEZZANINE 1ST FLOOR\nPLOT SA-3& ST-7 SECTOR 5-L N.KARACHI\nKARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 722,
+        "name": "AL-FALAH IMPEX",
+        "citycode": "PKKHI",
+        "address": "G-01, GROUND FLOOR, SIMRA TERRACE, GABOL STREET, NAZRETH ROAD OFF SOLDIER BAZAR, KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 723,
+        "name": "AL-MEENA MARINE ENGINEERS",
+        "citycode": "PKKHI",
+        "address": "Plot # 122-C, Keamari Township, Keamari Karachi-75620, Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 724,
+        "name": "AL-SIDDIQ CONSOLIDATOR (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "M-5 MEZZANINE FLOOR FALAK NAZ PLAZA MAIN SHAHRA-E-FAISAL\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 725,
+        "name": "AL-TAYYIBA APPAREL",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 27 SECTOR NO. 24, KORANGI INDUSTRIAL AREA, 74900-KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 726,
+        "name": "ALAM INTERNATIONAL TRADERS",
+        "citycode": "PKKHI",
+        "address": "A-4, RAFIQ CHAMBER ZAKARIA LANE \nJODIA BAZAR KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 727,
+        "name": "ALI TRADING Co (Pvt) Ltd.",
+        "citycode": "PKKHI",
+        "address": "ALI TRADING CO. (PVT) LTD.\n6 KM,DASKA ROAD,\nSIALKOT 51310, PAKISTAN.  ",
+        "website": null,
+        "infoMail": "Muhammad Yasir <yasir@alitradingco.com>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 728,
+        "name": "AM LOGISTIC",
+        "citycode": "PKKHI",
+        "address": "Suite # 01 Qasr-e- Tahir G Allana Road  \nKharadar Karachi-Pakista\n\n  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 729,
+        "name": "AM TECHNOLOGIES",
+        "citycode": "PKKHI",
+        "address": "24-C SUNSET BOULEVARD PHASE 2 D.H.A KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 730,
+        "name": "AMANULLAH ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "HOUSE NO.1C-1/3, NAZIMABAD, NO.1,\nKARACHI CENTRAL LIAQUATABAD TOWN\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 731,
+        "name": "AMBALA EXPORT TRADING CO",
+        "citycode": "PKKHI",
+        "address": "61-Q BLOCK 6 PECHS KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 733,
+        "name": "ANAS TROPICAL PRU & VEG EXPORT",
+        "citycode": "PKKHI",
+        "address": "CP.\n2578 MUNO GOTH SABAZIMANDI KHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 734,
+        "name": "ANDREW PAINTS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 38 INDUSTRIAL AREA KHUTTA ROAD ISLAMABAD PHN 92 51 4492380 81  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 736,
+        "name": "AQSA INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "ROOM NO 207/208 HASSAN CHAMBER\nBOHRI ROAD OPPOSITE NEW CUSTOM HOUSE\nKARACHI SINDH 74000 PAKISTAN  ",
+        "website": null,
+        "infoMail": "suqaf@hotmail.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 737,
+        "name": "ARABIAN ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "ARABIAN ENTREPRISES 589A, PHASE 5 STREET NO. 25 DHA LAHORE, PAKISTAN MR. FAWAD FAROOQ CELL: 00-92-321-5558333 / INFO@ARABIANENT.COM  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 738,
+        "name": "ARIES LOGISTICS (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "THE NEXT TO EXCELLENT 81- ALI BLOCK NEW GARDEN TOWN LAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 739,
+        "name": "ARSAM SPORTS",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 740,
+        "name": "ART LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "ANNUM ESTATE BUILDING ROOM # 406,4th FLOOR SHAHRAH-E-FAISAL\nKARACHI PAKISTAN\nOffice: +92-21-34321721-2 (2 Lines)\nMobile: +92-321-2821989\nFax: +92-21-34321720  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 741,
+        "name": "ARTISAN TEXTILE",
+        "citycode": "PKKHI",
+        "address": "S.D.21, BLOCK-B, NORTH NAZIMABAD\nKARACHI / PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 742,
+        "name": "ARZOO TEXTILES MILLS LIMITED",
+        "citycode": "PKKHI",
+        "address": "209 REGENCY ARCADE, THEMALL FAISALABAD, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 743,
+        "name": "ASIA POULTRY FEEDS PVT LTD",
+        "citycode": "PKKHI",
+        "address": "182-SHADMAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 744,
+        "name": "ASSAC CARPETS",
+        "citycode": "PKKHI",
+        "address": "16 ALLAMA IQBAL ROAD\nLAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 745,
+        "name": "ASTUTE SPORTS",
+        "citycode": "PKKHI",
+        "address": "14-C NISHTER ROAD S.I.E SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 746,
+        "name": "ATROX INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "P. O. BOX-2671, ST # 11, NAN & F BULD-231, MANDI SAMBRIAL, SIALKOT 51310 - PAKISTAN-SIALKOT. PH#: +92-52-3550909.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 747,
+        "name": "ATTOCK REFINERY LIMITED",
+        "citycode": "PKKHI",
+        "address": "MORGAH RAWALPINDI, PAKISTAN AND MCB BANK LTD \nCORPORATE THE MALL BRANCH RAWALPINDI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 749,
+        "name": "AWAN SPORTS INDUSTRIES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "SHATAB GARH\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 750,
+        "name": "BACO INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 751,
+        "name": "BALMEERA INTERTRADE",
+        "citycode": "PKKHI",
+        "address": "41-B LOWER MALL LAHORE-5 400 PAKISTAN TEL: 92-300-8443644  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 752,
+        "name": "BARKET FIRTILIZERS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PACIFIC HOUSE,C-17,BLOCK-2,CLIFTON,\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 754,
+        "name": "BILAL & COMPANY",
+        "citycode": "PKKHI",
+        "address": "RAWAN ROAD TATEPUR \nMULTAN. PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 755,
+        "name": "BOLA GEMA- PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "DASKA ROAD, NEAR CITY HOUSING,\nSIALKOT, PAKISTAN  ",
+        "website": null,
+        "infoMail": "exports@bolagema.com Exports@bolagema.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 756,
+        "name": "BOX RING",
+        "citycode": "PKKHI",
+        "address": "MAQBOOL ROAD OPP WAZIRABAD \nROAD 51310 SIALKOT  ",
+        "website": null,
+        "infoMail": "export@boxring.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 757,
+        "name": "BRIGHT SAIL PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "C-45, GULSHAN-E-HADEED PHASE-II,\nBIN QASIM, KARACHI.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 758,
+        "name": "BROTHERS PRODUCTION PVT LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 759,
+        "name": "BUKSH CARPET",
+        "citycode": "PKKHI",
+        "address": "ROOM NO.07 MAZANINE FLOOR MARIUM\nCENTRE BACHU BHAI STREET SADDAR\nKARACHI -  PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 760,
+        "name": "BUREAU VERITAS PAKISTAN PVT LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.21 , SECTOR 30 KORANGI INUS,AREA OFF,SURGEON FAIZ KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": "NUDRAT.AMIR@BUREAUVERITAS.COM",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 761,
+        "name": "CAPITAL SPORTS CORPORATION (PVT)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 762,
+        "name": "CARGO AND COMMODITIES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 262 MAIN HUB RIVER ROAD\nNEAR YOUSUF GOTH KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "info@carcom.net.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 763,
+        "name": "CARGO CRYSTAL (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 764,
+        "name": "CARGO SOLUTION SERVICES",
+        "citycode": "PKKHI",
+        "address": "83-G 1ST FLOOR BLOCKS 6 PECHS \nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 765,
+        "name": "CARGO TRACK",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 767,
+        "name": "CASUAL CLOTHING CO",
+        "citycode": "PKKHI",
+        "address": "PLOT # 25/22 SECTOR NO 12C NORTH KARACHI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 768,
+        "name": "CELERITY SUPPLY CHAIN (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 769,
+        "name": "CENTRAL ORDINANCE AVIATION DEPOT",
+        "citycode": "PKKHI",
+        "address": "C/O DET EMBARKATION\n603 ARMY SUPPLY COMPANY, AD CHAKLALA\nRAWALPINDI  46610 PK\nTE +923354052400  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 770,
+        "name": "CHADHARY IJAZ AHMAD & SONS",
+        "citycode": "PKKHI",
+        "address": "178/1 GOSHA-I-AFIAT, SAEED COLONY FAISALABAD - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 771,
+        "name": "CHEEMA BROTHERS",
+        "citycode": "PKKHI",
+        "address": "H NO 26 BLOOCK PHASE 11 MARGHAZAR COLONY LAHORE IQBAL TOWN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 772,
+        "name": "CHENAB APPAREL (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "CHENAB HOUSE CHAK# 204 R.B EAST\nCANAL ROAD FAISALABAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 773,
+        "name": "CHT PAKISTAN (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT# 54-B SUNDAR INDUSTRIAL ESTATE\nRAIWIND ROAD\nLAHORE-PAKISTAN\nPHONE: 042-35297476-81  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 774,
+        "name": "CIVIL AVIATION AUTHORITY",
+        "citycode": "PKKHI",
+        "address": "HEADQUARTER, TERMINAL-1\nJINNAH INTERNATIONAL AIRPORT,\nKARACHI, PAKISTAN.\nTEL: +92-21-99242130  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 775,
+        "name": "COMBINED LOGISTICS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "SUITE NO. 713 7TH FLOOR\nCHAPAL PLAZA, HASRAT MOHANI ROAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 776,
+        "name": "COMET SPORTS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "P.O BOX 366 PLOT NO 57-59 S.I.T.E SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 777,
+        "name": "COMMANDING OFFICER",
+        "citycode": "PKKHI",
+        "address": "NAVAL STORE DEPOT AT PN DOCKYARD KARACHI C/O CO EHQ (N) AT NSSD WEST WHARF ROAD KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 778,
+        "name": "COMPANION SERVICES",
+        "citycode": "PKKHI",
+        "address": "B-39 BLOCK 13, F.B AREA\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 779,
+        "name": "CONSOLIDATION SHIPPING &",
+        "citycode": "PKKHI",
+        "address": "LOGISTICS\nSUITE # 908-9, FLOOR BUSINESS PLAZA, MUMTAZ HASSAN ROAD, OFF I.I. CHUNDIRGAR ROAD KARACHI-74000. PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 780,
+        "name": "CONTINENTAL TEXTILES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 21, SECTOR 23 KORANGI INDUSTRIAL AREA KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 781,
+        "name": "CORAL ENTERPRISES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "26-27 BLOCK (D) 2KMS RAIWIND ROAD\t\tLAHORE 53700, PAKISTAN\t\t  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 782,
+        "name": "COTTON CLUB",
+        "citycode": "PKKHI",
+        "address": "B-1 STREET, SECTOR 16-A, NORTH KARACHI, KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 783,
+        "name": "CROSS WEAR",
+        "citycode": "PKKHI",
+        "address": "MADINA MADJID ROAD\nPACCA GARHA,\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 784,
+        "name": "D.G. Khan Cement Co. Ltd",
+        "citycode": "PKKHI",
+        "address": "Nishat House, 53 A, Lawrence Road\nLahore, Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 785,
+        "name": "DANISH TRADERS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 786,
+        "name": "DAWOOD MEAT COMPANY (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT SITUATED AT E-162 NORTH WESTERN INDUSTRIAL ZONE PORT QASIM  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 787,
+        "name": "DEEPSEA",
+        "citycode": "PKKHI",
+        "address": "6TH FLOOR UNI TOWER I.I.XHUNDIGAR ROAD KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 788,
+        "name": "DELTEX",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 792,
+        "name": "DIGRACIA KNITS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 793,
+        "name": "DISTRICT CONTROLLER OF STORES",
+        "citycode": "PKKHI",
+        "address": "PAKISTAN RAILWAYS\nKARACHI CANTT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 794,
+        "name": "DIVINE LOGISTICS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "MC-498 First Floor Green Town, Near Airport Karachi  ",
+        "website": null,
+        "infoMail": "sales@divinelogisticsint.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 796,
+        "name": "DYNAMIC TOOLING SERVICES",
+        "citycode": "PKKHI",
+        "address": "Quaid-e-Azam Industrial Estate, Kot Lakhpat,\nLahore - 54700 Pakistan.  ",
+        "website": null,
+        "infoMail": "info@dts.com.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 797,
+        "name": "E2E SUPPLY CHAIN MANAGMENT (PVT) LT",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 799,
+        "name": "ECU LINE PAKISTAN (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "3-F, 3RD FLOOR, BAHRIA COMPLEX 111 LALAZAR M.T KHAN ROAD KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 801,
+        "name": "EESHOO TOYS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 802,
+        "name": "ELEGANT Co",
+        "citycode": "PKKHI",
+        "address": "284 JAYSORWALA, THE DASKA\nDIST SIALKOT (51310) PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 803,
+        "name": "ENGINEERING SOLUTIONS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "726, G-11/2 IBNE-SINA ROAD\nISLAMABAD-PAKISTAN\nUNITED BANK LIMITED  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 804,
+        "name": "ENGRO POWERGEN QADIRPUR LIMITED",
+        "citycode": "PKKHI",
+        "address": "16TH FLOOR, THE HARBOR FRONT BUILDING HC#3, MARINE DRIVE, BLOCK 4, CLIFTON, KARACHI - 75600, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 805,
+        "name": "EURO SUPPLY CHAIN & LOGISTICS SERVICES",
+        "citycode": "PKKHI",
+        "address": "OFFICE #511 5th FLOOR PORT WAY TRADE \nCENTRE SMCHS BLOCK A SHARE FAISAL KARACHI  PAKISTAN\n  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 806,
+        "name": "EUROTEX",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 5 SECTOR CIII\nK.E.P.Z. KARACHI\nPAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 808,
+        "name": "F.E.B INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "S-167, GROUND FLOOR, ARKAY SQUARE\nSHARAH-E-LIAQUAT, NEW CHALI, KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 809,
+        "name": "FAHAD INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "NO.204, NEW KUTIYANA \nPLAZA NEAR CHAPAL STREET\nKHARADAR KARACHI\nPAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 810,
+        "name": "FAIRDEAL MILLS (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "19-KM SHEIKHUPURA ROAD FAISALABAD\nPAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 811,
+        "name": "FAISAL FABRICS LTD",
+        "citycode": "PKKHI",
+        "address": "1-KM JARRANWALA ROAD  KHURRIANWALA FAISALABAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 812,
+        "name": "FAISAL SPINNING MILLS LTD FINISHING UNIT",
+        "citycode": "PKKHI",
+        "address": "CITY TOWERS 9TH FLOOR, 6-K , \nMAIN BOULEVARD GULBERG-III LAHORE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 815,
+        "name": "FAST FLY IMPEX",
+        "citycode": "PKKHI",
+        "address": "P.O.BOX # 2287 KOTLI BHUTTA\t\t\t\t\tWAZIRABAD ROAD SIALKOT-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 816,
+        "name": "FATIMA WEAVING MILLS (PVT)LTD",
+        "citycode": "PKKHI",
+        "address": "201,131/1, 2ND FLOOR SPEEDY TOWERS, PHASE-1, D.H.A, MAIN KORANGI ROAD, \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 817,
+        "name": "FAUJI FRESH N FREEZE LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 818,
+        "name": "FAZAL CLOTH MILLS LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 819,
+        "name": "FAZAL REHMAN FABRICS LIMITED",
+        "citycode": "PKKHI",
+        "address": "1ST FLOOR INTERNATIONAL PLAZA\nBOHRA STREET MULTAN CANTT. PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 821,
+        "name": "FILTRADER PVT LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT # 251/252 DEH DIN EBRAHIM HYDERI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 822,
+        "name": "FINE COTTON TEXTILES.,",
+        "citycode": "PKKHI",
+        "address": "B - 237 MAIN IBRAHIM HAYDARY ROAD,\nKORANGI CREEK, KARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 823,
+        "name": "FOODEX",
+        "citycode": "PKKHI",
+        "address": "259-H, BLOCK-6 P.E.C.H.S,\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 824,
+        "name": "FORCE FIVE PVT LTD.",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 825,
+        "name": "FORTE LOGISTICS SOLUTIONS",
+        "citycode": "PKKHI",
+        "address": "SUITE # 103-104, 1ST FLOOR AMBER ESTATE MAIN SHAHRAH E FAISAL KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 826,
+        "name": "G.M FASHION",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 831,
+        "name": "GETZ PHARMA (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT # 29 30 SECTOR 27 KORANGI INDUSTRIAL AREA, KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 832,
+        "name": "GLOBAL CORPORATION",
+        "citycode": "PKKHI",
+        "address": "86-L Block-2 P.E.C.H.S,\nKarachi, Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 833,
+        "name": "GLOBAL LOGISTICS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "Suite # 303, 3rd Floor, Windsong Palace, \nP.E.C.H.S, Karachi - Pakistan\nTel # +92 213 4167700-01  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 834,
+        "name": "GLOBE X LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 835,
+        "name": "GLOBELINK PAKISTAN (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "Globelink Pakistan (Pvt) Ltd.\nUAN      : +9221 111298298 EXT. 284\nFax        : +9221 32851678/32851981 \nCell        : + 0322-2836583\nEmail    : sales2@globelinkpk.com \nWebsite : www.globelinkpk.c om ",
+        "website": null,
+        "infoMail": "sales2@globelinkpk.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 836,
+        "name": "GLOW PAK INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "129/5-M,QUAID E AZAM INDUSTRIAL ESTATE,KOT LAKHPAT,LAHORE,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 837,
+        "name": "GOLD & SILVER TITANIUM IND",
+        "citycode": "PKKHI",
+        "address": "BUILDING NO: 15/320 HAJI PURA ROAD\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 838,
+        "name": "GREEN BRIDGE ENTERPRISE",
+        "citycode": "PKKHI",
+        "address": "PLOT 193, AL MADINA GARDEN EAST \nKARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 840,
+        "name": "GUL AHMED TEXTILE MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.3A LANDHI INDUSTRIAL AREA\nLANDHI, KARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 841,
+        "name": "GULF CHEMICALS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 843,
+        "name": "HADI RASHEED SAIYID",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 844,
+        "name": "HAFIZ TANNERY",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 1 TO 5 SECTOR 7-A\nKORANGI  INDUSTRIAL AREA,\nKARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 845,
+        "name": "HAFIZ TANNERY (IMPORT)",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 1 TO 5 SECTOR 7-A\nKORANGI  INDUSTRIAL AREA,\nKARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 847,
+        "name": "HAMZA ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 848,
+        "name": "HANA CARPETS",
+        "citycode": "PKKHI",
+        "address": "G28-29, CH. KHALIQUZAMAN ROAD\nCLIFTON BL.8, KARACHI , PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 849,
+        "name": "HANZ TILES & CERAMICS",
+        "citycode": "PKKHI",
+        "address": "HANZ TILES & CERAMICS\nSUITE 4,99-CF-1/5,CLIFTON,KARACHI-75600 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 850,
+        "name": "HASHI CORPORATION",
+        "citycode": "PKKHI",
+        "address": "MARALA ROAD MURAD PUR SIALKOT 51360 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 851,
+        "name": "HASNAIN CARGO SERVICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 852,
+        "name": "HASSAN INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "L61-62 SEC 16B GABOL\nTOWN NORTH KARACHI\nINDUSTRIAL AREA\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 855,
+        "name": "HI JEANS",
+        "citycode": "PKKHI",
+        "address": "OFFICE NO: F-150, ODEON CENTER ,\nPLOT NO: 310/2, PREEDY STREET ,\nREGAL CHOK ,SADDAR KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "Nazia Plus Time <naziaplustime@gmail.com>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 856,
+        "name": "HIGHWAY LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 858,
+        "name": "HONEST FOOD PRODUCTS",
+        "citycode": "PKKHI",
+        "address": "1-WALI CENTER SB 6 BLOCK 13/C GULSHAN-E-IQBAL KARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 860,
+        "name": "HORIZAN MFG CO",
+        "citycode": "PKKHI",
+        "address": "HOUSE NO 5 STREET NO 5AQAB MISSION HOSPITAL MOH PORAN NAGAR PARIS ROAD SILAKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 861,
+        "name": "IBRAHIM ASSOCIATES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 862,
+        "name": "IDREES (CARGO LINKERS)",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 863,
+        "name": "IEDGE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 864,
+        "name": "IMRAN BROTHERS.",
+        "citycode": "PKKHI",
+        "address": "68, 2nd FLOOR COCHINWALA \nMARKET TOWER KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 865,
+        "name": "IMTCO PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 866,
+        "name": "INDEPENDENT OIL TOOLS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 31 E PORT QASIM NORTH WEST INDUS ZONE 74000\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 868,
+        "name": "INT'L AIR & SEA CARGO SERVICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 869,
+        "name": "INT'L TEXTILE DISTRIBUTORS INC",
+        "citycode": "PKKHI",
+        "address": "EXPORT PROCESSING ZONE\nPLOT #3, SECTOR B-VIII, P.O. BOX 18681, LANDHI -KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 870,
+        "name": "INTER FREIGHT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 871,
+        "name": "INTER FREIGHT - SAJID",
+        "citycode": "PKKHI",
+        "address": "LAHORE - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 872,
+        "name": "INTERNATIONAL BUSINESS CENTRE",
+        "citycode": "PKKHI",
+        "address": "G-50 RIMPA PLAZA M.A JINNAH ROAD\nKARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 873,
+        "name": "INTERNATIONAL BUSINESS CENTRE.",
+        "citycode": "PKKHI",
+        "address": "G-RIMPA PLAZA M. A. JINNAH ROAD,\nKARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 874,
+        "name": "INTERNATIONAL CARGO MANAGEMENT (ICM)",
+        "citycode": "PKKHI",
+        "address": "KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 876,
+        "name": "IRAN & BUKHARA PALACE",
+        "citycode": "PKKHI",
+        "address": "D-27, BLOCK-9, CLIFTON CH. KHALIQ-UZ-ZAMAN RAOD, KARACHI, PC 75600.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 877,
+        "name": "IRON FIST IMPEX (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "P-177, 1ST FLOOR, COLLEGE ROAD, \nSAMANABAD, FAISALABAD \nIQBAL TOWN-PAKISTAN  ",
+        "website": null,
+        "infoMail": "IRON FIST <info@himalayanzsalt.com>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 879,
+        "name": "ISMAIL SPORTS GARMENTS IND",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.11/4 SECTOR 17 KORANGI INDUSTRIAL AREA KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 880,
+        "name": "ITD TEXTILES (PVT.) LIMITED.",
+        "citycode": "PKKHI",
+        "address": "EXPORT PROCESSING ZONE, PLOT # 03 SECTOR B VIII, P.O BOX 18681 LANDHI KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 881,
+        "name": "JAFFER AGRO SERVICES (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "CITI TOWER,33-A BLOCK-6,P.E.C.H.S.\nSHAHRAH-E-FAISAL,KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 882,
+        "name": "JAGTEX (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "MILLAT TOWN PAHARANG DRAINAGE\nMILLAT ROAD FAISALABAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 883,
+        "name": "JAGUAR (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "P-79 SHIEKHUPURA ROAD,\nFAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 884,
+        "name": "JAHANZAIB MISBAH",
+        "citycode": "PKKHI",
+        "address": "JAHANZAIB MISBAH,A-110 BLOCK 15\nGULISTAN-E-JOHAR KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 885,
+        "name": "JAMAL DIN LEATHER IMPEX",
+        "citycode": "PKKHI",
+        "address": "114, NEAR CLOCK TOWER SADDAR BAZAR\nSIALKOT-51310 PAKISTAN.  ",
+        "website": null,
+        "infoMail": "naveed@jdleather.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 887,
+        "name": "JAUN ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "108 SHADMAN-1 LAHORE, PAKISTAN\nPH: +92 42 37669588  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 888,
+        "name": "JEHANGIR KHAN INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "2ND FLOOR BLOCK 6 PECHS  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 889,
+        "name": "JEHANZEB MUHMAND & CO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 890,
+        "name": "JOONAID CO.",
+        "citycode": "PKKHI",
+        "address": "1ST FLOOR, AL-FALAH CHAMBER,\nABDULLAH HAROON ROAD, KARACHI  ",
+        "website": null,
+        "infoMail": "bawanies@yahoo.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 891,
+        "name": "K-ELECTRIC LIMITED",
+        "citycode": "PKKHI",
+        "address": "KE HOUSE 39/B SUNSET BOULEVARD PHASE 2 D.H.A KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 892,
+        "name": "K.A. ENTERPRISES PRIVATE LIMITED",
+        "citycode": "PKKHI",
+        "address": "18-19, 1ST FLOOR YARN CENTER\nMONTGOMERY BAZAR, FAISALABAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 893,
+        "name": "K.B. ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "19KM - SHEIKHUPURA ROAD\nFAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 894,
+        "name": "K.P INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 895,
+        "name": "KAMAL TEXTILE MILLS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 896,
+        "name": "KAMRAN C/O GERRY'S",
+        "citycode": "PKKHI",
+        "address": "KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 899,
+        "name": "KARACHI CARGO SERVICES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "Fabeha Castle, 168 Block B, S.M.C.H.S\nKarachi, Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 900,
+        "name": "KAYSONS INTERNATIONAL (PVT.) L",
+        "citycode": "PKKHI",
+        "address": "AAMIR TRADE CENTER, SUITE 5, 4TH FLOOR 233/1-A BLOCK 2, P.E.C.H SOCIETY, KARACHI /PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 901,
+        "name": "KHATTAK TRADERS",
+        "citycode": "PKKHI",
+        "address": "OFF NO. 3, 2ND FLOOR PLAZA NO 16,\nARSHAD SHARIF PLAZA, G-11 MARKAZ\nISLAMABAD , PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 902,
+        "name": "KIMPEX SPORTS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "6 Church Street Fateh Garh Sialkot\nPakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 903,
+        "name": "KOHAT CEMENT COMPANY LIMITED",
+        "citycode": "PKKHI",
+        "address": "37-P, GULBERG, 11, LAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 904,
+        "name": "KOHINOOR TEXTILES MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "25 WEST WHARF INDUSTRIAL AREA \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 905,
+        "name": "KRISHNA SPORTS CORPORATION",
+        "citycode": "PKKHI",
+        "address": "HN 24 256 A MOHALLAH DHAROWALL SILAKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 906,
+        "name": "LAKHANAY SILK MILLS (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 907,
+        "name": "LASER SPORTS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "10 KM DHEERA SANDHA PASRUR ROAD SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 909,
+        "name": "LOGWAYS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "OFFICE NO 709 7TH KAWISH CROWN PLAZA D.A.C.H.S BLOCK 7/8 SHAHRAH E FAISAL KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 910,
+        "name": "LOJISTICA",
+        "citycode": "PKKHI",
+        "address": "A-109 1ST FLOOR BHAYANI SHOPPING CENTRE BLOCK-N NORTH NAZIMABAD KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 911,
+        "name": "M. A. ARAIN & BROTHERS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PO BOX 432 WAZIRABAD ROAD\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 912,
+        "name": "M.R. INDUSTRIES.",
+        "citycode": "PKKHI",
+        "address": "F / 418 S.I.T.E. KARACHI PAKISTAN\nTEL # +92 (021) 2579361 UPTO 2 &  021-2576506.\nFAX # +92 (021) 2575979\n  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 913,
+        "name": "M.T TECHNIQUES",
+        "citycode": "PKKHI",
+        "address": "88-92 SMALL INDUSTIES ESTATE M.A JINNAH ROAD\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 914,
+        "name": "M.TAYYAB M.SHOAIB TRADING CORP.",
+        "citycode": "PKKHI",
+        "address": "R. T. SAWANT ROAD, OFF NISHTER ROAD,\nKARACHI.74400 PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 915,
+        "name": "M/S BOX RING",
+        "citycode": "PKKHI",
+        "address": "MAQBOOL ROAD OPT, WAZIRABAD ROAD\t\t\t\tSIALKOT- PAKISTAN\t\t\t\t  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 916,
+        "name": "MACHTRADE CORPORATION",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. C.I.DD-2, SECTOR 16,\nK.I.A. KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 917,
+        "name": "MACRO EXPORTS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 918,
+        "name": "MAHAD SPORTS WEAR",
+        "citycode": "PKKHI",
+        "address": "P.O BOX 759 SIALKOT 51310 PAKISTAN\nTEL: 92-52-3554552 & 3256256  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 919,
+        "name": "MAHMOOD BROTHERS",
+        "citycode": "PKKHI",
+        "address": "59, SECTOR 7-A, KORANGI INDUSTRIAL AREA, KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 920,
+        "name": "MALIK SPORTS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 32 S.I.E NEAR GRID STATION\nUGOKI ROAD SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 921,
+        "name": "MAMA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 922,
+        "name": "MAP ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "KARACHI - PAKITAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 924,
+        "name": "MAQSOOD TRADERS",
+        "citycode": "PKKHI",
+        "address": "ABBA SOOMAR STREET GHARI KHATA LIGHT HOUSE M A JINNAH ROAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 925,
+        "name": "MAROOF INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "HOUSE NO-1195, NASIR COLONY, \nSECTOR NO.32/D KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 926,
+        "name": "MASHRIQ GEMS.",
+        "citycode": "PKKHI",
+        "address": "OFFICE 181/21, A.M OFF SHAHRAH-E-LIAQUAT, NEAR PASSPORT OFFICE SADDAR KARACHI.TEL#: +92-21-36367786.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 927,
+        "name": "MASTER TEXTILE MILLS LIMITED",
+        "citycode": "PKKHI",
+        "address": "82-C/1, GULLBERG-III, LAHORE-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 929,
+        "name": "MAVRK JEANS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 930,
+        "name": "MAXPEED SHIPPING & LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "Suite # 9/1, 9th Floor, Arkay Square,\nMain Shahrah-e-Liaquat, Karachi - Pakistan.\nTel: +92-213- 242 1426 - 27 (02 Lines)\nFax: +92-213- 242 1428\nCell: +92-345- 220 6966\nE-Mail: noshan@maxpeedshipp ing.com\nSkype: noshanarbi\nWeb: www.maxpeedshipping.com ",
+        "website": null,
+        "infoMail": "noshan@maxpeedshipping.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 932,
+        "name": "MEDISPOREX (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "P. O. Box 600, KHADIM ALI ROAD,   \nSIALKOT - 51310, PAKISTAN\n\n  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 933,
+        "name": "MEHAR CARGO (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 934,
+        "name": "MEHER AND CO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 936,
+        "name": "METAL MASTERS",
+        "citycode": "PKKHI",
+        "address": "104/C GHALIB ROAD S.I.E SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 937,
+        "name": "MINZI INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "FATEH GHAR SMALL INDUSTRIES ESTATE\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 938,
+        "name": "MISC. (PERSONAL BAGG/EFECT)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 939,
+        "name": "MISL",
+        "citycode": "PKKHI",
+        "address": "New Office Address: S/3, S.I.T.E, G ALLANA ROAD, KARACHI-28  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 941,
+        "name": "MISTIQUBE",
+        "citycode": "PKKHI",
+        "address": "AT-3, A BLOCK MIDCITY, SERVICE ROAD ISLAMABAD  ",
+        "website": null,
+        "infoMail": "INFO@MISTIQUBE.COM",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 942,
+        "name": "MOHSIN TEXTILE",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 944,
+        "name": "MRS RAFIKA ABDUL KHALIQ",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 945,
+        "name": "MRS. AZRA ASIF SATTAR",
+        "citycode": "PKKHI",
+        "address": "NO 10 SANDS APPARTMENT BLOCK 2\nNEAR CHINA TOWN CLIFTON\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 946,
+        "name": "MS HINA SHARIQ / C/O SHAHID SAHAB",
+        "citycode": "PKKHI",
+        "address": "HOUSE # C-33 SECTOR 14/A\nSHADMAN TOWN \nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 947,
+        "name": "MUEED ESTABLISHMENT",
+        "citycode": "PKKHI",
+        "address": "120-MUQADDAS PARK GULSHAN E RAVI LAHORE, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 948,
+        "name": "MUHAMMAD NAWAZ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 950,
+        "name": "MUSHKO PRINTING SOLUTIONS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "2ND FLOOR SAFA HOUSE ABDULLAH HAROON ROAD, KARACHI, PAKISTAN 74400  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 951,
+        "name": "MUSHTAQ INTERNATIONAL TRADERS",
+        "citycode": "PKKHI",
+        "address": "R-104 ANUM HOMES JAMIA MILLIA ROAD \nKARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 952,
+        "name": "MUSTAFA & COMPANY (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "ROOM NO. 204 WINDSONG PLACE\nPLOT NO. A 16-17, BLOCK NO. 7 & 8,\nK.C.H. SOCIETY, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 953,
+        "name": "MUSTAQIM DYING & PRINTING INDUSTRIES PVT LTD",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 954,
+        "name": "MUTABAL FOOD LTD",
+        "citycode": "PKKHI",
+        "address": "OFFICE NO 01 PLOT NO C-931 BLOCK-2 PECHS TARIQ ROAD KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 958,
+        "name": "Muhammad Jahangir Enterprises",
+        "citycode": "PKKHI",
+        "address": "Shop # 10 Shakoor, Market B 36 Block - 1 \nShireen Jinnah Colony Clifton, Karachi South  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 959,
+        "name": "NABIQASIM INDUSTRIES PVT LIMITED",
+        "citycode": "PKKHI",
+        "address": "507-510 COMMERCE CENTRE HASRAT MOHANI ROAD KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 960,
+        "name": "NAIZMH ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "23/8 NUSRULLAH TOWN  SAEED COLONY  NO 2  , FAISALABAD-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 961,
+        "name": "NASARUN EXPORTS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 11-A, SECTOR 8 F KORANGI INDUSTRIAL AREA KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 962,
+        "name": "NAUTILUS GLOBAL MARINE SERVICES",
+        "citycode": "PKKHI",
+        "address": "Address: Office B-3, 2nd Floor, Haryani Tower, Plot 23-C, 27th Street, Tauheed Commercial, DHA Phase 5-Ext, Karachi, Pakistan  ",
+        "website": null,
+        "infoMail": "omer@nautilus-glo.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 963,
+        "name": "NAVEENA EXPORTS LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 966,
+        "name": "NFK EXPORTS ( PVT ) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 967,
+        "name": "NIAZ GARMENTS INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT # F-306 2ND FLOOR S.I.T.E KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 969,
+        "name": "NOOR SONS",
+        "citycode": "PKKHI",
+        "address": "1ST FLOOR PLOT NO 551 SECTOR 7/A\nKORANGI INDUSTRIAL AREA\nKARACHI 74900 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 970,
+        "name": "NOSH FOOD INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "4TH FLOOR, 83-C PHASE II EXTENSION MAIN NATIONAL HIGHWAY DHA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 971,
+        "name": "NOVA INTERNATIONAL PVT LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT # 81, SECTOR 7A, KORANGI INDUSTRIAL AREA,\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 972,
+        "name": "NOVA LEATHER",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 974,
+        "name": "OHRENMANN CARPET PALACE.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 976,
+        "name": "ORGANO BOTANICA",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 977,
+        "name": "ORIENT CARGO SERVICES",
+        "citycode": "PKKHI",
+        "address": "904-POGRESSIVE SQUARE 11-A, BLOCK-6\nPECHS KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 978,
+        "name": "ORIENT TEXTILE MILLS LIMTED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 979,
+        "name": "PACIFIC FREIGHT SYSTEM(PVT)LTD",
+        "citycode": "PKKHI",
+        "address": "1/6-A FLOOR, BLOCK-6 PECHS \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 980,
+        "name": "PAK APPARELS",
+        "citycode": "PKKHI",
+        "address": "E-491/1, HERDIL RAAM STREET GARDEN EAST KARACHI-PAKISAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 981,
+        "name": "PAK AVIATION ENGINEERING SRVS (2)",
+        "citycode": "PKKHI",
+        "address": "TARMAC AREA, ADJACENT TERMINAL -2, \nJINNAH INT'L AIRPORT KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 982,
+        "name": "PAK HYDRAULIC & TRADING CO",
+        "citycode": "PKKHI",
+        "address": "F/18-20, BILAL CENTRE \nNICHOLSON ROAD\nLAHORE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 983,
+        "name": "PAK MINES INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "PLOT# 1166, SEC 9/A,BALDIA TOWN ,SB.\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 986,
+        "name": "PAK VEGETABLES & FRUITS",
+        "citycode": "PKKHI",
+        "address": "SAIMA HOUSE 688, ST 13-BLOCK GULSHAN-E-IQBAL  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 988,
+        "name": "PAKISTAN AIR FORCE ",
+        "citycode": "PKKHI",
+        "address": "NO 101 ALC PAF - FAISAL KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 989,
+        "name": "PAKISTAN INTERNATIONAL AIRLINE CORP",
+        "citycode": "PKKHI",
+        "address": "PROCUREMENT AND LOGISTICS\nPROCUREMENT AND LOGISTICS DEPTT, \nP.I.A HEAD OFFICE, \nKARACHI PAKISTAN\nTEL : 99043568  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 990,
+        "name": "PARAMOUNT TRADING CO",
+        "citycode": "PKKHI",
+        "address": "S/3 G.ALLANA ROAD S.I.T.E\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 991,
+        "name": "PCS LOGISTICS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "17-F BLOCK-6 P.E.C.H.S KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 992,
+        "name": "PEARL SCAFFOLD",
+        "citycode": "PKKHI",
+        "address": "PLOT# S-104, NEAR FIRE BRIGADE STATION, S.I.T.E AREA, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 993,
+        "name": "PELLE CLASSICS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.321, SECTOR 7-A, KORANGI INDUSTRIAL AREA, KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 994,
+        "name": "PENNA OVERSEAS CORP",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 995,
+        "name": "PERFECT ASSOCIATES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 997,
+        "name": "PREMIER TRADERS",
+        "citycode": "PKKHI",
+        "address": "27 BADRI BUILDING, I.I. CHUNDRIGAR ROAD,\nKARACHI, PAKISTAN.\nNTN NUMBER 0674783-3  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 999,
+        "name": "PRIME COAT PVT LTD",
+        "citycode": "PKKHI",
+        "address": "C-40/41 SITE SUPERHIGHWAY INDUS AREA SCHEME 33 KARACHI 74200 PK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1000,
+        "name": "PROHAND INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1002,
+        "name": "PUNJAB THERMAL POWER PVT LTD",
+        "citycode": "PKKHI",
+        "address": "1ST FLOOR 7-C-1 GULBERG LAHORE PK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1003,
+        "name": "QUALITY DYEING & FINISHING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1004,
+        "name": "QUALITY EXPORT INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "4/90, SECTOR 21, K.I.A\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1005,
+        "name": "QUICE FOOD INDUSTRIES LIMITED",
+        "citycode": "PKKHI",
+        "address": "WS-7, MADINA PALACE, F.C.H.S, DHORAJI COLONY, KARACHI- PAKISTAN \nREX REGISTRATION NUMBER: PKREXPK08627886  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1007,
+        "name": "R.J INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1008,
+        "name": "RABI ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "# 31 GROUND FLOOR BUSINESS PLAZA\nMUMTAZ HASSAN ROAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1009,
+        "name": "RAJA BROTHERS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1010,
+        "name": "RAJWANI APPAREL (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "KA 4 - C 2/1 BOCK 22 F.B INDUSTRIAL AREA\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1011,
+        "name": "RAJWANI DENIM MILLS (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "NC-91,DEHKHANTO LANDHI\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1012,
+        "name": "RANI & COMPANY",
+        "citycode": "PKKHI",
+        "address": "5-C, 5/17 NAZIMABAD., P.O. BOX#: 2513.\nKARACHI-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1013,
+        "name": "REAL STAR SURGICAL INSTRUMENTS",
+        "citycode": "PKKHI",
+        "address": "NAI ABADI RUNG PURA MUHALLA TARIQ PURA SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1014,
+        "name": "REHMAT E SHEREEN",
+        "citycode": "PKKHI",
+        "address": "Plot No. 124-K, Block-2, P.E.C.H.S., Tariq Road, Karachi, Pakistan.\nPh: +92-21-34381447 email: rstariqroad@yahoo.com  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1015,
+        "name": "RELIANCE COTTON SPINNING MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1016,
+        "name": "RIMMER INDUSTRIES (REGD)",
+        "citycode": "PKKHI",
+        "address": "ABBOT ROAD SIALKOT 51310,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1017,
+        "name": "RISHAD MATEEN & CO",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1018,
+        "name": "RISING SPORTSWEAR",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 91 SECTOR-24 KORANGI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1019,
+        "name": "ROSHAN ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "B-51, RIZWAN SOCIETY, MAIN UNIVERSITY ROAD, KARACHI-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1020,
+        "name": "ROWER SPORTS",
+        "citycode": "PKKHI",
+        "address": "Mohalla Bejle Ghar 16/324,\nNear Small Industrial Estate\n51310 Sialkot-Pakistan.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1021,
+        "name": "RUBY COLLECTION",
+        "citycode": "PKKHI",
+        "address": "195-B, BLOCK-3, ADMINISTRATIVE SOCIETY, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1022,
+        "name": "S M DENIM MILLS",
+        "citycode": "PKKHI",
+        "address": "D-11 SOUTH AVENUE S.I.T.E\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1024,
+        "name": "S.SAQLAINIA ENTERPRISE (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "BUILDING NO1 L/32/A BLOCK 22\nF.B.AREA \nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1025,
+        "name": "SAARUNG SHIPPING",
+        "citycode": "PKKHI",
+        "address": "SUITE 909 9TH FLOOR \nQ M HOUSE ELANDER ROAD\nOPP. SHAHEEN COMPLEX \nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "info@saarunglogistics.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1026,
+        "name": "SACHIN SPORTS INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "7KM Daska Road 51310\nSialkot, Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1028,
+        "name": "SADAQAT LIMITED",
+        "citycode": "PKKHI",
+        "address": "SAHIANWALA ROAD, KHURRIANWALA, \nFAISALABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1029,
+        "name": "SAEED KHAN ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1030,
+        "name": "SAFAI INTERNATIONAL.",
+        "citycode": "PKKHI",
+        "address": "05TH FLOOR, ADAMJEE HOUSE, \nI. I. CHUNDRIGAR ROAD,\nKARACHI 74000, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1031,
+        "name": "SAFINA LOGISTICS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "SUITE # 1013, 10 FLOOR , CHAPAL PLAZA KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1032,
+        "name": "SAIM MOBEEN FOOD INDUSTRIES LIMITED",
+        "citycode": "PKKHI",
+        "address": "4-KM BAHAWALPUR NEAR YAQOOB SOAP,FACTORY NASIRABAD MULTAN NTN #: 6328193-5  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1034,
+        "name": "SAJJAN S/O IBRAHIM.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1035,
+        "name": "SALIMUSA SPORTS",
+        "citycode": "PKKHI",
+        "address": "MULLA KAMAL, GOUSHALLA SIALKOT-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1036,
+        "name": "SALMIS FURNISHERS",
+        "citycode": "PKKHI",
+        "address": "10-C STADIUM LANE 1, OFF KHAYABAN-E-SHAMSHEER, PHASE V, D.H.A. KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1039,
+        "name": "SAPPHIRE FINISHING MILLS",
+        "citycode": "PKKHI",
+        "address": "3.5 KM, RAIWIND MANGA ROAD, RAIWIND DISTT, KASUR, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1040,
+        "name": "SARENA TEXTILE INDUSTRIES (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "21-WARIS ROAD,\nLAHORE-54000 PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1041,
+        "name": "SAUDI PAK LIVE STOCK (KHURSHEED)",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1042,
+        "name": "SAUDI PAK LIVE STOCK (POTATO)",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1043,
+        "name": "SAUDI PAK LIVE STOCK MEAT CO",
+        "citycode": "PKKHI",
+        "address": "ROOM. NO.613, TRADE TOWER ABDULLAH \nHAROON ROAD KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1044,
+        "name": "SAVILLE WHITTLE INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1045,
+        "name": "SAZ INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "E-17, S.I.T.E., KARACHI \nPAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1046,
+        "name": "SCHAZOO PHARMACEUTICAL",
+        "citycode": "PKKHI",
+        "address": "LABORATORIES KALALWAL 20KM\nLAHORE JARANWALA ROAD\nDISTRICT SHEIKHUPURA SIN PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1047,
+        "name": "SEA GOLD (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "AIR FREIGHT DIVISION ROOM # 509 5TH FLOO ANUM EMPIRE BLOCK # ZCCI K.E.C.H.S, KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1048,
+        "name": "SEA WAY LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "Office No. 3 Lower Floor, Paris Arcade,E-11/3 Markaz MPCHS, Islamabad, Pakistan  ",
+        "website": null,
+        "infoMail": "shakeel@seaways-logistics.net",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1049,
+        "name": "SEAGULL SHIPPING & LOGISTICS  (PVT)",
+        "citycode": "PKKHI",
+        "address": "BURNEY HOUSE, 1/6M, BLOCK-6, P.E.C.H.S,  SHAHRAH-E-FAISAL, MAIN NURSERY.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, Forwarder/Coloader, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1051,
+        "name": "SERVICE INDUSTRIES LTD",
+        "citycode": "PKKHI",
+        "address": "SERVIS HOUSE 2-MAIN GULBERG,\nLAHORE 54662 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1052,
+        "name": "SERVOPAK SHIPPING AGENCY",
+        "citycode": "PKKHI",
+        "address": "Servopak Shipping Agency\nRoom # 208, 2nd Floor,\nAnum Empire, Shahrah-e-Faisal,\nKarachi, Pakistan\nPhone:  0092 213 4381063-4\nCell # 92 345 278 4488\nFax: :      0092 213 4398295\n  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1053,
+        "name": "SERVOTECH PVT LTD",
+        "citycode": "PKKHI",
+        "address": "SUITE # 208 CHAPAL PLAZA\nHASRAT MOHANI ROAD \nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1054,
+        "name": "SEVEN STAR INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "AL AKBER STREET JUNA MARKET\nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1055,
+        "name": "SG MANUFACTURER",
+        "citycode": "PKKHI",
+        "address": "RORAS ROAD MUZAFAAR PUR.\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1056,
+        "name": "SHADAB CORP",
+        "citycode": "PKKHI",
+        "address": "ROOM NO 14D 2ND FLOOR\nWRITTER CHAMBER MUMTAZ HASSAN ROAD KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1058,
+        "name": "SHAHAB GARMENTS",
+        "citycode": "PKKHI",
+        "address": "HOUSE # A-109 STREET NO 4 BLOCK M MUKHDOOM SHAH COLONY SEC 11 1/2 ORNAGI TOWN KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1059,
+        "name": "SHAHEEN AIR INT'L LTD",
+        "citycode": "PKKHI",
+        "address": "JINNAH INTERNATIONAL AIRPORT, KARACHI-75200, PAKITAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1060,
+        "name": "SHAHEEN AIR INTL LTD (2)",
+        "citycode": "PKKHI",
+        "address": "TERMINAL ROAD, JINNAH INT'L AIRPORT\nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1061,
+        "name": "SHAHID & SONS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO C/11. SECTOR, 8/4 AL HABIB CO OPERATIVE HOUSING SOCIETY  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1063,
+        "name": "SHANCO SPORTS CORPORATION",
+        "citycode": "PKKHI",
+        "address": "S.I.E UGOKI ROAD NEAR GRID STATION\nSIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1064,
+        "name": "SHANGRILA FOODS (PRIVATE) LIMITED.",
+        "citycode": "PKKHI",
+        "address": "293/16, BLOCK - 3, B.Y.J.C.H.S.,\nBAHADURABAD, KARACHI, PAKISTAN\nTEL: (9221)-4855654-6, FAX: 4855657  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1065,
+        "name": "SHEKHANI INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "F-17 MARIPUR ROAD S.I.T.E KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1067,
+        "name": "SINE INTERNATIONAL (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "CD 388 & 389 GABOL TOWN, SECTOR 16-B, F.B.AREA, KARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1068,
+        "name": "SITARA CHEMICAL INDS",
+        "citycode": "PKKHI",
+        "address": "P.O BOX 442, SARGODHA ROAD, FAISALBAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1069,
+        "name": "SKY LINKERS INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "MASKAN PLAZA GULSHAN 'E' IQBAL \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1070,
+        "name": "SMA ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1071,
+        "name": "SMS CHEMICAL INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO E-20 E-36 E-37 AND E-38 \n   H.I.T.E.LASBELA HUB 90250 BALUCHISTAN- PAKISTAN\n\n  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1072,
+        "name": "SNS IMPEX",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1074,
+        "name": "SPORTS CHANNEL",
+        "citycode": "PKKHI",
+        "address": "SIALKOT  ",
+        "website": null,
+        "infoMail": "SALES@SPORTSCHANNEL.PK",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1075,
+        "name": "SQ COMMODITIES",
+        "citycode": "PKKHI",
+        "address": "SUIT NO 317 3RD FLOORGRAIN CENTRE OPP CITY COURT\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1076,
+        "name": "STAR SHIPPING (PVT)",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1077,
+        "name": "STARPAK MARTIAL ARTS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "P.O. BOX NO. 1123,\n94 AZIZ SHAHEED ROAD,\nSIALKOT 51310, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1078,
+        "name": "STITCH LINE APPAREL",
+        "citycode": "PKKHI",
+        "address": "PLOT # A-108, IBNEISHAH ROAD ROOAIDAD NAGAR NAZIMABAD 5/B, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1079,
+        "name": "STYLO SHOES",
+        "citycode": "PKKHI",
+        "address": "M.A JINNNAH ROAD, SHOP 28-29 YUSAF MARKET, KARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1081,
+        "name": "SUN INDUSTRIAL EQUIPMENT PAKISTAN",
+        "citycode": "PKKHI",
+        "address": "Office#709, 7TH Floor, Anum Empire \nShahra-e-Faisal Karachi 75350 Pakistan  ",
+        "website": null,
+        "infoMail": "kulsoom.suntech@gmail.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1083,
+        "name": "SUNNY ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "H NO B-16 RASHDI GOTH BLK-9 GULISTAN-E-JOHAR KARCHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1085,
+        "name": "SUNNY INT'L",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1086,
+        "name": "SURYA SPORTS",
+        "citycode": "PKKHI",
+        "address": "CAPITAL ROAD CHEEMA STREET, MODEL TOWN, SIALKOT 51310  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1087,
+        "name": "SWIFT SHIPPING (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "KDLB BUILDING 2ND FLOOR \nKARACHI PAKISTAN\n+92-21 32315962-63-64  ",
+        "website": null,
+        "infoMail": "hameed.ahmed@swiftshipping.net",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1089,
+        "name": "T S MARBLE INDUSTRY",
+        "citycode": "PKKHI",
+        "address": "Plot#b-48-49-67-68 MARBLE CITY HUB KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1090,
+        "name": "TABO GUGOO INDUSTRIES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PASRUR ROAD\nSIALKOT - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1091,
+        "name": "TAJ ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "48. PAPER MARKET H.A.A AFANDI ROAD \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1092,
+        "name": "TEAM FREIGHT MANAGEMENT",
+        "citycode": "PKKHI",
+        "address": "115, 1st FLOOE, SABAH PALACE , SHAHREH-E-FAISAL,\nKARACHI PAKISTAN\nPhone + 92.21.34326801-3  EXT:108\nDirect  + 92.21.34322247 \nFax     + 92.21.34322249\nCell     + 92.322.2277386\nEmail   ahmed@tea m-freight.com ",
+        "website": null,
+        "infoMail": "ahmed@team-freight.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1093,
+        "name": "TETRA PAK PAKISTAN LTD",
+        "citycode": "PKKHI",
+        "address": "316 UPPER MALL LAHORE 54000\nPAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1094,
+        "name": "TEX KNIT INT",
+        "citycode": "PKKHI",
+        "address": "A-17/C, NEAR SITE STADIUM, S.I.T.E \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1095,
+        "name": "TEX-KNIT INT",
+        "citycode": "PKKHI",
+        "address": "A-17/C NEAR SITE STADIUM SITE KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1096,
+        "name": "TEXTILE CHANNEL",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. DP-90/A, SECTOR 12-C\nNORTH KARACHI INDUSTRIAL AREA \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1097,
+        "name": "TEXTILE VISION",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.CI-124 & 125\nSECTOR 12/C, NORTH KARACHI\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1098,
+        "name": "THE CRESCENT TEXTILE MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "8TH FLOOR, SIDCO COMMERCIAL AVENUE R.A. LINES, STRECHEN ROAD KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1099,
+        "name": "THE INDUS HOSPITAL & HEALTH NETWORK",
+        "citycode": "PKKHI",
+        "address": "PLOT C-76, SECTOR 31/5\nKORANGI CROSSING KARACHI  75190\nPakistan  ",
+        "website": null,
+        "infoMail": "nazish.iqbal@tih.org.pk",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1100,
+        "name": "THE LEATHER COMPANY",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 94 SECTOR 7-A\nKORANGI INDUSTRIAL AREA \nKARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1101,
+        "name": "THE ORGANIC MEAT COMPANY (PVT.) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1102,
+        "name": "THE SPORT STORE",
+        "citycode": "PKKHI",
+        "address": "M-1 PLOT 3C STADIUM LANE 2\nPHASE 5 DHA 75500 KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1103,
+        "name": "THE TREASURER",
+        "citycode": "PKKHI",
+        "address": "UNIVERSITY OF AGRICULTURE\nJAIL ROAD FAISALABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1104,
+        "name": "TNG  LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "C-3 DATA CENTER KHALID BIN WALEED,RD KARACHI  ",
+        "website": null,
+        "infoMail": "faisal@tnglogistics.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1106,
+        "name": "TRADE INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1107,
+        "name": "U & I GARMENTS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "ST - 2/12, SECTOR - 19\nKORANGI INDUSTRIAL AREA \nKARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": "liaumair@gmail.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1108,
+        "name": "U.K MARTIAL ARTS INTERNATION",
+        "citycode": "PKKHI",
+        "address": "CAPITAL ROAD, SIALKOT, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1109,
+        "name": "UNI CRAFT",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1110,
+        "name": "UNIBIS LIMITED",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1111,
+        "name": "UNIBRO INDUSTRIES LTD",
+        "citycode": "PKKHI",
+        "address": "UNIBRO HOUSE 114 9TH EAST STREET PHASE-1,D D.H.A KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1112,
+        "name": "UNICORP INSTRUMENT",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1113,
+        "name": "UNION CARGO (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "248-A BLOCK-6 PECHS SHAHRAH-E-FAISAL\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": "imranhaffer@uclpakistan.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1114,
+        "name": "UNION FABRICS PRIVATE LIMITED",
+        "citycode": "PKKHI",
+        "address": "E-20/B, CENTRAL AVENUE, S.I.T.E KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1115,
+        "name": "UNIQUE ENTERPRISES (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "SHAHEEN VIEW, SUITE#: 13, 18-A, BLOCK-6, P.E.C.H.S. SHAHRAH-E-FAISAL, KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1116,
+        "name": "UNIQUE MARITIME",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1117,
+        "name": "UNISHIP GLOBAL LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "SUITE, 707, 7TH FLOOR BUISNESS CENTRE\nMUMTAZ HASSAN ROAD KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": "abid@uniship.net",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1118,
+        "name": "UNISHIP GLOBAL SERVICES",
+        "citycode": "PKKHI",
+        "address": "Suite No. 11/12, 11th Floor, Arkay Square (EXT) Shahrah-e-Liaqat, Karachi, PAKISTAN  ",
+        "website": null,
+        "infoMail": "abid@uniship.net",
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1120,
+        "name": "UNITED TOWEL",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 2 & 17 SECTOR 20\nKORANGI INDUSTRIAL AREA\nKARACHI 74900 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1121,
+        "name": "UNIVERSAL FREIGHT SYSTEMS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1122,
+        "name": "UNIVERSAL SHIPPING",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1123,
+        "name": "VENUS GLOBAL LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "SUITE NO 1 & 10, 10TH FLOOR, SHARJAH TRADE CENTRE\nNEW CHALLI ROAD \nKARACHI \nPAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1125,
+        "name": "VISION AIR INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1127,
+        "name": "VISION TECHNOLOGIES CORPORATION (PRIVATE) L",
+        "citycode": "PKKHI",
+        "address": "TECHNOLOGY DRIVE, 14 KM, PASRUR ROAD,  SIALKOT   PAKISTAN  ",
+        "website": null,
+        "infoMail": "Muhammad Irfan <irfan@vision.com.pk>",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1130,
+        "name": "WATER REGIME (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "130-R/3, JOHAR TOWN LAHORE, PAKISTAN  ",
+        "website": null,
+        "infoMail": "info@waterregime.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1131,
+        "name": "WELCOME SHIPPING AIDS PVT LTD",
+        "citycode": "PKKHI",
+        "address": "Ground floor Old saudia Arabian Airline Building AFU Airport Karachi  ",
+        "website": null,
+        "infoMail": "mfawad@welcomeshipping.com",
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1132,
+        "name": "WELDON INSTRUMENTS.",
+        "citycode": "PKKHI",
+        "address": "62/24 GHAZI ROAD CANTT - SIALKOT\nTEL: +92 (052) 3241483 / 3241483/4. FAX: +92 (052) 3241482.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1133,
+        "name": "WILD ORCHARD (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1134,
+        "name": "WINGS EXPRESS",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1135,
+        "name": "WORLD LINK SHIPPING AGENCY",
+        "citycode": "PKKHI",
+        "address": "Suite#M29,Mezzanine Floor,Mateen shopping Gallery,\nTariq Road PECHS,Oop Rehmania Masjid,\nKarachi Pakistan\nMob:+923222093330\nTel:+92-21-34256987\nTel:+92-21-32039939\nTel:+92-21-34256942\nEmail:wls @groupmail.com\nworldlinkshipping@cyber.net.pk ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1137,
+        "name": "WUSQA INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 13 B SMALL INDUSTRIES ESTATES SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1138,
+        "name": "XPRESS LOGISTICES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1142,
+        "name": "ZADAF ( PVT ) LTD.",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.LC-45 LANDHI\nINDUSTRIAL AREA 74900\nKARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1755,
+        "name": "SHARIF & ELAHI CORPORATION",
+        "citycode": "PKSKT",
+        "address": "SOCIAL SECURITY STREET NR JAMIA MAKKI MASJID  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1769,
+        "name": "M.N. TEXTILES (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "PLOT # LX-5, SCHEME 3 & 4, LANDHI INDUSTRIAL AREA, KARACHI, PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1773,
+        "name": "SONIC TEXTILE INDUSTRIES (PVT) LTD.",
+        "citycode": "PKKHI",
+        "address": "D-153-A-Pathan Colony, S.I.T.E, Karachi-Pakistan. ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1774,
+        "name": "DANIYAL ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 9, Ist FLOOR, SECTOR 12-D NORTH KARACHI , KARACHI PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1791,
+        "name": "MAHEEN TEXTILE MILLS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "28-KM, SHEIKHPURA ROAD, KHURRIANWALA, FAISALABAD, 38000 PAKISTAN. ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1802,
+        "name": "NUTEX INTERNATIONAL ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 1804,
+        "name": "FAISAL FABRICS LTD.",
+        "citycode": "PKLYP",
+        "address": "1-KM JARANWALA ROAD, KHURRIANWALA  FAISALABAD, PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010118,
+        "name": "AL-GHOSIA IND",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010122,
+        "name": "PERFECT FOOD INDUSTRIES",
+        "citycode": "PKLHE",
+        "address": "SHAHDARA BUND ROAD NEAR JEHANGIR TOMB LAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": "CC-00884",
+        "name": "HANA CARPET",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010128,
+        "name": "SUNRISE ENTERPRISES",
+        "citycode": "PKSKT",
+        "address": "STREET NO 4, MUHAMMAD PURA, PASRUR, SIALKOT, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010130,
+        "name": "BLUEJET ENTERPRISES",
+        "citycode": "PKSKT",
+        "address": "KK BUILDING, BANO BAZAR, SIALKOT, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010131,
+        "name": "SUBLI MASTER",
+        "citycode": "PKSKT",
+        "address": "OFFICE, KASHMIR ROAD PAKISTAN,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010132,
+        "name": "STITCHWELL GARMENTS",
+        "citycode": "PKKHI",
+        "address": "ADDRESS : D-137/C S.I.T.E., KARACHI - PAKISTAN   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Import, ",
+        "types": "Consignee, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": "CU-00647",
+        "name": "PAKISTAN INTERNATIONAL AIRLINES CORPORATION",
+        "citycode": "PKKHI",
+        "address": "PIA HEAD OFFICE BUIL PIA BUILDING KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": "CU-00013",
+        "name": "PROLINE (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "2/1, SECTOR 15, KORANGI INDUSTRIAL AREA, KARACHI-74900  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": "CU-00721",
+        "name": "SAAR INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "MOHALLA SHUJABAD ZAFERWL ROAD SIALKOT  ",
+        "website": null,
+        "infoMail": "INFO@SAARIND.COM",
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": "CU-00902",
+        "name": "Sadaf Enterprises",
+        "citycode": "PKKHI",
+        "address": "Plot NO. L-4/A-2, Block -22, FB Area, Karachi Central Gulberg Town  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": "CU-00146",
+        "name": "SOORTY ENTERPRIES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": "CC-11914",
+        "name": "IMRAN BROTHERS TEXTILE (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "SF UNIT # 32, HUB RIVER ROAD, S.I.T.E., KARACHI, Karachi West  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010139,
+        "name": "REPSTER WEARS",
+        "citycode": "PKSKT",
+        "address": "ROAD 19/47 NIHAL CHAND STREET SIALKOT PAKISTAN 19/47 SIALKOT PUNJAB  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010151,
+        "name": "ITTEFAQ TRADING CO.",
+        "citycode": "PKLHE",
+        "address": "Ittefaq House # 369/D-2 Johar Town,  Lahore 54782, Pakistan. Tel: 92-42-35211692~ 3 Fax: 92-42-35401692",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010163,
+        "name": "CREST ARTCRAFT",
+        "citycode": "PKSKT",
+        "address": "AL SARWAR MOHAMMAD ALI STREET COMMISSIONER ROAD SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010174,
+        "name": "ENGLISH FASHION.",
+        "citycode": "GBFXT",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010176,
+        "name": "Hilal Foods (Pvt.) Ltd.",
+        "citycode": "PKKHI",
+        "address": "507, 508 Clifton Centre Kehkashan, Clifton Karachi, Pakistan.  Tel: 00-92-21-5872701-6 ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010188,
+        "name": "A.R. HOSIERY WORKS",
+        "citycode": "PKKHI",
+        "address": "D-140/A-1 MANGHOPIR ROAD,  SITE KARACHI ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010194,
+        "name": "HERMAIN ENTERPRISE",
+        "citycode": "PKKHI",
+        "address": "No. 213, Hoor centre, North Napier Road Karachi-Pakistan Hp# 0092-321-2077-662",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010198,
+        "name": "ALLIED TRADING CORPORATION",
+        "citycode": "PKLHE",
+        "address": "ADD H-1170. AKBARI MANDI LAHORE PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010200,
+        "name": "LUCERNA TRADING DMCC C/OF: ABM INFO TECH (PVT) LTD",
+        "citycode": "AEDXB",
+        "address": "UNIT NO 4238 DMCC BUSEINESS CENTRE, LEVEL NO: 1 JEWELLERY AND GEMPLEX3, DUBAI UAE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010215,
+        "name": "WORLD G CORPORATION",
+        "citycode": "PKSKT",
+        "address": "CHURCH STREET FATEH 51310 SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010217,
+        "name": "H.NIZAM DIN AND SONS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "D64 S I T E KARACHI PAKISTAN C/O ALPINTER SA BELGIUM  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010231,
+        "name": "ANSA INDUSTRIES.",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.5,15 & 16 SECTOR C-2 KARACHI EXPORT PROCESSING ZONE, LANDHI INDUSTRIAL AREA KARACHI- 75150 PAKISTAN.",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010232,
+        "name": "SCS EXPRESS PVT LTD CUSTOMER",
+        "citycode": "PKKHI",
+        "address": "NO 11 RODNEY STREET COLOMBO  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010234,
+        "name": "SPONA SPORTS.",
+        "citycode": "PKSKT",
+        "address": "779 A, STREET 5, PURAN NAGAR 51310  SIALKOT - PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010238,
+        "name": "AHMED FINE WEAVING LTD.,",
+        "citycode": "PKMUX",
+        "address": "1-2ND FLOOR, INTERNATIONAL PLAZA, BOHRA STREET, MULTAN CANTT. PAKISTAN. ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010239,
+        "name": "COLONY TEXTILE MILLS LIMITED",
+        "citycode": "PKLHE",
+        "address": "M. ISMAIL AIWAN-I-SCIENCE BUILDING FEROZEPUR ROAD,  LAHORE PAKISTAN",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010240,
+        "name": "NISHAT (CHUNIAN) LIMITED",
+        "citycode": "PKLHE",
+        "address": "31-Q GULBERG II,  LAHORE PAKISTAN 54660 ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010242,
+        "name": "ROBIQA ENTERPRISES",
+        "citycode": "PKSKT",
+        "address": "KOT KHIZRI 52001 5TH KM G T ROAD WAZIRABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010251,
+        "name": "FIRST STONE CORPORATION PVT LTD",
+        "citycode": "PKSKT",
+        "address": "DAKWALA STOP SADRA BADRA DASKA ROAD SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010257,
+        "name": "MARK ONE SURGICAL",
+        "citycode": "PKSKT",
+        "address": "PACCA GARAH KASHMIR ROAD SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010260,
+        "name": "SAMZ APPAREL ( PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "DP 13/1 SECTOR 12-D NORTH KARACHI, INDUSTRIAL AREA, KARACHI-PAKISTAN. ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010273,
+        "name": "SUNRISE EXPORTS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO,CB-242,SECTOR 16-B,MEEZANINE FIRST AND SECOND FLOOR, GABOOL TOWN NORTH KARACHI INDUSTRIAL AREA,  KARACHI. NTN NO: 1210085-4",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010278,
+        "name": "FULLMOON ENTERPRISES.",
+        "citycode": "PKKHI",
+        "address": "POLT# 24, 1ST FLOOR, SECTOR 12-C,NORTH KARACHI, NORTH KARACHI INDUSTRIAL AREA KARACHI, KARACHI - 75850, PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010281,
+        "name": "ABDUL WASI ULFAT S/O ABDUL HADI ULFAT",
+        "citycode": "AFKDH",
+        "address": "NO.12 KHUWAJA YARANA MARKET,KANDHAR, AFGHANISTAN VIA KARACHI,PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010294,
+        "name": "PAKISTAN NAVY C/O COMMANDING OFFICER",
+        "citycode": "PKKHI",
+        "address": "EMBARKATION HEADQUARTERS (NAVY) AT NSSD , WEST WHARF ROAD KARACHI SD 75260 PK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010297,
+        "name": "SHAFI LIFESTYLE (PVT) LTD",
+        "citycode": "PKLHE",
+        "address": "ON BEHALF OF JOSEF SEIBEL ASIA PACIFIC LTD ROOM 109 FLAT 6 17/F BLOCK C TML TOWER 3 HOI SHING ROAD  NEW TERRITORIES HONG KONG ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010299,
+        "name": "Raheel Amanullah ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010302,
+        "name": "DARSON INDUSTRIES (PVT) LTD",
+        "citycode": "PKWZA",
+        "address": "P.O. BOX NO. 5 DARSON ROAD G.T. ROAD WAZIRABAD 52000 PAKISTAN Tel No: +92-55-660-3616   FAX : +92-55-660-0035",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010307,
+        "name": "WITTVOLK EUROPE INTERNATIONAL GENERAL TRADING LLC",
+        "citycode": "AEDXB",
+        "address": "P.O BOX 90218 OFFICE 214-J THE SQUARE, AL MAMZAR AL MAMZAR DUBAI United Arab Emirates (AE) ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010316,
+        "name": "ZIA OOCL LOG",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010317,
+        "name": "GE HYDRO FRANCE",
+        "citycode": "PKLHE",
+        "address": "12TH LEVEL ARFA IT TOWER 346-B FEROZPUR ROAD LAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010333,
+        "name": "F.B. INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT  05, SECTOR 12-D, NORTH KARACHI INDUSTRIAL AREA KARACHI, PAKISTAN",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010339,
+        "name": "AL TAYYIBA APPAREL.,",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010340,
+        "name": "JAGUAR APPAREL (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "DP21 SECTOR 12D IST FLOOR NORTH KARACHI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010346,
+        "name": "SULTANIA GARMENTS",
+        "citycode": "PKKHI",
+        "address": "D-88/A, NEAR WALIKA HOSPITAL, S.I.T.E, KARACHI PAKISTAN. ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010351,
+        "name": "DANCO FRESH",
+        "citycode": "PKKHI",
+        "address": "CRYSTEL VIEW PLOT D 62 DMCHS KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010356,
+        "name": "EMBASSY OF DENMARK.",
+        "citycode": "PKISB",
+        "address": "HOUSE NO 16 STREET 21 F-6/2 P. O . BOX 1118 ISLAMABAD PAKISTAN",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010388,
+        "name": "AL-MADINAH ISLAMIC RESEARCH CENTRE",
+        "citycode": "PKKHI",
+        "address": "MASJID SA’AD BIN ABI WAQAS D.H.A. PHASE IV. KARACHI.PAKISTAN  ",
+        "website": null,
+        "infoMail": "JAMSHED.AWAN100@GMAIL.COM,\nKAMRANYASIN@MIRC.ORG.PK",
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010391,
+        "name": "THE ORGANIC MEAT COMPANY",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 257 SECTOR 24 KORANGI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010394,
+        "name": "RANS INTL FREIGHT FOWARDING CO",
+        "citycode": "PKKHI",
+        "address": "A-714, 7th Floor, Saima Trade Tower I.I Chundrigar Road Karachi  ",
+        "website": "www.ransintl.com",
+        "infoMail": "sabamendhro@ransintl.com",
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010398,
+        "name": "TAHIR CARPETS",
+        "citycode": "PKLHE",
+        "address": "2-B MANOHAR STREET NICHOLSON ROAD LAHORE PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010400,
+        "name": "AERTEX SPORTS",
+        "citycode": "PKSKT",
+        "address": "343 MODEL TOWN SIALKOT PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010405,
+        "name": "ARRIZA GROUP",
+        "citycode": "PKKHI",
+        "address": "R-990, BLOCK-20, F.B.AREA,  KARACHI-75950, PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010415,
+        "name": "QST INTERNATIONAL.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010419,
+        "name": "JAGUAR APPAREL (PRIVATE) LIMITED.",
+        "citycode": "PKKHI",
+        "address": "DP21, SECTOR 12D, IST FLOOR, NORTH KARACHI INDUSTRIAL AREA, KARACHI-PAKISTAN. NTN#9578658-3",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, Notify, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010421,
+        "name": "TROUT APPAREL",
+        "citycode": "PKSKT",
+        "address": "NEKA PURA ZAFAR WAL ROAD PO BOX CANTT SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010424,
+        "name": "TRIMCO PAKISTAN (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "WS/592-2, JOHARABAD INDUSTRIAL AREA BLOCK 2 FEDRAL B AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010433,
+        "name": "NLC MARINE & AIR SERVICES.",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010439,
+        "name": "DALDA FOODS LIMITED.",
+        "citycode": "PKKHI",
+        "address": "F-33, HUB RIVER ROAD, S.I.T.E   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010441,
+        "name": "MEZAN TEA (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "A/22 S.I.T.E. MAURIPIR ROAD, KARACHI 75730 PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010442,
+        "name": "THE PARACHA TEXTILE MILLS LTD",
+        "citycode": "PKKHI",
+        "address": "(GHEE UNIT) A/22, MAURIPUR ROAD, SHER SHAH, S.I.T.E., KARACHI 75730, PAKISTAN. TEL 32561101 FAX 32561873  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010444,
+        "name": "JAVED AHMED KAIMKHANI",
+        "citycode": "PKKHI",
+        "address": "115/II , 30TH STREET KHY E MUHAFIZ D.H.A PHASE VI KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "JAVED@MILL-TEX.COM",
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010446,
+        "name": "JAY + ENN SAFETY",
+        "citycode": "PKKHI",
+        "address": "PLOT # 4 STREET NO 9 RASHEEDABAD JHANG ROAD FAISLABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010454,
+        "name": "THAR COAL BLOCK-1 POWER GENERATION COMPANY (PVT) L",
+        "citycode": "PKKHI",
+        "address": "7TH FLOOR EXECUTIVE TOWERS DOLMEN MALL CLIFTON KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010469,
+        "name": "SNA TRADERS.CO",
+        "citycode": "PKKHI",
+        "address": "A-54, STREET 71,BLOCK G SAIMA ARABIAN VILLAS KARACHI  ",
+        "website": null,
+        "infoMail": "snatraders.co@gmail.com",
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010477,
+        "name": "HUGO SPORT PAK",
+        "citycode": "PKSKT",
+        "address": "SIALKOT  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010479,
+        "name": "STITCHWELL GARMENTS.",
+        "citycode": "PKKHI",
+        "address": "D‐137/C, S.I.T.E, KARACHI ‐ PAKISTAN TEL : 021‐32575253‐55 FAX : 021‐32575801",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010481,
+        "name": "ROOMI FABRICS LIMITED",
+        "citycode": "PKMUX",
+        "address": "MASOOD ROOMI HOUSE, 5 OFFICERS  COLONY, KASHAN-E-MEHR-E-ROOMI,   MULTAN, PAKISTAN.",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010482,
+        "name": "MASOOD FABRICS LIMITED.",
+        "citycode": "PKMUX",
+        "address": "Masood Roomi House, 5 Officers Colony,  Kashan-e-Mehr-e-Roomi, Multan, Pakistan. ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010484,
+        "name": "UNIVERSAL CABLES INDUSTRIES LIMITED",
+        "citycode": "PKKHI",
+        "address": "61-C JAMI COMMERCIAL STREET -7, PHASE VII D.H.A. KARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": "'Ubaid Maqsood' <ubaid@ucil.com.pk>",
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010497,
+        "name": "NAZ TEXTILES (PVT) LIMITED",
+        "citycode": "PKKHI",
+        "address": "E/32-A, ESTATE AVENUE, S.I.T.E.,  KARACHI-75700 PAKISTAN.",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010514,
+        "name": "KHALID OVERSEAS CORPORATION",
+        "citycode": "PKSKT",
+        "address": "SMALL INDUSTRIES ESTATE, SIALKOT - 51340 (PAKISTAN) ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010518,
+        "name": "CENTRAL SURGICAL CO. (PVT) LTD.,",
+        "citycode": "PKSKT",
+        "address": "HARI PUR CHOWK, 1.5KM DURGANWALI VIL/ BHAGO ROAD, SIALKOT 51310, PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010523,
+        "name": "GOHAR TEXTILE MILLS PVT LTD",
+        "citycode": "PKLYP",
+        "address": "208 CHAK ROAD , ZIA TOWN FAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010525,
+        "name": "PERFECT GLOVES MANUFACTURER CO (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT # 498 500 SECTOR 7/A KORANGI K.I.A KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010527,
+        "name": "ABRAR ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "NO.1 CHUNA GROUND, NEAR KHAN AGENCY MPR COLONY BLOCK C, MAIN MANGHOPIR ROAD,KARACHI PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010530,
+        "name": "ECO GREEN / UK COURIER",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010537,
+        "name": "CRETESOL (PRIVATE) LIMITED",
+        "citycode": "PKISB",
+        "address": "PLOT # 399, I-9/3 INDUSTRIAL AREA ISLAMABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": "3021956-6",
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010539,
+        "name": "AOL APPAREL PRIVATE LIMITED",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 6/2, SECTOR 15, KORANGI INDUSTRIAL AREA, KARACHI-74900, PAKISTAN.",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010551,
+        "name": "RANA IMPEX",
+        "citycode": "PKLYP",
+        "address": "VIEW PARK GATWALA, 12 KM SHEIKHUPURA ROAD, FAISALABAD, PAKISTAN",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010557,
+        "name": "Blow Plast (Pvt) Limited",
+        "citycode": "PKKHI",
+        "address": "D-13-A6 Manghopir Road, S.I.T.E Karachi, Pakistan ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010561,
+        "name": "PAK FASHEO CLOTHING COMPANY",
+        "citycode": "PKKHI",
+        "address": "PLOT F# 222 LABOUR SQAURE SITE KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "www.pakfasheo.com",
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010565,
+        "name": "ANABIA GARMENTS",
+        "citycode": "PKKHI",
+        "address": "POLT NO 240 SECTOR 27 KORANGI INDUSTRIAL AREA KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010570,
+        "name": "PIK PAK INDUSTRIES",
+        "citycode": "PKSKT",
+        "address": "PAKKA PEYA, S.I.E. DEFENCE ROAD SIALKOT - PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010572,
+        "name": "QASIM INTERNATIONAL CONTAINER TERMINAL PAKISTAN LT",
+        "citycode": "PKKHI",
+        "address": "BERTH 5-10, MARGINAL WHARVES, PORT MOHAMMAD BIN QASIM, P.O. BOX: 6435, KARACHI - 75020 ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010589,
+        "name": "Jilani Shipping International",
+        "citycode": "PKKHI",
+        "address": "2nd Floor, Glass Tower, Clifton PSO Head Off. Karachi-Pakistan.   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010597,
+        "name": "SHEIKH MUHAMMAD SAEED & SONS",
+        "citycode": "PKKHI",
+        "address": "KORANGI INDUSTRIAL AREA PLOT #402 SECTOR 7/A LINE #5TH KARACHI (PAKISTAN)   ",
+        "website": null,
+        "infoMail": "smsleather@gmail.com",
+        "strn": 1200410501682,
+        "operations": "Sea Import, ",
+        "types": "Consignee, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010608,
+        "name": "ADAMJEE ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "E-17/A S.I.T.E KARACHI -PAKISTAN Ph: +92-21-32568536 (4 LINES) Fax: +92-21-32568536 ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010622,
+        "name": "SUNSHINE GLOVES",
+        "citycode": "PKLYP",
+        "address": "P 8/15 STREET No. 3 TALIAN WALA ROAD, UMER FAROOQ TOWN NARWALA ROAD , FAISALABAD 38000 – PAKISTAN",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010629,
+        "name": "MASUM LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "OFFICE NO 815 PARK AVENUE BLOCK 6 PECHS SHAHRAH E FAISAL KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010631,
+        "name": "CASUAL CLOTHING CO. ",
+        "citycode": "PKKHI",
+        "address": "PLOT LA-8/21, BLOCK 22, F.B INDUSTRIAL AREA, KARACHI.  ",
+        "website": null,
+        "infoMail": "awahab@casual.net.pk",
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010633,
+        "name": "KITARIYA BROTHERS",
+        "citycode": "PKSKT",
+        "address": "ALI PUR GUJJRAN P.O SAMBRIAL SIALKOT  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010639,
+        "name": "VELOCITY SOLUTIONS ",
+        "citycode": "PKKHI",
+        "address": "OFFICE 211 BUSINESS AVENUE SHARA E FAISAL KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010642,
+        "name": "GLOBEX SAFETY (PVT) LTD",
+        "citycode": "PKLHE",
+        "address": "LAHORE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010650,
+        "name": "AK GROUP ",
+        "citycode": "PKKHI",
+        "address": "BUILDING # 40-C OFFICE # 101 14TH COMMERCIAL STREET DHA PHASE II EXT KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010662,
+        "name": "PERFORMANCE SURGICAL INSTRUMENTS",
+        "citycode": "PKSKT",
+        "address": "CO AIRPORT ROAD OPP PETROL PUMP SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010665,
+        "name": "ZIL LIMITED",
+        "citycode": "PKKHI",
+        "address": "GROUND FLOOR BAHRIA COMPLEX III M.T KHAN ROAD KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010672,
+        "name": "TEKNOKRAT",
+        "citycode": "PKKHI",
+        "address": "B-25 GROUND FLOOR BLOCK 12 KDA SCHEMR 36 GULISTAN E JOHAR KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010678,
+        "name": "ECOM LOGISTIX",
+        "citycode": "PKKHI",
+        "address": "252-B, PECHS Block 6, Karachi, Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010681,
+        "name": "REMO SPORTS",
+        "citycode": "PKSKT",
+        "address": "LANE A UNIT 5 6 7 INDUSTRIAL ESTATE SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010688,
+        "name": "CONTINENTAL TOWELS  (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT  # 141 SECTOR # 27 KORANGI INDUSTRIAL AREA KARACHI / PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010700,
+        "name": "KUMAIL GLOVES INDUSTRIES",
+        "citycode": "PKSKT",
+        "address": "Near Zero Point, Wazirabad Road Sambrial Sialkot-Pakistan Tel: +92 52 3571646 Fax:+92 52 3257068  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010703,
+        "name": "CMYK SERVICES",
+        "citycode": "PKKHI",
+        "address": "Building 23-C, 2nd Floor, Old Sunset Boulevard, Phase 2, DHA, Karachi      ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010718,
+        "name": "GILLANI INDUSTRIES",
+        "citycode": "PKSKT",
+        "address": "LAKHAN PUR SQUARE, PASRUR ROAD, SIALKOT, 51310-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010731,
+        "name": "MUSTHAFA IMRAN AHMED",
+        "citycode": "PKISB",
+        "address": "VILLA 249 STREET 76 SECTOR F11/1 ISLAMABAD 715123 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010759,
+        "name": "PETRO SOURCING (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 7 SECTOR NO 7-A K I A KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010761,
+        "name": "CARE MEDICAL SUPPLIES",
+        "citycode": "PKSKT",
+        "address": "NOUL MORE RORAS ROAD SIALKOT 51310 PUNJAB PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010765,
+        "name": "ALPINE INDUSTRIES",
+        "citycode": "PKSKT",
+        "address": "1-KM AIMNA ABAD ROAD SIALKOT-51310, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010776,
+        "name": "MDS COMPANY",
+        "citycode": "PKKHI",
+        "address": "SHOP # 31-32 BLOCK DA NEW FRUIT MANDI SUPPERHIGHWAY KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010781,
+        "name": "KARIMA TEXTILE RECYCLER (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO # 1,2,3,6,7,8 SECTOR E-VI, PHASE II KARACHI EXPORT PROCESSING ZONE  AUTHORITY, LANDHI INDUSTRIAL AREA, KARACHI PAKISTAN ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010782,
+        "name": "RAVI ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, CHA/CHB, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010801,
+        "name": "FAISAL SPINNING MILLS TLD",
+        "citycode": "PKLHE",
+        "address": "CITY TOWER 6K MAIN BOULEVARD GULBERG-II LAHORE PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010804,
+        "name": "GHANI GLASS LIMITED",
+        "citycode": "PKLHE",
+        "address": "40-L BLOCK MODEL TOWN, LAHORE, PAKISTAN,  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010812,
+        "name": "CP PAKISTAN",
+        "citycode": "PKLHE",
+        "address": "27 Q CCA 1ST FLOOR DHA PHASE 7 LAHORE, PAKISTAN.   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010815,
+        "name": "LIGHT PAK GLOBAL INDUSTRIES (PRIVATE) LIMITED",
+        "citycode": "PKSKT",
+        "address": "TANNERY STREET,TIBBI ARAYAN AIRPORT ROAD 51310 SIALKOT (PAKISTAN)  ",
+        "website": null,
+        "infoMail": "lightpak@cyber.net.pk",
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010816,
+        "name": "ARTISTIC MILLINERS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT 4 AND SECTOR 25 KORANGI INDUSTRIAL AREA KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010826,
+        "name": "SSD TRADING INC",
+        "citycode": "PKKHI",
+        "address": "POLT NO A 2 SACHAL GOTH NEAR SPARCO ROAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010830,
+        "name": "DUKE TEXTILES",
+        "citycode": "PKKHI",
+        "address": "F-115 S.I.T.E KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010841,
+        "name": "HAMMAD TEXTILE",
+        "citycode": "PKKHI",
+        "address": "PLOT # 287, SECTOR 27, KORANGI INDUSTRIAL AREA,                                  KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010842,
+        "name": "BABRI IMP.,EXP & DIST",
+        "citycode": "PKKHI",
+        "address": "F-483 S.I.T.E KARACHI CTC   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010844,
+        "name": "TRANSACT INTERNATIONAL",
+        "citycode": "PKSKT",
+        "address": "RORAS ROAD MUZAFAR PUR SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010847,
+        "name": "ENGRO POLYMERAND CHEMICALS LIMITED.",
+        "citycode": "PKKHI",
+        "address": "12TH FLOOR, OCEAN TOWER, G-3, BLOCK-9, KAHAYAN-E-IQBAL, CLIFTON, KARACHI SOUTH SADDAR TOWN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010849,
+        "name": "YUNUS TEXTILE MILLS LIMITED",
+        "citycode": "PKKHI",
+        "address": "H-23/1 LANDHI INDUSTRIAL AREA KARACHI-75120, PAKISTAN Ph: (92-21) 508 1305 Fax: (92-21) 508 1226 E-mail: info@yunustextile.com   www.yunustextile.com  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010851,
+        "name": "PAK HUA INDUSTRIAL CO (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT # 6, 7 & 8 SECTOR D-VI, PHASE 11 EXPORT PROCESSING ZONE KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010855,
+        "name": "BABRI IMP.,EXP. & DIST",
+        "citycode": "PKKHI",
+        "address": "F-483 , S . I . T .E  KARACHI PAKSITAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010858,
+        "name": "AQSA INDUSTRIES (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.480, SECTOR 7A, KORANGI INDUSTRIAL AREA KARACHI EAST (PAKISTAN)  ",
+        "website": null,
+        "infoMail": null,
+        "strn": "8307630-0",
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010859,
+        "name": "LEATHER ENGINEER CO.",
+        "citycode": "PKSKT",
+        "address": "MOH.MACHINE WALA, CHITTI SHEIKHAN SIALKOT (PAKISTAN)  ",
+        "website": null,
+        "infoMail": "LEATHER.ENGINEER.CO@GMAIL.COM",
+        "strn": 2656648.6,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010866,
+        "name": "KERRY FREIGHT PAKISTAN (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "C-105 KDA SCHEME 1 KARSAZ ROAD KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010875,
+        "name": "A.U. TEXTILE",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 372, SHAH BAIG, GOBOL TOWN, FEDERAL B AREA KARACHI KARACHI - PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010882,
+        "name": "LAKHANI INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "F-249, S.I.T.E.KARACHI-75700 PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010909,
+        "name": "FINE GRIP IMPORT EXPORT",
+        "citycode": "PKKHI",
+        "address": "PLOT 548 SECTOR 7/A KORANGI INDUSTRIAL AREA KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010918,
+        "name": "AL KAREEM TEXTILES",
+        "citycode": "PKKHI",
+        "address": "C4/2 AL AHRAM SQUARE BLOCK G NORTH NAZIMABAD KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010920,
+        "name": "Q.N.ENTERPRISES",
+        "citycode": "PKSKT",
+        "address": "6/9 ZAFAR ALI ROAD SIALKOT 51310, PAKISTAN PHONE: +92-523-253379  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010926,
+        "name": "ZEPHYR TEXTILES",
+        "citycode": "PKLHE",
+        "address": "Street# 03, House# 7/2, New Canal Park, Taj Bagh Harbanspura, Lahore  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010930,
+        "name": "TECHNICARE CORPORATION",
+        "citycode": "PKSKT",
+        "address": "TECHNIC HOUSE CAPITAL ROAD SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010932,
+        "name": "PANTHER TYRES LIMITED",
+        "citycode": "PKLHE",
+        "address": "97-B, AZIZ AVENUE, CANAL BANK ROAD, GULBERG 5 LAHORE , PAKISTAN. 92-111-55-4444  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010935,
+        "name": "HIGH SAFETY INDUSTRY",
+        "citycode": "PKSKT",
+        "address": "GOHD PUR ROAD, GHANSAR PUR, SIALKOT, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010939,
+        "name": "THAPUR PAKISTAN PVT LTD",
+        "citycode": "PKLHE",
+        "address": "10 KM INDUSTRIAL ESTATE NEAR CITY HOUSING SOCIETY SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010945,
+        "name": "DOWELL SCHLUMBERGER (WESTERN) ",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010952,
+        "name": "SAMARTEX",
+        "citycode": "PKKHI",
+        "address": "SUITE NO 16, MUSTAFA GARDEN NEAR MAKKI MUSJID GARDEN EAST KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010957,
+        "name": "TUF PAK SPORTS WORKS",
+        "citycode": "PKSKT",
+        "address": "P.O BOX 2170 MARALA ROAD, GOHAD PUR SIALKOT   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010962,
+        "name": "S.S. MEDIDENT INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "DENTAL HOUSE RORAS ROAD SIALKOT 51310 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010969,
+        "name": "KPDC FOOD & SPECIALTY CHEMICALS",
+        "citycode": "PKLYP",
+        "address": "33, BEHIND SHAFI PLAZA DJIKOT ROAD FAISALABAD LAILPUR TOWN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010971,
+        "name": "SHABBIR INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "F-520, S.I.T.E. KARACHI-75700, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010972,
+        "name": "I.Q KNITWEAR",
+        "citycode": "PKKHI",
+        "address": "E-47, SECTOR 31-D, P & T.C.H.S, KORANGI INDUSTRIAL AREA, KARACHI-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010973,
+        "name": "AMFSH INDUSTRY",
+        "citycode": "PKKHI",
+        "address": "NEW HAMZA GHOUSE, SIALKOT-51310-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010976,
+        "name": "Askari Chartered Services (ACS)",
+        "citycode": "PKISB",
+        "address": "PAF Base Chaklala,Rawalpindi-Pakistan  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010981,
+        "name": "CITROPAK LIMITED",
+        "citycode": "PKKHI",
+        "address": "38-A MAIN GULBERG LAHORE PAKISTAN   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010990,
+        "name": "KAREEM QUALITY RAGS (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "9,10 , 11,21 AND 22, SECTOR E-III, PHASE II, KARACHI EXPORT PROCESSING ZONE, MEHRAN HIGHWAY LANDHI ( EXTENSION ) KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011000,
+        "name": "AKSA TEX STYLE INDUSTRIES",
+        "citycode": "PKMUX",
+        "address": "AHMED PURA , SAMEEJABAD NO.1 MULTAN PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011002,
+        "name": "NEW ZEENAT TEXTILE MILLS",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 24, BLOCK – 3 -  OVERSEAS CO-OPERATIVE HOUSING SOCIETY  STADIUM ROAD, KARACHI   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011003,
+        "name": "KEYSTONE ENTERPRISES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT 22 SECTOR 12 C NORTH KARACHI INDUSTRIAL AREA KARACHI 75850 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011006,
+        "name": "RIZVI ASSOCIATES",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011022,
+        "name": "RACE & RANGE SPORTS",
+        "citycode": "PKKHI",
+        "address": "BISMILLAH CHOWK, PASRUR ROAD, SIALKOT, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011030,
+        "name": "AAJ PAPER MILLS PRIVATE LTD",
+        "citycode": "PKLYP",
+        "address": "5-C VALUE ADDITION KHURRIAWALA FAISALABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011036,
+        "name": "Y.K.T TRADERS",
+        "citycode": "PKSKT",
+        "address": "P.O BOX NO 985 LIAQAT ALI ROAD SMALL INDUSTRIAL ESTATE 51340 SIALKOT - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011045,
+        "name": "SAHI STAR",
+        "citycode": "PKSKT",
+        "address": "DEFENCE LINK PASRUR ROAD, NEW HAMZAGHAUS SIALKOT -51310- PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011046,
+        "name": "PROLINE. (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "2/1, SECTOR 15, KORANGI INDUSTRIAL AREA, KARACHI-74900  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011050,
+        "name": "A.U TEXTILE",
+        "citycode": "PKKHI",
+        "address": "PLOT NO.372, SHAH BAIG, GOBOL TOWNL, FEDERAL B AREA KARACHI   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011053,
+        "name": "AMROS PHARMACEUTICALS",
+        "citycode": "PKKHI",
+        "address": "A/96, S.I.T.E SUPER HIGHWAY,KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": "Ahmedaslam@amrospharma.com",
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011055,
+        "name": "MATRIX INTECH",
+        "citycode": "PKSKT",
+        "address": "786 SADRA BADRA, DASKA ROAD, SIALKOT  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011061,
+        "name": "SUBHAN TEXTILES",
+        "citycode": "PKLYP",
+        "address": "OFFICES # 109, FIRST FLOOR, REGENCY ARCADE FAISALABAD.38000 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011070,
+        "name": "SAYA WEAVING MILLS (PVT.) LTD. ",
+        "citycode": "PKKHI",
+        "address": "MUHAMMAD FEROZ STREET, JODIA BAZAR, KARACHI 74000  ",
+        "website": null,
+        "infoMail": "export1@sayatex.com ",
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011072,
+        "name": "BURHANI STS INDUSTRIES (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "F-166/B, SITE KARACHI, 75400 KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011074,
+        "name": "MUBEEN MAQBOOL INDUSTRIES",
+        "citycode": "PKLYP",
+        "address": "18-A OFFICERS COLONY NO.1 MADINA TOWN,FAISALABAD, ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011077,
+        "name": "HENZIL ENTERPRISES",
+        "citycode": "PKKHI",
+        "address": "GODOWN NO.1, SHERSHAH MARKET, SUPER WAZIRSTAN, MUHAMMADI ROAD, STREET NO.57, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011079,
+        "name": "SHAHBAZ GARMENTS (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "OFFICE # 27-B, 27TH FLOOR, SKY TOWER - WEST WING, DOLMEN CITY, PLOT # HC-3, BLOCK-4 MARINE DRIVE, CLIFTON 75400 KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011080,
+        "name": "BIZZTEX SOURCING",
+        "citycode": "PKKHI",
+        "address": "SUIT# 213-214 HMH SQUARE, BLOCK 12, GULSHAN-E-IQBAL KARACHI - PAKISTAN TEL#: 021-34899214  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011082,
+        "name": "QADBROS ENGINEERING PVT LTD",
+        "citycode": "PKLHE",
+        "address": "9-A , LINK RAVI ROAD , BADAMI BAGH LAHORE - 54000 , PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011092,
+        "name": "APPAREL ZONE",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. A-412 &  A-428 SECTOR 6-F MEHRAN TOWN KORANGI INDUSTRIAL AREA KARACHI PAKISTAN. TEL: 0213-5141247  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011101,
+        "name": "UZAIR EXPORT PVT LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 5,6,7,12,13 & 14 SECTOR D-V, PHASE II KEPZ KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011109,
+        "name": "MASTER CHANGAN MOTOTRS LIMTIED",
+        "citycode": "PKKHI",
+        "address": "DSU-40 TO DSU-44 AT DOWNSTREAM INDUSTRIAL ESTATE PORT QASIM, KARACH, PAKSITAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011112,
+        "name": "TAPAL TEA (PRIVATE) LIMITED",
+        "citycode": "PKKHI",
+        "address": "PLOT 40, SECTOR 15, KORANGI INDUSTRIAL AREA,KARACHI 74900, PAKISTAN ,TEL 35063891  FAX.35063890  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011113,
+        "name": "SUNFLOWER INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "PLOT NO 28/1 SECTOR 15, KORANGI INDUSTRIAL AREA KARACHI-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011115,
+        "name": "EUROPA INTERNATIONAL",
+        "citycode": "PKLYP",
+        "address": "P-3, REHMANABAD FAISALABAD-PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011124,
+        "name": "LILO SPORTS",
+        "citycode": "PKSKT",
+        "address": "Awan Chowk Pasrur Road  near Attock petrol Station  51480 Sialkot-Pakistan. ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011128,
+        "name": "SERENE AIR (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "ADJACENT AFU TERMINAL 1 ROAD, JIAP KARACHI POSTAL CODE: 72500 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011134,
+        "name": "QAISONS INDUSTRY ",
+        "citycode": "PKSKT",
+        "address": "HAIDER STREET NO 1 NEKA PURA SIALKOT PAKISTAN NTN 4384174-7  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011136,
+        "name": "ELEPHANTS GROUP",
+        "citycode": "PKKHI",
+        "address": "FEROZ AZIZ & COMPANY 211 BUSINESS ARCADE BLOCK 6 PECHS SHAHRAH - E - FAISAL KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011137,
+        "name": "REIGN PHARMACEUTICALS PCSIR - KLC PVT LTD",
+        "citycode": "PKKHI",
+        "address": "TBIC BUILDING- I, PCSIR LABORATORIES COMPLES, SHAHRAH-E-DR.SALIM -UZ-ZAMAN SIDDIQUI, OFF UNIVERSITY ROAD, KARACHI 75280, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011139,
+        "name": "EROUTEZ SOLUTION PRIVATE LIMITED",
+        "citycode": "PKKHI",
+        "address": "SUITE # 611, 6TH FLOOR, MARINE FAISAL, PLOT# 10-A,  P.E.C.H.S. BLOCK 6, KARACHI, PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011140,
+        "name": "ADIL HASSAN TEXTILES",
+        "citycode": "PKLYP",
+        "address": "P-31,SHOP NO.4 FARE MARKET MONTGOMERY BAZAR FAISALABAD-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011142,
+        "name": "SHIWANI TEXTILE",
+        "citycode": "PKKHI",
+        "address": "PLOT No. B-30/A, SCHEME 33, PHASE-1 SITE-II, SUPER HIGHWAY KARACHI-PAKISTAN.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011145,
+        "name": "GEMCO",
+        "citycode": "PKKHI",
+        "address": "43/4/A, BLOCK-6, P.E.C.H.S, KARACHI-75400, PAKISTAN.  ",
+        "website": null,
+        "infoMail": "import@global-pk.com",
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011154,
+        "name": "HAZBI CHEMICALS",
+        "citycode": "PKKHI",
+        "address": "ROOM NO 12 2ND FLOOR MIAN CHAMBERS SHARAH-E-LIAQUAT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011157,
+        "name": "ESSATEX INDUSTRIES",
+        "citycode": "PKKHI",
+        "address": "C-13-A,  S. I. T. E.  KARACHI,  PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011160,
+        "name": "AL QURESH FABRICS PVT LTD",
+        "citycode": "PKLYP",
+        "address": "P-76/A PUNJAB INDUSTRIAL ESTATE FAISALABAD PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011173,
+        "name": "POKAL INDUSTRIES (PVT) LTD",
+        "citycode": "PKSKT",
+        "address": "9-KM DASKA ROAD ADHA SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011196,
+        "name": "SUGHRAN IMPEX SIALKOT",
+        "citycode": "PKKHI",
+        "address": "BILAL INDUSTRIAL ZONE, 10 KM DASKA ROAD, 61310 SIALKOT PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011199,
+        "name": "PAKISTAN INTERNATIONAL AIRLINES",
+        "citycode": "PKKHI",
+        "address": "QUAID-E-AZAM INTERNATIONAL AIRPORT SUPPLY CHAIN MANAGEMENT DEPARTMENT KARACHI-PAKISTAN ZIP CODE: 75200 TEL:0092-21-99045267  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011209,
+        "name": "SCADA INDUSTRIES (PVT.) LTD.",
+        "citycode": "PKKHI",
+        "address": "A-28, EASTERN INDUSTRIAL ZONE, PORT QASIM BIN QASIM TOWN, MALIR KARACHI, PAKISTAN NTN # 7175072-2 STRN # 3277876120843  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011211,
+        "name": "CROWN TEXTILE",
+        "citycode": "PKKHI",
+        "address": "F-352-A S.I.T.E., KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011212,
+        "name": "WINGS INTERNATIONAL LOGISTICS",
+        "citycode": "PKKHI",
+        "address": "S 1 WESTLAND TRADE CENTER KCHS BLOCK6, 7, 8 SHSHEED E MILLAT TOAD KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011214,
+        "name": "RESALE INTERNATIONAL (PVT) LTD",
+        "citycode": "PKKHI",
+        "address": "PLOT NO. 15, SECTOR B-VI, PHASE 1, EXPORT PROCESSING ZONE, KARACHI - PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011216,
+        "name": "COLGATE PALMOLIVE (PAKISTAN) LTD ",
+        "citycode": "PKKHI",
+        "address": "Lakson Square، 265 Sarwar Shaheed Rd, Civil Lines, Karachi, Karachi City, Sindh 2500  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011218,
+        "name": "SCADA INDUSTRIES (PVT.) LTD",
+        "citycode": "PKKHI",
+        "address": "A-29, EASTERN INDUSTRIAL ZONE, PORT QASIM, BIN QASIM TOWN MALIR KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
+    },
     {
         "code": 51,
         "name": "EUR LOGISTICS SERVICES PAKISTAN PRIVATE LTD",
@@ -3100,7 +14975,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, Commission Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 58,
@@ -3112,7 +14987,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 80,
@@ -3124,7 +14999,19 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 95,
+        "name": "MAHAD INTERNATIONAL",
+        "citycode": "PKKHI",
+        "address": "PLOT NO: 21 SECTOR 12-A NORTH KARACHI \nINDUSTRIAL AREA KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, ",
+        "partytypeid": "Vendor"
     },
     {
         "code": 96,
@@ -3136,7 +15023,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 105,
@@ -3148,7 +15035,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, Commission Agent, Delivery Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 120,
@@ -3160,7 +15047,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 142,
@@ -3172,7 +15059,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, Overseas Agent, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 147,
@@ -3184,7 +15071,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 151,
@@ -3196,7 +15083,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 214,
@@ -3208,7 +15095,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Consignee, Local Vendor, Overseas Agent, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 233,
@@ -3220,7 +15107,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 571,
@@ -3232,7 +15119,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Consignee, Overseas Agent, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 623,
@@ -3244,7 +15131,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 789,
@@ -3256,7 +15143,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 791,
@@ -3268,7 +15155,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 798,
@@ -3280,7 +15167,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Shipper, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 814,
@@ -3292,7 +15179,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Shipper, Local Vendor, Transporter, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 827,
@@ -3304,7 +15191,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 908,
@@ -3316,7 +15203,7 @@ let parties = {
         "strn": 201511103746,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 955,
@@ -3328,7 +15215,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 956,
@@ -3340,7 +15227,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Local Vendor, Commission Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 964,
@@ -3352,7 +15239,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1001,
@@ -3364,7 +15251,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1050,
@@ -3376,7 +15263,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Shipper, Local Vendor, Air Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1062,
@@ -3388,7 +15275,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1119,
@@ -3400,7 +15287,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1212,
@@ -3412,7 +15299,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, ",
         "types": "Consignee, Overseas Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1790,
@@ -3424,7 +15311,7 @@ let parties = {
         "strn": 410420300928,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1797,
@@ -3436,7 +15323,7 @@ let parties = {
         "strn": 3277876117060,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1805,
@@ -3448,7 +15335,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1806,
@@ -3460,7 +15347,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1807,
@@ -3472,7 +15359,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1808,
@@ -3484,7 +15371,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1809,
@@ -3496,7 +15383,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1810,
@@ -3508,7 +15395,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 1812,
@@ -3520,7 +15407,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010124,
@@ -3532,7 +15419,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": "CU-00633",
@@ -3544,7 +15431,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010144,
@@ -3556,7 +15443,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010170,
@@ -3568,7 +15455,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010300,
@@ -3580,7 +15467,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Shipper, Local Vendor, Commission Agent, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010319,
@@ -3592,7 +15479,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010432,
@@ -3604,7 +15491,19 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12010494,
+        "name": "RELIANCE WEAVING MILLS LTD",
+        "citycode": "PKMUX",
+        "address": "2ND FLOOR TRUST PLAZA LMQ ROAD MULTAN PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
     },
     {
         "code": null,
@@ -3616,7 +15515,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, Sea Export, ",
         "types": "Shipper, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010628,
@@ -3628,7 +15527,7 @@ let parties = {
         "strn": null,
         "operations": "Sea Export, ",
         "types": "Consignee, Shipper, Transporter, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010664,
@@ -3640,7 +15539,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Shipper, CHA/CHB, Air Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010743,
@@ -3652,7 +15551,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Consignee, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010769,
@@ -3664,7 +15563,7 @@ let parties = {
         "strn": null,
         "operations": "Air Import, ",
         "types": "Consignee, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12010900,
@@ -3676,7 +15575,7 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Consignee, Local Vendor, Air Line, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
     },
     {
         "code": 12011005,
@@ -3688,7 +15587,31 @@ let parties = {
         "strn": null,
         "operations": "Air Export, ",
         "types": "Consignee, Shipper, Local Vendor, ",
-        "partytypeid": "Client"
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011063,
+        "name": "MERIDIAN SHIPPING PVT LTD",
+        "citycode": "PKKHI",
+        "address": "null  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, Local Vendor, Shipping Line, ",
+        "partytypeid": "Vendor"
+    },
+    {
+        "code": 12011162,
+        "name": "AL-BIJJAR TRADING (FZC)",
+        "citycode": "AESHJ",
+        "address": "Q4-199, P.O BOX. 120160, SHARJAH AIRPORT INTERNATIONAL FREE ZONE, SHARJAH, UNITED ARAB EMIRATES  ",
+        "website": "www.albijjar.ae ",
+        "infoMail": "zaigham@albijjar.ae",
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Consignee, Shipper, ",
+        "partytypeid": "Vendor"
     }
   ],
   "unknown":[],
@@ -3702,8 +15625,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 16,
@@ -3714,8 +15636,7 @@ let parties = {
         "infoMail": "Alyna International <alynainternational@gmail.com>",
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 18,
@@ -3726,8 +15647,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 19,
@@ -3737,9 +15657,8 @@ let parties = {
         "website": null,
         "infoMail": null,
         "strn": null,
-        "operations": "Air Export, Sea Export, Sea Import, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 32,
@@ -3750,8 +15669,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 35,
@@ -3762,8 +15680,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 39,
@@ -3774,8 +15691,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 45,
@@ -3786,8 +15702,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 46,
@@ -3798,8 +15713,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 52,
@@ -3810,8 +15724,7 @@ let parties = {
         "infoMail": "faisalspin@umergroup.com",
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 71,
@@ -3822,8 +15735,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 74,
@@ -3834,8 +15746,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 86,
@@ -3846,20 +15757,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": 95,
-        "name": "MAHAD INTERNATIONAL",
-        "citycode": "PKKHI",
-        "address": "PLOT NO: 21 SECTOR 12-A NORTH KARACHI \nINDUSTRIAL AREA KARACHI  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 108,
@@ -3870,8 +15768,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 114,
@@ -3882,8 +15779,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 119,
@@ -3894,8 +15790,7 @@ let parties = {
         "infoMail": ": 'salman.waheed@anahygiene.com'",
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 126,
@@ -3906,8 +15801,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 131,
@@ -3918,8 +15812,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 133,
@@ -3930,8 +15823,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 152,
@@ -3942,8 +15834,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 175,
@@ -3954,8 +15845,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 177,
@@ -3966,8 +15856,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 304,
@@ -3978,8 +15867,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 306,
@@ -3990,8 +15878,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 307,
@@ -4002,8 +15889,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 308,
@@ -4014,8 +15900,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 310,
@@ -4026,8 +15911,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 311,
@@ -4038,8 +15922,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 312,
@@ -4050,8 +15933,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 314,
@@ -4062,8 +15944,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 316,
@@ -4074,8 +15955,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 317,
@@ -4086,8 +15966,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 319,
@@ -4098,8 +15977,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 320,
@@ -4110,8 +15988,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 322,
@@ -4122,20 +15999,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": 323,
-        "name": "PRIME CARGO",
-        "citycode": "PKKHI",
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 324,
@@ -4146,8 +16010,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 327,
@@ -4158,8 +16021,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 329,
@@ -4170,8 +16032,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 330,
@@ -4182,8 +16043,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 332,
@@ -4194,8 +16054,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 333,
@@ -4206,8 +16065,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 334,
@@ -4218,8 +16076,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 337,
@@ -4230,8 +16087,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 338,
@@ -4242,8 +16098,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 339,
@@ -4254,8 +16109,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 341,
@@ -4266,8 +16120,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 342,
@@ -4278,8 +16131,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 343,
@@ -4290,8 +16142,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 344,
@@ -4302,8 +16153,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 345,
@@ -4314,8 +16164,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 346,
@@ -4326,20 +16175,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 347,
@@ -4350,8 +16186,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 348,
@@ -4362,8 +16197,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 349,
@@ -4374,8 +16208,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 351,
@@ -4386,8 +16219,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 352,
@@ -4398,8 +16230,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 353,
@@ -4410,8 +16241,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 356,
@@ -4422,8 +16252,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 358,
@@ -4434,8 +16263,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 359,
@@ -4446,8 +16274,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 360,
@@ -4458,8 +16285,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 361,
@@ -4470,8 +16296,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 362,
@@ -4482,8 +16307,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 363,
@@ -4494,8 +16318,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 364,
@@ -4506,8 +16329,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 365,
@@ -4518,8 +16340,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 366,
@@ -4530,8 +16351,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 368,
@@ -4542,8 +16362,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 370,
@@ -4554,8 +16373,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 371,
@@ -4566,8 +16384,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 372,
@@ -4578,8 +16395,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 373,
@@ -4590,8 +16406,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 374,
@@ -4602,8 +16417,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 375,
@@ -4614,8 +16428,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 376,
@@ -4626,8 +16439,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 377,
@@ -4638,8 +16450,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 378,
@@ -4650,8 +16461,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 379,
@@ -4662,8 +16472,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 380,
@@ -4674,8 +16483,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 382,
@@ -4686,8 +16494,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 383,
@@ -4698,8 +16505,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, Air Line, "
     },
     {
         "code": 384,
@@ -4710,8 +16516,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 385,
@@ -4722,8 +16527,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 386,
@@ -4734,8 +16538,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 387,
@@ -4746,8 +16549,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 388,
@@ -4758,8 +16560,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 389,
@@ -4770,8 +16571,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 390,
@@ -4782,8 +16582,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 392,
@@ -4794,8 +16593,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 393,
@@ -4806,8 +16604,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 394,
@@ -4818,8 +16615,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 396,
@@ -4830,8 +16626,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 397,
@@ -4842,8 +16637,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 399,
@@ -4854,8 +16648,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 400,
@@ -4866,8 +16659,7 @@ let parties = {
         "infoMail": "kaziz@fascom.com",
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 401,
@@ -4878,8 +16670,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 402,
@@ -4890,8 +16681,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 403,
@@ -4902,8 +16692,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 404,
@@ -4914,8 +16703,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 405,
@@ -4926,8 +16714,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 406,
@@ -4938,8 +16725,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 407,
@@ -4950,8 +16736,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 408,
@@ -4962,8 +16747,7 @@ let parties = {
         "infoMail": "general@cooper.com.pk",
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 410,
@@ -4974,8 +16758,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 411,
@@ -4986,8 +16769,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 412,
@@ -4998,8 +16780,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 413,
@@ -5010,8 +16791,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 414,
@@ -5022,8 +16802,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 416,
@@ -5034,8 +16813,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 417,
@@ -5046,8 +16824,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 418,
@@ -5058,20 +16835,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 419,
@@ -5082,8 +16846,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 420,
@@ -5094,8 +16857,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 421,
@@ -5106,8 +16868,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 422,
@@ -5118,8 +16879,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Local Vendor, Air Line, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, Air Line, "
     },
     {
         "code": 424,
@@ -5130,8 +16890,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 426,
@@ -5142,8 +16901,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 428,
@@ -5154,8 +16912,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 429,
@@ -5166,8 +16923,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 430,
@@ -5178,8 +16934,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 431,
@@ -5190,8 +16945,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 432,
@@ -5202,8 +16956,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 433,
@@ -5214,8 +16967,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 434,
@@ -5226,8 +16978,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 435,
@@ -5238,8 +16989,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 436,
@@ -5250,8 +17000,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 437,
@@ -5262,8 +17011,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 438,
@@ -5274,8 +17022,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 439,
@@ -5286,8 +17033,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 440,
@@ -5298,8 +17044,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 442,
@@ -5310,8 +17055,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 443,
@@ -5322,8 +17066,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 444,
@@ -5334,8 +17077,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 445,
@@ -5346,8 +17088,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 447,
@@ -5358,8 +17099,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 449,
@@ -5370,8 +17110,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, Air Line, "
     },
     {
         "code": 450,
@@ -5382,8 +17121,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 451,
@@ -5394,8 +17132,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 452,
@@ -5406,8 +17143,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 453,
@@ -5418,8 +17154,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 454,
@@ -5430,8 +17165,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 455,
@@ -5442,8 +17176,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 456,
@@ -5454,8 +17187,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 457,
@@ -5466,8 +17198,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 459,
@@ -5478,8 +17209,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 460,
@@ -5490,8 +17220,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 461,
@@ -5502,8 +17231,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 462,
@@ -5514,8 +17242,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 463,
@@ -5526,8 +17253,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 464,
@@ -5538,8 +17264,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 465,
@@ -5550,8 +17275,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 466,
@@ -5562,8 +17286,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 467,
@@ -5574,8 +17297,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 468,
@@ -5586,8 +17308,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 469,
@@ -5598,8 +17319,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 470,
@@ -5610,8 +17330,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 471,
@@ -5622,8 +17341,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 472,
@@ -5634,8 +17352,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 473,
@@ -5646,8 +17363,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 474,
@@ -5658,8 +17374,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 475,
@@ -5670,8 +17385,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 476,
@@ -5682,8 +17396,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 477,
@@ -5694,8 +17407,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 478,
@@ -5706,8 +17418,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 479,
@@ -5718,8 +17429,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 480,
@@ -5730,8 +17440,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 481,
@@ -5742,8 +17451,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 482,
@@ -5754,8 +17462,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 483,
@@ -5766,8 +17473,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 484,
@@ -5778,8 +17484,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 485,
@@ -5790,20 +17495,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 486,
@@ -5814,8 +17506,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 487,
@@ -5826,8 +17517,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 488,
@@ -5838,8 +17528,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 489,
@@ -5850,8 +17539,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 490,
@@ -5862,8 +17550,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 491,
@@ -5874,8 +17561,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 492,
@@ -5886,8 +17572,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 493,
@@ -5898,8 +17583,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 494,
@@ -5910,8 +17594,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 495,
@@ -5922,8 +17605,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 496,
@@ -5934,8 +17616,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 497,
@@ -5946,8 +17627,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 498,
@@ -5958,8 +17638,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 499,
@@ -5970,8 +17649,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 500,
@@ -5982,8 +17660,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 501,
@@ -5994,8 +17671,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 502,
@@ -6006,8 +17682,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 503,
@@ -6018,8 +17693,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 504,
@@ -6030,8 +17704,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 505,
@@ -6042,8 +17715,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 507,
@@ -6054,8 +17726,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 508,
@@ -6066,8 +17737,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 509,
@@ -6078,8 +17748,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 510,
@@ -6090,8 +17759,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 511,
@@ -6102,8 +17770,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 512,
@@ -6114,8 +17781,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 514,
@@ -6126,8 +17792,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 515,
@@ -6138,8 +17803,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 516,
@@ -6150,8 +17814,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 517,
@@ -6162,8 +17825,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 518,
@@ -6174,8 +17836,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 519,
@@ -6186,8 +17847,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 520,
@@ -6198,8 +17858,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 521,
@@ -6210,8 +17869,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 522,
@@ -6222,8 +17880,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 523,
@@ -6234,8 +17891,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, Shipping Line, "
     },
     {
         "code": 524,
@@ -6246,8 +17902,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 525,
@@ -6258,8 +17913,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 526,
@@ -6270,8 +17924,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 527,
@@ -6282,8 +17935,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 528,
@@ -6294,8 +17946,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 529,
@@ -6306,8 +17957,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 531,
@@ -6318,8 +17968,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 532,
@@ -6330,8 +17979,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 533,
@@ -6342,8 +17990,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 534,
@@ -6354,8 +18001,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 535,
@@ -6366,8 +18012,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Local Vendor, Air Line, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, Air Line, "
     },
     {
         "code": 536,
@@ -6378,8 +18023,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 537,
@@ -6390,8 +18034,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 539,
@@ -6402,8 +18045,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 540,
@@ -6414,8 +18056,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 541,
@@ -6426,8 +18067,7 @@ let parties = {
         "infoMail": "cskhi@gaspalcargo.com.pk",
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 542,
@@ -6438,8 +18078,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 543,
@@ -6450,8 +18089,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 544,
@@ -6462,8 +18100,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 545,
@@ -6474,8 +18111,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 546,
@@ -6486,8 +18122,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 547,
@@ -6498,8 +18133,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 548,
@@ -6510,8 +18144,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 549,
@@ -6522,20 +18155,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 550,
@@ -6546,8 +18166,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 551,
@@ -6558,8 +18177,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 552,
@@ -6570,8 +18188,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 553,
@@ -6582,8 +18199,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 554,
@@ -6594,8 +18210,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 555,
@@ -6606,8 +18221,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 556,
@@ -6618,8 +18232,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 557,
@@ -6630,8 +18243,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 558,
@@ -6642,8 +18254,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 561,
@@ -6654,8 +18265,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 562,
@@ -6666,8 +18276,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 564,
@@ -6678,8 +18287,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 565,
@@ -6690,8 +18298,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 567,
@@ -6702,8 +18309,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 568,
@@ -6714,8 +18320,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 569,
@@ -6726,8 +18331,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 570,
@@ -6738,8 +18342,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 572,
@@ -6750,8 +18353,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 573,
@@ -6762,8 +18364,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 574,
@@ -6774,8 +18375,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 575,
@@ -6786,8 +18386,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 576,
@@ -6798,8 +18397,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 577,
@@ -6810,8 +18408,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 579,
@@ -6822,8 +18419,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 580,
@@ -6834,8 +18430,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 581,
@@ -6846,8 +18441,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 582,
@@ -6858,8 +18452,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 583,
@@ -6870,8 +18463,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 584,
@@ -6882,8 +18474,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 585,
@@ -6894,8 +18485,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 587,
@@ -6906,8 +18496,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 588,
@@ -6918,8 +18507,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 589,
@@ -6930,8 +18518,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 590,
@@ -6942,8 +18529,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 591,
@@ -6954,8 +18540,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 592,
@@ -6966,8 +18551,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 593,
@@ -6978,8 +18562,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 594,
@@ -6990,8 +18573,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 595,
@@ -7002,8 +18584,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 596,
@@ -7014,8 +18595,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 597,
@@ -7026,8 +18606,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 598,
@@ -7038,8 +18617,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 600,
@@ -7050,8 +18628,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 601,
@@ -7062,8 +18639,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 602,
@@ -7074,8 +18650,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 603,
@@ -7086,8 +18661,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 604,
@@ -7098,8 +18672,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 605,
@@ -7110,8 +18683,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 606,
@@ -7122,8 +18694,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 607,
@@ -7134,8 +18705,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 608,
@@ -7146,8 +18716,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 609,
@@ -7158,8 +18727,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 610,
@@ -7170,8 +18738,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 611,
@@ -7182,8 +18749,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 613,
@@ -7194,8 +18760,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 614,
@@ -7206,8 +18771,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 617,
@@ -7218,8 +18782,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 618,
@@ -7230,8 +18793,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 619,
@@ -7242,8 +18804,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 620,
@@ -7254,20 +18815,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 621,
@@ -7278,8 +18826,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Forwarder/Coloader, Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Forwarder/Coloader, Local Vendor, Shipping Line, "
     },
     {
         "code": 622,
@@ -7290,8 +18837,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 624,
@@ -7302,8 +18848,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 625,
@@ -7314,8 +18859,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 626,
@@ -7326,8 +18870,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 627,
@@ -7338,8 +18881,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 628,
@@ -7350,8 +18892,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 629,
@@ -7362,8 +18903,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 630,
@@ -7374,8 +18914,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 631,
@@ -7386,8 +18925,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 632,
@@ -7398,8 +18936,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 633,
@@ -7410,8 +18947,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 634,
@@ -7422,8 +18958,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 635,
@@ -7434,8 +18969,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 636,
@@ -7446,8 +18980,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 637,
@@ -7458,8 +18991,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 638,
@@ -7470,8 +19002,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 639,
@@ -7482,8 +19013,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 640,
@@ -7494,8 +19024,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 641,
@@ -7506,8 +19035,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 642,
@@ -7518,20 +19046,18 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 643,
         "name": "GALA A.S",
-        "citycode": "PKKHI",
+        "citycode": null,
         "address": "ZAPADNI 75 797 32 PROSTEJOV CZECH REPUBLIC TEL: 420 582 314 411  ",
         "website": null,
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 644,
@@ -7542,8 +19068,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 645,
@@ -7554,8 +19079,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 646,
@@ -7566,8 +19090,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 647,
@@ -7578,8 +19101,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 648,
@@ -7590,8 +19112,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 649,
@@ -7602,8 +19123,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 650,
@@ -7614,8 +19134,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 651,
@@ -7626,8 +19145,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 652,
@@ -7638,8 +19156,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 653,
@@ -7650,8 +19167,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 654,
@@ -7662,8 +19178,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 655,
@@ -7674,8 +19189,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 656,
@@ -7686,8 +19200,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 657,
@@ -7698,8 +19211,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 658,
@@ -7710,8 +19222,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 659,
@@ -7722,8 +19233,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 660,
@@ -7734,8 +19244,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 661,
@@ -7745,9 +19254,8 @@ let parties = {
         "website": null,
         "infoMail": null,
         "strn": null,
-        "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "operations": "Air Export, Air Import, Sea Export, ",
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 662,
@@ -7758,8 +19266,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 663,
@@ -7770,8 +19277,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 664,
@@ -7782,8 +19288,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 665,
@@ -7794,8 +19299,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 666,
@@ -7806,8 +19310,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 667,
@@ -7818,8 +19321,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 668,
@@ -7830,8 +19332,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 669,
@@ -7842,8 +19343,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 670,
@@ -7854,8 +19354,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 671,
@@ -7866,8 +19365,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 672,
@@ -7878,8 +19376,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 673,
@@ -7890,8 +19387,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 674,
@@ -7902,8 +19398,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 675,
@@ -7914,8 +19409,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 676,
@@ -7926,8 +19420,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 677,
@@ -7938,8 +19431,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 678,
@@ -7950,8 +19442,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 679,
@@ -7962,8 +19453,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 680,
@@ -7974,8 +19464,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 681,
@@ -7986,20 +19475,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 682,
@@ -8010,8 +19486,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 683,
@@ -8022,8 +19497,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 684,
@@ -8034,8 +19508,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 685,
@@ -8046,8 +19519,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 686,
@@ -8058,8 +19530,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 687,
@@ -8070,8 +19541,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 688,
@@ -8082,8 +19552,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 689,
@@ -8094,8 +19563,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 690,
@@ -8106,8 +19574,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 693,
@@ -8118,8 +19585,7 @@ let parties = {
         "infoMail": "zaidi@aas.net.pk",
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 697,
@@ -8130,8 +19596,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 702,
@@ -8142,8 +19607,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 705,
@@ -8154,8 +19618,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 707,
@@ -8166,8 +19629,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 708,
@@ -8178,8 +19640,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 709,
@@ -8190,8 +19651,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 710,
@@ -8202,8 +19662,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 711,
@@ -8214,8 +19673,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 713,
@@ -8226,8 +19684,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 716,
@@ -8238,8 +19695,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 719,
@@ -8250,8 +19706,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 720,
@@ -8262,8 +19717,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 732,
@@ -8274,8 +19728,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 735,
@@ -8286,8 +19739,7 @@ let parties = {
         "infoMail": "shamauoon@mrindustries.pk",
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 748,
@@ -8298,8 +19750,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 753,
@@ -8310,8 +19761,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 766,
@@ -8322,8 +19772,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 790,
@@ -8334,8 +19783,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 795,
@@ -8346,8 +19794,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 800,
@@ -8358,8 +19805,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 807,
@@ -8370,8 +19816,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 813,
@@ -8382,8 +19827,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 820,
@@ -8394,8 +19838,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 828,
@@ -8406,8 +19849,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 829,
@@ -8418,8 +19860,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 830,
@@ -8430,8 +19871,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 839,
@@ -8442,8 +19882,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 842,
@@ -8454,8 +19893,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 846,
@@ -8466,8 +19904,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 853,
@@ -8478,8 +19915,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 854,
@@ -8490,8 +19926,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 857,
@@ -8502,8 +19937,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 859,
@@ -8514,8 +19948,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 867,
@@ -8526,8 +19959,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 875,
@@ -8538,8 +19970,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 878,
@@ -8550,8 +19981,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 886,
@@ -8562,8 +19992,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 897,
@@ -8574,8 +20003,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 898,
@@ -8586,8 +20014,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 923,
@@ -8598,8 +20025,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 928,
@@ -8610,8 +20036,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 931,
@@ -8622,8 +20047,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 935,
@@ -8634,8 +20058,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 940,
@@ -8646,8 +20069,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 943,
@@ -8658,8 +20080,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 949,
@@ -8670,8 +20091,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 957,
@@ -8682,8 +20102,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 965,
@@ -8694,8 +20113,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 968,
@@ -8706,8 +20124,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 973,
@@ -8718,20 +20135,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 975,
@@ -8742,8 +20146,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 984,
@@ -8754,8 +20157,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 985,
@@ -8766,8 +20168,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 987,
@@ -8778,8 +20179,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 996,
@@ -8790,8 +20190,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 998,
@@ -8802,8 +20201,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1006,
@@ -8814,8 +20212,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1023,
@@ -8826,8 +20223,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1027,
@@ -8838,8 +20234,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1033,
@@ -8850,8 +20245,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1037,
@@ -8862,8 +20256,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1038,
@@ -8874,8 +20267,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1057,
@@ -8886,8 +20278,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1066,
@@ -8898,8 +20289,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1073,
@@ -8910,8 +20300,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1080,
@@ -8922,8 +20311,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1082,
@@ -8933,9 +20321,8 @@ let parties = {
         "website": null,
         "infoMail": null,
         "strn": null,
-        "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "operations": "Air Export, Sea Export, Sea Import, ",
+        "types": "Consignee, "
     },
     {
         "code": 1084,
@@ -8946,8 +20333,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1088,
@@ -8958,8 +20344,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1105,
@@ -8970,8 +20355,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1124,
@@ -8982,8 +20366,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1126,
@@ -8994,8 +20377,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 1128,
@@ -9006,8 +20388,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 1129,
@@ -9018,8 +20399,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1136,
@@ -9030,8 +20410,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1139,
@@ -9042,8 +20421,7 @@ let parties = {
         "infoMail": "imranffc.skt@gmail.com",
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1140,
@@ -9054,8 +20432,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1141,
@@ -9066,8 +20443,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1143,
@@ -9078,8 +20454,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1366,
@@ -9090,8 +20465,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1367,
@@ -9102,8 +20476,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1368,
@@ -9114,8 +20487,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1369,
@@ -9126,8 +20498,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1370,
@@ -9138,8 +20509,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1371,
@@ -9150,8 +20520,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1372,
@@ -9162,8 +20531,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1373,
@@ -9174,8 +20542,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1374,
@@ -9186,8 +20553,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1376,
@@ -9198,8 +20564,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1377,
@@ -9210,8 +20575,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1378,
@@ -9222,8 +20586,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1379,
@@ -9234,8 +20597,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1380,
@@ -9246,8 +20608,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1381,
@@ -9258,8 +20619,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1384,
@@ -9270,8 +20630,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1385,
@@ -9282,8 +20641,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1386,
@@ -9294,8 +20652,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1387,
@@ -9306,8 +20663,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1388,
@@ -9318,8 +20674,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1389,
@@ -9330,8 +20685,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1390,
@@ -9342,8 +20696,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1392,
@@ -9354,8 +20707,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1393,
@@ -9366,8 +20718,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1394,
@@ -9378,8 +20729,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1395,
@@ -9390,8 +20740,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1397,
@@ -9402,8 +20751,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1398,
@@ -9414,8 +20762,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Local Vendor, CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, CHA/CHB, "
     },
     {
         "code": 1399,
@@ -9426,8 +20773,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 1400,
@@ -9438,8 +20784,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1401,
@@ -9450,20 +20795,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 1402,
@@ -9474,8 +20806,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1404,
@@ -9486,8 +20817,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1405,
@@ -9498,8 +20828,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1406,
@@ -9510,8 +20839,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1407,
@@ -9522,8 +20850,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1408,
@@ -9534,8 +20861,7 @@ let parties = {
         "infoMail": "customerservices@quick-fm.com",
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1409,
@@ -9546,8 +20872,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1410,
@@ -9558,8 +20883,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1411,
@@ -9570,8 +20894,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 1412,
@@ -9582,8 +20905,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1413,
@@ -9594,8 +20916,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1414,
@@ -9606,8 +20927,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1415,
@@ -9618,8 +20938,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1416,
@@ -9630,8 +20949,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1417,
@@ -9642,8 +20960,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1418,
@@ -9654,8 +20971,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1419,
@@ -9666,8 +20982,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1420,
@@ -9678,8 +20993,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1421,
@@ -9690,8 +21004,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1422,
@@ -9702,8 +21015,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1423,
@@ -9714,8 +21026,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1424,
@@ -9726,8 +21037,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1425,
@@ -9738,8 +21048,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1426,
@@ -9750,8 +21059,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1427,
@@ -9762,8 +21070,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1428,
@@ -9774,8 +21081,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1429,
@@ -9786,8 +21092,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1430,
@@ -9798,8 +21103,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1431,
@@ -9810,8 +21114,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1432,
@@ -9822,8 +21125,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1433,
@@ -9834,8 +21136,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1434,
@@ -9846,8 +21147,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1435,
@@ -9858,8 +21158,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1436,
@@ -9870,8 +21169,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1437,
@@ -9882,8 +21180,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1438,
@@ -9894,8 +21191,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1439,
@@ -9906,8 +21202,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1440,
@@ -9918,8 +21213,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1441,
@@ -9930,8 +21224,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1442,
@@ -9942,8 +21235,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1443,
@@ -9954,8 +21246,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1444,
@@ -9966,8 +21257,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1445,
@@ -9978,8 +21268,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1446,
@@ -9990,8 +21279,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1447,
@@ -10002,8 +21290,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1448,
@@ -10014,8 +21301,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1449,
@@ -10026,8 +21312,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1450,
@@ -10038,8 +21323,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1451,
@@ -10050,8 +21334,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1452,
@@ -10062,8 +21345,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1453,
@@ -10074,8 +21356,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1454,
@@ -10086,8 +21367,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1455,
@@ -10098,8 +21378,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1456,
@@ -10110,8 +21389,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1457,
@@ -10122,8 +21400,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1458,
@@ -10134,8 +21411,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1459,
@@ -10146,8 +21422,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1460,
@@ -10158,8 +21433,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1461,
@@ -10170,8 +21444,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1462,
@@ -10182,20 +21455,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1463,
@@ -10206,8 +21466,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1464,
@@ -10218,8 +21477,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1465,
@@ -10230,8 +21488,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1466,
@@ -10242,8 +21499,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1467,
@@ -10254,8 +21510,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1468,
@@ -10266,8 +21521,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1469,
@@ -10278,8 +21532,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1470,
@@ -10290,8 +21543,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1471,
@@ -10302,8 +21554,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1472,
@@ -10314,8 +21565,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1473,
@@ -10326,8 +21576,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1474,
@@ -10338,8 +21587,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1475,
@@ -10350,8 +21598,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1476,
@@ -10362,8 +21609,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1477,
@@ -10374,8 +21620,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1478,
@@ -10386,8 +21631,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1479,
@@ -10398,8 +21642,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1480,
@@ -10410,8 +21653,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1481,
@@ -10422,8 +21664,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1482,
@@ -10434,8 +21675,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1483,
@@ -10446,8 +21686,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1484,
@@ -10458,8 +21697,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1485,
@@ -10470,8 +21708,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1486,
@@ -10482,8 +21719,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1487,
@@ -10494,8 +21730,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1488,
@@ -10506,8 +21741,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1489,
@@ -10518,8 +21752,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1490,
@@ -10530,8 +21763,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1491,
@@ -10542,8 +21774,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, Sea Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1492,
@@ -10554,8 +21785,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1493,
@@ -10566,8 +21796,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1494,
@@ -10578,8 +21807,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1495,
@@ -10590,8 +21818,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1496,
@@ -10602,8 +21829,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1497,
@@ -10614,8 +21840,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1498,
@@ -10626,8 +21851,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1499,
@@ -10638,8 +21862,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1500,
@@ -10650,8 +21873,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1501,
@@ -10662,8 +21884,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1502,
@@ -10674,8 +21895,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1503,
@@ -10686,8 +21906,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1504,
@@ -10698,8 +21917,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1505,
@@ -10710,8 +21928,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1506,
@@ -10722,8 +21939,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1507,
@@ -10734,8 +21950,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1508,
@@ -10746,8 +21961,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1509,
@@ -10758,8 +21972,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1510,
@@ -10770,8 +21983,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1511,
@@ -10782,8 +21994,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1512,
@@ -10794,8 +22005,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1513,
@@ -10806,8 +22016,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1514,
@@ -10818,8 +22027,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1515,
@@ -10830,8 +22038,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1516,
@@ -10842,8 +22049,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1517,
@@ -10854,8 +22060,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1518,
@@ -10866,8 +22071,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1519,
@@ -10878,8 +22082,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1520,
@@ -10890,8 +22093,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1521,
@@ -10902,8 +22104,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1522,
@@ -10914,20 +22115,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1523,
@@ -10938,8 +22126,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1524,
@@ -10950,8 +22137,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1525,
@@ -10962,8 +22148,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1526,
@@ -10974,8 +22159,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1527,
@@ -10986,8 +22170,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1528,
@@ -10998,8 +22181,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1529,
@@ -11010,8 +22192,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1530,
@@ -11022,8 +22203,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1531,
@@ -11034,8 +22214,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1532,
@@ -11046,8 +22225,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1533,
@@ -11058,8 +22236,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1534,
@@ -11070,8 +22247,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1535,
@@ -11082,8 +22258,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1536,
@@ -11094,8 +22269,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1537,
@@ -11106,8 +22280,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1538,
@@ -11118,8 +22291,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1539,
@@ -11130,8 +22302,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1540,
@@ -11142,8 +22313,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1541,
@@ -11154,8 +22324,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1542,
@@ -11166,8 +22335,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1543,
@@ -11178,8 +22346,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1544,
@@ -11190,8 +22357,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1545,
@@ -11202,8 +22368,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1546,
@@ -11214,8 +22379,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1547,
@@ -11226,8 +22390,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1548,
@@ -11238,8 +22401,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1549,
@@ -11250,8 +22412,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1550,
@@ -11262,8 +22423,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1551,
@@ -11274,8 +22434,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1552,
@@ -11286,8 +22445,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1553,
@@ -11298,8 +22456,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1554,
@@ -11310,8 +22467,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1555,
@@ -11322,8 +22478,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1556,
@@ -11334,8 +22489,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1557,
@@ -11346,8 +22500,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1558,
@@ -11358,8 +22511,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1559,
@@ -11370,8 +22522,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1560,
@@ -11382,8 +22533,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1561,
@@ -11394,8 +22544,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1562,
@@ -11406,8 +22555,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1563,
@@ -11418,8 +22566,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1564,
@@ -11430,8 +22577,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1565,
@@ -11442,8 +22588,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1566,
@@ -11454,8 +22599,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1567,
@@ -11466,8 +22610,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1568,
@@ -11478,8 +22621,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1569,
@@ -11490,8 +22632,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1570,
@@ -11502,8 +22643,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1571,
@@ -11514,8 +22654,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1572,
@@ -11526,8 +22665,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1573,
@@ -11538,8 +22676,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1574,
@@ -11550,8 +22687,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1575,
@@ -11562,8 +22698,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1576,
@@ -11574,8 +22709,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1577,
@@ -11586,8 +22720,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1578,
@@ -11598,8 +22731,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1579,
@@ -11610,8 +22742,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1580,
@@ -11622,8 +22753,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1581,
@@ -11634,8 +22764,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1582,
@@ -11646,20 +22775,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1583,
@@ -11670,8 +22786,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1584,
@@ -11682,8 +22797,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1585,
@@ -11694,8 +22808,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1586,
@@ -11706,8 +22819,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1587,
@@ -11718,8 +22830,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1588,
@@ -11730,8 +22841,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1589,
@@ -11742,8 +22852,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1590,
@@ -11754,8 +22863,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1591,
@@ -11766,8 +22874,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1592,
@@ -11778,8 +22885,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1593,
@@ -11790,8 +22896,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1594,
@@ -11802,8 +22907,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1595,
@@ -11814,8 +22918,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1596,
@@ -11826,8 +22929,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1597,
@@ -11838,8 +22940,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1598,
@@ -11850,8 +22951,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1599,
@@ -11862,8 +22962,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1600,
@@ -11874,8 +22973,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1601,
@@ -11886,8 +22984,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1602,
@@ -11898,8 +22995,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1603,
@@ -11910,8 +23006,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1604,
@@ -11922,8 +23017,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1605,
@@ -11934,8 +23028,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1606,
@@ -11946,8 +23039,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1607,
@@ -11958,8 +23050,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1608,
@@ -11970,8 +23061,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1609,
@@ -11982,8 +23072,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1610,
@@ -11994,8 +23083,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1611,
@@ -12006,8 +23094,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1612,
@@ -12018,8 +23105,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1613,
@@ -12030,8 +23116,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1614,
@@ -12042,8 +23127,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1615,
@@ -12054,8 +23138,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1616,
@@ -12066,8 +23149,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1617,
@@ -12078,8 +23160,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1618,
@@ -12090,8 +23171,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1619,
@@ -12102,8 +23182,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1620,
@@ -12114,8 +23193,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1621,
@@ -12126,8 +23204,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1622,
@@ -12138,8 +23215,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1623,
@@ -12150,8 +23226,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1624,
@@ -12162,8 +23237,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1625,
@@ -12174,8 +23248,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1626,
@@ -12186,8 +23259,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1627,
@@ -12198,8 +23270,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1628,
@@ -12210,8 +23281,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1629,
@@ -12222,8 +23292,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1630,
@@ -12234,8 +23303,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1631,
@@ -12246,8 +23314,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1632,
@@ -12258,8 +23325,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1633,
@@ -12270,8 +23336,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1634,
@@ -12282,8 +23347,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1635,
@@ -12294,8 +23358,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1636,
@@ -12306,8 +23369,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1637,
@@ -12318,8 +23380,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1638,
@@ -12330,8 +23391,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1639,
@@ -12342,8 +23402,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1640,
@@ -12354,8 +23413,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1641,
@@ -12366,8 +23424,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1642,
@@ -12378,20 +23435,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1643,
@@ -12402,8 +23446,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1644,
@@ -12414,8 +23457,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1645,
@@ -12426,8 +23468,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1646,
@@ -12438,8 +23479,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1647,
@@ -12450,8 +23490,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1648,
@@ -12462,8 +23501,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1649,
@@ -12474,8 +23512,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1650,
@@ -12486,8 +23523,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1651,
@@ -12498,8 +23534,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1652,
@@ -12510,8 +23545,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1653,
@@ -12522,8 +23556,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1654,
@@ -12534,8 +23567,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1655,
@@ -12546,8 +23578,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1656,
@@ -12558,8 +23589,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1657,
@@ -12570,8 +23600,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1658,
@@ -12582,8 +23611,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1659,
@@ -12594,8 +23622,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1660,
@@ -12606,8 +23633,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1661,
@@ -12618,8 +23644,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1662,
@@ -12630,8 +23655,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1663,
@@ -12642,8 +23666,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1664,
@@ -12654,8 +23677,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1665,
@@ -12666,8 +23688,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1666,
@@ -12678,8 +23699,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1667,
@@ -12690,8 +23710,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1668,
@@ -12702,8 +23721,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1669,
@@ -12714,8 +23732,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1670,
@@ -12726,8 +23743,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1671,
@@ -12738,8 +23754,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1672,
@@ -12750,8 +23765,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1673,
@@ -12762,8 +23776,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1674,
@@ -12774,8 +23787,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1675,
@@ -12786,8 +23798,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1676,
@@ -12798,8 +23809,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1677,
@@ -12810,8 +23820,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1678,
@@ -12822,8 +23831,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1679,
@@ -12834,8 +23842,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1680,
@@ -12846,8 +23853,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1681,
@@ -12858,8 +23864,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1682,
@@ -12870,8 +23875,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1683,
@@ -12882,8 +23886,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1684,
@@ -12894,8 +23897,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1685,
@@ -12906,8 +23908,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1686,
@@ -12918,8 +23919,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1687,
@@ -12930,8 +23930,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1688,
@@ -12942,8 +23941,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1689,
@@ -12954,8 +23952,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1690,
@@ -12966,8 +23963,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1691,
@@ -12978,8 +23974,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1692,
@@ -12990,8 +23985,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1693,
@@ -13002,8 +23996,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1694,
@@ -13014,8 +24007,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1695,
@@ -13026,8 +24018,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1696,
@@ -13038,8 +24029,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1697,
@@ -13050,8 +24040,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1698,
@@ -13062,8 +24051,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1699,
@@ -13074,8 +24062,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1700,
@@ -13086,8 +24073,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1701,
@@ -13098,8 +24084,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1702,
@@ -13110,20 +24095,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1703,
@@ -13134,8 +24106,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1704,
@@ -13146,8 +24117,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1705,
@@ -13158,8 +24128,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1706,
@@ -13170,8 +24139,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1707,
@@ -13182,8 +24150,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1708,
@@ -13194,8 +24161,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1709,
@@ -13206,8 +24172,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1710,
@@ -13218,8 +24183,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1711,
@@ -13230,8 +24194,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1712,
@@ -13242,8 +24205,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1713,
@@ -13254,8 +24216,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1714,
@@ -13266,8 +24227,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1715,
@@ -13278,8 +24238,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1716,
@@ -13290,8 +24249,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1717,
@@ -13302,8 +24260,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1718,
@@ -13314,8 +24271,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1719,
@@ -13326,8 +24282,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1720,
@@ -13338,8 +24293,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1721,
@@ -13350,8 +24304,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1722,
@@ -13362,8 +24315,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1723,
@@ -13374,8 +24326,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1724,
@@ -13386,8 +24337,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1725,
@@ -13398,8 +24348,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1726,
@@ -13410,8 +24359,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1727,
@@ -13422,8 +24370,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1728,
@@ -13434,8 +24381,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1729,
@@ -13446,8 +24392,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1730,
@@ -13458,8 +24403,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1731,
@@ -13470,8 +24414,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1732,
@@ -13482,8 +24425,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1733,
@@ -13494,8 +24436,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1734,
@@ -13506,8 +24447,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1735,
@@ -13518,8 +24458,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1736,
@@ -13530,8 +24469,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1737,
@@ -13542,8 +24480,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1738,
@@ -13554,8 +24491,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1739,
@@ -13566,8 +24502,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1740,
@@ -13578,8 +24513,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1741,
@@ -13590,8 +24524,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1742,
@@ -13602,8 +24535,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1743,
@@ -13614,8 +24546,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1744,
@@ -13626,8 +24557,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1745,
@@ -13638,8 +24568,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1746,
@@ -13650,8 +24579,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1747,
@@ -13662,8 +24590,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1748,
@@ -13674,8 +24601,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1749,
@@ -13686,8 +24612,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1750,
@@ -13698,8 +24623,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1751,
@@ -13710,8 +24634,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 1752,
@@ -13722,8 +24645,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1753,
@@ -13734,8 +24656,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1754,
@@ -13746,8 +24667,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1756,
@@ -13758,8 +24678,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1757,
@@ -13770,8 +24689,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 1758,
@@ -13782,8 +24700,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1759,
@@ -13794,8 +24711,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1760,
@@ -13806,8 +24722,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1762,
@@ -13818,8 +24733,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 1763,
@@ -13830,8 +24744,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1764,
@@ -13842,20 +24755,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1765,
@@ -13866,8 +24766,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 1766,
@@ -13878,8 +24777,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1767,
@@ -13890,8 +24788,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 1768,
@@ -13902,8 +24799,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1770,
@@ -13914,8 +24810,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1771,
@@ -13926,8 +24821,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1775,
@@ -13938,8 +24832,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 1777,
@@ -13950,8 +24843,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1778,
@@ -13962,8 +24854,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 1780,
@@ -13974,8 +24865,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 1781,
@@ -13986,8 +24876,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1782,
@@ -13998,8 +24887,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1783,
@@ -14010,8 +24898,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1784,
@@ -14022,8 +24909,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1786,
@@ -14034,8 +24920,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1787,
@@ -14046,8 +24931,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1788,
@@ -14058,8 +24942,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1789,
@@ -14070,8 +24953,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1792,
@@ -14082,8 +24964,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 1795,
@@ -14094,8 +24975,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1801,
@@ -14106,8 +24986,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 1803,
@@ -14118,8 +24997,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010123,
@@ -14130,8 +25008,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010125,
@@ -14142,8 +25019,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010126,
@@ -14154,8 +25030,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010127,
@@ -14166,8 +25041,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010129,
@@ -14178,8 +25052,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010133,
@@ -14190,8 +25063,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010135,
@@ -14202,8 +25074,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010136,
@@ -14214,8 +25085,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010137,
@@ -14226,8 +25096,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010138,
@@ -14238,8 +25107,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010140,
@@ -14250,8 +25118,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010141,
@@ -14262,8 +25129,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010142,
@@ -14274,8 +25140,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010143,
@@ -14286,8 +25151,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010145,
@@ -14298,8 +25162,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010146,
@@ -14310,8 +25173,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010147,
@@ -14322,8 +25184,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010148,
@@ -14334,8 +25195,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010149,
@@ -14346,8 +25206,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010150,
@@ -14358,8 +25217,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010152,
@@ -14370,8 +25228,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010153,
@@ -14382,8 +25239,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010154,
@@ -14394,8 +25250,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010155,
@@ -14406,8 +25261,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010156,
@@ -14418,8 +25272,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010157,
@@ -14430,8 +25283,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010158,
@@ -14442,8 +25294,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010159,
@@ -14454,8 +25305,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010160,
@@ -14466,8 +25316,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010162,
@@ -14478,8 +25327,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010164,
@@ -14490,8 +25338,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010166,
@@ -14502,8 +25349,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010167,
@@ -14514,8 +25360,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, Sea Export, Sea Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010168,
@@ -14526,8 +25371,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010169,
@@ -14538,8 +25382,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010171,
@@ -14550,8 +25393,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010172,
@@ -14562,8 +25404,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010173,
@@ -14574,20 +25415,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010175,
@@ -14598,8 +25426,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010177,
@@ -14610,8 +25437,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010178,
@@ -14622,8 +25448,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010183,
@@ -14634,8 +25459,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010184,
@@ -14646,8 +25470,7 @@ let parties = {
         "infoMail": "Jason@bjhengrui.cn",
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010185,
@@ -14658,8 +25481,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010187,
@@ -14670,8 +25492,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010189,
@@ -14682,8 +25503,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010190,
@@ -14694,8 +25514,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010191,
@@ -14706,8 +25525,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010192,
@@ -14718,8 +25536,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010193,
@@ -14730,8 +25547,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010196,
@@ -14742,8 +25558,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010197,
@@ -14754,8 +25569,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010199,
@@ -14766,8 +25580,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010201,
@@ -14778,8 +25591,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010202,
@@ -14790,8 +25602,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010204,
@@ -14802,8 +25613,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010205,
@@ -14814,8 +25624,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010206,
@@ -14826,8 +25635,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010207,
@@ -14838,8 +25646,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010208,
@@ -14850,8 +25657,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010209,
@@ -14862,8 +25668,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010210,
@@ -14874,8 +25679,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010211,
@@ -14886,8 +25690,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010212,
@@ -14898,8 +25701,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010216,
@@ -14910,8 +25712,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010218,
@@ -14922,8 +25723,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010220,
@@ -14934,8 +25734,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010221,
@@ -14946,8 +25745,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010222,
@@ -14958,8 +25756,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010223,
@@ -14970,8 +25767,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010224,
@@ -14982,8 +25778,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010225,
@@ -14994,8 +25789,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010226,
@@ -15006,8 +25800,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010227,
@@ -15018,8 +25811,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010229,
@@ -15030,8 +25822,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010230,
@@ -15042,8 +25833,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010233,
@@ -15054,8 +25844,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010235,
@@ -15066,8 +25855,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010236,
@@ -15078,8 +25866,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010241,
@@ -15090,8 +25877,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010243,
@@ -15102,8 +25888,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010245,
@@ -15114,8 +25899,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010249,
@@ -15126,8 +25910,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010250,
@@ -15138,8 +25921,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010252,
@@ -15150,8 +25932,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010253,
@@ -15162,8 +25943,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010254,
@@ -15174,8 +25954,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010255,
@@ -15186,8 +25965,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010256,
@@ -15198,8 +25976,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010258,
@@ -15210,8 +25987,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010259,
@@ -15222,8 +25998,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010261,
@@ -15234,8 +26009,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010262,
@@ -15246,8 +26020,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010263,
@@ -15258,8 +26031,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010264,
@@ -15270,8 +26042,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010265,
@@ -15282,8 +26053,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010266,
@@ -15294,8 +26064,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010267,
@@ -15306,20 +26075,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010268,
@@ -15330,8 +26086,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010269,
@@ -15342,8 +26097,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010270,
@@ -15354,8 +26108,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010271,
@@ -15366,8 +26119,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010272,
@@ -15378,8 +26130,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010274,
@@ -15390,8 +26141,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010275,
@@ -15402,8 +26152,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010276,
@@ -15414,8 +26163,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010277,
@@ -15426,8 +26174,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Local Vendor, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, "
     },
     {
         "code": 12010279,
@@ -15438,8 +26185,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Air Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010280,
@@ -15450,8 +26196,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010282,
@@ -15462,8 +26207,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010283,
@@ -15474,8 +26218,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Import, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010284,
@@ -15486,8 +26229,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010285,
@@ -15498,8 +26240,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010286,
@@ -15510,8 +26251,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010287,
@@ -15522,8 +26262,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010288,
@@ -15534,8 +26273,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010289,
@@ -15546,8 +26284,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010290,
@@ -15558,8 +26295,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010291,
@@ -15570,8 +26306,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010292,
@@ -15582,8 +26317,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010295,
@@ -15594,8 +26328,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010296,
@@ -15606,8 +26339,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010298,
@@ -15618,8 +26350,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010303,
@@ -15630,8 +26361,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010305,
@@ -15642,8 +26372,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010306,
@@ -15654,8 +26383,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010308,
@@ -15666,8 +26394,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010309,
@@ -15678,8 +26405,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010310,
@@ -15690,8 +26416,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010311,
@@ -15702,8 +26427,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010312,
@@ -15714,8 +26438,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010314,
@@ -15726,8 +26449,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010318,
@@ -15738,8 +26460,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010320,
@@ -15750,8 +26471,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010321,
@@ -15762,8 +26482,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010322,
@@ -15774,8 +26493,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010323,
@@ -15786,8 +26504,7 @@ let parties = {
         "infoMail": "ANDREAS.LINDEN@KRAFTPOWERCON.COM",
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010327,
@@ -15798,8 +26515,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010328,
@@ -15810,8 +26526,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010329,
@@ -15822,8 +26537,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010330,
@@ -15834,8 +26548,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010331,
@@ -15846,8 +26559,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010335,
@@ -15858,8 +26570,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010337,
@@ -15870,8 +26581,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010338,
@@ -15882,8 +26592,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010341,
@@ -15894,8 +26603,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010342,
@@ -15906,8 +26614,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010343,
@@ -15918,8 +26625,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010344,
@@ -15930,8 +26636,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010345,
@@ -15942,8 +26647,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010347,
@@ -15954,8 +26658,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010348,
@@ -15966,8 +26669,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010349,
@@ -15978,8 +26680,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010350,
@@ -15990,8 +26691,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010352,
@@ -16002,8 +26702,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010353,
@@ -16014,8 +26713,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010354,
@@ -16026,8 +26724,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010357,
@@ -16038,20 +26735,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010360,
@@ -16062,8 +26746,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010361,
@@ -16074,8 +26757,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010362,
@@ -16086,8 +26768,7 @@ let parties = {
         "infoMail": "info@seaworld.com.pk",
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010363,
@@ -16098,8 +26779,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010364,
@@ -16110,8 +26790,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010365,
@@ -16122,8 +26801,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010366,
@@ -16134,8 +26812,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010367,
@@ -16146,8 +26823,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010369,
@@ -16158,8 +26834,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010370,
@@ -16170,8 +26845,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010371,
@@ -16182,8 +26856,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010372,
@@ -16194,8 +26867,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010373,
@@ -16206,8 +26878,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010374,
@@ -16218,8 +26889,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010375,
@@ -16230,8 +26900,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010377,
@@ -16242,8 +26911,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010378,
@@ -16254,8 +26922,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010379,
@@ -16266,8 +26933,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010380,
@@ -16278,8 +26944,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010381,
@@ -16290,8 +26955,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010382,
@@ -16302,8 +26966,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010383,
@@ -16314,8 +26977,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010384,
@@ -16326,8 +26988,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010385,
@@ -16338,8 +26999,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010386,
@@ -16350,8 +27010,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010387,
@@ -16362,8 +27021,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010389,
@@ -16374,8 +27032,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010390,
@@ -16386,8 +27043,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010392,
@@ -16398,8 +27054,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010393,
@@ -16410,8 +27065,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010395,
@@ -16422,8 +27076,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010396,
@@ -16434,8 +27087,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010399,
@@ -16446,8 +27098,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010401,
@@ -16458,8 +27109,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010402,
@@ -16470,8 +27120,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010403,
@@ -16482,8 +27131,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010404,
@@ -16494,8 +27142,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010407,
@@ -16506,8 +27153,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010408,
@@ -16518,8 +27164,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010409,
@@ -16530,8 +27175,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010410,
@@ -16542,8 +27186,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010412,
@@ -16554,8 +27197,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010413,
@@ -16566,8 +27208,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010414,
@@ -16578,8 +27219,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010416,
@@ -16590,8 +27230,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010417,
@@ -16602,8 +27241,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010420,
@@ -16614,8 +27252,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010422,
@@ -16626,8 +27263,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010423,
@@ -16638,8 +27274,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010425,
@@ -16650,8 +27285,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010427,
@@ -16662,8 +27296,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010428,
@@ -16674,8 +27307,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010430,
@@ -16686,8 +27318,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010431,
@@ -16698,8 +27329,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010434,
@@ -16710,8 +27340,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010435,
@@ -16722,8 +27351,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12010437,
@@ -16734,8 +27362,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010438,
@@ -16746,8 +27373,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010440,
@@ -16758,8 +27384,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010443,
@@ -16770,20 +27395,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010445,
@@ -16794,8 +27406,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010447,
@@ -16806,8 +27417,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010448,
@@ -16818,8 +27428,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010449,
@@ -16830,8 +27439,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010450,
@@ -16842,8 +27450,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010451,
@@ -16854,8 +27461,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010452,
@@ -16866,8 +27472,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010453,
@@ -16878,8 +27483,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010455,
@@ -16890,8 +27494,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010458,
@@ -16902,8 +27505,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010459,
@@ -16914,8 +27516,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010461,
@@ -16926,8 +27527,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010462,
@@ -16938,8 +27538,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010463,
@@ -16950,8 +27549,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010464,
@@ -16962,8 +27560,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010465,
@@ -16974,8 +27571,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010467,
@@ -16986,8 +27582,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010468,
@@ -16998,8 +27593,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010470,
@@ -17010,8 +27604,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010472,
@@ -17022,8 +27615,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010473,
@@ -17034,8 +27626,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010474,
@@ -17046,8 +27637,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010475,
@@ -17058,8 +27648,7 @@ let parties = {
         "infoMail": "sinomayz@gmail.com",
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010476,
@@ -17070,8 +27659,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010478,
@@ -17082,8 +27670,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010480,
@@ -17094,8 +27681,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010483,
@@ -17106,8 +27692,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010485,
@@ -17118,8 +27703,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010487,
@@ -17130,8 +27714,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010488,
@@ -17142,8 +27725,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010489,
@@ -17154,8 +27736,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010490,
@@ -17166,8 +27747,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010491,
@@ -17178,8 +27758,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010492,
@@ -17190,8 +27769,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010493,
@@ -17202,20 +27780,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": 12010494,
-        "name": "RELIANCE WEAVING MILLS LTD",
-        "citycode": null,
-        "address": "2ND FLOOR TRUST PLAZA LMQ ROAD MULTAN PAKISTAN  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010495,
@@ -17226,8 +27791,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010496,
@@ -17238,8 +27802,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010498,
@@ -17250,8 +27813,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010499,
@@ -17262,8 +27824,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010500,
@@ -17274,8 +27835,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010501,
@@ -17286,8 +27846,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010502,
@@ -17298,8 +27857,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010503,
@@ -17310,8 +27868,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010504,
@@ -17322,8 +27879,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010505,
@@ -17334,8 +27890,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010506,
@@ -17346,8 +27901,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010507,
@@ -17358,8 +27912,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010509,
@@ -17370,8 +27923,7 @@ let parties = {
         "infoMail": "ME@EURO-ART.CO.UK",
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010510,
@@ -17382,8 +27934,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010511,
@@ -17394,8 +27945,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010512,
@@ -17406,8 +27956,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010513,
@@ -17418,8 +27967,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010515,
@@ -17430,8 +27978,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010516,
@@ -17442,8 +27989,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010517,
@@ -17454,8 +28000,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010519,
@@ -17466,8 +28011,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010521,
@@ -17478,8 +28022,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010522,
@@ -17490,8 +28033,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010524,
@@ -17502,20 +28044,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "CHA/CHB, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "CHA/CHB, "
     },
     {
         "code": 12010526,
@@ -17526,8 +28055,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010528,
@@ -17538,8 +28066,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010529,
@@ -17550,8 +28077,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010531,
@@ -17562,8 +28088,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010532,
@@ -17574,8 +28099,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010533,
@@ -17586,8 +28110,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010534,
@@ -17598,8 +28121,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010535,
@@ -17610,8 +28132,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010536,
@@ -17622,8 +28143,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010538,
@@ -17634,8 +28154,7 @@ let parties = {
         "infoMail": "NIAZ@BABULAMANAH.COM   ",
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010540,
@@ -17646,8 +28165,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010542,
@@ -17658,8 +28176,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010543,
@@ -17670,8 +28187,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010544,
@@ -17682,8 +28198,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, Shipping Line, "
     },
     {
         "code": 12010545,
@@ -17694,8 +28209,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010546,
@@ -17706,8 +28220,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010548,
@@ -17718,8 +28231,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010549,
@@ -17730,8 +28242,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010550,
@@ -17742,8 +28253,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010553,
@@ -17754,8 +28264,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010554,
@@ -17766,8 +28275,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010555,
@@ -17778,8 +28286,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010558,
@@ -17790,8 +28297,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010560,
@@ -17802,8 +28308,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010562,
@@ -17814,8 +28319,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010566,
@@ -17826,8 +28330,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010568,
@@ -17838,8 +28341,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010569,
@@ -17850,8 +28352,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010571,
@@ -17862,8 +28363,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010573,
@@ -17874,8 +28374,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010575,
@@ -17886,8 +28385,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010576,
@@ -17898,8 +28396,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010577,
@@ -17910,8 +28407,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010578,
@@ -17922,8 +28418,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010579,
@@ -17934,8 +28429,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010580,
@@ -17946,8 +28440,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010581,
@@ -17958,8 +28451,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010582,
@@ -17970,8 +28462,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010583,
@@ -17982,8 +28473,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010584,
@@ -17994,8 +28484,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010585,
@@ -18006,8 +28495,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010586,
@@ -18018,8 +28506,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010588,
@@ -18030,8 +28517,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010590,
@@ -18042,8 +28528,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010591,
@@ -18054,8 +28539,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010592,
@@ -18066,8 +28550,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010593,
@@ -18078,8 +28561,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010594,
@@ -18090,8 +28572,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010595,
@@ -18102,8 +28583,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010598,
@@ -18114,8 +28594,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010600,
@@ -18126,8 +28605,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010601,
@@ -18138,8 +28616,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010602,
@@ -18150,8 +28627,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010603,
@@ -18162,8 +28638,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010604,
@@ -18174,8 +28649,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010605,
@@ -18186,8 +28660,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010606,
@@ -18198,8 +28671,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010607,
@@ -18210,8 +28682,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010609,
@@ -18222,8 +28693,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010612,
@@ -18234,20 +28704,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010613,
@@ -18258,8 +28715,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010614,
@@ -18270,8 +28726,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010615,
@@ -18282,8 +28737,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, Notify, "
     },
     {
         "code": 12010616,
@@ -18294,8 +28748,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010617,
@@ -18306,8 +28759,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010618,
@@ -18318,8 +28770,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010619,
@@ -18330,8 +28781,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010620,
@@ -18342,8 +28792,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010621,
@@ -18354,8 +28803,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Local Vendor, Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Local Vendor, Shipping Line, "
     },
     {
         "code": 12010623,
@@ -18366,8 +28814,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010624,
@@ -18378,8 +28825,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010625,
@@ -18390,8 +28836,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010626,
@@ -18402,8 +28847,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010627,
@@ -18414,8 +28858,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010630,
@@ -18426,8 +28869,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010632,
@@ -18438,8 +28880,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010634,
@@ -18450,8 +28891,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010635,
@@ -18462,8 +28902,7 @@ let parties = {
         "infoMail": "rie.muranaka@iss-shipping.com",
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010636,
@@ -18474,8 +28913,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010637,
@@ -18486,8 +28924,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010638,
@@ -18498,8 +28935,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010640,
@@ -18510,8 +28946,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010641,
@@ -18522,8 +28957,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010643,
@@ -18534,8 +28968,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010644,
@@ -18546,8 +28979,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010645,
@@ -18558,8 +28990,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010646,
@@ -18570,8 +29001,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010647,
@@ -18582,8 +29012,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010649,
@@ -18594,8 +29023,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010651,
@@ -18606,8 +29034,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010652,
@@ -18618,8 +29045,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010653,
@@ -18630,8 +29056,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010654,
@@ -18642,8 +29067,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010655,
@@ -18654,8 +29078,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010656,
@@ -18666,8 +29089,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010657,
@@ -18678,8 +29100,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010658,
@@ -18690,8 +29111,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010659,
@@ -18702,8 +29122,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010660,
@@ -18714,8 +29133,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010661,
@@ -18725,9 +29143,8 @@ let parties = {
         "website": null,
         "infoMail": null,
         "strn": null,
-        "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "operations": "Air Export, Sea Export, ",
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010663,
@@ -18738,8 +29155,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010666,
@@ -18750,8 +29166,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010667,
@@ -18762,8 +29177,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010668,
@@ -18774,8 +29188,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010669,
@@ -18786,8 +29199,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010670,
@@ -18798,8 +29210,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010671,
@@ -18810,8 +29221,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010673,
@@ -18822,8 +29232,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010674,
@@ -18834,8 +29243,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010675,
@@ -18846,8 +29254,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010676,
@@ -18858,8 +29265,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010677,
@@ -18870,8 +29276,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010679,
@@ -18882,8 +29287,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010680,
@@ -18894,8 +29298,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010682,
@@ -18906,8 +29309,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010684,
@@ -18918,8 +29320,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010685,
@@ -18930,8 +29331,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010686,
@@ -18942,8 +29342,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010687,
@@ -18954,8 +29353,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010689,
@@ -18966,20 +29364,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010690,
@@ -18990,8 +29375,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010691,
@@ -19002,8 +29386,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010692,
@@ -19014,8 +29397,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010693,
@@ -19026,8 +29408,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010694,
@@ -19038,8 +29419,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010695,
@@ -19050,8 +29430,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010696,
@@ -19062,8 +29441,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010698,
@@ -19074,8 +29452,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010699,
@@ -19086,8 +29463,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010701,
@@ -19098,8 +29474,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010704,
@@ -19110,8 +29485,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010705,
@@ -19122,8 +29496,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010706,
@@ -19134,8 +29507,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010707,
@@ -19146,8 +29518,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010708,
@@ -19158,8 +29529,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010709,
@@ -19170,8 +29540,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010710,
@@ -19182,8 +29551,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010711,
@@ -19194,8 +29562,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010712,
@@ -19206,8 +29573,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010713,
@@ -19218,8 +29584,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010714,
@@ -19230,8 +29595,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010715,
@@ -19242,8 +29606,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010716,
@@ -19254,8 +29617,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010717,
@@ -19266,8 +29628,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010719,
@@ -19278,8 +29639,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010720,
@@ -19290,8 +29650,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010721,
@@ -19302,8 +29661,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010722,
@@ -19314,8 +29672,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010723,
@@ -19326,8 +29683,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010724,
@@ -19338,8 +29694,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010725,
@@ -19350,8 +29705,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010726,
@@ -19362,8 +29716,7 @@ let parties = {
         "infoMail": "jawwad@freightworld.com.pk\nINFO@FREIGHTWORLD.COM.PK",
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Forwarder/Coloader, Local Vendor, ",
-        "partytypeid": "Client"
+        "types": "Forwarder/Coloader, Local Vendor, "
     },
     {
         "code": 12010727,
@@ -19374,8 +29727,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010728,
@@ -19386,8 +29738,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010729,
@@ -19398,8 +29749,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010730,
@@ -19410,8 +29760,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010732,
@@ -19422,8 +29771,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010733,
@@ -19434,8 +29782,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010734,
@@ -19446,8 +29793,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010735,
@@ -19458,8 +29804,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010736,
@@ -19470,8 +29815,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010737,
@@ -19482,8 +29826,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010738,
@@ -19494,8 +29837,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010739,
@@ -19506,8 +29848,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010740,
@@ -19518,8 +29859,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010741,
@@ -19530,8 +29870,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010742,
@@ -19542,8 +29881,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010744,
@@ -19554,8 +29892,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010745,
@@ -19566,8 +29903,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010746,
@@ -19578,8 +29914,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010747,
@@ -19590,8 +29925,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010748,
@@ -19602,8 +29936,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010750,
@@ -19614,8 +29947,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 12010751,
@@ -19626,8 +29958,7 @@ let parties = {
         "infoMail": "info@gosaint.com/ 404.480.4440",
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010752,
@@ -19638,8 +29969,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010753,
@@ -19650,8 +29980,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010754,
@@ -19662,8 +29991,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010755,
@@ -19674,8 +30002,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010756,
@@ -19686,8 +30013,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010757,
@@ -19698,20 +30024,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010758,
@@ -19722,8 +30035,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010760,
@@ -19734,8 +30046,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010762,
@@ -19746,8 +30057,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010763,
@@ -19758,8 +30068,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010764,
@@ -19770,8 +30079,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010766,
@@ -19782,8 +30090,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010767,
@@ -19794,8 +30101,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010768,
@@ -19806,8 +30112,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010770,
@@ -19818,8 +30123,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010771,
@@ -19830,8 +30134,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010772,
@@ -19842,8 +30145,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010773,
@@ -19854,8 +30156,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010774,
@@ -19866,8 +30167,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010775,
@@ -19878,8 +30178,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010777,
@@ -19890,8 +30189,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010778,
@@ -19902,8 +30200,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010779,
@@ -19914,8 +30211,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010780,
@@ -19926,8 +30222,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010784,
@@ -19938,8 +30233,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010785,
@@ -19950,8 +30244,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010786,
@@ -19962,8 +30255,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010787,
@@ -19974,8 +30266,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010788,
@@ -19986,8 +30277,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010789,
@@ -19998,8 +30288,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010790,
@@ -20010,8 +30299,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010791,
@@ -20022,8 +30310,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010792,
@@ -20034,8 +30321,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010793,
@@ -20046,8 +30332,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010794,
@@ -20058,8 +30343,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010795,
@@ -20070,8 +30354,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010796,
@@ -20082,8 +30365,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010797,
@@ -20094,8 +30376,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010798,
@@ -20106,8 +30387,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010799,
@@ -20118,8 +30398,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010800,
@@ -20130,8 +30409,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010802,
@@ -20142,8 +30420,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010803,
@@ -20154,8 +30431,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010805,
@@ -20166,8 +30442,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010806,
@@ -20178,8 +30453,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010807,
@@ -20190,8 +30464,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010808,
@@ -20202,8 +30475,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010809,
@@ -20214,8 +30486,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010810,
@@ -20226,8 +30497,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010811,
@@ -20238,8 +30508,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010813,
@@ -20250,8 +30519,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010814,
@@ -20262,8 +30530,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010817,
@@ -20274,8 +30541,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010818,
@@ -20286,8 +30552,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010819,
@@ -20298,8 +30563,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010820,
@@ -20310,8 +30574,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010821,
@@ -20322,8 +30585,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010822,
@@ -20334,8 +30596,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010823,
@@ -20346,8 +30607,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010824,
@@ -20358,8 +30618,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010825,
@@ -20370,8 +30629,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010827,
@@ -20382,8 +30640,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010828,
@@ -20394,8 +30651,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010829,
@@ -20406,8 +30662,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010831,
@@ -20418,8 +30673,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010832,
@@ -20430,20 +30684,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010833,
@@ -20454,8 +30695,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010835,
@@ -20466,8 +30706,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010836,
@@ -20478,8 +30717,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010837,
@@ -20490,8 +30728,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010839,
@@ -20502,8 +30739,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010840,
@@ -20514,8 +30750,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010843,
@@ -20526,8 +30761,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010845,
@@ -20538,8 +30772,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010848,
@@ -20550,8 +30783,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010850,
@@ -20562,8 +30794,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010852,
@@ -20574,8 +30805,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010854,
@@ -20586,8 +30816,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010856,
@@ -20598,8 +30827,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010857,
@@ -20610,8 +30838,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010861,
@@ -20622,8 +30849,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": null,
@@ -20634,8 +30860,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010863,
@@ -20646,8 +30871,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010864,
@@ -20658,8 +30882,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010865,
@@ -20670,8 +30893,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010867,
@@ -20682,8 +30904,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010868,
@@ -20694,8 +30915,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010870,
@@ -20706,8 +30926,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010872,
@@ -20718,8 +30937,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010873,
@@ -20730,8 +30948,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010874,
@@ -20742,8 +30959,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010876,
@@ -20754,8 +30970,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010877,
@@ -20766,8 +30981,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010878,
@@ -20778,8 +30992,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010879,
@@ -20790,8 +31003,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010880,
@@ -20802,8 +31014,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010881,
@@ -20814,8 +31025,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010883,
@@ -20826,8 +31036,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010884,
@@ -20838,8 +31047,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010885,
@@ -20850,8 +31058,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010886,
@@ -20862,8 +31069,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010887,
@@ -20874,8 +31080,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010889,
@@ -20886,8 +31091,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010890,
@@ -20898,8 +31102,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010891,
@@ -20910,8 +31113,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010892,
@@ -20922,8 +31124,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010893,
@@ -20934,8 +31135,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Air Line, ",
-        "partytypeid": "Client"
+        "types": "Air Line, "
     },
     {
         "code": 12010895,
@@ -20946,8 +31146,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010897,
@@ -20958,8 +31157,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010898,
@@ -20970,8 +31168,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010899,
@@ -20982,8 +31179,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010901,
@@ -20994,8 +31190,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010902,
@@ -21006,8 +31201,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010903,
@@ -21018,8 +31212,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010904,
@@ -21030,8 +31223,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010905,
@@ -21042,8 +31234,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010906,
@@ -21054,8 +31245,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010907,
@@ -21066,8 +31256,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010908,
@@ -21078,8 +31267,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010910,
@@ -21090,8 +31278,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010911,
@@ -21102,8 +31289,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010912,
@@ -21114,8 +31300,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010913,
@@ -21126,8 +31311,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010914,
@@ -21138,8 +31322,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010915,
@@ -21150,8 +31333,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010916,
@@ -21162,20 +31344,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010917,
@@ -21186,8 +31355,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010919,
@@ -21198,8 +31366,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010921,
@@ -21210,8 +31377,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010922,
@@ -21222,8 +31388,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010923,
@@ -21234,8 +31399,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010924,
@@ -21246,8 +31410,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010925,
@@ -21258,8 +31421,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010927,
@@ -21270,8 +31432,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010931,
@@ -21282,8 +31443,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010933,
@@ -21294,8 +31454,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010934,
@@ -21306,8 +31465,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010937,
@@ -21318,8 +31476,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010938,
@@ -21330,8 +31487,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010940,
@@ -21342,8 +31498,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010942,
@@ -21354,8 +31509,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010943,
@@ -21366,8 +31520,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010944,
@@ -21378,8 +31531,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010946,
@@ -21390,8 +31542,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010947,
@@ -21402,8 +31553,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010950,
@@ -21414,8 +31564,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010951,
@@ -21426,8 +31575,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010953,
@@ -21438,8 +31586,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010954,
@@ -21450,8 +31597,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010955,
@@ -21462,8 +31608,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010956,
@@ -21474,8 +31619,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010958,
@@ -21486,8 +31630,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010959,
@@ -21498,8 +31641,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010960,
@@ -21510,8 +31652,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010961,
@@ -21522,8 +31663,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010963,
@@ -21534,8 +31674,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010964,
@@ -21546,8 +31685,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010966,
@@ -21558,8 +31696,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010967,
@@ -21570,8 +31707,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010968,
@@ -21582,8 +31718,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010970,
@@ -21594,8 +31729,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010974,
@@ -21606,8 +31740,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010975,
@@ -21618,8 +31751,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010977,
@@ -21630,8 +31762,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010978,
@@ -21642,8 +31773,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010979,
@@ -21654,8 +31784,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010980,
@@ -21666,8 +31795,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010982,
@@ -21678,8 +31806,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010985,
@@ -21690,8 +31817,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010986,
@@ -21702,8 +31828,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010987,
@@ -21714,8 +31839,7 @@ let parties = {
         "infoMail": "SULTAN@BANDODESIGN.COM",
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010988,
@@ -21726,8 +31850,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipping Line, ",
-        "partytypeid": "Client"
+        "types": "Shipping Line, "
     },
     {
         "code": 12010991,
@@ -21738,8 +31861,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010992,
@@ -21750,8 +31872,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010993,
@@ -21762,8 +31883,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010994,
@@ -21774,8 +31894,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010995,
@@ -21786,8 +31905,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010996,
@@ -21798,8 +31916,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12010997,
@@ -21810,8 +31927,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12010998,
@@ -21822,8 +31938,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12010999,
@@ -21834,8 +31949,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011001,
@@ -21846,8 +31960,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12011004,
@@ -21858,8 +31971,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011007,
@@ -21870,8 +31982,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011008,
@@ -21882,8 +31993,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011009,
@@ -21894,20 +32004,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
-    },
-    {
-        "code": null,
-        "name": null,
-        "citycode": null,
-        "address": "null  ",
-        "website": null,
-        "infoMail": null,
-        "strn": null,
-        "operations": "",
-        "types": "",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011010,
@@ -21918,8 +32015,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011011,
@@ -21930,8 +32026,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011013,
@@ -21942,8 +32037,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011014,
@@ -21954,8 +32048,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011015,
@@ -21966,8 +32059,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011016,
@@ -21978,8 +32070,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011018,
@@ -21990,8 +32081,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011019,
@@ -22002,8 +32092,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011020,
@@ -22014,8 +32103,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011021,
@@ -22026,8 +32114,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011023,
@@ -22038,8 +32125,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011025,
@@ -22050,8 +32136,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011026,
@@ -22062,8 +32147,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011027,
@@ -22074,8 +32158,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011028,
@@ -22086,8 +32169,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011029,
@@ -22098,8 +32180,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011031,
@@ -22110,8 +32191,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011032,
@@ -22122,8 +32202,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12011033,
@@ -22134,8 +32213,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12011034,
@@ -22146,8 +32224,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011035,
@@ -22158,8 +32235,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011037,
@@ -22170,8 +32246,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011039,
@@ -22182,8 +32257,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011040,
@@ -22194,8 +32268,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011041,
@@ -22206,8 +32279,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12011042,
@@ -22218,8 +32290,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011043,
@@ -22230,8 +32301,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011049,
@@ -22242,8 +32312,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011051,
@@ -22254,8 +32323,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011052,
@@ -22266,8 +32334,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011054,
@@ -22278,8 +32345,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011056,
@@ -22290,8 +32356,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011057,
@@ -22302,8 +32367,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011058,
@@ -22314,8 +32378,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011059,
@@ -22326,8 +32389,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011060,
@@ -22338,8 +32400,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011062,
@@ -22350,8 +32411,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Shipper, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Shipper, "
     },
     {
         "code": 12011064,
@@ -22362,8 +32422,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011065,
@@ -22374,8 +32433,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Import, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011066,
@@ -22386,8 +32444,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011067,
@@ -22398,8 +32455,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011068,
@@ -22410,8 +32466,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011069,
@@ -22422,8 +32477,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Shipper, ",
-        "partytypeid": "Client"
+        "types": "Shipper, "
     },
     {
         "code": 12011071,
@@ -22434,8 +32488,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011073,
@@ -22446,8 +32499,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011075,
@@ -22458,8 +32510,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Sea Export, ",
-        "types": "Consignee, Notify, ",
-        "partytypeid": "Client"
+        "types": "Consignee, Notify, "
     },
     {
         "code": 12011076,
@@ -22470,8 +32521,7 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
     },
     {
         "code": 12011078,
@@ -22482,10 +32532,1109 @@ let parties = {
         "infoMail": null,
         "strn": null,
         "operations": "Air Export, ",
-        "types": "Consignee, ",
-        "partytypeid": "Client"
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011081,
+        "name": "ABU BAKKAR TRADERS",
+        "citycode": null,
+        "address": "H NO C21 GULSHAN E ROOMI MAIN JINNAH AVENUE OPP MALIR, KARACHI, PK   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011083,
+        "name": "SCHLUMBERGER SEACO, INC.",
+        "citycode": null,
+        "address": "I-9 BASE, PLOT 267-268 & 269, I-9/3 INDUSTRIAL AREA ISLAMABAD CAPITAL TERRITORY, ISLAMABAD, 44000 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011084,
+        "name": "ETUDES ET PRODUCTIONS SCHLUMBERGER",
+        "citycode": null,
+        "address": "C/O GCA SUPPLY 4 INDUSTRY 32, AVENUE OCENIE - BAT, B1 ZA COURTABOEUF 3 919143 LES ULIS CEDEX FRANCE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011086,
+        "name": "ANANTA APPARELS LIMITED",
+        "citycode": null,
+        "address": "PLOT 246-249 ADAMJEE EPZ SHIDDHIRGONJ NARAYANGONJ 1431 BANGLADESH  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011087,
+        "name": "KAFTAN ANDALUCIA S.L.",
+        "citycode": null,
+        "address": "CL VICENTE TRAVER Y TOMAS 1 41120 GELVES,  SEVILLA SPAIN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011088,
+        "name": "RAINBOW PACKAGE INDUSTRIAL CO., LTD.",
+        "citycode": "TWNTC",
+        "address": "NO.238,LANE 256,YILIN RD., RENDE DIST., TAINAN CITY, TAIWAN 717 R.O.C.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011090,
+        "name": "PHONG PHU INTERNATIONAL JSC",
+        "citycode": null,
+        "address": "48 TANG NHON PHU STREET TANG NHON PHU B WARD THU DUC CITY HO CHI MINH CITY VIETNAM   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011091,
+        "name": "KESSELS BV",
+        "citycode": null,
+        "address": "AMSTERDAM SESTRAATWEG 45D-1411 AX NAARDAN, THE NETHERLANDS  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011093,
+        "name": "JAM APAREL LLC",
+        "citycode": null,
+        "address": "135 BETTY ROAD, EAST MEADOW, NY, 11554 USA. CONTACT: UMER JAMIL '+1647-282-852  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011094,
+        "name": "AGROSKY UG",
+        "citycode": null,
+        "address": "AM GRUNEN WEG 8 65451 KELSTERBACH DE 250626469139343, FRANKFURT  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011095,
+        "name": "SABAH IMPEX PVT LTD",
+        "citycode": null,
+        "address": "OFFICE 2-3 MEZZANINE FLOOR 25 HUMA PLAZA, ISLAMABAD, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011096,
+        "name": "RATVI FRUIT AND VEG LTD",
+        "citycode": null,
+        "address": "6 MASTER CLOSE LUTON LUI 5PH UK, LONDON, GB, LU1 5PH, GB. 0044-786-76435  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011097,
+        "name": "NEW SUNSHINE FRESH LTD",
+        "citycode": null,
+        "address": "35 GUESTGROVE B192 XB, BIRMINGHAM, GB  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011098,
+        "name": "TO THE ORDER OF BANKISLAMI PAKISTAN LIMITED, KARAC",
+        "citycode": "PKKHI",
+        "address": "KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011099,
+        "name": "BROOKES PHARMA PRIVATE LIMITED",
+        "citycode": null,
+        "address": "58-59 SECTOR 15 KORANGI INDUSTRIAL AREA, KARACHI 74900 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011100,
+        "name": "MEDICINE COMPANY FOR TRADING",
+        "citycode": null,
+        "address": "PHARMACEUTICALS MEDICINES SUPPLIES, DENTAL SUPPLIES AND MEDICAL EQUIPMENT LIMITED ACTONZ ERBIL IRAQ  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011102,
+        "name": "DFS WORLDWIDE",
+        "citycode": null,
+        "address": "UNIT 7 MARLIN PARK CENTRAL WAY FELTHAM LONDON TW14 0AN   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011103,
+        "name": "REHAN ENTERPRISES",
+        "citycode": null,
+        "address": "OFFICE 46-47 ZAMINDARE PATI NEW VEGETABLES MARKET KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011104,
+        "name": "CARGO & COMMODITIES UK LTD",
+        "citycode": null,
+        "address": "ASHLEY HOUSE, 235-239 HIGH ROAD. LONDON ENGLAND,N22 8HF  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011105,
+        "name": "MRS. RAHMA MOOSA ABDUL RAHMAN",
+        "citycode": null,
+        "address": "HOUSE NO:163, SECTOR A/RS, SAEEDABAD, BALDIA TOWN KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011106,
+        "name": "MRS RAHMA MOOSA ABDUL RAHMAN",
+        "citycode": null,
+        "address": "C/O. DAUD RAHMANI, P.O.BOX A7790, PC 111 AFIPRTS HEITI, HEIGHTS, MUSCAT, OMAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011107,
+        "name": "FAITH MINERALS PVT LTD",
+        "citycode": null,
+        "address": "PLOT 7,8,18,19 SECTOR E-V PHASE II, KEPZ LANDHI, KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011108,
+        "name": "GLOBAL MINERALS TECHNOLOGIES",
+        "citycode": null,
+        "address": "S.L AVDA GRAN VIA CARLOS III NUM 84 PLANTA 3 E-08028-BARCELONA-SPAIN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011110,
+        "name": "INCHCAPE KENYA LTD",
+        "citycode": null,
+        "address": "DELTA TOWERS 1ST FLOOR, WAIYAKI WAY, NAIROBI KENYA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011114,
+        "name": "ROMAN FASHION LIMITED",
+        "citycode": null,
+        "address": "GANZENSTRAAT 1 AMERSFOORT 3815 JA THE NETHERLANDS NL VAT: NL861821671B01 NL EORI: NL861821671 EMAIL: DELIVERIES@ROMAN-FASHION.CO.UK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011116,
+        "name": "DILMENLER MAKINA VE TEKS.SAN TIC.AS",
+        "citycode": "TRIST",
+        "address": "ISTANBUL, TURKEY   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011117,
+        "name": "EAGLE BURGMANN END. SIZDIRMAZLIK SAN. VE TIC. LTD.",
+        "citycode": "TRMAD",
+        "address": "TUZLA KIMYA SANAYICILERI AYDINLI - KOSB TUNA CAD. NO: 8 TUZLA 34953 ISTANBUL / TURKEY  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011118,
+        "name": "GEIS AIR + SEA GMBH",
+        "citycode": null,
+        "address": "MATTENTWIETE 8 20457 HAMBURG/GERMANY   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011119,
+        "name": "NIDA MUSTAFA",
+        "citycode": null,
+        "address": "HOUSE NO 24 6/S NABI DAD LANE STREET 1 NEAR GABOL PARK LYARI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011120,
+        "name": "NIDA MUSTAFA.",
+        "citycode": null,
+        "address": "5 STAFFORD STREE SOUTH GRANVILLE NSW SYDNEY AUSTRALIA   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011121,
+        "name": "KAYANI BROTHERS & COMPANY",
+        "citycode": null,
+        "address": "HOUSE BV11 397 ST 2/2 REHEEM TOWN SHAKRIAL, RAWALPINDI,PK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011122,
+        "name": "MEMAK ENDUSTRIYEL GIDA MAKINALARI A.S.",
+        "citycode": "TRIST",
+        "address": "ORG.SAN.BOLG. BUYUKKAYACIK MAH 103.CAD. NO:10 SELC¸UKLU / KONYA Turkey (TR)  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011123,
+        "name": "GHAURI TYRE & TUBE (PVT) LIMITED.",
+        "citycode": "PKLHE",
+        "address": "146/-M, INDUSTRIAL AREA, KOT LAKHPAT, LAHORE, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011125,
+        "name": "EBN COMERCIO, IMPORTACAO E EXPORTACAO LTDA",
+        "citycode": null,
+        "address": "RODOVIA ANTONIO HEIL,1001 CEP:88316-000 City: ITAJAI UF:SC ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011126,
+        "name": "FRUTTA ANS VEGETABLES IMPORT",
+        "citycode": null,
+        "address": "EXPORT DI AHAMMED JASHIM VERONA (VR) VIALE DELLA FIERA 6 CAP 37136 VR-415548 PIVA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011127,
+        "name": "THERMODYN,S.A.S",
+        "citycode": "FRTY8",
+        "address": "null 480, ALLEE GUSTAVE EIFFEL 71200 LE CREUSOT FRANCE ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011129,
+        "name": "SENATOR INTERNATIONAL SPEDITION MBH",
+        "citycode": null,
+        "address": "FRANKFURTER STRASSE 12 MAERSK LOGISTICS & SERVICES INTERNATIONAL   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011130,
+        "name": "CHORKA TEXTILE LTD.",
+        "citycode": "PKKHI",
+        "address": "KAZIRCHAR, DANGA, PALASH, NARSINGDI, BANGLADESH.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011131,
+        "name": "SHAOXING SKY BAG TEXTILES CO LTD",
+        "citycode": "PKKHI",
+        "address": "ROOM 205,FLOOR 2,NO.7 BUILDING,NORTH OF KAIYUAN ROAD,MASHAN TOWN,YUECHENG DISTRICT SHAOXING CITY,ZHEJIANG,CHINA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011132,
+        "name": "ASIA PACIFIC TRADE HUB PVT LTD",
+        "citycode": "PKLHE",
+        "address": "OFFICE 813 8TH FLOOR AL-HAFEEZ HEIGHTS GHALIB ROAD GULBERG III LAHORE / PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011133,
+        "name": "MATECH MAKINA SAN VE TIC LTD STI",
+        "citycode": "TRIST",
+        "address": "YAZIBASI MAH BATIBETON CAD NO:5 35875 TORBALI-IZMIR / TURKIYE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011138,
+        "name": "B - MED LLC",
+        "citycode": null,
+        "address": "NIZAMI DISTRICT, R.RUSTAMOV STR., HOUSE 41/42, AZ1002, BAKU, AZERBAIJAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011141,
+        "name": "MANHATTAN HOSIERY CO, INC.",
+        "citycode": null,
+        "address": "172 CLASSON AVENUE BROOKLYN NEW YORK 11205 USA.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011143,
+        "name": "BALSIGAR TEXTILE AG",
+        "citycode": null,
+        "address": "GASWERSTRASSE 70A CH-4900 LANGENTHAL SWITZERLAND  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011144,
+        "name": "TURNER BIANCA PLC",
+        "citycode": null,
+        "address": "BELL MILL, CLAREMONT STREET, HATHERSHAW, OLDHAM OL8 3EJ, UNITED KINGDOM  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011146,
+        "name": "ANYCOLOR COMPUTER CONSUMABLES CO.,LTD",
+        "citycode": "CNGGZ",
+        "address": "FL 3RD, BLDG D6, LONGDONG INDUSTRIAL PLANT YINGLONG AVENUE NO. 206, TIANHE DISTRICT, GUANGZHOU,CHINA ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011147,
+        "name": "MARC LAUGE HOLDING APS",
+        "citycode": null,
+        "address": "SKOVRIDERVEJ 27 ESBJERG N 6715 DK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011148,
+        "name": "QUOREX SARL",
+        "citycode": "USH5S",
+        "address": "19A AVENUE CHOISEUL VERSOIX 1290 SW  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011149,
+        "name": "HRH ENTERPRISES ",
+        "citycode": null,
+        "address": "OFFICE NO. 108, AL - FIZA GLASS TOWER PLOT NO. D - 8, BLOCK 10-A, GULSHAN-E-IQBAL, KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011150,
+        "name": "BEAUTIFUL GANGSAN",
+        "citycode": null,
+        "address": "120-56, DONGNAM-RO 41BEON-GIL DAEDONG-MYEON GIMHAE-SI, GYEONGSANGNAM-DO REPUBLIC OF KOREA SOUTH KOREA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011151,
+        "name": "GE AVIATION LAFAYETTE",
+        "citycode": null,
+        "address": "3700 HIGHWAY 52 SOUTH LAFAYETTE, IN 47909 USA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011152,
+        "name": "ST ENGINEERING AEROSPACE ENGINES PTE LTD",
+        "citycode": null,
+        "address": "501 AIRPORT ROAD, PAYA LEBAR, SINGAPORE 539931  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011155,
+        "name": "APICMAN LIMITED",
+        "citycode": null,
+        "address": "SHARIF WAY KM4 OLD LAGOS ROAD ATIBA IJEBU OGUN STATE NIGERIA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011156,
+        "name": "SHANGHAI THENOW HEALTH SCI-TECH HOLDING CO.,LTD",
+        "citycode": "CNSGH",
+        "address": "ADD-17F, HUAZHOU BUILDING, NO. 788, ZHIJIANG ROAD WEST, SHANGHAI, CHINA 200070  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011158,
+        "name": "TEXTILE IMPORTS & MORE INC.,",
+        "citycode": null,
+        "address": "9900 STITLING ROAD SUITE 240 HOLLYWOOD, FL 33024 USA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011159,
+        "name": "TALLY WEIJL LOGISTICS GERMANY",
+        "citycode": null,
+        "address": "SCHOPFHEIMER STR. 27A D-79541 LOERRACH, GERMANY  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011161,
+        "name": "PAXAR (CHINA) LIMITED",
+        "citycode": "HKTKO",
+        "address": "NO.7 CHUN YING STREET,TSEUNG RWAN O IND'L ESTATE NT, GATE B, WH-C, KC: P-0016  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011165,
+        "name": "KARACHI MEAT & LIVESTOCK COMPANY PVT LTD",
+        "citycode": null,
+        "address": "2ND FLOOR PLOT NO:K-7/17, 7/19 MAIN CHOUDARY KHALIQ UZ ZAMAN ROAD, KARACHI, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011166,
+        "name": "AL AFSAL TRADING & SERVICES",
+        "citycode": null,
+        "address": "ZONE:53 STREET 740 BUILDING NO:84, DOHA QATAR  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011167,
+        "name": "GE INDUSTRIAL OF PUERTO RICO LLC",
+        "citycode": "USPR7",
+        "address": "STATE RD# 402 KM 1.5 LAS MARIAS INDUSTRIAL ZONE ANASCO PR 00610 US  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011170,
+        "name": "RABE TOOLING AB",
+        "citycode": null,
+        "address": "TIBBLEVAGEN 21D SE 72630 SKULTUNA SWEDEN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011171,
+        "name": "ATI APPAREL",
+        "citycode": "PKKHI",
+        "address": "IST FLOOR PLOT 27 2 SECTOR 6 A NORTH KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, Sea Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011172,
+        "name": "CREDIT INDUSTRIEL ET COMMERCIAL",
+        "citycode": null,
+        "address": "CIC PARIS REAUMUR ENTERPRISES 15 RUE BACHAUMONT 75002 PARIS  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011174,
+        "name": "NORTHTEC SP Z O O",
+        "citycode": null,
+        "address": "UL DWORCOWA 15A 43 502 CZECHOWICE DZIEDZICE POLAND  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011177,
+        "name": "JAMUNA BANK PLC",
+        "citycode": null,
+        "address": "UTTARA BRANCH PLOT NO 3 AND 3A MYMENSING ROAD GIANT BUSINESS  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011178,
+        "name": "NHT FASHIONS LIMITED",
+        "citycode": null,
+        "address": "PLOT 20 22 SECTOR 5 EXPORT PROCESSING ZONE  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011179,
+        "name": "AVERY DENNSION HONG KONG B.V.",
+        "citycode": "HKHKG",
+        "address": "NO. 7 CHUN YING STREET, TSEUNG KWAN O INT'L ESTATE, N.T., HONG KONG.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011180,
+        "name": "NOVIBRA BOSKOVICE S.R.O.",
+        "citycode": "CZPRG",
+        "address": "HRADKOV 2188 680 01 BOSKOVICE CZECH REPUBLIC  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011182,
+        "name": "MAME POD RESTAURANT",
+        "citycode": null,
+        "address": "SAR, BLOCK 525, ROAD 25, BUILDING 133, SHOP 145   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011183,
+        "name": "MASTER MV EAGLE",
+        "citycode": null,
+        "address": "KARACHI, PAKISTAN C/O: UNIVERSAL SHIPPING PVT LTD LEVEL 1, BHOJA TERRACE, SHAHRAH-E-LIAQUAT, KARACHI -74200, PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011184,
+        "name": "BLUE WATER SHIPPING A/S",
+        "citycode": null,
+        "address": "HAVNEPLADSEN 12 9900 FREDERIKSHAVN DENMARK LOVEN@BWS.DK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011185,
+        "name": "DEFSHOP GMBH",
+        "citycode": null,
+        "address": "FRANKLINSTRABE 12A-13, 10587 BERLIN, GERMANY  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011186,
+        "name": "SEAGREEN ENTERPRISES (PVT) LTD",
+        "citycode": null,
+        "address": "A 2 FISH HARBOUR WEST WHARF KARACHI 2 PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011187,
+        "name": "MFS SEAFOODS LIMITED",
+        "citycode": null,
+        "address": "UNIT 39 WALSALL ENTERPRISE PARK REGAL DRIVE WALSALL WS2 9HQ UK  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011188,
+        "name": "AMG ENTERPRISE",
+        "citycode": null,
+        "address": "H NO P.169 PUNJAB TOWN NEAR WIRELSS GATE KARACHI PAKISTAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011189,
+        "name": "MR. SIRAJ MUSANI",
+        "citycode": null,
+        "address": "HOUSE COTTAGE PLOT NO: 160/N NEAR GUJRAT HOUSE CHASE DEPARTMENT JAIL CHOWRANGI KASHMIR ROAD KARACHI, PAKISTAN   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011190,
+        "name": "MR, SIRAJ MUSANI",
+        "citycode": null,
+        "address": "HIZAM STREET NEAR ABU ZAID RESTAURENT ZAHOOR PARK DISTRICT ISKAN MADINAH, SAUDI ARABIA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011191,
+        "name": "GEORG FISCHER PIPING SYSTEMS (SWITZERLAND) LTD",
+        "citycode": "CHSCH",
+        "address": "AMSLER-LAFFON-STR. 9, CH-8201 SCHAFFHAUSEN /SWITZERLAND.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011192,
+        "name": "SHAMI TRADERS",
+        "citycode": null,
+        "address": "H NO 3 B-BLOCK AL-AHMED GARDEN G.T ROAD MANAWA LAHORE,  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011193,
+        "name": "KARALB DEVELOPMENT 2017 S.L.",
+        "citycode": null,
+        "address": "CL VICENTE TRAVER Y TOMAS 141120 GELVES, SEVILLA SPAIN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011194,
+        "name": "ROMAN FASHION LTD",
+        "citycode": null,
+        "address": "GANZENSTRAAT 1 AMERSFOORT 3815 JA THE NETHERLANDS VAT: NL861821671B01 E-MAIL: deliveries@roman-fashion.co.uk  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
+    },
+    {
+        "code": 12011195,
+        "name": "FREIGHT LINES EXPRESS PTE LTD",
+        "citycode": null,
+        "address": "AIRFREIGHT DIVISION 9 AIRLINE ROAD 01 27 CARGO AGENTS BUILDING D SINGAPORE   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011197,
+        "name": "A.R. WORLDWIDE",
+        "citycode": "HKHKG",
+        "address": "UNIT A3, 3/F MAT SHUN IND, BLDG,18-24 KWAI CHEONG ROAD,KWAI CHUNG, HK.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011198,
+        "name": "MTU MAINTENANCE HANNOVER GMBH",
+        "citycode": null,
+        "address": "MUENCHNERSTRASSE 31 30855 LANGENHAGEN GERMANY EORI NO DE2436418 TEL: +49 511 7806 4636  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011200,
+        "name": "PUJIANG YUZE JEWELRY CO.,LTD",
+        "citycode": "CNSGH",
+        "address": "NO.56 XINGGONG ROAD, HUANGZHAI AREA, PUJIANG, ZHEJIANG PROVINCE, CHINA.  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011202,
+        "name": "H & M EXOTIC FRUIT & VEG LIMITED",
+        "citycode": null,
+        "address": "GB 308807985000 188 MITCHAM ROAD SW179NJ, LONDON, GREAT BRITIAN  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011203,
+        "name": "NRBC BANK PLC",
+        "citycode": null,
+        "address": "BANANI BRANCH, ROSE BUD, HOUSE #155, ROAD # 11 & 13/B, BLOCK-E,BANANI C/A, DHAKA-1213,BANGLADESH  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011204,
+        "name": "AAA SOLUTIONS",
+        "citycode": null,
+        "address": "PLOT NO 51 SECTOR 12/C NORTH KARACHI  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011205,
+        "name": "ASIA COMMODITY SERVICE CO.LTD",
+        "citycode": null,
+        "address": "26/F BEAUTIFUL GROUP TOWER 77 CONNOUGH ROAD CENTRAL HONG KONG  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011206,
+        "name": "BE AERO HAVACLIK A.S",
+        "citycode": null,
+        "address": "ATATURK HAVALIMANI GENERAL HAVACLIK TERMINAL   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011207,
+        "name": "MOTOCAST INDUSTRIES",
+        "citycode": null,
+        "address": "MUGHAL STREET, BARTH, SIALKOT  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011208,
+        "name": "ARAGON INTERNATIONAL",
+        "citycode": null,
+        "address": "COMMERCE FZC BUS CENTER, ALSHMOOKH 1, UAQ FZ  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011213,
+        "name": "LOGISTICS CANADA INC",
+        "citycode": null,
+        "address": "115 EAST DRIVE BRAMPTION   ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011215,
+        "name": "BAKER PERKINS",
+        "citycode": "GBLGP",
+        "address": "MANOR DRIVE PASTON PARKWAY PETERBOROUGH PE4 7AP  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Import, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011219,
+        "name": "SOCIETE PALMI FOOD DU COMMERCE",
+        "citycode": null,
+        "address": "ET DU DISTRIBUTION ROUTE CEINTURE ELJEM 5160 MAHDIA TUNISIA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011220,
+        "name": "TESS S R L",
+        "citycode": null,
+        "address": "PLOT NO L 15 1 BLOCK 21 FEDRAL B INDUSTRIAL AREA  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011221,
+        "name": "OHTL PUBLIC COMPANY LIMITED",
+        "citycode": null,
+        "address": "48 SOI BURAPA CHAROENKRUNG ROAD  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Consignee, "
+    },
+    {
+        "code": 12011222,
+        "name": "NIGAR APPARELS",
+        "citycode": null,
+        "address": "F-495 METROVILLE SITE, 75840  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011223,
+        "name": "A AND G ENTERPRISES",
+        "citycode": null,
+        "address": "H NO P 168 GATE KARACHI PAKISTAN,KARACHI,75400,PK,0092306156356  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Air Export, ",
+        "types": "Shipper, "
+    },
+    {
+        "code": 12011224,
+        "name": "OFFPRICE IMPORTS INC",
+        "citycode": null,
+        "address": "368 WASHINGTON RD Sayreville, NJ 08872  ",
+        "website": null,
+        "infoMail": null,
+        "strn": null,
+        "operations": "Sea Export, ",
+        "types": "Consignee, Shipper, "
     }
-]
+  ]
 }
 
 let accountsList = {
@@ -30489,6 +41638,316 @@ let accountsList = {
                     "title": "RACE & RANGE SPORTS",
                     "editable": "0",
                     "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011092",
+                    "account_title": "APPAREL ZONE",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "APPAREL ZONE",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011101",
+                    "account_title": "UZAIR EXPORT PVT LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "UZAIR EXPORT PVT LTD",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011136",
+                    "account_title": "ELEPHANTS GROUP",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "ELEPHANTS GROUP",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011137",
+                    "account_title": "REIGN PHARMACEUTICALS PCSIR - KLC PVT LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "REIGN PHARMACEUTICALS PCSIR - KLC PVT LTD",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011139",
+                    "account_title": "EROUTEZ SOLUTION PRIVATE LIMITED",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "EROUTEZ SOLUTION PRIVATE LIMITED",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011140",
+                    "account_title": "ADIL HASSAN TEXTILES",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "ADIL HASSAN TEXTILES",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011142",
+                    "account_title": "SHIWANI TEXTILE",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "SHIWANI TEXTILE",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011145",
+                    "account_title": "GEMCO",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "GEMCO",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P95",
+                    "account_title": "MAHAD INTERNATIONAL",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer/Vendor",
+                    "title": "MAHAD INTERNATIONAL",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011112",
+                    "account_title": "TAPAL TEA (PRIVATE) LIMITED",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "TAPAL TEA (PRIVATE) LIMITED",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011113",
+                    "account_title": "SUNFLOWER INDUSTRIES",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "SUNFLOWER INDUSTRIES",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011115",
+                    "account_title": "EUROPA INTERNATIONAL",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "EUROPA INTERNATIONAL",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011124",
+                    "account_title": "LILO SPORTS",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "LILO SPORTS",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011128",
+                    "account_title": "SERENE AIR (PVT) LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "SERENE AIR (PVT) LTD",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011134",
+                    "account_title": "QAISONS INDUSTRY ",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "QAISONS INDUSTRY ",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011154",
+                    "account_title": "HAZBI CHEMICALS",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "HAZBI CHEMICALS",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011157",
+                    "account_title": "ESSATEX INDUSTRIES",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "ESSATEX INDUSTRIES",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011160",
+                    "account_title": "AL QURESH FABRICS PVT LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "AL QURESH FABRICS PVT LTD",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011109",
+                    "account_title": "MASTER CHANGAN MOTOTRS LIMTIED",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "MASTER CHANGAN MOTOTRS LIMTIED",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011173",
+                    "account_title": "POKAL INDUSTRIES (PVT) LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "POKAL INDUSTRIES (PVT) LTD",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12010494",
+                    "account_title": "RELIANCE WEAVING MILLS LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer/Vendor",
+                    "title": "RELIANCE WEAVING MILLS LTD",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011196",
+                    "account_title": "SUGHRAN IMPEX SIALKOT",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "SUGHRAN IMPEX SIALKOT",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011199",
+                    "account_title": "PAKISTAN INTERNATIONAL AIRLINES",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "PAKISTAN INTERNATIONAL AIRLINES",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011209",
+                    "account_title": "SCADA INDUSTRIES (PVT.) LTD.",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "SCADA INDUSTRIES (PVT.) LTD.",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P323",
+                    "account_title": "PRIME CARGO",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer/Vendor",
+                    "title": "PRIME CARGO",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011212",
+                    "account_title": "WINGS INTERNATIONAL LOGISTICS",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "WINGS INTERNATIONAL LOGISTICS",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011162",
+                    "account_title": "AL-BIJJAR TRADING (FZC)",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer/Vendor",
+                    "title": "AL-BIJJAR TRADING (FZC)",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011214",
+                    "account_title": "RESALE INTERNATIONAL (PVT) LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "RESALE INTERNATIONAL (PVT) LTD",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011216",
+                    "account_title": "COLGATE PALMOLIVE (PAKISTAN) LTD ",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "COLGATE PALMOLIVE (PAKISTAN) LTD ",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011218",
+                    "account_title": "SCADA INDUSTRIES (PVT.) LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "SCADA INDUSTRIES (PVT.) LTD",
+                    "editable": "0",
+                    "subCategory": "Customer"
+                },
+                {
+                    "account_no": "P12011211",
+                    "account_title": "CROWN TEXTILE",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "Customer",
+                    "title": "CROWN TEXTILE",
+                    "editable": "0",
+                    "subCategory": "Customer"
                 }
             ]
         },
@@ -31562,6 +43021,16 @@ let accountsList = {
                     "subCategory": "General"
                 },
                 {
+                    "account_no": "1226090",
+                    "account_title": "NOMAN DELTEX ",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "General",
+                    "title": "NOMAN DELTEX ",
+                    "editable": "0",
+                    "subCategory": "General"
+                },
+                {
                     "account_no": "1226089",
                     "account_title": "JAVED MASIH (AIRPORT STAFF)",
                     "type": "Detail",
@@ -31722,6 +43191,36 @@ let accountsList = {
                     "catogary": "Asset",
                     "sub_category": "General",
                     "title": "SALEEM QAZI (CNEE SALMIS FURNISHER)",
+                    "editable": "0",
+                    "subCategory": "General"
+                },
+                {
+                    "account_no": "13008",
+                    "account_title": "RECEIVABLE FROM UNIBIS UK",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "General",
+                    "title": "RECEIVABLE FROM UNIBIS UK",
+                    "editable": "0",
+                    "subCategory": "General"
+                },
+                {
+                    "account_no": "13009",
+                    "account_title": "EUR LOGISTICS SERVICES PAK (PVT) LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "General",
+                    "title": "EUR LOGISTICS SERVICES PAK (PVT) LTD",
+                    "editable": "0",
+                    "subCategory": "General"
+                },
+                {
+                    "account_no": "13010",
+                    "account_title": "GLOBAL AGENCIES MANAGEMENT (PVT) LTD",
+                    "type": "Detail",
+                    "catogary": "Asset",
+                    "sub_category": "General",
+                    "title": "GLOBAL AGENCIES MANAGEMENT (PVT) LTD",
                     "editable": "0",
                     "subCategory": "General"
                 },
@@ -33617,6 +45116,26 @@ let accountsList = {
                     "title": "GENEL TRANSPORT",
                     "editable": "0",
                     "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011181",
+                    "account_title": "CARGO FLY S.R.O.",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "CARGO FLY S.R.O.",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011168",
+                    "account_title": "DSV AIR & SEA",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "DSV AIR & SEA",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
                 }
             ]
         },
@@ -33774,6 +45293,96 @@ let accountsList = {
                     "subCategory": "Vendor"
                 },
                 {
+                    "account_no": "P12011111",
+                    "account_title": "PANAF LOGISTICS LTD",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "PANAF LOGISTICS LTD",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011175",
+                    "account_title": "BLUE PORT SP Z O O",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "BLUE PORT SP Z O O",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011217",
+                    "account_title": "ACE FREIGHT LIMITED",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "ACE FREIGHT LIMITED",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011089",
+                    "account_title": "SPEEDMARK TRANSPORTATION, INC/NYC",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "SPEEDMARK TRANSPORTATION, INC/NYC",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011024",
+                    "account_title": "SPEEDMARK TRANSPORTATION B.V ",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "SPEEDMARK TRANSPORTATION B.V ",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011153",
+                    "account_title": "EASY LOAD INTERNATIONAL FREIGHT",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "EASY LOAD INTERNATIONAL FREIGHT",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011017",
+                    "account_title": "AOF CARGO LOGISTICS CO.,LTD.",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "AOF CARGO LOGISTICS CO.,LTD.",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12010965",
+                    "account_title": "TRANSFERA",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "TRANSFERA",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12010983",
+                    "account_title": "INDO TRANS LOGISTICS CORPORATION ",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "INDO TRANS LOGISTICS CORPORATION ",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
                     "account_no": "P12010702",
                     "account_title": "JAN CONTAINER LINES LLC",
                     "type": "Detail",
@@ -33835,11 +45444,11 @@ let accountsList = {
                 },
                 {
                     "account_no": "P12010846",
-                    "account_title": "LAMAIGNERE CARGO ",
+                    "account_title": "LAMAIGNERE CARGO, S.L.",
                     "type": "Detail",
                     "catogary": "Liability",
                     "sub_category": "Customer/Vendor",
-                    "title": "LAMAIGNERE CARGO ",
+                    "title": "LAMAIGNERE CARGO, S.L.",
                     "editable": "0",
                     "subCategory": "Customer/Vendor"
                 },
@@ -34242,46 +45851,6 @@ let accountsList = {
                     "title": "TRADE LINKER.",
                     "editable": "0",
                     "subCategory": "Vendor"
-                },
-                {
-                    "account_no": "P12011017",
-                    "account_title": "AOF CARGO LOGISTICS CO.,LTD.",
-                    "type": "Detail",
-                    "catogary": "Liability",
-                    "sub_category": "Customer/Vendor",
-                    "title": "AOF CARGO LOGISTICS CO.,LTD.",
-                    "editable": "0",
-                    "subCategory": "Customer/Vendor"
-                },
-                {
-                    "account_no": "P12010965",
-                    "account_title": "TRANSFERA",
-                    "type": "Detail",
-                    "catogary": "Liability",
-                    "sub_category": "Customer/Vendor",
-                    "title": "TRANSFERA",
-                    "editable": "0",
-                    "subCategory": "Customer/Vendor"
-                },
-                {
-                    "account_no": "P12010983",
-                    "account_title": "INDO TRANS LOGISTICS CORPORATION ",
-                    "type": "Detail",
-                    "catogary": "Liability",
-                    "sub_category": "Customer/Vendor",
-                    "title": "INDO TRANS LOGISTICS CORPORATION ",
-                    "editable": "0",
-                    "subCategory": "Customer/Vendor"
-                },
-                {
-                    "account_no": "P12011024",
-                    "account_title": "SPEEDMARK TRANSPORTATION B.V ",
-                    "type": "Detail",
-                    "catogary": "Liability",
-                    "sub_category": "Customer/Vendor",
-                    "title": "SPEEDMARK TRANSPORTATION B.V ",
-                    "editable": "0",
-                    "subCategory": "Customer/Vendor"
                 }
             ]
         },
@@ -35408,6 +46977,56 @@ let accountsList = {
                     "title": "ADVANCE  QICT",
                     "editable": "0",
                     "subCategory": "Vendor"
+                },
+                {
+                    "account_no": "P12011135",
+                    "account_title": "Parisi Grand Smooth Logistics Ltd – Ningbo Branch",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "Parisi Grand Smooth Logistics Ltd – Ningbo Branch",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011210",
+                    "account_title": "VITAL TRADERS",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Vendor",
+                    "title": "VITAL TRADERS",
+                    "editable": "0",
+                    "subCategory": "Vendor"
+                },
+                {
+                    "account_no": "P12011201",
+                    "account_title": "PHILLIPINE AIRLINE",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Vendor",
+                    "title": "PHILLIPINE AIRLINE",
+                    "editable": "0",
+                    "subCategory": "Vendor"
+                },
+                {
+                    "account_no": "P12011176",
+                    "account_title": "NZ TRANSPORT SERVICE",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Vendor",
+                    "title": "NZ TRANSPORT SERVICE",
+                    "editable": "0",
+                    "subCategory": "Vendor"
+                },
+                {
+                    "account_no": "P12011169",
+                    "account_title": "DSV AIR & SEA PAKISTAN (SMC-PRIVATE) LIMITED",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Customer/Vendor",
+                    "title": "DSV AIR & SEA PAKISTAN (SMC-PRIVATE) LIMITED",
+                    "editable": "0",
+                    "subCategory": "Customer/Vendor"
                 },
                 {
                     "account_no": "P181",
@@ -36931,6 +48550,36 @@ let accountsList = {
                     "title": "Raheel @ Amanullah ",
                     "editable": "0",
                     "subCategory": "Customer/Vendor"
+                },
+                {
+                    "account_no": "P12011163",
+                    "account_title": "KALEEM (ESSATEX)",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Vendor",
+                    "title": "KALEEM (ESSATEX)",
+                    "editable": "0",
+                    "subCategory": "Vendor"
+                },
+                {
+                    "account_no": "P12011164",
+                    "account_title": "KALEEM (ESSATEX IND)",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Vendor",
+                    "title": "KALEEM (ESSATEX IND)",
+                    "editable": "0",
+                    "subCategory": "Vendor"
+                },
+                {
+                    "account_no": "P12011085",
+                    "account_title": "ZAHID (RIZVI)",
+                    "type": "Detail",
+                    "catogary": "Liability",
+                    "sub_category": "Vendor",
+                    "title": "ZAHID (RIZVI)",
+                    "editable": "0",
+                    "subCategory": "Vendor"
                 },
                 {
                     "account_no": "P12010984",
