@@ -60,7 +60,7 @@ const PartySearch = ({state, dispatch, reset, useWatch, control}) => {
             temp[state.headIndex].invoiceType = x.types?.includes("Overseas Agent")?"Agent Bill":"Job Invoice" ;
           }
           else {
-            temp[state.headIndex].invoiceType = x.types.includes("Overseas Agent")?"Agent Invoice":"Job Bill" ;
+            temp[state.headIndex].invoiceType = x.types?.includes("Overseas Agent")?"Agent Invoice":"Job Bill" ;
           }
           temp[state.headIndex] = {
             ...temp[state.headIndex], 

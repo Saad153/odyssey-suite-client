@@ -44,6 +44,7 @@ const initialState = {
   search:"",
   selectedParty:{id:'', name:''},
   payType:'Recievable',
+  payTypeByDifference:'Recievable',
   partyType:'client',
   invoiceCurrency:'USD',
   partyOptions:[],

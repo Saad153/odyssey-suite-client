@@ -31,7 +31,7 @@ const Gl = ({state, dispatch, companyId}) => {
   }
 
   const handleSubmit = async () => {
-    set("transLoad", true);
+    // set("transLoad", true);
     let tempInvoices = [];
     let invoicesIds = [];
     state.invoices.forEach((x, i) => {
@@ -112,21 +112,26 @@ const Gl = ({state, dispatch, companyId}) => {
     voucher.tranDate = moment(state.date).format("yyyy-MM-DD");
     state.edit?voucher.id = state.id : null;
     voucher.createdAt = state.createdAt;
-    
-    await axios.post(state.edit?process.env.NEXT_PUBLIC_CLIMAX_UPDATE_VOUCEHR:process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, voucher)
-    .then(async(x)=>{
-      let newInvoices = state.invoiceLosses.map((y)=>{
-        return {...y, VoucherId:state.edit?state.id:x.data.result.id}
-      })
-      await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_CREATE_INVOICE_TRANSACTION,{
-        invoices:tempInvoices,
-        invoiceLosses:newInvoices,
-      }).then(()=>{
-        openNotification("Success", "Transaction Recorded!", "green")
-      })
-    })
+    console.log(voucher)
+    // await axios.post(
+    //  state.edit?
+    //    process.env.NEXT_PUBLIC_CLIMAX_UPDATE_VOUCEHR:
+    //    process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, 
+    //    voucher
+    //  )
+    // .then(async(x)=>{
+    //   let newInvoices = state.invoiceLosses.map((y)=>{
+    //     return {...y, VoucherId:state.edit?state.id:x.data.result.id}
+    //   })
+    //   await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_CREATE_INVOICE_TRANSACTION,{
+    //     invoices:tempInvoices,
+    //     invoiceLosses:newInvoices,
+    //   }).then(()=>{
+    //     openNotification("Success", "Transaction Recorded!", "green")
+    //   })
+    // })
     await delay(1000)
-    await getInvoices(state, companyId, dispatch); 
+    // await getInvoices(state, companyId, dispatch); 
   }
 
   return (

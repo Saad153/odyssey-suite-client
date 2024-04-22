@@ -66,17 +66,23 @@ const BillComp = ({companyId, state, dispatch}) => {
     let creditReceiving = 0.00
     state.invoices.forEach((x)=>{
       if(x.receiving && (x.receiving!=0|| state.edit)){
-        tempGainLoss = tempGainLoss + parseFloat(state.manualExRate)*(x.receiving===null?0:parseFloat(x.receiving)) - parseFloat(x.ex_rate)*(x.receiving===null?0:parseFloat(x.receiving))
+        let tempExAmount = parseFloat(state.manualExRate)*(x.receiving===null?0:parseFloat(x.receiving)) - parseFloat(x.ex_rate)*(x.receiving===null?0:parseFloat(x.receiving))
+        // console.log(x.payType);
+        if(x.payType=="Payble"){
+          tempExAmount = -1*tempExAmount
+        }
+        tempGainLoss = tempGainLoss + tempExAmount
+        // console.log(tempGainLoss);
         let tempAmount = (parseFloat(state.manualExRate)*(x.receiving===null?0:parseFloat(x.receiving)) - parseFloat(x.ex_rate)*(x.receiving===null?0:parseFloat(x.receiving))).toFixed(2)
         let invoieLossValue = {}
         // console.log(x.receiving)
         x.payType == 'Recievable'?
-          debitReceiving = debitReceiving + x.receiving:
-          creditReceiving = creditReceiving + x.receiving
+          debitReceiving = debitReceiving + parseFloat(x.receiving):
+          creditReceiving = creditReceiving + parseFloat(x.receiving)
         invoieLossValue = {
           amount:x.receiving,
           InvoiceId:x.id,
-          gainLoss:payType=="Recievable"?
+          gainLoss: x.payType =="Recievable"?
             parseFloat(tempAmount)==0?
               0:parseFloat(tempAmount)*(-1)
             :
@@ -94,7 +100,7 @@ const BillComp = ({companyId, state, dispatch}) => {
       debitReceiving:debitReceiving,
       creditReceiving:creditReceiving,
     }})
-  }  
+  }
   const resetAll = () => {
     let tempList = [...state.invoices];
     tempList = tempList.map(x=>({
@@ -149,11 +155,7 @@ const BillComp = ({companyId, state, dispatch}) => {
         invNarration = invNarration + `Inv# ${x.invoice_No} for Job# ${x.jobId},`
       }
     });
-    console.log(state.totalrecieving)
-    console.log({
-      debit:state.debitReceiving,
-      credit:state.creditReceiving
-    })
+
     invNarration = invNarration + ` For ${state.selectedParty.name}`;
     //Create Account Transactions
     if((Object.keys(state.payAccountRecord).length!=0) && (state.totalrecieving!=0)){ // <- Checks if The Recieving Account is Selected
@@ -185,45 +187,76 @@ const BillComp = ({companyId, state, dispatch}) => {
           }
         })
       }
-      // Gain & Loss Account
-      if((Object.keys(state.gainLossAccountRecord).length!=0) && (state.gainLossAmount!=0) && (state.gainLossAmount!=null) && (state.totalrecieving!=0)){
-      gainAndLossAmount = state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount))
+      let partyAmount = state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)
+      let payAmount = state.debitReceiving > state.creditReceiving? 
+        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) + removing:
+        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) - removing; 
+
+      if(state.partytype=='agent'){
+        // Gain & Loss Account
+        if((Object.keys(state.gainLossAccountRecord).length!=0) && (state.gainLossAmount!=0) && (state.gainLossAmount!=null) && (state.totalrecieving!=0)){
+          gainAndLossAmount = state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount))
+          transTwo.push({
+            particular:state.gainLossAccountRecord,
+            tran:{
+              type:parseFloat(state.gainLossAmount)>0?'credit':'debit',
+              amount:parseFloat(gainAndLossAmount).toFixed(2),//state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount)),
+              defaultAmount:parseFloat(gainAndLossAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
+              narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+              accountType:'gainLoss'
+            }
+          })
+        }
+
+        // console.log(state.totalrecieving)
+        let newPartyAmount = 0;
+        let newPayAmount = 0;
+        console.log(state.debitReceiving, 'debit')
+        console.log(state.creditReceiving, 'credit')
+        console.log(parseFloat(state.gainLossAmount), 'gain-loss')
+        console.log(parseFloat(state.gainLossAmount), 'gain-loss')
         transTwo.push({
-          particular:state.gainLossAccountRecord,
+          particular:state.partyAccountRecord,
           tran:{
-            type:parseFloat(state.gainLossAmount)>0? (payType!="Recievable"?'debit':'credit') : (payType!="Recievable"?'credit':'debit'),
-            amount:gainAndLossAmount,//state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount)),
-            defaultAmount:parseFloat(gainAndLossAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
+            type:state.debitReceiving < state.creditReceiving?'debit':'credit',
+            amount:partyAmount,
+            defaultAmount:parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
-            accountType:'gainLoss'
+            accountType:'partyAccount'
+          }
+        })
+        transTwo.push({
+          particular:state.payAccountRecord,  
+          tran:{ 
+            type:state.debitReceiving < state.creditReceiving?'credit':'debit',
+            amount:parseFloat(payAmount) + parseFloat(state.gainLossAmount), 
+            defaultAmount:(parseFloat(payAmount)+ parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
+            narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+            accountType:'payAccount'
+          }
+        })
+      } else {
+        transTwo.push({
+          particular:state.partyAccountRecord,
+          tran:{
+            type:payType=="Recievable"?'credit':'debit',
+            amount:partyAmount,
+            defaultAmount:parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
+            narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+            accountType:'partyAccount'
+          }
+        })
+        transTwo.push({
+          particular:state.payAccountRecord,  
+          tran:{ 
+            type:state.payAccountRecord.Parent_Account.Account[payType=="Recievable"?'inc':'dec'],// <-Checks the account type to make Debit or Credit
+            amount:parseFloat(payAmount) + parseFloat(state.gainLossAmount), 
+            defaultAmount:(parseFloat(payAmount)+ parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
+            narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+            accountType:'payAccount'
           }
         })
       }
-      let partyAmount = state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)
-      console.log(state.totalrecieving)
-      let payAmount = payType=="Recievable"? 
-        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) - removing:
-        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) + removing; 
-      transTwo.push({
-        particular:state.partyAccountRecord,
-        tran:{
-          type:payType=="Recievable"?'credit':'debit',
-          amount:partyAmount, 
-          defaultAmount:parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
-          narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
-          accountType:'partyAccount'
-        }
-      })
-      transTwo.push({
-        particular:state.payAccountRecord,  
-        tran:{ 
-          type:state.payAccountRecord.Parent_Account.Account[payType=="Recievable"?'inc':'dec'],// <-Checks the account type to make Debit or Credit
-          amount:parseFloat(payAmount) + parseFloat(state.gainLossAmount), 
-          defaultAmount:(parseFloat(payAmount)+ parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
-          narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
-          accountType:'payAccount'
-        }
-      })
     }
     dispatch({type:'setAll', payload:{
       removing:removing,
@@ -355,13 +388,16 @@ const BillComp = ({companyId, state, dispatch}) => {
         </Col>
         <Col md={4} className="mt-3">
           <div className='grey-txt fs-14'>
-            {state.gainLossAmount==0.00 && <br/>}
+            
+            {/* 
             {(state.gainLossAmount>0 && payType!="Recievable") && <span style={{color:'red'}}><b>Loss</b></span>}
-            {(state.gainLossAmount>0 && payType=="Recievable") && <span style={{color:'green'}}><b>Gain</b></span>}
-            {(state.gainLossAmount<0 && payType!="Recievable") && <span style={{color:'green'}}><b>Gain</b></span>}
-            {(state.gainLossAmount<0 && payType=="Recievable") && <span style={{color:'red'}}><b>Loss</b></span>}
+            {(state.gainLossAmount>0 && payType=="Recievable") && <span style={{color:'green'}}><b>Gain</b></span>}*/}
+            {state.gainLossAmount==0.00 && <br/>}
+            {state.gainLossAmount>0 && <span style={{color:'green'}}><b>Gain</b></span>}
+            {state.gainLossAmount<0 && <span style={{color:'red'}}><b>Loss</b></span>} 
           </div>
           <div className="custom-select-input-small" >{Math.abs(state.gainLossAmount)}</div>
+          {/* <div className="custom-select-input-small" >{state.gainLossAmount}</div> */}
         </Col>
         <Col className="mt-3" md={8}>
           <span className="grey-txt fs-14">Gain / Loss Account</span>
@@ -460,7 +496,7 @@ const BillComp = ({companyId, state, dispatch}) => {
               disabled={state.autoOn}
               onChange={() => {
                 let tempState = [...state.invoices];
-                console.log(tempState[index])
+                // console.log(tempState[index])
                 tempState[index].check = !tempState[index].check;
                 if(state.payType=="Recievable"){
                   tempState[index].receiving = tempState[index].check?
