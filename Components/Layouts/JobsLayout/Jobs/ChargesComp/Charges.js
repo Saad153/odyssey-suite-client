@@ -59,6 +59,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
     
     const saveCharges = async () => {
         if(!state.chargeLoad){
+            await calculate()
             await dispatch({type:'toggle', fieldName:'chargeLoad', payload:true})
             await saveHeads(chargeList, state, dispatch, reset);
             //chargesData.refetch();
