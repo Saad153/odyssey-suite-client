@@ -57,7 +57,7 @@ const BillComp = ({companyId, state, dispatch}) => {
     } else {
       set('finalTax', state.taxAmount);
     }
-  }
+  };
 
   const calculateTransactions = () => {
     let tempGainLoss = 0.00;
@@ -100,7 +100,8 @@ const BillComp = ({companyId, state, dispatch}) => {
       debitReceiving:debitReceiving,
       creditReceiving:creditReceiving,
     }})
-  }
+  };
+
   const resetAll = () => {
     let tempList = [...state.invoices];
     tempList = tempList.map(x=>({
@@ -109,7 +110,8 @@ const BillComp = ({companyId, state, dispatch}) => {
       receiving:0.00,
     }));
     return tempList
-  }  
+  };
+
   const autoKnocking = async() => {
     let val = resetAll();
     if(state.auto=='0'||state.auto==null){
@@ -143,7 +145,8 @@ const BillComp = ({companyId, state, dispatch}) => {
     }
     calculateTax();
     calculateTransactions();
-  }  
+  };
+
   const submitPrices = async() => {
     let transTwo = [];
     let removing = 0;
@@ -189,8 +192,8 @@ const BillComp = ({companyId, state, dispatch}) => {
       }
       let partyAmount = state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)
       let payAmount = state.debitReceiving > state.creditReceiving? 
-        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) + removing:
-        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) - removing; 
+        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) - removing:
+        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) + removing; 
 
       if(state.partytype=='agent'){
         // Gain & Loss Account
@@ -211,16 +214,27 @@ const BillComp = ({companyId, state, dispatch}) => {
         // console.log(state.totalrecieving)
         let newPartyAmount = 0;
         let newPayAmount = 0;
-        console.log(state.debitReceiving, 'debit')
-        console.log(state.creditReceiving, 'credit')
-        console.log(parseFloat(state.gainLossAmount), 'gain-loss')
-        console.log(parseFloat(state.gainLossAmount), 'gain-loss')
+        // console.log(state.debitReceiving, 'debit')
+        // console.log(state.creditReceiving, 'credit')
+        // console.log(parseFloat(state.gainLossAmount), 'gain-loss')
+        let TempTotalReceing = Math.abs(state.debitReceiving - state.creditReceiving) * parseFloat(state.autoOn?state.exRate:state.manualExRate)
+        // console.log(TempTotalReceing, 'Total')
+        newPartyAmount = ((TempTotalReceing).toFixed(2));
+
+        if(state.debitReceiving>state.creditReceiving){
+          newPayAmount = (TempTotalReceing - removing).toFixed(2)
+        } else {
+          newPayAmount = (TempTotalReceing + removing).toFixed(2)
+        }
+        // console.log(newPartyAmount, 'Party')
+        // console.log(newPayAmount, 'Company')
+        // console.log(removing, 'tax & Charges')
         transTwo.push({
           particular:state.partyAccountRecord,
           tran:{
             type:state.debitReceiving < state.creditReceiving?'debit':'credit',
-            amount:partyAmount,
-            defaultAmount:parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
+            amount:newPartyAmount,
+            defaultAmount:parseFloat(newPartyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
             accountType:'partyAccount'
           }
@@ -229,13 +243,14 @@ const BillComp = ({companyId, state, dispatch}) => {
           particular:state.payAccountRecord,  
           tran:{ 
             type:state.debitReceiving < state.creditReceiving?'credit':'debit',
-            amount:parseFloat(payAmount) + parseFloat(state.gainLossAmount), 
-            defaultAmount:(parseFloat(payAmount)+ parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
+            amount:parseFloat(newPayAmount) + parseFloat(Math.abs(state.gainLossAmount)), 
+            defaultAmount:(parseFloat(newPayAmount)+parseFloat(Math.abs(state.gainLossAmount)))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
             accountType:'payAccount'
           }
         })
       } else {
+        console.log(removing)
         transTwo.push({
           particular:state.partyAccountRecord,
           tran:{
@@ -263,7 +278,8 @@ const BillComp = ({companyId, state, dispatch}) => {
       transactionCreation:transTwo,
       glVisible:true
     }})
-  }  
+  };
+
   const getContainers = (data) => {
     let result = "";
     data?.SE_Job?.Bl?.Container_Infos &&
@@ -271,7 +287,7 @@ const BillComp = ({companyId, state, dispatch}) => {
       result = result + x.no + ', '
     });
     return result||'none'
-  }
+  };
 
   return (
   <>
@@ -457,40 +473,38 @@ const BillComp = ({companyId, state, dispatch}) => {
         {state.invoices.map((x, index) => {
         return (
         <tr key={index} className='f fs-12' style={{backgroundColor:state.edit?'#E4EEF6':'white'}}>
-            <td style={{width:30}}>{index + 1}</td>
-            <td style={{width:100, paddingLeft:4, paddingTop:8}} className='row-hov blue-txt' onClick={()=>{
-                let type = x.operation;
-                if(x?.SE_Job?.jobNo){
-                    dispatchNew(incrementTab({
-                    "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
-                    "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
-                    "id":x.SE_Job.id
-                    }))
-                    router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
-                        type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
-                    )}
-                }
-            }> <b>{x?.SE_Job?.jobNo}</b></td>
-            <td style={{width:100}}>{x.invoice_No}</td>
-            <td>{x?.SE_Job?.Bl?.hbl||'none'}</td>
-            <td>{x?.SE_Job?.Bl?.mbl||'none'}</td>
-            <td style={{width:50}}>{x.currency}</td>
-            <td style={{width:50}}>{parseFloat(x.ex_rate).toFixed(2)}</td>
-            <td className='blue-txt' style={{width:30}}><b>{x.payType=="Payble"?"CN":"DN"}</b></td>
-            <td>{commas(x.inVbalance)}</td>
-            <td style={{padding:3, width:150}}>
-                <InputNumber style={{height:30, width:140, fontSize:12}} value={x.receiving} min="0.00" max={`${x.remBalance}`} stringMode  disabled={state.autoOn}
-                    onChange={(e)=>{
-                        let tempState = [...state.invoices];
-                        tempState[index].receiving = e;
-                        set('invoices', tempState);
-                    }}
-                />
-            </td>
-            <td>
-            {commas(x.remBalance - x.receiving)}
-            </td>
-            <td style={{ width:50}} className='px-3 py-2'>
+          <td style={{width:30}}>{index + 1}</td>
+          <td style={{width:100, paddingLeft:4, paddingTop:8}} className='row-hov blue-txt' onClick={()=>{
+            let type = x.operation;
+            if(x?.SE_Job?.jobNo){
+              dispatchNew(incrementTab({
+              "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
+              "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
+              "id":x.SE_Job.id
+              }))
+              router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
+                type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
+              )}
+            }
+          }> <b>{x?.SE_Job?.jobNo}</b></td>
+          <td style={{width:100}}>{x.invoice_No}</td>
+          <td>{x?.SE_Job?.Bl?.hbl||'none'}</td>
+          <td>{x?.SE_Job?.Bl?.mbl||'none'}</td>
+          <td style={{width:50}}>{x.currency}</td>
+          <td style={{width:50}}>{parseFloat(x.ex_rate).toFixed(2)}</td>
+          <td className='blue-txt' style={{width:30}}><b>{x.payType=="Payble"?"CN":"DN"}</b></td>
+          <td>{commas(x.inVbalance)}</td>
+          <td style={{padding:3, width:150}}>
+            <InputNumber style={{height:30, width:140, fontSize:12}} value={x.receiving} min="0.00" max={`${x.remBalance}`} stringMode  disabled={state.autoOn}
+              onChange={(e)=>{
+                let tempState = [...state.invoices];
+                tempState[index].receiving = e;
+                set('invoices', tempState);
+              }}
+            />
+          </td>
+          <td> {commas(x.remBalance - x.receiving)} </td>
+          <td style={{ width:50}} className='px-3 py-2'>
             <input type='checkbox' style={{cursor:'pointer'}} 
               checked={x.check} 
               disabled={state.autoOn}
@@ -518,8 +532,8 @@ const BillComp = ({companyId, state, dispatch}) => {
                 set('invoices', tempState);
               }}
             />
-            </td>
-            <td>{getContainers(x)}</td>
+          </td>
+          <td>{getContainers(x)}</td>
         </tr>
         )})}
         </tbody>
