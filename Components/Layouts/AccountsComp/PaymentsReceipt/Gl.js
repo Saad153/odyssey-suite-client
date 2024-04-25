@@ -31,106 +31,113 @@ const Gl = ({state, dispatch, companyId}) => {
   }
 
   const handleSubmit = async () => {
-    set("transLoad", true);
-    let tempInvoices = [];
-    let invoicesIds = [];
-    state.invoices.forEach((x, i) => {
-      // make receving & payin logic
-      let tempReceiving = invoiceCurrency!="PKR"? 
-        //parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2)):
-        parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2)):
-        parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving));
-      let tempPaying = invoiceCurrency!="PKR"? 
-        parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2)):
-        parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))
-
-      let tempRecStatus = invoiceCurrency!="PKR"?
-        parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":"2":
-        parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":"2"
-      let tempPayStatus = invoiceCurrency!="PKR"? 
-        parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":"2":
-        parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":"2"
-
-        if((x.receiving>0 || state.edit) && payType=="Recievable"){
-        invoicesIds.push(x.id)
-        tempInvoices.unshift({
-          id:x.id,
-          //recieved:parseFloat(x.total)+parseFloat(x.roundOff) == parseFloat(x.recieved)?x.recieved:tempReceiving, //this logic does not let over receive
-          recieved:tempReceiving, //this logic does not let over receive
-          status:tempRecStatus,
-          //inVbalance:x.inVbalance
-        })
-      }else if((x.receiving>0 || state.edit) && payType!="Recievable"){
-        invoicesIds.push(x.id)
-        tempInvoices.unshift({
-          id:x.id,
-          //paid:parseFloat(x.total)+parseFloat(x.roundOff) == parseFloat(x.paid)?x.paid:tempPaying, //this logic does not let over pay
-          paid:tempPaying, //this logic does not let over pay
-          status:tempPayStatus,
-          //inVbalance:x.inVbalance
-        })
+    if(
+      (state.partytype=="agent" && parseFloat(state.autoOn?state.exRate:state.manualExRate)<150)||
+      (state.partytype!="agent" && parseFloat(state.autoOn?state.exRate:state.manualExRate)==0)
+    ){
+      openNotification("Error", "Check Exchange Rate !", "red")
+    } else {
+      set("transLoad", true);
+      let tempInvoices = [];
+      let invoicesIds = [];
+      state.invoices.forEach((x, i) => {
+        // make receving & payin logic
+        let tempReceiving = invoiceCurrency!="PKR"? 
+          //parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2)):
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2)):
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving));
+        let tempPaying = invoiceCurrency!="PKR"? 
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2)):
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))
+  
+        let tempRecStatus = invoiceCurrency!="PKR"?
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":"2":
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":"2"
+        let tempPayStatus = invoiceCurrency!="PKR"? 
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":"2":
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":"2"
+  
+          if((x.receiving>0 || state.edit) && payType=="Recievable"){
+          invoicesIds.push(x.id)
+          tempInvoices.unshift({
+            id:x.id,
+            //recieved:parseFloat(x.total)+parseFloat(x.roundOff) == parseFloat(x.recieved)?x.recieved:tempReceiving, //this logic does not let over receive
+            recieved:tempReceiving, //this logic does not let over receive
+            status:tempRecStatus,
+            //inVbalance:x.inVbalance
+          })
+        }else if((x.receiving>0 || state.edit) && payType!="Recievable"){
+          invoicesIds.push(x.id)
+          tempInvoices.unshift({
+            id:x.id,
+            //paid:parseFloat(x.total)+parseFloat(x.roundOff) == parseFloat(x.paid)?x.paid:tempPaying, //this logic does not let over pay
+            paid:tempPaying, //this logic does not let over pay
+            status:tempPayStatus,
+            //inVbalance:x.inVbalance
+          })
+        }
+      });
+      let voucher = {
+        type:payType=="Recievable"?"Job Reciept":"Job Payment",
+        vType:state.transaction=="Bank"? 
+          payType=="Recievable"?
+            "BRV":"BPV":
+          payType=="Recievable"?
+            "CRV":"CPV",
+        CompanyId:companyId,
+        amount:"",
+        currency:invoiceCurrency,
+        exRate:state.autoOn?state.exRate:state.manualExRate,
+        chequeNo:state.checkNo,
+        drawnAt:state.drawnAt,
+        onAccount:state.onAccount,
+        costCenter:"KHI",
+        Voucher_Heads:[],
+        subType:state.subType
       }
-    });
-    let voucher = {
-      type:payType=="Recievable"?"Job Reciept":"Job Payment",
-      vType:state.transaction=="Bank"? 
-        payType=="Recievable"?
-          "BRV":"BPV":
-        payType=="Recievable"?
-          "CRV":"CPV",
-      CompanyId:companyId,
-      amount:"",
-      currency:invoiceCurrency,
-      exRate:state.autoOn?state.exRate:state.manualExRate,
-      chequeNo:state.checkNo,
-      drawnAt:state.drawnAt,
-      onAccount:state.onAccount,
-      costCenter:"KHI",
-      Voucher_Heads:[],
-      subType:state.subType
+      state.transactionCreation.forEach((x)=>{
+        let tempVoucheObj = {
+          defaultAmount:`${x.tran.defaultAmount==0?'':x.tran.defaultAmount}`,
+          amount:`${x.tran.amount}`,
+          type:x.tran.type,
+          narration:x.tran.narration,
+          VoucherId:null,
+          ChildAccountId:x.particular.id,
+          accountType:x.tran.accountType
+        }
+        let voucherHeadId = state.voucherHeads.find((y)=>y.accountType==x.tran.accountType)
+        if(voucherHeadId){
+          tempVoucheObj.id = voucherHeadId.id
+        }
+        voucher.Voucher_Heads.push(tempVoucheObj)
+      })
+      voucher.invoices = invoicesIds.join(", ");
+      voucher.partyId = state.selectedParty.id;
+      voucher.partyName = state.selectedParty.name;
+      voucher.partyType = state.partytype;
+      voucher.tranDate = moment(state.date).format("yyyy-MM-DD");
+      state.edit?voucher.id = state.id : null;
+      voucher.createdAt = state.createdAt;
+      await axios.post(
+       state.edit?
+         process.env.NEXT_PUBLIC_CLIMAX_UPDATE_VOUCEHR:
+         process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, 
+         voucher
+       )
+      .then(async(x)=>{
+        let newInvoices = state.invoiceLosses.map((y)=>{
+          return {...y, VoucherId:state.edit?state.id:x.data.result.id}
+        })
+        await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_CREATE_INVOICE_TRANSACTION,{
+          invoices:tempInvoices,
+          invoiceLosses:newInvoices,
+        }).then(()=>{
+          openNotification("Success", "Transaction Recorded!", "green")
+        })
+      })
+      await delay(1000)
+      await getInvoices(state, companyId, dispatch); 
     }
-    state.transactionCreation.forEach((x)=>{
-      let tempVoucheObj = {
-        defaultAmount:`${x.tran.defaultAmount==0?'':x.tran.defaultAmount}`,
-        amount:`${x.tran.amount}`,
-        type:x.tran.type,
-        narration:x.tran.narration,
-        VoucherId:null,
-        ChildAccountId:x.particular.id,
-        accountType:x.tran.accountType
-      }
-      let voucherHeadId = state.voucherHeads.find((y)=>y.accountType==x.tran.accountType)
-      if(voucherHeadId){
-        tempVoucheObj.id = voucherHeadId.id
-      }
-      voucher.Voucher_Heads.push(tempVoucheObj)
-    })
-    voucher.invoices = invoicesIds.join(", ");
-    voucher.partyId = state.selectedParty.id;
-    voucher.partyName = state.selectedParty.name;
-    voucher.partyType = state.partytype;
-    voucher.tranDate = moment(state.date).format("yyyy-MM-DD");
-    state.edit?voucher.id = state.id : null;
-    voucher.createdAt = state.createdAt;
-    await axios.post(
-     state.edit?
-       process.env.NEXT_PUBLIC_CLIMAX_UPDATE_VOUCEHR:
-       process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, 
-       voucher
-     )
-    .then(async(x)=>{
-      let newInvoices = state.invoiceLosses.map((y)=>{
-        return {...y, VoucherId:state.edit?state.id:x.data.result.id}
-      })
-      await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_CREATE_INVOICE_TRANSACTION,{
-        invoices:tempInvoices,
-        invoiceLosses:newInvoices,
-      }).then(()=>{
-        openNotification("Success", "Transaction Recorded!", "green")
-      })
-    })
-    await delay(1000)
-    await getInvoices(state, companyId, dispatch); 
   }
 
   return (

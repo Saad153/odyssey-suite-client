@@ -222,13 +222,14 @@ const BillComp = ({companyId, state, dispatch}) => {
         newPartyAmount = ((TempTotalReceing).toFixed(2));
 
         if(state.debitReceiving>state.creditReceiving){
-          newPayAmount = (TempTotalReceing - removing).toFixed(2)
+          newPayAmount = (TempTotalReceing - removing + parseFloat(state.gainLossAmount))
         } else {
-          newPayAmount = (TempTotalReceing + removing).toFixed(2)
+          newPayAmount = (TempTotalReceing + removing - parseFloat(state.gainLossAmount))
         }
         // console.log(newPartyAmount, 'Party')
         // console.log(newPayAmount, 'Company')
         // console.log(removing, 'tax & Charges')
+        // console.log(state.gainLossAmount, 'tax & Charges')
         transTwo.push({
           particular:state.partyAccountRecord,
           tran:{
@@ -243,14 +244,13 @@ const BillComp = ({companyId, state, dispatch}) => {
           particular:state.payAccountRecord,  
           tran:{ 
             type:state.debitReceiving < state.creditReceiving?'credit':'debit',
-            amount:parseFloat(newPayAmount) + parseFloat(Math.abs(state.gainLossAmount)), 
-            defaultAmount:(parseFloat(newPayAmount)+parseFloat(Math.abs(state.gainLossAmount)))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
+            amount:parseFloat(newPayAmount), 
+            defaultAmount:(parseFloat(newPayAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
             accountType:'payAccount'
           }
         })
       } else {
-        console.log(removing)
         transTwo.push({
           particular:state.partyAccountRecord,
           tran:{
@@ -472,7 +472,7 @@ const BillComp = ({companyId, state, dispatch}) => {
         <tbody>
         {state.invoices.map((x, index) => {
         return (
-        <tr key={index} className='f fs-12' style={{backgroundColor:state.edit?'#E4EEF6':'white'}}>
+        <tr key={index} className={`f fs-12 ${state.edit?'grey-row':''}`}>
           <td style={{width:30}}>{index + 1}</td>
           <td style={{width:100, paddingLeft:4, paddingTop:8}} className='row-hov blue-txt' onClick={()=>{
             let type = x.operation;
@@ -541,9 +541,10 @@ const BillComp = ({companyId, state, dispatch}) => {
       </div>
       </div>
         <div className=''>
-          Total {state.payType=="Recievable"?"Receivable":"Payble"} Amount:{" "}
+          {/*  */}
+          Total {state.debitReceiving > state.creditReceiving?"Receivable":"Payble"} Amount:{" "}
           <div style={{padding:3, border:'1px solid silver', minWidth:100, display:'inline-block', textAlign:'right'}}>
-            {state.totalrecieving.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")}
+            {Math.abs(state.debitReceiving - state.creditReceiving).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")}
           </div>
         </div>
         <div className='text-end'>

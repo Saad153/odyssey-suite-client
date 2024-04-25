@@ -139,7 +139,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         <>
         {x.type==type && 
         <tr key={x.key_id} className='f table-row-center-singleLine'>
-        <td className='text-center'>
+        <td className='text-center'>{/* Remove Charge */}
             <CloseCircleOutlined className='cross-icon' style={{ position: 'relative', bottom: 3 }}
                 onClick={() => {
                 if((x.Invoice==null || x.Invoice?.status==null || x.Invoice?.approved=="0")) {
@@ -276,8 +276,11 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
             />
         </td>}
         <td style={{ padding: 3 }}>{/* QTY */}
+          <div style={{border:chargeList[index]?.qty==0?'2px solid red':'silver'}}>
             <InputNumComp register={register} name={`chargeList.${index}.qty`} control={control} width={30} font={13} 
-            disabled={permissionAssign(permissions, x)}/>
+                disabled={permissionAssign(permissions, x)}
+            />
+          </div>
         </td> 
         {(operationType=="AI"||operationType=="AE") &&<td style={{ padding: 3 }}>{/* rate_charge */}
             <InputNumComp register={register} name={`chargeList.${index}.rate_charge`} control={control} width={30} font={13} 
