@@ -169,55 +169,54 @@ const VoucherPrint = ({ compLogo, voucherData }) => {
                 </Col>
             </Row>
             <div className='mt-4' style={{ maxHeight: 500, overflowY: 'auto' }}>
-                <Table bordered className='tableFixHead'>
-                    <thead style={{ fontSize: "10px" }}>
-                        <tr>
-                            <th>Code</th>
-                            <th>Head of Account</th>
-                            <th>Cost Center</th>
-                            <th>Debit</th>
-                            <th>Credit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            voucherData.Voucher_Heads.map((x, index) => {
-                                return (
-                                    <>
-                                        <tr key={index} className='fs-10' >
-                                            <td>{index + 1}</td>
-                                            <td>
-                                                <span className=''>{x.narration}</span>
-                                            </td>
-                                            <td>
-                                                <span className=''>{"KHI"}</span>
-                                            </td>
-                                            <td className='text-end' >
-                                                <span>{x.type === "debit" ? commas(x.amount) : ""}</span>
-                                            </td>
-                                            <td className='text-end'>
-                                                <span>{x.type === "credit" ? commas(x.amount) : ""}</span>
-                                            </td>
-                                        </tr>
-                                    </>
-                                )
-                            })}
-                        <tr className='text-end fw-bold fs-10'>
-                            <td colSpan={3} >
-                                Total
-                            </td>
-                            <td>
-                                {commas(debitTotal)}
-                            </td>
-                            <td>
-                                {commas(creditTotal)}
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
+              <Table bordered className='tableFixHead'>
+                <thead style={{ fontSize: "10px" }}>
+                    <tr>
+                    <th>Code</th>
+                    <th>Head of Account</th>
+                    <th>Cost Center</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {voucherData.Voucher_Heads.map((x, index) => {
+                    return (
+                    <tr key={index} className='fs-10' >
+                      <td>{index + 1}</td>
+                      <td>
+                        <span className=''>
+                            {x.Child_Account?.title}<br/>
+                            {x.narration && <span style={{fontSize:7, color:'grey'}}>{"( "}{x.narration}{" )"}</span>}
+                        </span>
+                      </td>
+                      <td>
+                        <span className=''>{"KHI"}</span>
+                      </td>
+                      <td className='text-end'>
+                        <span>{x.type === "debit" ? commas(x.amount) : ""}</span>
+                      </td>
+                      <td className='text-end'>
+                        <span>{x.type === "credit" ? commas(x.amount) : ""}</span>
+                      </td>
+                    </tr>
+                  )})}
+                  <tr className='text-end fw-bold fs-10'>
+                        <td colSpan={3} >
+                            Total
+                        </td>
+                        <td>
+                            {commas(debitTotal)}
+                        </td>
+                        <td>
+                            {commas(creditTotal)}
+                        </td>
+                  </tr>
+                </tbody>
+              </Table>
             </div>
             <Row className='my-2'>
-                <Col md={12}>
+              <Col md={12}>
                     <label className='fs-10'>Total amount in words :</label>
                     <input
                         type='text'
@@ -226,7 +225,7 @@ const VoucherPrint = ({ compLogo, voucherData }) => {
                         readOnly
                         defaultValue={numToWords(creditTotal)}
                     />
-                </Col>
+              </Col>
             </Row>
             <Row style={{ position: "fixed", bottom: 100, width: "90%" }}>
                 <Col md={4}>

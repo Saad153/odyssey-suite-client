@@ -286,7 +286,7 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
         >
           Delete
         </button>}
-        {id !== "new" && <button>
+        {id !== "new" && <button type="button">
           {/* //print button  */}
           <ReactToPrint
             content={() => inputRef}
@@ -369,11 +369,9 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
     }}>
       <div ref={(response) => (inputRef = response)}>
         {
-          id !== "new" ? (
-            <VoucherPrint compLogo={CompanyId} voucherData={voucherData} />
-          )
-            :
-            null
+          id !== "new" ? 
+          ( <VoucherPrint compLogo={CompanyId} voucherData={voucherData} /> )
+          :null
         }
       </div>
     </div>
