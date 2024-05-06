@@ -43,26 +43,33 @@ const InvoiceCharges = ({data, companyId}) => {
 
   let bankDetails = {
     one:`
-    IBAN: PK08 BAHL 1054 0081 0028 1201 \n
-    A/C #: 1054-0081-002182-01-5 \n
-    TITLE: SEANET SHIPPING & LOGISTICS \n
-    BANK: BANL AL HABIB LIMITED \n
-    BRANCH: TARIQ ROAD 1054, KARACHI \n
-    SWIFT: BAHLPKKAXXX`,
+    Bank Name: Soneri Bank Ltd \n
+    Bank Branch: Shahrah-e-Faisal Br 0031 Karachi \n
+    A/c Title: AIR CARGO SERVICES \n
+    A/c #: 20001766466 \n
+    Swift Code: SONEPKKAKAR \n
+    IBAN: PK02SONE0003120001766466`,
     two:`
-    IBAN: PK08 BAHL 1054 0081 0028 1201 \n
-    A/C #: 1054-0081-002182-01-5 \n
-    TITLE: AIR CARGO SERVICES \n
-    BANK: BANL AL HABIB LIMITED \n
-    BRANCH: TARIQ ROAD 1054, KARACHI \n
-    SWIFT: BAHLPKKAXXX`,
+    IBAN: PK91SONE0003120001534198 \n
+    TITLE: SEA NET SHIPPING & LOGISTICS \n
+    BANK: SONERI BANK LIMITED  \n
+    A/c #: 20001534198 \n
+    BRANCH: SHAHRAH-E-FAISAL BRANCH 0031, KARACHI \n
+    SWIFT: SONEPKKAXXX`,
     three:`
     IBAN: PK08 BAHL 1054 0081 0028 1201 \n
-    A/C #: 1054-0081-002182-01-5 \n
-    TITLE: CARGO LINKERS \n
-    BANK: BANL AL HABIB LIMITED \n
+    A/c #: 1054-0081-002182-01-5 \n
+    TITLE: SEA NET SHIPPING & LOGISTICS \n
+    BANK: BANK AL HABIB LIMITED \n
     BRANCH: TARIQ ROAD 1054, KARACHI \n
-    SWIFT: BAHLPKKAXXX`
+    SWIFT: BAHLPKKAXXX`,
+    four:`
+    IBAN: PK73 BAHL 1054 0081 0044 1101 \n
+    A/c #: 1054-0081-004411-01-7 \n
+    TITLE: AIR CARGO SERVICES \n    
+    BANK: BANK AL HABIB LIMITED \n
+    BRANCH: TARIQ ROAD 1054, KARACHI \n
+    SWIFT: BAHLPKKAXXX`,
   }
 
   useEffect(()=>{
@@ -511,15 +518,16 @@ return (
             <b>Bank Details</b>
             <div style={{border:"1px solid silver"}}>
                 <div style={{fontSize:12, lineHeight:0.8, whiteSpace:'pre-wrap', paddingBottom:10}}>
-                    {bank==1?bankDetails.one:bank==2?bankDetails.two:bankDetails.three}
+                    {bank==1?bankDetails.one:bank==2?bankDetails.two:bank==3?bankDetails.three:bankDetails.four}
                 </div>
             </div>
         </Col>
         <Col className='mt-5 p-0' md={2}>
             <Radio.Group onChange={(e)=>setBank(e.target.value)} value={bank}>
-                <Radio value={1}>BANK A</Radio>
-                <Radio value={2}>BANK B</Radio>
-                <Radio value={3}>BANK C</Radio>
+                <Radio value={1}>BANK-A {"(ACS)"}</Radio>
+                <Radio value={4}>BANK-B {"(ACS)"}</Radio>
+                <Radio value={2}>BANK-C {"(SNS)"}</Radio>
+                <Radio value={3}>BANK-D {"(SNS)"}</Radio>
             </Radio.Group>
         </Col>
     </Row>
