@@ -194,7 +194,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
         <Col className='text-end'>
             <button className='btn-custom' style={{fontSize:11}}
                 onClick={()=>{
-                    axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS)
+                    axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS,{headers:{companyid:companyId}})
                     .then((x)=>{
                         let tempData = []
                         x.data.result.forEach((y, i)=>{
