@@ -49,6 +49,8 @@ const EquipmentInfo = ({state, dispatch}) => {
                 tempState[i].gross = 3750; 
               }else if(e=='45HC'){ // 1 * 2
                 tempState[i].gross = 4800; 
+              } else {
+                tempState[i].gross = 0;
               }
               dispatch({type:'toggle', fieldName:'equipments', payload:tempState})
             }}
@@ -59,6 +61,21 @@ const EquipmentInfo = ({state, dispatch}) => {
               {value:'20FR', label:'20FR'},
               {value:'40SD', label:'40SD'},
               {value:'45HC', label:'45HC'},
+
+              {value:'40HV', label:'40HV'},
+              {value:'45BK', label:'45BK'},
+              {value:'45OT', label:'45OT'},
+              {value:'45TK', label:'45TK'},
+              {value:'45VH', label:'45VH'},
+              {value:'M3', label:'M3'},
+              {value:'40OT', label:'40OT'},
+              {value:'20RE', label:'20RE'},
+              {value:'20TK', label:'20TK'},
+              {value:'40FR', label:'40FR'},
+              {value:'40BK', label:'40BK'},
+              {value:'40HCRF', label:'40HCRF'},
+              {value:'20BK', label:'20BK'},
+              {value:'20OT', label:'20OT'}
             ]}
           />
           </td>
@@ -80,7 +97,9 @@ const EquipmentInfo = ({state, dispatch}) => {
                   value = 2900:
                   tempState[i].size=="40SD"?
                   value = 3750:
-                  value = 4800; // 45HC
+                  tempState[i].size=="45HC"?
+                  value = 4800:
+                  value = 0;
                 tempState[i].gross = value * tempState[i].qty;
                 tempState[i].teu = tempState[i].qty*2;
                 dispatch({type:'toggle', fieldName:'equipments', payload:tempState})
