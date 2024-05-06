@@ -75,7 +75,8 @@ const EquipmentInfo = ({state, dispatch}) => {
               {value:'40BK', label:'40BK'},
               {value:'40HCRF', label:'40HCRF'},
               {value:'20BK', label:'20BK'},
-              {value:'20OT', label:'20OT'}
+              {value:'20OT', label:'20OT'},
+              {value:'20FT', label:'20FT'},
             ]}
           />
           </td>

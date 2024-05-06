@@ -156,12 +156,14 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                     </div>
                 </Col>
                 <Col md={5}>
-                <div style={heading}>{(invoice.operation=="SI"|| invoice.operation=="AI")?"Arrival Date":"Departure Date"}</div>
+                <div style={heading}>
+                    {(invoice.operation=="SI"|| invoice.operation=="AI")?"Arrival Date":"Departure Date"}
+                </div>
                     <div style={paraStyles}>
                         {
                             (invoice.operation=="AI"||invoice.operation=="SI") ?
                             <>
-                                {moment(invoice.SE_Job?.arrivalDate).format("DD-MMM-YYYY")}
+                                {moment(invoice.SE_Job?.eta).format("DD-MMM-YYYY")}
                             </>
                             :
                             <>
