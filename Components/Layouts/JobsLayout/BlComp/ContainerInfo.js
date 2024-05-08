@@ -27,7 +27,7 @@ const ContainerInfo = ({control, register, state, useWatch, dispatch, reset}) =>
               tempDeleteList.push(x.id);
             }
         })
-        console.log(tempDeleteList);
+        // console.log(tempDeleteList);
         set('deletingContinersList', tempDeleteList)
     } else {
         let newTemp = temp;
@@ -44,7 +44,28 @@ const ContainerInfo = ({control, register, state, useWatch, dispatch, reset}) =>
   const weightOpt = [
     {label:'40HC', value:'40HC'},
     {label:'20HC', value:'20HC'},
-    {label:'30HC', value:'30HC'}
+    {label:'30HC', value:'30HC'},
+    
+    {value:'20SD', label:'20SD'},
+    {value:'20FR', label:'20FR'},
+    {value:'40SD', label:'40SD'},
+    {value:'45HC', label:'45HC'},
+
+    {value:'40HV', label:'40HV'},
+    {value:'45BK', label:'45BK'},
+    {value:'45OT', label:'45OT'},
+    {value:'45TK', label:'45TK'},
+    {value:'45VH', label:'45VH'},
+    {value:'M3', label:'M3'},
+    {value:'40OT', label:'40OT'},
+    {value:'20RE', label:'20RE'},
+    {value:'20TK', label:'20TK'},
+    {value:'40FR', label:'40FR'},
+    {value:'40BK', label:'40BK'},
+    {value:'40HCRF', label:'40HCRF'},
+    {value:'20BK', label:'20BK'},
+    {value:'20OT', label:'20OT'},
+    {value:'20FT', label:'20FT'},
   ]
   const weightUnit = [
     {label:'KG', value:'KG'},

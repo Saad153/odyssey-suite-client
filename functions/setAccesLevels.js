@@ -240,7 +240,6 @@ function setAccesLevels(dispatch, collapsed){
     }
   }}
 
-
   if(levels){
     levels = levels.slice(0, -1)
     levels = levels.substring(1);
@@ -248,22 +247,22 @@ function setAccesLevels(dispatch, collapsed){
     levels.forEach(x => {
     switch (x) {
       case "se":
-          obj.seaJobs = true;
-          break;
+        obj.seaJobs = true;
+        break;
       case "ae":
-          obj.airJobs = true;
-          break;
+        obj.airJobs = true;
+        break;
       case "setup":
-          obj.setup = true;
-          break;
+        obj.setup = true;
+        break;
       case "accounts":
-          obj.accounts = true;
-          break;
+        obj.accounts = true;
+        break;
       case "admin":
-          obj.admin = true;
-          break;
+        obj.admin = true;
+        break;
       default:
-          break;
+        break;
       }
     });
   }
@@ -272,15 +271,12 @@ function setAccesLevels(dispatch, collapsed){
     items.push(seaJobs):null;
     obj.airJobs?
     items.push(airJobs):null;
-  }else {
+  } else {
     obj.seaJobs?
     items.push(exportJobs):null;
     obj.airJobs?
     items.push(importJobs):null;
-
   }
-  obj.setup?
-  items.push(setup):null
   
   obj.accounts?
   items = [
@@ -300,6 +296,7 @@ function setAccesLevels(dispatch, collapsed){
       airJobs,
       reports
   ]:null
+  obj.setup?items.push(setup):null
   Cookies.set("permissions", JSON.stringify(obj));
   items.unshift(dashboard)
   items.push(tasks)

@@ -170,6 +170,14 @@
   border: none;
   cursor: pointer;
 }
+.btn-custom-green{
+  background-color: rgb(67, 137, 149)!important;
+  color: white;
+  padding: 2px 20px 2px 20px;
+  border-radius: 15px;
+  border: none;
+  cursor:not-allowed
+}
 .btn-custom-disabled{
   background-color: rgb(126, 173, 181)!important;
   color: white;

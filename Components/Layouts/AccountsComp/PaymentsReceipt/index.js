@@ -20,14 +20,14 @@ const PaymentsReceipt = ({id, voucherData}) => {
     const companyId = useSelector((state) => state.company.value);
 
     useEffect(() => {
-        if(router?.query?.id=='undefined') {
+      if(router?.query?.id=='undefined') {
             Router.push({pathname:"/accounts/paymentReceipt/new"}, undefined,{shallow:true});
             dispatchNew(incrementTab({
                 "label": "Payment / Receipt",
                 "key": "3-4",
                 "id":"new"
             }))
-        } else if (router.query.name!='undefined' && router.query.partyid!='undefined' && router.query.partyid){
+      } else if (router.query.name!='undefined' && router.query.partyid!='undefined' && router.query.partyid){
             setAll({ 
                 selectedParty:{id:router.query.partyid, name:router.query.name}, 
                 partytype:router.query.type,
@@ -35,7 +35,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
                 invoiceCurrency:router.query.currency,
                 tranVisible:true
             })
-        }else if(router?.query?.id!='undefined'&&router?.query?.id!='new') {
+      }else if(router?.query?.id!='undefined'&&router?.query?.id!='new') {
             let payAcc = {}, partyAcc = {}, taxAc = {acc:{}, amount:0}, bankAc = {acc:{}, amount:0}, gainLoss = {acc:{}, amount:0}
             voucherData?.Voucher_Heads.forEach((x)=>{
                 if(x.accountType=='payAccount'){
@@ -86,8 +86,10 @@ const PaymentsReceipt = ({id, voucherData}) => {
                 manualExRate:voucherData.exRate,
                 subType:voucherData.subType
             })
-        }
+      }
     }, [router]);
+
+    const addNew = () => router.push("/accounts/paymentReceipt/new")
 
     useEffect(() => { searchParties() }, [state.search]);
 
@@ -132,26 +134,26 @@ const PaymentsReceipt = ({id, voucherData}) => {
 
     const gridRef = useRef(); 
     const [columnDefs, setColumnDefs] = useState([
-        {headerName: '#', field:'no', width: 50, filter:false },
-        {headerName: 'Voucher No.', field:'voucher_Id', filter: true},
-        {headerName: 'Name', field:'partyName', flex:1, filter: true},
-        {headerName: 'Party', field:'partyType', filter: true},
-        {headerName: 'Type', field:'vType', width:124, filter: true},
-        {headerName: 'Date', field:'tranDate', filter: true},
+      {headerName: '#', field:'no', width: 50, filter:false },
+      {headerName: 'Voucher No.', field:'voucher_Id', filter: true},
+      {headerName: 'Name', field:'partyName', flex:1, filter: true},
+      {headerName: 'Party', field:'partyType', filter: true},
+      {headerName: 'Type', field:'vType', width:124, filter: true},
+      {headerName: 'Date', field:'tranDate', filter: true},
     ]);
     const defaultColDef = useMemo( ()=> ({
-        sortable: true,
-        filter: "agTextColumnFilter",
-        floatingFilter: true,
+      sortable: true,
+      filter: "agTextColumnFilter",
+      floatingFilter: true,
     }));
 
     const cellClickedListener = useCallback((e)=> {
-        dispatchNew(incrementTab({"label": "Payment / Receipt","key": "3-4","id":e.data.id}))
-        Router.push(`/accounts/paymentReceipt/${e.data.id}`)
+      dispatchNew(incrementTab({"label": "Payment / Receipt","key": "3-4","id":e.data.id}))
+      Router.push(`/accounts/paymentReceipt/${e.data.id}`)
     }, []);
 
     const getRowHeight = useCallback(() => {
-        return 38;
+      return 38;
     }, []);
 
   return (
@@ -197,7 +199,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
                     axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS,{headers:{companyid:companyId}})
                     .then((x)=>{
                         let tempData = []
-                        x.data.result.forEach((y, i)=>{
+                        x.data?.result?.forEach((y, i)=>{
                             tempData.push({...y, no:i+1})
                         })
                         setAll({oldVouchers:true, oldVouchersList:tempData});
@@ -206,15 +208,25 @@ const PaymentsReceipt = ({id, voucherData}) => {
             >Show Old</button>
         </Col>
         <Col md={6} className='mt-3'>
+          {!state.edit && <>
             <Input placeholder="Search" size='small'
-                suffix={state.search.length>2?<CloseCircleOutlined onClick={()=>setAll({search:""})} />:<SearchOutlined/>} 
-                value={state.search} onChange={(e)=>setAll({search:e.target.value})}
+              suffix={state.search.length>2?<CloseCircleOutlined onClick={()=>setAll({search:""})} />:<SearchOutlined/>} 
+              value={state.search} onChange={(e)=>setAll({search:e.target.value})}
             />
             {state.search.length>2 &&
-                <div style={{position:"absolute", zIndex:10}}>
-                    <ListComp data={state.partyOptions} />
-                </div>
+              <div style={{position:"absolute", zIndex:10}}>
+                <ListComp data={state.partyOptions} />
+              </div>
             }
+          </>}
+          {state.edit && <>
+            <button 
+              className="btn-custom-green"
+              onClick={addNew}
+            >
+              Add New
+            </button>
+          </>}
         </Col>
         <Col md={1} className='mt-3'>
             <Select disabled={state.partytype!="agent"?true:false} value={state.invoiceCurrency} size='small'
@@ -233,17 +245,17 @@ const PaymentsReceipt = ({id, voucherData}) => {
     </Row>
     {state.tranVisible && <BillComp companyId={companyId} state={state} dispatch={dispatch} />}
     <Modal 
-        width={'80%'}
-        open={state.oldVouchers}
-        onOk={()=>setAll({oldVouchers:false})}
-        onCancel={()=> setAll({oldVouchers:false})}
-        footer={false}
-        centered
-        maskClosable={false}
-        title={<>Old Vouchers</>}
+      width={'80%'}
+      open={state.oldVouchers}
+      onOk={()=>setAll({oldVouchers:false})}
+      onCancel={()=> setAll({oldVouchers:false})}
+      footer={false}
+      centered
+      maskClosable={false}
+      title={<>Old Vouchers</>}
     >   
     {state.oldVouchers &&
-    <div className="ag-theme-alpine" style={{width:"100%", height:'72vh'}}>
+      <div className="ag-theme-alpine" style={{width:"100%", height:'72vh'}}>
         <AgGridReact
           ref={gridRef} // Ref for accessing Grid's API
           rowData={state.oldVouchersList} // Row Data for Rows
@@ -254,7 +266,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
           onCellClicked={cellClickedListener} 
           getRowHeight={getRowHeight}
         />
-    </div>
+      </div>
     }
     </Modal>
     </div>

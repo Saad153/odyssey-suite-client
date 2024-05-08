@@ -44,6 +44,7 @@ const ListData = ({ voucherData }) => {
       );
     });
   };
+
   useEffect(() => {
     if (originalData) {
       const filterData = search(originalData);
@@ -74,7 +75,7 @@ const ListData = ({ voucherData }) => {
   }
 
   return (
-    <div className=''>
+    <>
       <Row>
         <Col md="6"><h5></h5></Col>
         <Col md="4">
@@ -92,7 +93,7 @@ const ListData = ({ voucherData }) => {
         </Col>
       </Row>
       <hr />
-      <div className='mt-3' style={{ maxHeight: "60vh", overflowY: 'auto', overflowX: "scroll" }}>
+      <div className='mt-3' style={{ maxHeight: "55vh", overflowY: 'auto', overflowX: "scroll" }}>
         <Table className='tableFixHead'>
           <thead>
             <tr>
@@ -136,7 +137,7 @@ const ListData = ({ voucherData }) => {
       <div className='d-flex justify-content-end items-end my-4' style={{ maxWidth: "100%" }} >
         <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
-    </div>
+    </>
   );
 };
 
