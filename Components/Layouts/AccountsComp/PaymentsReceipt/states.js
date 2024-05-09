@@ -39,6 +39,7 @@ const initialState = {
   load:false,
   visible:false,
   glVisible:false,
+  searchTerm:'',
 
   tranVisible:false,
   search:"",
@@ -181,4 +182,20 @@ const getInvoices = async(state, companyId, dispatch) => {
   })
 }
 
-export { recordsReducer, initialState, getCompanyName, getAccounts, totalRecieveCalc, getInvoices };
+const getTotal = (type, list, curr) => {
+  let result = 0.00;
+  curr=="PKR"?
+  list.forEach((x)=>{
+    if(type==x.tran.type){
+      result = result + parseFloat(x.tran.amount)
+    }
+  }):
+  list.forEach((x)=>{
+    if(type==x.tran.type){
+      result = result + parseFloat(x.tran.defaultAmount)
+    }
+  });
+  return result;
+}
+
+export { recordsReducer, initialState, getCompanyName, getAccounts, totalRecieveCalc, getInvoices, getTotal };

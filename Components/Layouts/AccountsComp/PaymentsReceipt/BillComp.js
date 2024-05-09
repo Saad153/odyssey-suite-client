@@ -1,5 +1,5 @@
 import { getNetInvoicesAmount } from '/functions/amountCalculations';
-import { getAccounts, totalRecieveCalc, getInvoices } from './states';
+import { getAccounts, totalRecieveCalc, getInvoices, getTotal } from './states';
 import openNotification from '/Components/Shared/Notification';
 import TransactionInfo from './TransactionInfo';
 import { Empty, InputNumber, Checkbox, Radio } from 'antd';
@@ -178,13 +178,13 @@ const BillComp = ({companyId, state, dispatch}) => {
       }
       // Bank Charges Account
       if((Object.keys(state.bankChargesAccountRecord).length!=0) && (state.bankCharges!=0) && (state.bankCharges!=null) && (state.totalrecieving!=0)){
-        removing = removing + parseFloat(state.bankCharges);
+        removing = removing + parseFloat(state.bankCharges)*parseFloat(state.autoOn?state.exRate:state.manualExRate);
         transTwo.push({
           particular:state.bankChargesAccountRecord,
           tran:{
             type:'debit',
-            amount:state.bankCharges,
-            defaultAmount:parseFloat(state.bankCharges)/parseFloat(state.autoOn?state.exRate:state.manualExRate),//0
+            amount:(parseFloat(state.bankCharges)*parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2),
+            defaultAmount:parseFloat(state.bankCharges).toFixed(2),//0
             narration:`Bank Charges Paid Against ${invNarration}`,
             accountType:'BankCharges'
           }
@@ -204,12 +204,22 @@ const BillComp = ({companyId, state, dispatch}) => {
             tran:{
               type:parseFloat(state.gainLossAmount)>0?'credit':'debit',
               amount:parseFloat(gainAndLossAmount).toFixed(2),//state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount)),
-              defaultAmount:parseFloat(gainAndLossAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
-              narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+              defaultAmount:(parseFloat(gainAndLossAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
+              narration:`Ex-Rate ${parseFloat(state.gainLossAmount)<0?'Loss':"Gain"} Against ${invNarration}`,
               accountType:'gainLoss'
             }
           })
         }
+        transTwo.push({
+          particular:state.partyAccountRecord,
+          tran:{
+            type:state.debitReceiving < state.creditReceiving?'debit':'credit',
+            amount:Math.abs(parseFloat(state.gainLossAmount)).toFixed(2),
+            defaultAmount:(Math.abs(parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
+            narration:`Ex-Rate ${parseFloat(state.gainLossAmount)<0?'Loss':"Gain"} Against ${invNarration}`,
+            accountType:'partyAccount'
+          }
+        })
 
         // console.log(state.totalrecieving)
         let newPartyAmount = 0;
@@ -222,9 +232,9 @@ const BillComp = ({companyId, state, dispatch}) => {
         newPartyAmount = ((TempTotalReceing).toFixed(2));
 
         if(state.debitReceiving>state.creditReceiving){
-          newPayAmount = (TempTotalReceing - removing + parseFloat(state.gainLossAmount))
+          newPayAmount = (TempTotalReceing - removing )//+ parseFloat(state.gainLossAmount))
         } else {
-          newPayAmount = (TempTotalReceing + removing - parseFloat(state.gainLossAmount))
+          newPayAmount = (TempTotalReceing + removing )//- parseFloat(state.gainLossAmount))
         }
         // console.log(newPartyAmount, 'Party')
         // console.log(newPayAmount, 'Company')
@@ -240,12 +250,13 @@ const BillComp = ({companyId, state, dispatch}) => {
             accountType:'partyAccount'
           }
         })
+
         transTwo.push({
           particular:state.payAccountRecord,  
           tran:{ 
             type:state.debitReceiving < state.creditReceiving?'credit':'debit',
-            amount:parseFloat(newPayAmount), 
-            defaultAmount:(parseFloat(newPayAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
+            amount:parseFloat(newPayAmount).toFixed(2), 
+            defaultAmount:((parseFloat(newPayAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2),//-removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
             accountType:'payAccount'
           }
@@ -255,8 +266,8 @@ const BillComp = ({companyId, state, dispatch}) => {
           particular:state.partyAccountRecord,
           tran:{
             type:payType=="Recievable"?'credit':'debit',
-            amount:partyAmount,
-            defaultAmount:parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
+            amount:parseFloat(partyAmount).toFixed(2),
+            defaultAmount:(parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
             accountType:'partyAccount'
           }
@@ -265,14 +276,17 @@ const BillComp = ({companyId, state, dispatch}) => {
           particular:state.payAccountRecord,  
           tran:{ 
             type:state.payAccountRecord.Parent_Account.Account[payType=="Recievable"?'inc':'dec'],// <-Checks the account type to make Debit or Credit
-            amount:parseFloat(payAmount) + parseFloat(state.gainLossAmount), 
-            defaultAmount:(parseFloat(payAmount)+ parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate),//-removing
+            amount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount)).toFixed(2), 
+            defaultAmount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate).toFixed(2),//-removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
             accountType:'payAccount'
           }
         })
       }
-    }
+    };
+    // console.log(getTotal('credit', transTwo,'PKR'))
+    // console.log(getTotal('debit', transTwo,'PKR'))
+    console.log(transTwo)
     dispatch({type:'setAll', payload:{
       removing:removing,
       transactionCreation:transTwo,
@@ -540,13 +554,15 @@ const BillComp = ({companyId, state, dispatch}) => {
       </Table>
       </div>
       </div>
-        <div className=''>
-          {/*  */}
+        <>
+        {/*  */}
+        <div style={{position:'relative', top:20}}>
           Total {state.debitReceiving > state.creditReceiving?"Receivable":"Payble"} Amount:{" "}
           <div style={{padding:3, border:'1px solid silver', minWidth:100, display:'inline-block', textAlign:'right'}}>
             {Math.abs(state.debitReceiving - state.creditReceiving).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")}
           </div>
         </div>
+        </>
         <div className='text-end'>
           <button onClick={submitPrices} className='btn-custom'>Make Transaction</button>
         </div>

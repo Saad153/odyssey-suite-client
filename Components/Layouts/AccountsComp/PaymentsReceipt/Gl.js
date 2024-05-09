@@ -6,29 +6,13 @@ import axios from 'axios';
 import { delay } from '../../../../functions/delay';
 import { getNetInvoicesAmount } from '../../../../functions/amountCalculations';
 import openNotification from '../../../Shared/Notification';
-import { getInvoices } from './states';
+import { getInvoices, getTotal } from './states';
 
 const Gl = ({state, dispatch, companyId}) => {
 
   const { payType, invoiceCurrency } = state;
   const set = (a, b) => { dispatch({type:'set', var:a, pay:b}) }
   const commas = (a) => a==0?'0':parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")
-
-  const getTotal = (type, list, curr) => {
-    let result = 0.00;
-    curr=="PKR"?
-    list.forEach((x)=>{
-      if(type==x.tran.type){
-        result = result + parseFloat(x.tran.amount)
-      }
-    }):
-    list.forEach((x)=>{
-      if(type==x.tran.type){
-        result = result + parseFloat(x.tran.defaultAmount)
-      }
-    });
-    return result;
-  }
 
   const handleSubmit = async () => {
     if(
@@ -167,7 +151,10 @@ const Gl = ({state, dispatch, companyId}) => {
       {state.transactionCreation.map((x, index) => {
       return (
         <tr key={index}>
-          <td>{x.particular?.title}</td>
+          <td>
+            {x.particular?.title}
+            <div className='fs-10 grey-txt'>{"("}{x.tran.narration.slice(0,60)}{")"} .....</div>
+          </td>
           {state.invoiceCurrency!="PKR" &&<td className='text-end' style={{minWidth:90}}>{x.tran.type!="credit"?<><span className='gl-curr-rep'>{state.invoiceCurrency+". "}</span>{commas(x.tran.defaultAmount)}</>:''}</td>}
           {state.invoiceCurrency!="PKR" &&<td className='text-end' style={{minWidth:90}}>{x.tran.type=="credit"?<><span className='gl-curr-rep'>{state.invoiceCurrency+". "}</span>{commas(x.tran.defaultAmount)}</>:''}</td>}
           <td className='px-0' style={{width:"1px"}}></td>

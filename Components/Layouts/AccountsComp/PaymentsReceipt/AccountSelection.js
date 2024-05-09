@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table } from 'react-bootstrap';
 import { Modal, Input } from 'antd';
 import { getCompanyName } from './states';
@@ -7,21 +7,21 @@ import Spinner from 'react-bootstrap/Spinner';
 const AccountSelection = ({state, dispatch, companyId}) => {
 
   const set = (payload) => { dispatch({type:'setAll', payload}) }
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <>
     <Modal 
       open={state.visible} 
       onOk={()=>dispatch({type:'on'})} 
-      onCancel={()=>dispatch({type:'off'})}
+      onCancel={()=> set({visible:false}) }
       footer={false} maskClosable={false}
       width={'60%'}
     >
     <>{!state.accountsLoader &&
     <div style={{minHeight:150}}>
       <span >Select Account</span>
-      <Input style={{width:200, marginLeft:20}} placeholder='Search Account' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
+      <Input style={{width:200, marginLeft:20}} placeholder='Search Account' value={state.searchTerm} onChange={(e)=>set({searchTerm:e.target.value})} />
       <hr/>
       <div className='table-sm-1 mt-3' style={{maxHeight:300, overflowY:'auto'}}>
         <Table className='tableFixHead' bordered>
@@ -36,10 +36,10 @@ const AccountSelection = ({state, dispatch, companyId}) => {
         {state.accounts.length>0 &&
           <tbody>
             {state.accounts.filter((x)=>{
-              if(x.title.toLowerCase().includes(searchTerm.toLowerCase()) || x.Parent_Account.title.toLowerCase().includes(searchTerm.toLowerCase())){
+              if(x.title.toLowerCase().includes(state.searchTerm.toLowerCase()) || x.Parent_Account.title.toLowerCase().includes(state.searchTerm.toLowerCase())){
                 return x 
               }
-              if(searchTerm==""){ 
+              if(state.searchTerm==""){ 
                 return x 
               }
             }).map((x, index) => {
@@ -48,7 +48,8 @@ const AccountSelection = ({state, dispatch, companyId}) => {
                 onClick={() => {
                   set({
                     [`${state.variable}`]:x, 
-                    visible:false
+                    visible:false,
+                    searchTerm:''
                   });
                 }}
               >
