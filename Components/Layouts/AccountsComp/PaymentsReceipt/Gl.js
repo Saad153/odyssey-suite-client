@@ -125,12 +125,12 @@ const Gl = ({state, dispatch, companyId}) => {
   }
 
   return (
-  <Modal title={`Transaction General Journal`} open={state.glVisible} onOk={()=>set('glVisible', false)} 
-    onCancel={()=>set('glVisible', false)} footer={false} maskClosable={false} width={'80%'}
+  <Modal title={`Proceed with transaction?`} open={state.glVisible} onOk={()=>set('glVisible', false)} 
+    onCancel={()=>set('glVisible', false)} footer={false} maskClosable={false} width={'80%'} centered
   >
-  <div style={{minHeight:330, fontSize:12}}>
-    <h4 className='grey-txt'>Proceed with following transaction?</h4>
-    <div className='table-sm-1 mt-3' style={{maxHeight:330, overflowY:'auto'}}>
+  <div style={{minHeight:400, fontSize:12}}>
+    {/* <h4 className='grey-txt'>Proceed with following transaction?</h4> */}
+    <div className='table-sm-1 mt-3' style={{maxHeight:390, overflowY:'auto'}}>
       <Table className='tableFixHead' bordered>
       <thead>
         <tr>
