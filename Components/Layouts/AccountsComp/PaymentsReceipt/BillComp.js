@@ -213,7 +213,7 @@ const BillComp = ({companyId, state, dispatch}) => {
         transTwo.push({
           particular:state.partyAccountRecord,
           tran:{
-            type:state.debitReceiving < state.creditReceiving?'debit':'credit',
+            type:parseFloat(state.gainLossAmount)<0?'credit':'debit',
             amount:Math.abs(parseFloat(state.gainLossAmount)).toFixed(2),
             defaultAmount:(Math.abs(parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
             narration:`Ex-Rate ${parseFloat(state.gainLossAmount)<0?'Loss':"Gain"} Against ${invNarration}`,
@@ -275,7 +275,7 @@ const BillComp = ({companyId, state, dispatch}) => {
         transTwo.push({
           particular:state.payAccountRecord,  
           tran:{ 
-            type:state.payAccountRecord.Parent_Account.Account[payType=="Recievable"?'inc':'dec'],// <-Checks the account type to make Debit or Credit
+            type:payType=="Recievable"?'debit':'credit',// <-Checks the account type to make Debit or Credit
             amount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount)).toFixed(2), 
             defaultAmount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate).toFixed(2),//-removing
             narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
@@ -286,7 +286,6 @@ const BillComp = ({companyId, state, dispatch}) => {
     };
     // console.log(getTotal('credit', transTwo,'PKR'))
     // console.log(getTotal('debit', transTwo,'PKR'))
-    console.log(transTwo)
     dispatch({type:'setAll', payload:{
       removing:removing,
       transactionCreation:transTwo,

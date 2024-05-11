@@ -208,7 +208,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
             >Show Old</button>
         </Col>
         <Col md={6} className='mt-3'>
-          {!state.edit && <>
+          {!state.selectedParty.name && <>
             <Input placeholder="Search" size='small'
               suffix={state.search.length>2?<CloseCircleOutlined onClick={()=>setAll({search:""})} />:<SearchOutlined/>} 
               value={state.search} onChange={(e)=>setAll({search:e.target.value})}
@@ -219,7 +219,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
               </div>
             }
           </>}
-          {state.edit && <>
+          {state.selectedParty.name && <>
             <button 
               className="btn-custom-green"
               onClick={addNew}
