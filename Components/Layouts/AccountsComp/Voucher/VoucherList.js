@@ -22,13 +22,13 @@ const VoucherList = ({ voucherData }) => {
   return (
     <div className='base-page-layout'>
       <Tabs defaultActiveKey='1'>
-        <Tabs.TabPane tab="Vouchers" key={"1"}>
+        <Tabs.TabPane tab="General" key={"1"}>
           <ListData voucherData={FirstCatVouchers} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="SI PI" key={"2"}>
+        <Tabs.TabPane tab="SI / PI" key={"2"}>
           <ListData voucherData={secondCatVouchers} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="OP" key={"3"}>
+        <Tabs.TabPane tab="OP (Opening)" key={"3"}>
           <ListData voucherData={thirdCatVouchers} />
         </Tabs.TabPane>
       </Tabs>

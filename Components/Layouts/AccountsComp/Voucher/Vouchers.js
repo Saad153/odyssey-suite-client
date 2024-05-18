@@ -19,7 +19,11 @@ import Router from "next/router";
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { incrementTab } from '/redux/tabs/tabSlice';
-import VoucherHistory from "./history"
+import VoucherHistory from "./history";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaPrint } from "react-icons/fa6";
+import { FaHistory } from "react-icons/fa";
+import { CiBoxList } from "react-icons/ci";
 
 const Vouchers = ({ register, control, errors, CompanyId, child, settlement, reset, voucherData, setSettlement, setChild, id }) => {
 
@@ -279,24 +283,29 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
             dispatch(incrementTab({ "label": "Voucher", "key": "3-5", "id": "new" }))
           } }
         >
-          New
+          <b>+</b> New
         </button>
         {id !== "new" && <button type="button" className="btn-red mb-3 fs-11 mx-2" 
           onClick={() => {handleDelete()}}
         >
-          Delete
+          <MdDeleteOutline className="pr-b2" /> Delete
         </button>}
         {id !== "new" && <button type="button">
           {/* //print button  */}
           <ReactToPrint
             content={() => inputRef}
             trigger={() => (
-              <div className="btn-custom px-4">Print</div>
+              <div className="btn-custom px-4"><FaPrint/> Print</div>
             )}
           />
         </button>}
         {/* voucher history modal toggle states  */}
-        {id !== "new" && <button type="button" className="btn-custom-blue fs-11 px-4" onClick={()=>setIsOpen(true)}>History</button>}
+        {id !== "new" && <button type="button" className="btn-custom fs-11 px-4" onClick={()=>setIsOpen(true)}> <FaHistory/> History</button>}
+        {isOpen && <VoucherHistory id={id} isOpen={isOpen} onClose={()=>setIsOpen(false)}/>}
+        <button type="button" className="btn-custom fs-11 px-4" onClick={()=>Router.push("/accounts/voucherList")}> 
+          <CiBoxList/> Show old
+        </button>
+        
         {isOpen && <VoucherHistory id={id} isOpen={isOpen} onClose={()=>setIsOpen(false)}/>}
       </Col>
 

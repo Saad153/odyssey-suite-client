@@ -58,6 +58,10 @@
 .fw-8{ font-weight: 800!important; }
 .fw-9{ font-weight: 900!important; }
 
+.flex{
+  display: flex;
+  align-items: center;
+}
 
 .ag-theme-alpine {
   
@@ -278,6 +282,11 @@
   color:red;
   position: relative;
   top: 0px;
+}
+
+.pr-b2{
+  position: relative;
+  bottom: 2px;
 }
 
 .previous-rec{

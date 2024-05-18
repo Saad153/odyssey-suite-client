@@ -562,8 +562,11 @@ const BillComp = ({companyId, state, dispatch}) => {
           </div>
         </div>
         </>
+        <button onClick={submitPrices}>
+        Submit
+        </button>
         <div className='text-end'>
-          <button onClick={submitPrices} className='btn-custom'>Make Transaction</button>
+          <button onClick={submitPrices} className='btn-custom mb-2'>Make Transaction</button>
         </div>
     </div>
     }

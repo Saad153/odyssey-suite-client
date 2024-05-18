@@ -34,7 +34,8 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
     const commas = (a) =>  { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")}
 
     useEffect(() => {
-        console.log(invoice.SE_Job)
+        // console.log(invoice)
+        // console.log(records)
     }, [invoice])
     
     const paraStyles = { lineHeight:1.2, fontSize:11 }
@@ -163,11 +164,11 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                         {
                             (invoice.operation=="AI"||invoice.operation=="SI") ?
                             <>
-                                {moment(invoice.SE_Job?.eta).format("DD-MMM-YYYY")}
+                                {invoice.SE_Job?.eta?moment(invoice.SE_Job?.eta).format("DD-MMM-YYYY"):''}
                             </>
                             :
                             <>
-                                {moment(invoice.SE_Job?.departureDate).format("DD-MMM-YYYY")}
+                                {invoice.SE_Job?.departureDate?moment(invoice.SE_Job?.departureDate).format("DD-MMM-YYYY"):''}
                             </>
                         }
                     </div>
@@ -186,11 +187,11 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                         {
                             (invoice.operation=="AI"||invoice.operation=="SI") ?
                             <>
-                                {moment(invoice.SE_Job?.arrivalDate).format("DD-MMM-YYYY")}
+                                {invoice.SE_Job?.arrivalDate?moment(invoice.SE_Job?.arrivalDate).format("DD-MMM-YYYY"):''}
                             </>
                             :
                             <>
-                                {moment(invoice.SE_Job?.departureDate).format("DD-MMM-YYYY")}
+                                {invoice.SE_Job?.departureDate?moment(invoice.SE_Job?.departureDate).format("DD-MMM-YYYY"):''}
                             </>
                         }
                     </div>
@@ -345,7 +346,13 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
         <td className='text-center p-0'>{x.amount}</td>
         <td className='text-center p-0'>{x.discount}</td>
         <td className='text-center p-0'>{x.tax_amount}</td>
-        <td className='text-center p-0'>{x.local_amount}</td>
+        <td className='text-center p-0'>
+            {
+            (invoice.type=="Agent Invoice"||invoice.type=="Agent Bill")?
+                (parseFloat(x.local_amount)/parseFloat(x.ex_rate)).toFixed(2):
+                x.local_amount
+            }
+            </td>
     </tr>
     )})}
     </tbody>
@@ -354,18 +361,30 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
     <Col md={4} style={{fontSize:10}}><b className='fw-8'>Total Discount</b> <span style={{float:'right'}} className='px-3'>0.00</span></Col>
     <Col md={4} style={{fontSize:10}}><b className='fw-8'>Tax Amount</b>     <span style={{float:'right'}} className='px-3'>0.00</span></Col>
     <Col md={4} style={{fontSize:10}}>
-        <div><b className='fw-8'>Invoice Total {"("}PKR{")"}</b>
+        {(invoice.type=="Agent Invoice"||invoice.type=="Agent Bill")?
+        <></>:
+        <div>
+            <b className='fw-8'>Invoice Total {"("}PKR{")"}</b>
             <span style={{float:'right'}}>
                 {commas((calculateTotal(records)))} 
                 {/* invoice.ex_rate */}
             </span>
         </div>
+        }
         <div><b className='fw-8'>Round Off </b> <span style={{float:'right'}} >{invoice.roundOff}</span></div>
         <div>
             <b className='fw-8'>Total Amount </b>
             <span style={{float:'right'}}>
-                { commas(parseFloat(calculateTotal(records)) + parseFloat(invoice.roundOff)) }
+                { 
+                    (invoice.type=="Agent Invoice"||invoice.type=="Agent Bill")?
+                        commas((parseFloat(calculateTotal(records)) + parseFloat(invoice.roundOff))/parseFloat(invoice.ex_rate)):
+                        commas(parseFloat(calculateTotal(records)) + parseFloat(invoice.roundOff))
+                }
             </span>
+            {/* (invoice.type=="Agent Invoice"||invoice.type=="Agent Bill")?
+                (parseFloat(x.local_amount)/parseFloat(x.ex_rate)).toFixed(2):
+                x.local_amount
+            } */}
         </div>
     </Col>
     </Row>
@@ -382,7 +401,11 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
             <b className='fw-8'>In-Words</b>
             <p>
                 {invoice.type=="Job Invoice"?"PKR":invoice.type=="Job Bill"?"PKR":"USD"} {" "}
-                {inWords(parseFloat(calculateTotal(records)) + parseFloat(invoice.roundOff))}
+                
+                {(invoice.type=="Agent Invoice"||invoice.type=="Agent Bill")?
+                    inWords((parseFloat(calculateTotal(records)) + parseFloat(invoice.roundOff))/parseFloat(invoice.ex_rate)):
+                    inWords(parseFloat(calculateTotal(records)) + parseFloat(invoice.roundOff))
+                }
             </p>
         </Col>
     </Row>

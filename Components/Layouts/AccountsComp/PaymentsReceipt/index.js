@@ -23,6 +23,8 @@ const PaymentsReceipt = ({id, voucherData}) => {
   const router = useRouter()
   const companyId = useSelector((state) => state.company.value);
 
+  const commas = (a) =>  { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")};  
+
   useEffect(() => {
     if(router?.query?.id=='undefined') {
       Router.push({pathname:"/accounts/paymentReceipt/new"}, undefined,{shallow:true});
@@ -150,6 +152,15 @@ const PaymentsReceipt = ({id, voucherData}) => {
     {headerName: 'Party', field:'partyType', filter: true},
     {headerName: 'Type', field:'vType', width:124, filter: true},
     {headerName: 'Date', field:'tranDate', filter: true},
+    {headerName: 'Amount', field:'amount', filter: true, 
+    cellRenderer:(params)=>{
+      return(
+        <div>
+          {commas(params.value)}
+        </div>
+      )
+    }
+  },
   ]);
   const defaultColDef = useMemo( ()=> ({
     sortable: true,
@@ -218,8 +229,11 @@ const PaymentsReceipt = ({id, voucherData}) => {
           .then((x)=>{
             let tempData = []
             x.data?.result?.forEach((y, i)=>{
-              tempData.push({...y, no:i+1})
-            })
+              tempData.push({
+                ...y, no:i+1,
+                amount: y.Voucher_Heads?.reduce((x, cur) => x + Number(cur.amount), 0)||null
+              })
+            });
             setAll({oldVouchers:true, oldVouchersList:tempData});
           })
         }}

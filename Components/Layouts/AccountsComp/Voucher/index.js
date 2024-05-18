@@ -86,12 +86,13 @@ const Voucher = ({ id }) => {
     }
     voucher.CompanyId = CompanyId ? CompanyId : 1;
     voucher.type = (voucher.vType == "BPV" || voucher.vType == "CPV") ? "Payble" : (voucher.vType == "BRV" || voucher.vType == "CRV") ? "Recievable" : voucher.vType == "TV" ? "Trasnfer Voucher" : "General Voucher"
-    //voucher.createdAt = voucherData.createdAt
 
+    //voucher.createdAt = voucherData.createdAt
+    console.log(voucher)
     // <----- Create New Voucher ----->
     if (id == "new") {
       delete voucher.id;
-      await axios.post(process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, voucher).then((x) => {
+      await axios.post(process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, {...voucher, createdBy:employeeName}).then((x) => {
         if (x.data.status == "success") {
           //passing id and mode to create history funtion when create method triggers
           createHistory(x.data.result.id,"Create")

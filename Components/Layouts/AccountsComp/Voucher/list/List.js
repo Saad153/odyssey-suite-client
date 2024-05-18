@@ -97,12 +97,13 @@ const ListData = ({ voucherData }) => {
         <Table className='tableFixHead'>
           <thead>
             <tr>
-              <th >Voucher No.</th>
-              <th>Type</th>
-              <th>Cheque Date</th>
+              <th style={{width:130}}>No #</th>
+              <th style={{width:10}}>Type</th>
+              <th style={{width:120}}>Cheque Date</th>
               <th>Paid to</th>
-              <th>Amount</th>
-              <th>Voucher Date</th>
+              <th style={{width:170}}>Amount</th>
+              <th style={{width:120}}>Dated</th>
+              <th style={{width:80}}>Made By</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -121,6 +122,7 @@ const ListData = ({ voucherData }) => {
                       <span className='blue-txt fw-6'>{commas(x.amount)}</span>
                     </td>
                     <td>{moment(x.createdAt).format("YYYY-MM-DD")}</td>
+                    <td>{x.createdBy}</td>
                     <td style={{cursor:"pointer"}} onClick={() => handleEdit(x.id)}>
                       <span className='fs-15 text-dark'><RiEdit2Fill /></span>
                     </td>
