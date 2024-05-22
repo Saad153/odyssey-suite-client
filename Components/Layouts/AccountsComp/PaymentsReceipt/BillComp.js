@@ -285,10 +285,10 @@ const BillComp = ({companyId, state, dispatch}) => {
         })
       }
     };
-    // console.log(getTotal('credit', transTwo,'PKR'))
+
     // console.log(getTotal('debit', transTwo,'PKR'))
-    console.log(getTotal('debit', transTwo,'PKR'))
-    console.log(getTotal('credit', transTwo,'PKR'))
+    // console.log(getTotal('credit', transTwo,'PKR'))
+    
     dispatch({type:'setAll', payload:{
       removing:removing,
       transactionCreation:transTwo,
@@ -511,7 +511,7 @@ const BillComp = ({companyId, state, dispatch}) => {
           <td className='blue-txt' style={{width:30}}><b>{x.payType=="Payble"?"CN":"DN"}</b></td>
           <td>{commas(x.inVbalance)}</td>
           <td style={{padding:3, width:150}}>
-            <InputNumber style={{height:30, width:140, fontSize:12}} value={x.receiving} min="0.00" max={`${x.remBalance}`} stringMode  disabled={state.autoOn}
+            <InputNumber style={{height:30, width:140, fontSize:12}} value={x.receiving} min="0.00" stringMode  disabled={state.autoOn}
               onChange={(e)=>{
                 let tempState = [...state.invoices];
                 tempState[index].receiving = e;
@@ -566,7 +566,7 @@ const BillComp = ({companyId, state, dispatch}) => {
         </div>
         </>
         <button>
-          Submit
+          {/* Submit */}
         </button>
         <div className='text-end'>
           <button onClick={submitPrices} className='btn-custom mb-2'>Make Transaction</button>

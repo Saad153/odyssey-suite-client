@@ -35,11 +35,19 @@ const Gl = ({state, dispatch, companyId}) => {
           parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))
   
         let tempRecStatus = invoiceCurrency!="PKR"?
-          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":"2":
-          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":"2"
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))>(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":
+          "2":
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":
+          parseFloat(x.recieved) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))>(parseFloat(x.inVbalance))?"3":
+          "2"
         let tempPayStatus = invoiceCurrency!="PKR"? 
-          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":"2":
-          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":"2"
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))<(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount*parseFloat(x.ex_rate).toFixed(2):0) + (parseFloat(x.receiving)*parseFloat(x.ex_rate).toFixed(2))>(parseFloat(x.inVbalance)*parseFloat(x.ex_rate).toFixed(2))?"3":
+          "2":
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":
+          parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))>(parseFloat(x.inVbalance))?"3":
+          "2"
   
           if((x.receiving>0 || state.edit) && payType=="Recievable"){
           invoicesIds.push(x.id)
@@ -78,7 +86,7 @@ const Gl = ({state, dispatch, companyId}) => {
         costCenter:"KHI",
         Voucher_Heads:[],
         subType:state.subType
-      }
+      };
       state.transactionCreation.forEach((x)=>{
         let tempVoucheObj = {
           defaultAmount:`${x.tran.defaultAmount==0?'':x.tran.defaultAmount}`,
@@ -94,7 +102,7 @@ const Gl = ({state, dispatch, companyId}) => {
           tempVoucheObj.id = voucherHeadId.id
         }
         voucher.Voucher_Heads.push(tempVoucheObj)
-      })
+      });
       voucher.invoices = invoicesIds.join(", ");
       voucher.partyId = state.selectedParty.id;
       voucher.partyName = state.selectedParty.name;
@@ -102,6 +110,7 @@ const Gl = ({state, dispatch, companyId}) => {
       voucher.tranDate = moment(state.date).format("yyyy-MM-DD");
       state.edit?voucher.id = state.id : null;
       voucher.createdAt = state.createdAt;
+      
       await axios.post(
        state.edit?
          process.env.NEXT_PUBLIC_CLIMAX_UPDATE_VOUCEHR:
@@ -119,7 +128,7 @@ const Gl = ({state, dispatch, companyId}) => {
         })
       })
       await delay(1000);
-      await getInvoices(state, companyId, dispatch); 
+      await getInvoices(state, companyId, dispatch);
     }
   };
 
@@ -175,11 +184,11 @@ const Gl = ({state, dispatch, companyId}) => {
   </div>
   {getTotal('debit', state.transactionCreation,'PKR') == getTotal('credit', state.transactionCreation,'PKR') &&
   <>
-    {/* {state.transactionCreation.length>0 &&  */}
+    {state.transactionCreation.length>0 && 
     <button className='btn-custom' disabled={state.transLoad?true:false} onClick={handleSubmit}>
       {state.transLoad? <Spinner size='sm' className='mx-5' />:"Approve & Save"}
     </button>
-    {/* } */}
+    }
   </>
   }
   </Modal>
