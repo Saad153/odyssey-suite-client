@@ -107,8 +107,7 @@ const Gl = ({state, dispatch, companyId}) => {
          process.env.NEXT_PUBLIC_CLIMAX_UPDATE_VOUCEHR:
          process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, 
          voucher
-       )
-      .then(async(x)=>{
+       ).then(async(x)=>{
         let newInvoices = state.invoiceLosses.map((y)=>{
           return {...y, VoucherId:state.edit?state.id:x.data.result.id}
         })
@@ -119,10 +118,10 @@ const Gl = ({state, dispatch, companyId}) => {
           openNotification("Success", "Transaction Recorded!", "green")
         })
       })
-      await delay(1000)
+      await delay(1000);
       await getInvoices(state, companyId, dispatch); 
     }
-  }
+  };
 
   return (
   <Modal title={`Proceed with transaction?`} open={state.glVisible} onOk={()=>set('glVisible', false)} 
@@ -176,11 +175,11 @@ const Gl = ({state, dispatch, companyId}) => {
   </div>
   {getTotal('debit', state.transactionCreation,'PKR') == getTotal('credit', state.transactionCreation,'PKR') &&
   <>
-    {state.transactionCreation.length>0 && 
+    {/* {state.transactionCreation.length>0 &&  */}
     <button className='btn-custom' disabled={state.transLoad?true:false} onClick={handleSubmit}>
       {state.transLoad? <Spinner size='sm' className='mx-5' />:"Approve & Save"}
     </button>
-    }
+    {/* } */}
   </>
   }
   </Modal>

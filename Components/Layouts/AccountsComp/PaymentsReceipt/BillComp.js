@@ -148,6 +148,7 @@ const BillComp = ({companyId, state, dispatch}) => {
   };
 
   const submitPrices = async() => {
+    
     let transTwo = [];
     let removing = 0;
     let tempInvoices = [...state.invoices];
@@ -286,6 +287,8 @@ const BillComp = ({companyId, state, dispatch}) => {
     };
     // console.log(getTotal('credit', transTwo,'PKR'))
     // console.log(getTotal('debit', transTwo,'PKR'))
+    console.log(getTotal('debit', transTwo,'PKR'))
+    console.log(getTotal('credit', transTwo,'PKR'))
     dispatch({type:'setAll', payload:{
       removing:removing,
       transactionCreation:transTwo,
@@ -562,8 +565,8 @@ const BillComp = ({companyId, state, dispatch}) => {
           </div>
         </div>
         </>
-        <button onClick={submitPrices}>
-        Submit
+        <button>
+          Submit
         </button>
         <div className='text-end'>
           <button onClick={submitPrices} className='btn-custom mb-2'>Make Transaction</button>

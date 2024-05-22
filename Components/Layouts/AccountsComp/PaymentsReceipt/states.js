@@ -195,7 +195,7 @@ const getTotal = (type, list, curr) => {
       result = result + parseFloat(x.tran.defaultAmount)
     }
   });
-  return result;
+  return parseFloat(result.toFixed(2));
 }
 
 export { recordsReducer, initialState, getCompanyName, getAccounts, totalRecieveCalc, getInvoices, getTotal };
