@@ -490,20 +490,34 @@ const BillComp = ({companyId, state, dispatch}) => {
         return (
         <tr key={index} className={`f fs-12 ${state.edit?'grey-row':''}`}>
           <td style={{width:30}}>{index + 1}</td>
-          <td style={{width:100, paddingLeft:4, paddingTop:8}} className='row-hov blue-txt' onClick={()=>{
-            let type = x.operation;
-            if(x?.SE_Job?.jobNo){
-              dispatchNew(incrementTab({
-              "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
-              "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
-              "id":x.SE_Job.id
-              }))
-              router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
-                type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
-              )}
+          <td style={{width:100, paddingLeft:4, paddingTop:8}} className='row-hov blue-txt' 
+            onClick={()=>{
+              let type = x.operation;
+              if(x?.SE_Job?.jobNo){
+                dispatchNew(incrementTab({
+                "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
+                "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
+                "id":x.SE_Job.id
+                }))
+                router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
+                  type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
+                )
+              }
             }
-          }> <b>{x?.SE_Job?.jobNo}</b></td>
-          <td style={{width:100}}>{x.invoice_No}</td>
+          }>
+            <b>{x?.SE_Job?.jobNo}</b>
+          </td>
+          <td style={{width:120}} className='row-hov blue-txt' 
+            onClick={()=>{
+              if(x?.SE_Job?.jobNo){
+                dispatchNew(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}`}))
+                router.push(`/reports/invoice/${x.id}`)
+              }
+            }
+          }
+          >
+            <b>{x?.invoice_No}</b>
+          </td>
           <td>{x?.SE_Job?.Bl?.hbl||'none'}</td>
           <td>{x?.SE_Job?.Bl?.mbl||'none'}</td>
           <td style={{width:50}}>{x.currency}</td>
