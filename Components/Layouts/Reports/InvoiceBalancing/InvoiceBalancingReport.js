@@ -155,68 +155,69 @@ const InvoiceBalancingReport = ({ result, query }) => {
       return (
       <>
         {!load &&
-        <div>
+        <>
           {records.length > 0 &&
-          <>
-          <PrintTopHeader company={query.company} />
-          <hr className='mb-2' />
-          <div className='table-sm-1' style={{ maxHeight: overflow ? 600 : "100%", overflowY: 'auto' }}>
-            <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
-              <thead>
-                <tr>
-                  <th className='text-center'>#</th>
-                  <th className='text-center'>Inv. No</th>
-                  <th className='text-center'>Date</th>
-                  <th className='text-center'>HBL/HAWB</th>
-                  <th className='text-center'>Name</th>
-                  <th className='text-center'>F. Dest</th>
-                  <th className='text-center'>F/Tp</th>
-                  <th className='text-center'>Curr</th>
-                  <th className='text-center'>Debit</th>
-                  <th className='text-center'>Credit</th>
-                  <th className='text-center'>Paid/Rcvd</th>
-                  <th className='text-center'>Balance</th>
-                  <th className='text-center'>Age</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentRecords.map((x, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{x.invoice_No}</td>
-                    <td>{x.createdAt}</td>
-                    <td>{x.blHbl}</td>
-                    <td>{x.party_Name}</td>
-                    <td>{x.fd}</td>
-                    <td>{x.ppcc}</td>
-                    <td>{x.currency}</td>
-                    <td>{commas(x.debit)}</td>
-                    <td>{commas(x.credit)}</td>
-                    <td>{commas(x.paidRec)}</td>
-                    <td>{commas(x.balance)}</td>
-                    <td>{x.age}</td>
-                  </tr>
-                )})}
-                <tr>
-                    <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
-                    <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
-                    <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
-                    <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
-                    <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
-                    <td style={{ textAlign: 'center' }}>-</td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
-          {overflow && <div className="d-flex justify-content-end mt-4">
-            <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-          </div>
-          }
-          </>
+            <>
+              <PrintTopHeader company={query.company} />
+              <hr className='mb-2' />
+              <div className='table-sm-1' style={{ maxHeight: overflow ? 600 : "100%", overflowY: 'auto' }}>
+                <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
+                  <thead>
+                    <tr>
+                      <th className='text-center'>#</th>
+                      <th className='text-center'>Inv. No</th>
+                      <th className='text-center'>Date</th>
+                      <th className='text-center'>HBL/HAWB</th>
+                      <th className='text-center'>Name</th>
+                      <th className='text-center'>F. Dest</th>
+                      <th className='text-center'>F/Tp</th>
+                      <th className='text-center'>Curr</th>
+                      <th className='text-center'>Debit</th>
+                      <th className='text-center'>Credit</th>
+                      <th className='text-center'>Paid/Rcvd</th>
+                      <th className='text-center'>Balance</th>
+                      <th className='text-center'>Age</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentRecords.map((x, i) => {
+                    return (
+                      <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{x.invoice_No}</td>
+                        <td>{x.createdAt}</td>
+                        <td>{x.blHbl}</td>
+                        <td>{x.party_Name}</td>
+                        <td>{x.fd}</td>
+                        <td>{x.ppcc}</td>
+                        <td>{x.currency}</td>
+                        <td>{commas(x.debit)}</td>
+                        <td>{commas(x.credit)}</td>
+                        <td>{commas(x.paidRec)}</td>
+                        <td>{commas(x.balance)}</td>
+                        <td>{x.age}</td>
+                      </tr>
+                    )})}
+                    <tr>
+                        <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
+                        <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
+                        <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
+                        <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
+                        <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
+                        <td style={{ textAlign: 'center' }}>-</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+              {overflow && 
+                <div className="d-flex justify-content-end mt-4">
+                  <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+                </div>
+              }
+            </>
           }
           {records.length == 0 && <>No Similar Record</>}
-        </div>
+        </>
         }
         {load && <div className='text-center py-5 my-5'> <Spinner /> </div>}
       </>

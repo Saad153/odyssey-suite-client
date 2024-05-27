@@ -202,34 +202,6 @@ function setAccesLevels(dispatch, collapsed){
       }),
     ]
   )
-  const exportJobs = getParentItem('Export Jobs', '8', <span className=''><RiShipLine /><IoMdArrowDropleft className='flip' /></span>,
-    [
-      getItem('Air Export Jobs List', '8-1',<></>, null, {
-        label: `Air Export Jobs List`,
-        key: '8-1',
-        children: `Content of Tab Pane 2`,
-      }),
-      getItem('Sea Export Jobs List', '8-3',<></>, null, {
-        label: `Sea Export Jobs List`,
-        key: '8-3',
-        children: `Content of Tab Pane 2`,
-      }),
-    ]
-  )
-  const importJobs = getParentItem('Import Jobs', '9', <span className=''><RiShipLine /><IoMdArrowDropleft className='flip' /></span>,
-    [
-      getItem('Air Import', '9-1',<></>, null, {
-        label: `Air Import`,
-        key: '9-1',
-        children: `Content of Tab Pane 2`,
-      }),
-      getItem('Sea Import', '9-3',<></>, null, {
-        label: `Sea Import`,
-        key: '9-3',
-        children: `Content of Tab Pane 2`,
-      }),
-    ]
-  )
   function getParentItem(label, key, icon, children) {
     return { key, icon, children, label}
   }
@@ -271,11 +243,6 @@ function setAccesLevels(dispatch, collapsed){
     items.push(seaJobs):null;
     obj.airJobs?
     items.push(airJobs):null;
-  } else {
-    obj.seaJobs?
-    items.push(exportJobs):null;
-    obj.airJobs?
-    items.push(importJobs):null;
   }
   
   obj.accounts?
@@ -288,8 +255,6 @@ function setAccesLevels(dispatch, collapsed){
   obj.admin?
     items = [
       //dashboard,
-      exportJobs,
-      importJobs,
       setup,
       accounts,
       seaJobs,

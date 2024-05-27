@@ -305,6 +305,16 @@ const BillComp = ({companyId, state, dispatch}) => {
     return result||'none'
   };
 
+  useEffect(() => {
+    let delayDebounceFn ;
+    if(state.autoOn){
+      delayDebounceFn = setTimeout(() => {
+        autoKnocking()
+      }, 1500)
+    }
+    return () => clearTimeout(delayDebounceFn)
+  }, [state.auto])
+
   return (
   <>
   <Row>
@@ -345,11 +355,11 @@ const BillComp = ({companyId, state, dispatch}) => {
         </Col>
         <Col md={3}>
           <br/>
-          <button className={state.autoOn?'btn-custom':'btn-custom-disabled'}
+          {/* <button className={state.autoOn?'btn-custom':'btn-custom-disabled'}
             style={{fontSize:10}}
             disabled={!state.autoOn}
             onClick={()=>autoKnocking()}
-          >Set</button>
+          >Set</button> */}
         </Col>
         {!state.autoOn &&
         <Col md={12}>
@@ -520,10 +530,12 @@ const BillComp = ({companyId, state, dispatch}) => {
           </td>
           <td>{x?.SE_Job?.Bl?.hbl||'none'}</td>
           <td>{x?.SE_Job?.Bl?.mbl||'none'}</td>
-          <td style={{width:50}}>{x.currency}</td>
-          <td style={{width:50}}>{parseFloat(x.ex_rate).toFixed(2)}</td>
-          <td className='blue-txt' style={{width:30}}><b>{x.payType=="Payble"?"CN":"DN"}</b></td>
-          <td>{commas(x.inVbalance)}</td>
+          <td style={{width:20}} className='px-0 text-center'>{x.currency}</td>
+          <td style={{width:45}} className='px-0 text-center'>{parseFloat(x.ex_rate).toFixed(2)}</td>
+          <td style={{width:10}} className='blue-txt px-0 text-center'>
+            <b>{x.payType=="Payble"?"CN":"DN"}</b>
+          </td>
+          <td style={{width:320}} className='px-1'>{commas(x.inVbalance)}</td>
           <td style={{padding:3, width:150}}>
             <InputNumber style={{height:30, width:140, fontSize:12}} value={x.receiving} min="0.00" stringMode  disabled={state.autoOn}
               onChange={(e)=>{
@@ -533,14 +545,13 @@ const BillComp = ({companyId, state, dispatch}) => {
               }}
             />
           </td>
-          <td> {commas(x.remBalance - x.receiving)} </td>
+          <td className='px-1' style={{width:300}}> {commas(x.remBalance - x.receiving)} </td>
           <td style={{ width:50}} className='px-3 py-2'>
             <input type='checkbox' style={{cursor:'pointer'}} 
               checked={x.check} 
               disabled={state.autoOn}
               onChange={() => {
                 let tempState = [...state.invoices];
-                // console.log(tempState[index])
                 tempState[index].check = !tempState[index].check;
                 if(state.payType=="Recievable"){
                   tempState[index].receiving = tempState[index].check?
