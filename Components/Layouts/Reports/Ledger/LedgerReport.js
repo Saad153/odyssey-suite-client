@@ -22,24 +22,24 @@ const LedgerReport = ({ voucherData, from, to, name, company, currency }) => {
           closingBalance =
             y.type === "debit"
               ? closingBalance +
-                parseFloat(y.amount) / exRate
+                (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
               : closingBalance -
-                parseFloat(y.amount) / exRate
+                (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
 
           if (y["Voucher.vType"] === "OP") {
             openingBalance =
               y.type === "debit"
                 ? openingBalance +
-                  parseFloat(y.amount) / exRate
+                  (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
                 : openingBalance -
-                  parseFloat(y.amount) / exRate
+                  (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
           } else {
             let tempBalance = parseFloat(closingBalance) + parseFloat(prevBalance)
             tempArray.push({
               date: y.createdAt,
               voucherType: y["Voucher.type"],
               voucherId: y["Voucher.id"],
-              amount: parseFloat(y.amount) / exRate,
+              amount: currency=="PKR"? parseFloat(y.amount) :parseFloat(y.amount) / exRate,
               balance: tempBalance,
               voucher: y["Voucher.voucher_Id"],
               type: y.type,

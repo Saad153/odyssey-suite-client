@@ -402,7 +402,6 @@ const MainLayout = ({children}) => {
 
   return (
   <Layout className="main-dashboard-layout">
-      {/* sidebar  */}
     {!load && 
     <Sider 
       trigger={null} 
