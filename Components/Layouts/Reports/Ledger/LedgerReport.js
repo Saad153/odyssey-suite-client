@@ -25,7 +25,6 @@ const LedgerReport = ({ voucherData, from, to, name, company, currency }) => {
                 (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
               : closingBalance -
                 (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
-
           if (y["Voucher.vType"] === "OP") {
             openingBalance =
               y.type === "debit"
