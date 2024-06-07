@@ -532,10 +532,10 @@ const BillComp = ({companyId, state, dispatch}) => {
           <td>{x?.SE_Job?.Bl?.mbl||'none'}</td>
           <td style={{width:20}} className='px-0 text-center'>{x.currency}</td>
           <td style={{width:45}} className='px-0 text-center'>{parseFloat(x.ex_rate).toFixed(2)}</td>
-          <td style={{width:10}} className='blue-txt px-0 text-center'>
+          <td style={{width:5}} className='blue-txt px-0 text-center'>
             <b>{x.payType=="Payble"?"CN":"DN"}</b>
           </td>
-          <td style={{width:320}} className='px-1'>{commas(x.inVbalance)}</td>
+          <td style={{minWidth:140}} className='px-1'>{commas(x.inVbalance)}</td>
           <td style={{padding:3, width:150}}>
             <InputNumber style={{height:30, width:140, fontSize:12}} value={x.receiving} min="0.00" stringMode  disabled={state.autoOn}
               onChange={(e)=>{

@@ -19,6 +19,7 @@ const InvoiceBalaincing = () => {
   const [representator, setRepresentator] = useState("");
   const [currency, setCurrency] = useState("");
   const [reportType, setReportType] = useState("viewer");
+  const [balance, setBalance] = useState("all");
   const [jobTypes, setJobTypes] = useState([]);
   const [values, setValues] = useState();
   const [payType, setPayType] = useState("Payble");
@@ -34,7 +35,8 @@ const InvoiceBalaincing = () => {
     representator,
     currency,
     jobTypes,
-    reportType
+    reportType,
+    balance
   };
 
   const filterValues = useSelector(state => state.filterValues);
@@ -53,6 +55,7 @@ const InvoiceBalaincing = () => {
       setCurrency(value.currency),
       setJobTypes(value.jobTypes),
       setReportType(value.reportType)
+      setBalance(value.balance)
     }
   }, [filters])
 
@@ -69,21 +72,22 @@ const InvoiceBalaincing = () => {
     Router.push({
         pathname: `/reports/invoiceBalancing/report`,
         query: {
-                "company": company,
-                "overseasagent": overseasAgent,
-                "representator": representator,
-                "jobtypes": jobTypes,
-                "currency": currency,
-                "from": from,
-                "to": to,
-                "paytype": payType,
-                "report": reportType
+          "company": company,
+          "overseasagent": overseasAgent,
+          "representator": representator,
+          "jobtypes": jobTypes,
+          "currency": currency,
+          "from": from,
+          "to": to,
+          "paytype": payType,
+          "report": reportType,
+          "balance": balance,
         }
     });
     dispatch(incrementTab({
         "label": "Agt Inovice Bal Report",
         "key": "5-8",
-        "id": `report?company=${company}&overseasagent=${overseasAgent}&representator=${representator}&currency=${currency}&jobtypes=${jobTypes}&to=${to}&from=${from}&paytype=${payType}&report=${reportType}`
+        "id": `report?company=${company}&overseasagent=${overseasAgent}&representator=${representator}&currency=${currency}&jobtypes=${jobTypes}&to=${to}&from=${from}&paytype=${payType}&report=${reportType}&balance=${balance}`
     }))
     dispatch(setFilterValues({
         pageName: "AgentInvoiceBalancing",
@@ -218,7 +222,14 @@ const InvoiceBalaincing = () => {
                 <Radio value={"grid"}>Grid</Radio>
               </Radio.Group>
             </Col>
-            <Col md={5}></Col>
+            <Col md={2} style={{ border: '1px solid silver', marginLeft: 12 }} className='py-1'>
+              Balance
+              <Radio.Group onChange={(e) => setBalance(e.target.value)} value={balance}>
+                <Radio value={"exclude0"}>Exclude 0</Radio>
+                <Radio value={"all"}>Show All</Radio>
+              </Radio.Group>
+            </Col>
+            <Col md={3}></Col>
             <Col md={1}><button className='btn-custom' onClick={() => handleSearch()}>Go</button></Col>
           </Row>
         </Col>

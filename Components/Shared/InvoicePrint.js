@@ -84,16 +84,16 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
         <Col md={6} style={{borderTop:border, borderRight:border, borderLeft:border, borderBottom:border, maxHeight:70, overflow:'hidden'}} className='p-0 px-1'>
             <div style={heading}>INVOICE TO</div>
             <div style={paraStyles}>{invoice.party_Name}</div>
-            <div style={paraStyles}>{invoice.SE_Job.Client?.address1}</div>
+            <div style={paraStyles}>{invoice?.SE_Job?.Client?.address1}</div>
             {/* <div style={paraStyles}>{invoice.SE_Job.Client?.infoMail}</div> */}
             {/* <div style={paraStyles}>{invoice.SE_Job.Client?.telephone1}</div> */}
             {/* <div style={paraStyles}>{invoice.SE_Job.Client?.mobile1}</div> */}
         </Col>
         <Col md={6} style={{  borderTop:border, borderBottom:border, borderRight:border, maxHeight:70, overflow:'hidden'}} className='p-0 px-1'>
         <div style={heading}>Shipper/Consignee</div>
-            <div style={paraStyles}>{invoice.SE_Job.shipper?.name} / </div>
-            <div style={paraStyles}>{invoice.SE_Job.consignee?.name}</div>
-            <div style={paraStyles}>{invoice.SE_Job.consignee?.address1}</div>
+            <div style={paraStyles}>{invoice?.SE_Job?.shipper?.name} / </div>
+            <div style={paraStyles}>{invoice?.SE_Job?.consignee?.name}</div>
+            <div style={paraStyles}>{invoice?.SE_Job?.consignee?.address1}</div>
             {/* <div style={paraStyles}>{invoice.SE_Job.Client?.infoMail}</div> */}
             {/* <div style={paraStyles}>{invoice.SE_Job.consignee?.telephone1}</div> */}
             {/* <div style={paraStyles}>{invoice.SE_Job.consignee?.mobile1}</div> */}
@@ -106,7 +106,7 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
         </Col>
         <Col md={6} style={{borderRight:border, borderBottom:border}} className='p-0 px-1'>
             <span style={heading}>Sales Rep</span>
-            <span style={{...paraStyles, paddingLeft:70}}>{invoice.SE_Job.sales_representator?.name}</span>
+            <span style={{...paraStyles, paddingLeft:70}}>{invoice?.SE_Job?.sales_representator?.name}</span>
         </Col>
     </Row>
     <Row style={{paddingLeft:12, paddingRight:12}}>
@@ -126,12 +126,12 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
             <Row>
                 <Col md={7}>
                     <div style={heading}>Job No</div>
-                    <div style={paraStyles}>{invoice.SE_Job.jobNo}</div>
+                    <div style={paraStyles}>{invoice?.SE_Job?.jobNo}</div>
                     
                 </Col>
                 <Col md={5}>
                     <div style={heading}>Job Date</div>
-                    <div style={paraStyles}>{moment(invoice.SE_Job.jobDate).format("DD-MMM-YYYY")}</div>
+                    <div style={paraStyles}>{moment(invoice?.SE_Job?.jobDate).format("DD-MMM-YYYY")}</div>
                 </Col>
             </Row>
         </Col>
@@ -205,13 +205,13 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                 <Col md={7}>
                     <div style={heading}>Port of Loading</div>
                     <div style={paraStyles}>
-                        {(invoice.operation=="SE"||invoice.operation=="SI")? getPort(invoice.SE_Job.pol):getAirPort(invoice.SE_Job.pol)}
+                        {(invoice.operation=="SE"||invoice.operation=="SI")? getPort(invoice.SE_Job?.pol):getAirPort(invoice.SE_Job?.pol)}
                     </div>
                 </Col>
                 <Col md={5}>
                     <div style={heading}>Port of Discharge</div>
                     <div style={paraStyles}>
-                        {(invoice.operation=="SE"||invoice.operation=="SI")? getPort(invoice.SE_Job.pod):getAirPort(invoice.SE_Job.pod)}
+                        {(invoice.operation=="SE"||invoice.operation=="SI")? getPort(invoice.SE_Job?.pod):getAirPort(invoice.SE_Job?.pod)}
                     </div>
                 </Col>
             </Row>
@@ -221,8 +221,8 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                 <Col md={7}>
                     <div style={heading}>Destination Port</div>
                     <div style={paraStyles}>
-                        {getPort(invoice.SE_Job.fd)}
-                        {invoice.SE_Job.fd}
+                        {getPort(invoice.SE_Job?.fd)}
+                        {invoice.SE_Job?.fd}
                     </div>
                 </Col>
                 <Col md={5}>
@@ -262,7 +262,7 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                 <Col md={4}>
                     <div style={heading}>Weight</div>
                     <div style={paraStyles}>
-                        {invoice.SE_Job.weight?parseFloat(invoice.SE_Job.weight).toFixed(2):"0.00"}
+                        {invoice.SE_Job?.weight?parseFloat(invoice.SE_Job?.weight).toFixed(2):"0.00"}
                     </div>
                 </Col>
                 <Col md={4}>

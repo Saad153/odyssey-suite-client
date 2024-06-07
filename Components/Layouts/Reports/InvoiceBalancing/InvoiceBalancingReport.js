@@ -5,6 +5,9 @@ import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import PrintTopHeader from '/Components/Shared/PrintTopHeader';
 import Cookies from "js-cookie";
 import { AiFillPrinter } from "react-icons/ai";
+import { useDispatch } from 'react-redux';
+import { incrementTab } from '/redux/tabs/tabSlice';
+import Router from 'next/router';
 import { AgGridReact } from 'ag-grid-react';
 import { CSVLink } from "react-csv";
 import Pagination from "/Components/Shared/Pagination";
@@ -12,6 +15,8 @@ import Pagination from "/Components/Shared/Pagination";
 const InvoiceBalancingReport = ({ result, query }) => {
     
   let inputRef = useRef(null);
+  const dispatch = useDispatch();
+
   const [load, setLoad] = useState(true);
   const [records, setRecords] = useState([]);
   const [username, setUserName] = useState("");
@@ -122,72 +127,103 @@ const InvoiceBalancingReport = ({ result, query }) => {
   const TableComponent = ({overflow}) => {
     return (
     <>
-      {!load &&
-      <>
-        {records.length > 0 &&
-          <>
-            <PrintTopHeader company={query.company} />
-            <hr className='mb-2' />
-            <div className='table-sm-1' style={{ maxHeight: overflow ? 600 : "100%", overflowY: 'auto' }}>
-              <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
-                <thead>
-                  <tr>
-                    <th className='text-center'>#</th>
-                    <th className='text-center'>Inv. No</th>
-                    <th className='text-center'>Date</th>
-                    <th className='text-center'>HBL/HAWB</th>
-                    <th className='text-center'>Name</th>
-                    <th className='text-center'>F. Dest</th>
-                    <th className='text-center'>F/Tp</th>
-                    <th className='text-center'>Curr</th>
-                    <th className='text-center'>Debit</th>
-                    <th className='text-center'>Credit</th>
-                    <th className='text-center'>Paid/Rcvd</th>
-                    <th className='text-center'>Balance</th>
-                    <th className='text-center'>Age</th>
+    {!load &&
+    <>
+      {records.length > 0 &&
+        <>
+          <PrintTopHeader company={query.company} />
+          <hr className='mb-2' />
+          <div className='table-sm-1' style={{ maxHeight: overflow ? 600 : "100%", overflowY: 'auto' }}>
+            <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
+              <thead>
+                <tr>
+                  <th className='text-center'>#</th>
+                  <th className='text-center'>Inv. No</th>
+                  <th className='text-center'>Job. No</th>
+                  <th className='text-center'>Date</th>
+                  <th className='text-center'>HBL/HAWB</th>
+                  <th className='text-center'>Name</th>
+                  <th className='text-center'>F. Dest</th>
+                  <th className='text-center'>F/Tp</th>
+                  <th className='text-center'>Curr</th>
+                  <th className='text-center'>Debit</th>
+                  <th className='text-center'>Credit</th>
+                  <th className='text-center'>Paid/Rcvd</th>
+                  <th className='text-center'>Balance</th>
+                  <th className='text-center'>Age</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentRecords
+                .filter((x)=>{
+                  return query.balance=="exclude0"?Math.floor(x.balance)!=0:x
+                })
+                .map((x, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td
+                      className="blue-txt"
+                      style={{ width: 90, cursor:"pointer"}} 
+                      onClick={async ()=>{
+                        
+                        await Router.push(`/reports/invoice/${x.id}`)
+                        dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}`}))
+                      }}
+                    >{x.invoice_No}</td>
+                    <td
+                      className="blue-txt"
+                      style={{ width: 90, cursor:"pointer"}} 
+                      onClick={()=>{
+                        let type = x?.SE_Job?.operation;
+                        if(x?.SE_Job?.jobNo){
+                          dispatch(incrementTab({
+                          "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
+                          "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
+                          "id":x.SE_Job.id
+                          }))
+                          Router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
+                            type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
+                          )
+                        }
+                      }
+                    }
+                    >{x.SE_Job?.jobNo}</td>
+                    <td>{x.createdAt}</td>
+                    <td>{x?.SE_Job?.Bl?.hbl}</td>
+                    <td>{x.party_Name}</td>
+                    <td>{x.fd}</td>
+                    <td>{x.ppcc}</td>
+                    <td>{x.currency}</td>
+                    <td>{commas(x.debit)}</td>
+                    <td>{commas(x.credit)}</td>
+                    <td>{commas(x.paidRec)}</td>
+                    <td>{commas(x.balance)}</td>
+                    <td>{x.age}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {currentRecords.map((x, i) => {
-                  return (
-                    <tr key={i}>
-                      <td>{i + 1}</td>
-                      <td>{x.invoice_No}</td>
-                      <td>{x.createdAt}</td>
-                      <td>{x.blHbl}</td>
-                      <td>{x.party_Name}</td>
-                      <td>{x.fd}</td>
-                      <td>{x.ppcc}</td>
-                      <td>{x.currency}</td>
-                      <td>{commas(x.debit)}</td>
-                      <td>{commas(x.credit)}</td>
-                      <td>{commas(x.paidRec)}</td>
-                      <td>{commas(x.balance)}</td>
-                      <td>{x.age}</td>
-                    </tr>
-                  )})}
-                  <tr>
-                      <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
-                      <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
-                      <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
-                      <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
-                      <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
-                      <td style={{ textAlign: 'center' }}>-</td>
-                  </tr>
-                </tbody>
-              </Table>
+                )})}
+                <tr>
+                    <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
+                    <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
+                    <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
+                    <td style={{ textAlign: 'right' }}>{paidReceivedTotal(records)}</td>
+                    <td style={{ textAlign: 'right' }}>{balanceTotal(records)}</td>
+                    <td style={{ textAlign: 'center' }}>-</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+          {overflow && 
+            <div className="d-flex justify-content-end mt-4">
+              <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
             </div>
-            {overflow && 
-              <div className="d-flex justify-content-end mt-4">
-                <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-              </div>
-            }
-          </>
-        }
-        {records.length == 0 && <>No Similar Record</>}
-      </>
+          }
+        </>
       }
-      {load && <div className='text-center py-5 my-5'> <Spinner /> </div>}
+      {records.length == 0 && <>No Similar Record</>}
+    </>
+    }
+    {load && <div className='text-center py-5 my-5'> <Spinner /> </div>}
     </>
     )
   }

@@ -89,16 +89,22 @@ const MainTable = ({ ledger, closing, opening, name, company, currency, from, to
         </div>
         <hr className="mt-0" />
         <div className="d-flex justify-content-end">
-          <span className="mx-1">Closing Balance:</span><b>
+          <span className="mx-1">Closing Balance:</span>
+          <b>
             {closing > 0 ?
-              <span className="blue-txt">{closing.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") + " Dr"}</span> :
-              <span className="grey-txt">{Math.abs(closing).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") + " Cr"}</span>
+              <span className="blue-txt">
+                {closing.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") + " Dr"}
+              </span>
+              :
+              <span className="grey-txt">
+                {Math.abs(closing).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") + " Cr"}
+              </span>
             }
           </b>
         </div>
       </div>
     )
-  }
+  };
 
   useEffect(() => {
     getUserName();
@@ -109,26 +115,25 @@ const MainTable = ({ ledger, closing, opening, name, company, currency, from, to
   }, [])
 
   return (
-    <div>
-      <ReactToPrint content={() => inputRef} onBeforePrint={() => setIsPrinting(false)} onAfterPrint={() => setIsPrinting(true)}
-        trigger={() => <AiFillPrinter className="blue-txt cur fl-r" size={30} />}
-      />
-      <div className="d-flex justify-content-end items-end">
-        <CSVLink data={ledger} className="btn-custom mx-2 fs-11 text-center" style={{ width: "110px", float: 'left' }}>
-          Excel
-        </CSVLink>
-      </div>
-      <TableComponent overFlow={true}/>
-      <div style={{ display: "none" }}>
-        <div className="pt-5 px-3" ref={(response) => (inputRef = response)}>
-          <TableComponent overFlow={false}/>
-          <div style={{ position: 'absolute', bottom: 10 }}>Printed On: {`${moment().format("YYYY-MM-DD")}`}</div>
-          <div style={{ position: 'absolute', bottom: 10, right: 10 }}>Printed By: {username}</div>
-        </div>
+  <div>
+    <ReactToPrint content={() => inputRef} onBeforePrint={() => setIsPrinting(false)} onAfterPrint={() => setIsPrinting(true)}
+      trigger={() => <AiFillPrinter className="blue-txt cur fl-r" size={30} />}
+    />
+    <div className="d-flex justify-content-end items-end">
+      <CSVLink data={ledger} className="btn-custom mx-2 fs-11 text-center" style={{ width: "110px", float: 'left' }}>
+        Excel
+      </CSVLink>
+    </div>
+    <TableComponent overFlow={true}/>
+    <div style={{ display: "none" }}>
+      <div className="pt-5 px-3" ref={(response) => (inputRef = response)}>
+        <TableComponent overFlow={false}/>
+        <div style={{ position: 'absolute', bottom: 10 }}>Printed On: {`${moment().format("YYYY-MM-DD")}`}</div>
+        <div style={{ position: 'absolute', bottom: 10, right: 10 }}>Printed By: {username}</div>
       </div>
     </div>
+  </div>
   )
 };
 
 export default React.memo(MainTable);
-

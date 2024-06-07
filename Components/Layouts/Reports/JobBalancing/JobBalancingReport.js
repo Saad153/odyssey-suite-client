@@ -23,13 +23,13 @@ const JobBalancingReport = ({ result, query }) => {
   const commas = (a) => a ? parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") : '0.0';
 
   const getTotal = (type, list) => {
-    let result = 0.00;
+    let values = 0.00;
     list.forEach((x) => {
-        if (type == x.payType) {
-            result = result + x.total
-        }
+      if (type == x.payType) {
+        values = values + x.total
+      }
     })
-    return commas(result);
+    return commas(values);
   }
 
   const paidReceivedTotal = (list) => {
@@ -87,7 +87,7 @@ const JobBalancingReport = ({ result, query }) => {
       y.age = getAge(y.createdAt);
       y.freightType = y?.SE_Job?.freightType == "Prepaid" ? "PP" : "CC"
       y.fd = y?.SE_Job?.fd;
-      y.createdAt = moment(y.createdAt).format("DD-MMM-YYYY")
+      y.createdAt = moment(y.createdAt).format("DD-MMM-YY")
       y.hbl = y?.SE_Job?.Bl?.hbl
       
       y.recievable = y.payType == "Recievable" ? commas(y.total) : "-";
@@ -129,17 +129,18 @@ const JobBalancingReport = ({ result, query }) => {
           <PrintTopHeader company={query.company} />
           <hr className='mb-2' />
           <div className='table-sm-1' style={{ maxHeight: overflow ? 530 : "50%", overflowY: 'auto' }}>
-          <Table className='tableFixHead' bordered style={{ fontSize: 12 }}>
+          <Table className='tableFixHead' bordered style={{ fontSize: 11 }}>
             <thead>
               <tr>
                 <th className='text-center'>#</th>
                 <th className='text-center'>Inv. No</th>
+                <th className='text-center'>Job. No</th>
                 <th className='text-center'>Date</th>
                 <th className='text-center'>HBL/HAWB</th>
                 <th className='text-center'>Name</th>
                 <th className='text-center'>F. Dest</th>
                 <th className='text-center'>F/Tp</th>
-                <th className='text-center'>Curr</th>
+                {/* <th className='text-center'>Curr</th> */}
                 <th className='text-center'>Debit</th>
                 <th className='text-center'>Credit</th>
                 <th className='text-center'>Paid/Rcvd</th>
@@ -152,24 +153,45 @@ const JobBalancingReport = ({ result, query }) => {
               {overflow ? currentRecords.map((x,i)=>{
               return (
                 <tr key={i}>
-                  <td style={{ maxWidth: 30 }}>{i + 1}</td>
-                  <td style={{ maxWidth: 90, paddingLeft: 3, paddingRight: 3, cursor:"pointer"}} className="blue-txt"
+                  <td style={{ maxWidth: 10 }}>{i + 1}</td>
+                  <td 
+                    className="blue-txt"
+                    style={{ width: 90, cursor:"pointer"}} 
                     onClick={async ()=>{
                       await Router.push(`/reports/invoice/${x.id}`)
                       dispatch(incrementTab({ "label": "Invoice Details", "key": "2-11", "id":`${x.id}`}))
                     }}
                   >{x.invoice_No}</td>
+                  <td 
+                    style={{ width: 90, cursor:"pointer"}} 
+                    className="blue-txt"
+                    onClick={()=>{
+                      let type = x?.SE_Job?.operation;
+                      if(x?.SE_Job?.jobNo){
+                        dispatch(incrementTab({
+                        "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
+                        "key":type=="SE"?"4-3":type=="SI"?"4-6":type=="AE"?"7-2":"7-5",
+                        "id":x.SE_Job.id
+                        }))
+                        Router.push(type=="SE"?`/seaJobs/export/${x.SE_Job.id}`:type=="SI"?`/seaJobs/import/${x.SE_Job.id}`:
+                          type=="AE"?`/airJobs/export/${x.SE_Job.id}`:`/airJobs/import/${x.SE_Job.id}`
+                        )
+                      }
+                    }
+                  }>
+                    {x?.SE_Job?.jobNo}
+                  </td>
                   <td style={{}}>{x.createdAt}</td>
-                  <td style={{}}>{x.hbl}</td>
-                  <td style={{}}>{x.party_Name}</td>
-                  <td style={{ maxWidth: 90 }}>{x.fd}</td>
-                  <td style={{}}>{x.freightType}</td>
-                  <td style={{}}>{x.currency}</td>
+                  <td style={{width:50}}>{x.hbl}</td>
+                  <td style={{width:150}}><b>{x.party_Name}</b></td>
+                  <td style={{ maxWidth: 70 }}>{x.fd}</td>
+                  <td style={{width:20}}>{x.freightType}</td>
+                  {/* <td style={{width:20}}>{x.currency}</td> */}
                   <td style={{ textAlign: 'right' }} >{x.recievable}</td>
                   <td style={{ textAlign: 'right' }} >{x.payble}</td>
                   <td style={{ textAlign: 'right' }} >{x.balanced}</td>
                   <td style={{ textAlign: 'right' }} >{x.finalBalance}</td>
-                  <td style={{ textAlign: 'center' }}>{x.age}</td>
+                  <td style={{ width: 1 }}>{x.age}</td>
                 </tr>
               )}) : 
               // print mode 

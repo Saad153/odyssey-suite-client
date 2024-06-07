@@ -21,7 +21,8 @@ export async function getServerSideProps(context) {
             "from":           query.from         ,
             "to":             query.to           ,
             "paytype":        query.paytype      ,
-            "jobtypes":       query.jobtypes      ,
+            "jobtypes":       query.jobtypes     ,
+            "balance":        query.balance      ,
         }
         }).then((x)=>x.data)
     return{ 
