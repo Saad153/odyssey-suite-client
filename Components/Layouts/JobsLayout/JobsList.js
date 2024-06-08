@@ -18,15 +18,25 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
   const dispatch = useDispatch();
   const [isOpen,setIsOpen] = useState(false);
   //search state
-  const [query, setQuery] = useState("");
-  const keys = ["jobNo","weight","Client","name"]
+  const [query, setQuery] = useState(null);
   //pagination states
   const [currentPage,setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(20);
 
   const indexOfLast = currentPage * recordsPerPage;
   const indexOfFirst = indexOfLast - recordsPerPage;
-  const currentRecords = records.slice(indexOfFirst,indexOfLast);
+  const currentRecords = (query!='' && query!=null && query!=undefined)?records.filter((x)=>{
+    return  x.jobNo.toLowerCase().includes(query.toLowerCase()) ||
+      x?.Client?.name.toLowerCase().includes(query.toLowerCase()) ||
+      x?.fd.toLowerCase().includes(query.toLowerCase()) ||
+      x?.freightType.toLowerCase().includes(query.toLowerCase()) ||
+      x?.nomination.toLowerCase().includes(query.toLowerCase()) ||
+      x?.pod.toLowerCase().includes(query.toLowerCase()) ||
+      x?.pol.toLowerCase().includes(query.toLowerCase()) ||
+      x?.weight.toLowerCase().includes(query.toLowerCase()) ||
+      x?.Bl?.hbl.toLowerCase().includes(query.toLowerCase()) ||
+      x?.Bl?.mbl.toLowerCase().includes(query.toLowerCase()) 
+  }) : records.slice(indexOfFirst, indexOfLast);
   const noOfPages = Math.ceil(records.length / recordsPerPage);
 
   useEffect(() => {
@@ -34,25 +44,10 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
       setRecords(jobsData.result);
     }
   }, [])
-
-  const search = (data) => {
-    return data.filter(item => {
-      return keys.some(key => {
-        if (key === "Client" && item[key] && item[key].name) {
-          return item[key].name.toLowerCase().includes(query.toLowerCase());
-        } else if (item[key]) {
-          return item[key].toLowerCase().includes(query.toLowerCase());
-        } else {
-          return false;
-        }
-      });
-    });
-  };
   
   useEffect(() => {
-    const filteredData = search(jobsData.result);
-    setRecords(filteredData)
-  }, [jobsData, query])
+    setRecords(jobsData.result)
+  }, [jobsData])
 
   return (
     <>
@@ -112,7 +107,7 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
                   <th>Weight Info</th>
                   <th>Other Info</th>
                   <th>Status</th>
-                  <th>Created By</th>
+                  <th>Dates</th>
                 </tr>
               </thead>
               <tbody>
@@ -141,11 +136,10 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
                         <td>{index + 1}</td>
                         <td>
                           <span className='blue-txt fw-7'>{x.jobNo}</span>
+                          <br />HBL: <span className='blue-txt'>{x?.Bl?.hbl}</span>
+                          <br />MBL: <span className='blue-txt'>{x?.Bl?.mbl}</span>
                           <br />Nomination: <span className='grey-txt'>{x.nomination}</span>
                           <br />Freight Type: <span className='grey-txt'>{x.freightType}</span>
-                          <br />Created at: <span className='grey-txt '>{
-                           x.createdAt ? moment(x.createdAt).format("DD-MM-YYYY") : "-"}
-                          </span><br />
                         </td>
                         <td>
                           POL: <span className='grey-txt'>{x.pol}</span><br />
@@ -165,8 +159,15 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
                         <td>
                           {x.approved == "true" ? <img src={'/approve.png'} height={70} className='' /> : "Not Approved"}
                         </td>
-                        <td className='blue-txt fw-6'>
-                          {x.created_by?.name}
+                        <td>
+                          <span className='blue-txt fw-6'>
+                            {x.created_by?.name}
+                          </span>
+                          <br/>
+                          Created at:{" "} 
+                          <span className='grey-txt '>
+                            {x.createdAt ? moment(x.createdAt).format("DD-MM-YY") : "-"}
+                          </span>
                         </td>
                       </tr>
                     )
@@ -174,9 +175,10 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
               </tbody>
             </Table>
           </div>
+          {(query=="" || query==null || query==undefined ) &&
           <div className='d-flex justify-content-end items-end my-4'style={{maxWidth:"100%"}} >
-              <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-          </div>
+            <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+          </div>}
         </div>
       }
     </>
