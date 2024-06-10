@@ -488,7 +488,7 @@ const BillComp = ({companyId, state, dispatch}) => {
           <th>Curr</th>
           <th>Ex.</th>
           <th>Type</th>
-          <th>{state.payType=="Recievable"? 'Inv':'Bill'} Bal</th>
+          <th>Amount</th>
           <th>{state.payType=="Recievable"? 'Receiving Amount':'Paying Amount'}</th>
           <th>Balance</th>
           <th className='text-center'>-</th>

@@ -136,8 +136,8 @@ const SEJobList = ({ jobsData, sessionData, type }) => {
                         <td>{index + 1}</td>
                         <td>
                           <span className='blue-txt fw-7'>{x.jobNo}</span>
-                          <br />HBL: <span className='blue-txt'>{x?.Bl?.hbl}</span>
-                          <br />MBL: <span className='blue-txt'>{x?.Bl?.mbl}</span>
+                          <br />{(type=="SE"||type=="SI")?'HBL:':'AWBL'} <span className='blue-txt'>{x?.Bl?.hbl}</span>
+                          <br />{(type=="SE"||type=="SI")?'MBL:':'MWBL'}<span className='blue-txt'>{x?.Bl?.mbl}</span>
                           <br />Nomination: <span className='grey-txt'>{x.nomination}</span>
                           <br />Freight Type: <span className='grey-txt'>{x.freightType}</span>
                         </td>
