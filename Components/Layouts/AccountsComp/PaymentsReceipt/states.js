@@ -143,8 +143,6 @@ const getInvoices = async(state, companyId, dispatch) => {
       })
       
       temp = temp.map((y, index)=>{
-        // console.log(y.Charge_Heads[0].ex_rate)
-        // console.log(y.ex_rate)
         let tempRemBalance = state.partytype=="agent"?
         (state.payType=="Recievable"?
           (parseFloat(y.total)/parseFloat(y.ex_rate) - (parseFloat(y.recieved==null?0:y.recieved)/parseFloat(y.ex_rate)) - parseFloat(y.receiving==null?0:y.receiving) + parseFloat(y.roundOff)).toFixed(2):
@@ -172,6 +170,7 @@ const getInvoices = async(state, companyId, dispatch) => {
     }
     dispatch({
     type:"setAll", 
+    
     payload:{
       invoices:temp,
       partyAccountRecord:accountData.Child_Account,
