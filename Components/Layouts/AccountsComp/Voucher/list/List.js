@@ -13,12 +13,12 @@ import { Input, Tabs } from 'antd';
 const commas = (a) => a == 0 ? '0' : parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")
 
 const ListData = ({ voucherData }) => {
+
   const [rowData, setRowData] = useState();
   const [originalData, setOriginalData] = useState();
+  const [query, setQuery] = useState("");
+  
   const dispatch = useDispatch();
-  //search 
-  const [query, setQuery] = useState("")
-  const keys = ["voucher_Id", "type", "amount"]
 
   const handleDelete = (id) => {
     PopConfirm("Confirmation", "Are You Sure To Remove This Charge?",
@@ -34,23 +34,6 @@ const ListData = ({ voucherData }) => {
     await Router.push(`/accounts/vouchers/${voucherId}`);
     dispatch(incrementTab({ "label": "Voucher", "key": "3-5", "id": `${voucherId}` }));
   };
-  
-  // search funtionalites
-  const search = (data) => {
-    return data.filter(item => {
-      return keys.some(key => 
-        typeof item[key] === 'string' && 
-        item[key]?.toLowerCase().includes(query.toLowerCase())
-      );
-    });
-  };
-
-  useEffect(() => {
-    if (originalData) {
-      const filterData = search(originalData);
-      setRowData(filterData);
-    }
-  }, [query, originalData]);
 
   useEffect(() => {
     setData(voucherData);
@@ -99,7 +82,7 @@ const ListData = ({ voucherData }) => {
             <tr>
               <th style={{width:130}}>No #</th>
               <th style={{width:10}}>Type</th>
-              <th style={{width:120}}>Cheque Date</th>
+              <th style={{width:150}}>Cheque</th>
               <th>Paid to</th>
               <th style={{width:170}}>Amount</th>
               <th style={{width:120}}>Dated</th>
@@ -109,13 +92,20 @@ const ListData = ({ voucherData }) => {
             </tr>
           </thead>
           <tbody>
-            {
-              currentRecords?.map((x, index) => {
+            {(query?originalData:currentRecords)?.filter((x)=>{
+                return x.voucher_Id.toLowerCase().includes(query.toLowerCase()) ||
+                x.chequeNo.toLowerCase().includes(query.toLowerCase()) ||
+                x.payTo.toLowerCase().includes(query.toLowerCase())
+              }).map((x, index) => {
                 return (
                   <tr key={index}>
                     <td className='blue-txt fw-6 fs-12'>{x.voucher_Id}</td>
                     <td>{x.type}</td>
-                    <td>{x.chequedate ? moment(x.chequedate).format("YYYY-MM-DD") : "-"}</td>
+                    <td>
+                      Date: <span className='blue-txt'>{x.chequeDate ? moment(x.chequeDate).format("YYYY-MM-DD") : "-"}</span>
+                      <br/>
+                      No.: <span className='blue-txt'>{x.chequeNo}</span>
+                    </td>
                     <td>{x.payTo}</td>
                     <td>
                       <span style={{ color: 'grey' }}>Rs. </span>
@@ -136,9 +126,11 @@ const ListData = ({ voucherData }) => {
           </tbody>
         </Table>
       </div>
-      <div className='d-flex justify-content-end items-end my-4' style={{ maxWidth: "100%" }} >
+      {(query==''||query==null) &&
+       <div className='d-flex justify-content-end items-end my-4' style={{ maxWidth: "100%" }} >
         <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
+      }
     </>
   );
 };
