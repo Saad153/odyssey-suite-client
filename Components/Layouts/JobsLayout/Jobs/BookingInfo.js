@@ -138,7 +138,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
       </>
     )
   }
-
+  // console.log(state)
   return (
     <>
       <Row style={{ fontSize: 12 }}>
@@ -350,7 +350,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             options={state.fields.vendor.chaChb} disabled={getStatus(approved) || customCheck.length == 0}
           />
           <div style={{ marginTop: 13 }}></div>
-          <Weights register={register} control={control} equipments={state.equipments}
+          <Weights state={state} register={register} control={control} equipments={state.equipments}
             type={type} approved={approved} useWatch={useWatch}
           />
         </Col>

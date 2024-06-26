@@ -6,7 +6,7 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 const ContainerInfo = ({control, register, state, useWatch, dispatch, reset}) => {
   
   const set = (a, b) => dispatch({type:'toggle', fieldName:a, payload:b});
-
+  
   const onChange = (e, i, variable, type) => {
     let temp = [...state.Container_Infos];
     temp[i][variable] = type=='e'?e:e.target.value;
@@ -222,9 +222,9 @@ return (
     <td className='p-0'><Input  value={x.seal}      style={{width: 100  }} size='small' onChange={(e)=>onChange(e,i,'seal'        )}   /></td>
     <td className='p-0'><Select value={x.size}      style={{width: 75   }} size='small' onChange={(e)=>onChange(e,i,'size','e'    )} options={weightOpt}/></td>
     <td className='p-0'><Input  value={x.rategroup} style={{width:'100%'}} size='small' onChange={(e)=>onChange(e,i,'rategroup'   )}    /></td>
-    <td className='p-0'><InputNumber value={x.gross}style={{width: 89   }} size='small' onChange={(e)=>onChange(e,i,'gross','e')} min="0.00"/></td>
+    <td className='p-0'><InputNumber value={x.gross} style={{width: 89   }} size='small' onChange={(e)=>onChange(e,i,'gross','e')} min="0.00"/></td>
     <td className='p-0'><InputNumber value={x.net}  style={{width: 89   }} size='small' onChange={(e)=>onChange(e,i,'net','e')}   min="0.00"/></td>
-    <td className='p-0'><InputNumber value={x.tare} style={{width: 89   }} size='small' onChange={(e)=>onChange(e,i,'tare','e')}  min="0.00"/></td>
+    <td className='p-0'><InputNumber value={x.gross-x.net} style={{width: 89   }} size='small' onChange={(e)=>onChange(e,i,'tare','e')}  min="0.00"/></td>
     <td className='p-0'><Select value={x.wtUnit}    style={{width: 90   }} size='small' onChange={(e)=>onChange(e,i,'wtUnit','e'  )} options={weightUnit}/></td>
     <td className='p-0'><InputNumber value={x.cbm}  style={{width: 80   }} size='small' onChange={(e)=>onChange(e,i,'cbm','e'  )} min="0.00"/></td>
     <td className='p-0'><InputNumber value={x.pkgs} style={{width:'100%'}} size='small' onChange={(e)=>onChange(e,i,'pkgs','e')}  min="0.00"/></td>

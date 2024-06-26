@@ -7,7 +7,7 @@ import { getVendors, getClients } from '../states';
 import SelectComp from "/Components/Shared/Form/SelectComp";
 import { Row, Col, Table, Spinner } from 'react-bootstrap';
 import PopConfirm from '/Components/Shared/PopConfirm';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PartySearch from './PartySearch';
 import { saveHeads, calculateChargeHeadsTotal, makeInvoice, getHeadsNew } from "../states";
 import { useQueryClient } from '@tanstack/react-query';
@@ -18,6 +18,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
     
     const queryClient = useQueryClient();
     const { permissions } = state;
+    const [fieldValue, setFieldValue] = useState('PP');
 
     useEffect(() => {
         if(chargeList){
@@ -32,6 +33,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         }
     }, [chargeList])
 
+    console.log("chargeList",chargeList)
     const calculate  = () => {
         let tempChargeList = [...chargeList];
         for(let i = 0; i<tempChargeList.length; i++){
@@ -85,7 +87,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
             await makeInvoice(chargeList, companyId, reset, operationType, dispatch, state);
         }
     }
-
+    console.log("chargeList",chargeList)
   return(
 <>
     <Row>
@@ -249,8 +251,10 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         <td>{x.basis=="Per Shipment"?'P/Shp':'P/Unit'} {/* Basis */}
         </td>
         <td style={{ padding: 3, minWidth: 50 }}> {/* PP?CC */}
-            <SelectComp register={register} name={`chargeList.${index}.pp_cc`} control={control} width={60} font={13} 
+            <SelectComp register={register} name="PP"
+                control={control} width={60} font={13} 
                 disabled={permissionAssign(permissions, x)}
+                defaultValue="PP"
                 options={[
                     { id: 'PP', name: 'PP' },
                     { id: 'CC', name: 'CC' }
@@ -322,8 +326,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         </td>
         <td>{x.local_amount}</td>
         <td>{x.particular}</td>
-        <td>Un-Approved</td><td></td><td></td>
-        </tr>
+        <td>{x.status === '1' ? 'Approved' : 'Unapproved'}</td><td></td><td></td></tr>
         }
         </>
     )})}

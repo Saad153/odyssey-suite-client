@@ -95,12 +95,16 @@ const ListData = ({ voucherData }) => {
             {(query?originalData:currentRecords)?.filter((x)=>{
                 return x.voucher_Id.toLowerCase().includes(query.toLowerCase()) ||
                 x.chequeNo.toLowerCase().includes(query.toLowerCase()) ||
-                x.payTo.toLowerCase().includes(query.toLowerCase())
+                x.payTo.toLowerCase().includes(query.toLowerCase()) ||
+                x.chequeDate.toLowerCase().includes(query.toLowerCase()) ||
+                x.vType.toLowerCase().includes(query.toLowerCase()) ||
+                x.currency.toLowerCase().includes(query.toLowerCase()) ||
+                x.amount.toString().includes(query)
               }).map((x, index) => {
                 return (
                   <tr key={index}>
                     <td className='blue-txt fw-6 fs-12'>{x.voucher_Id}</td>
-                    <td>{x.type}</td>
+                    <td>{x.vType}</td>
                     <td>
                       Date: <span className='blue-txt'>{x.chequeDate ? moment(x.chequeDate).format("YYYY-MM-DD") : "-"}</span>
                       <br/>

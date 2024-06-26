@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Paragraph from '@tiptap/extension-paragraph'
@@ -10,8 +10,17 @@ import TextAreaComp from '/Components/Shared/Form/TextAreaComp';
 
 const BlDetail = ({control, register, state, useWatch, dispatch, reset, type}) => {
 
+  // console.log("state from bi details",state)
+  const [roundedGross, setRoundedGross] = useState();
   const set = (a, b) => dispatch({type:'toggle', fieldName:a, payload:b});
   const allValues = useWatch({control})
+
+  useEffect(() => {
+    const cumulativeGross = state?.Container_Infos.reduce((total, container) => total + parseFloat(container.gross), 0);
+    setRoundedGross(cumulativeGross.toFixed(2)) ; 
+    
+      }, [state])
+
   const Editor = (variable) => useEditor({
     extensions: [
       StarterKit,
@@ -35,6 +44,8 @@ const BlDetail = ({control, register, state, useWatch, dispatch, reset, type}) =
     overflowY:'auto',
     padding:0
   }
+
+
 
 return(
 <div style={{height:600, overflowY:'auto', overflowX:'hidden'}}>
@@ -134,7 +145,7 @@ return(
         </Col>
         <Col md={6} className='mt-2'>
           <div>Gross WT</div>
-          <div className='dummy-input'>{allValues.gross}</div>
+          <div className='dummy-input'>{roundedGross}</div>
         </Col>
         <Col md={6} className='mt-2'>
           <div>Tare WT</div>
@@ -198,8 +209,10 @@ return(
         <Col md={5} style={{paddingRight:20}}>
         <div>Gross Weight</div>
         <div className='brdr-grey mb-2'>
-          <EditorContent editor={Editor('grossWeightContent')} style={partyDetail} />
-        </div>
+          {/* <EditorContent editor={Editor('grossWeightContent')} style={partyDetail} /> */}
+          Gross Weight: {roundedGross} <br />
+          Net Weight: {allValues.net} 
+           </div>
         </Col>
         <Col md={5}>
         <div>Measurement</div>

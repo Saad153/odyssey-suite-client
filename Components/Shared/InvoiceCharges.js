@@ -317,10 +317,11 @@ return (
     <div className='fs-12' 
         style={{maxHeight:660, overflowY:'auto', overflowX:'hidden'}}
     >
-    <div style={{maxWidth:70}}>
+    <div style={{  display: 'flex', justifyContent: 'space-between'}}>
     <Popover content={PrintOptions} placement="bottom" title="Printing Options">
-        <div className='div-btn-custom text-center p-2'>Print</div>
+        <div className='div-btn-custom text-center p-2'style={{ maxWidth: 70 }}>Print</div>
     </Popover>
+    <div className='div-btn-custom text-center p-2'>Payment</div>
     </div>
     <Row className='py-3'>
         <Col md={3} className="mb-3">

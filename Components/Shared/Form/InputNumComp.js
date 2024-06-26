@@ -3,7 +3,7 @@ import { useController } from "react-hook-form";
 import React from 'react';
 
 const NumComp = (props) => {
-  const { control, name } = props;
+  const { control, name,state } = props;
   const { field:{onChange, onBlur, value, name: fieldName, ref} } = useController({ control, name });
   return (
     <>
