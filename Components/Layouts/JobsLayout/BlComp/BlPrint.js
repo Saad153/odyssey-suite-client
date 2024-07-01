@@ -159,7 +159,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
             </Row>
             {/* 5th row  */}
             <Col>
-              <Col style={{ display: "flex", color:"black", fontWeight:"600", marginTop:20 }}>
+              <Col style={{ display: "flex", color:"black", fontWeight:"600", marginTop:10 }}>
                 <Col md={2}>
                   <div className="bl-print" >{parse(state.marksContent)}</div>
                   </Col>
@@ -172,7 +172,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                 <Col md={1}></Col>
                 <Col md={2} style={{ fontWeight: "bold" }}>
                   <div >
-                  <span>{!grossWeight && parseFloat(gross_weight).toFixed(3)} {allValues.wtUnit} </span> <br />
+                  <span>{!grossWeight && parseFloat(gross_weight).toFixed(3)} {allValues.wtUnit} </span> <br /> <br />
                   <span style={{ marginTop: "15px" }}>Net Weight:</span><br /> 
                   <span>{!netWeight &&  parseFloat(allValues.net).toFixed(3)} {allValues.wtUnit}</span> 
                   <div style={{ display: "flex", flexDirection: "column", marginTop: "15px"}}>
