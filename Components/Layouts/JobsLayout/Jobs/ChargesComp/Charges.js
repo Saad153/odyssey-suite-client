@@ -293,11 +293,14 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
             <SelectSearchComp register={register} name={`chargeList.${index}.currency`} control={control} width={100} font={13} 
             disabled={permissionAssign(permissions, x)}
                 options={[
-                    { id: 'PKR', name: 'PKR' },
-                    { id: 'USD', name: 'USD' },
-                    { id: 'EUR', name: 'EUR' },
-                    { id: 'GBP', name: 'GBP' },
-                    { id: 'AED', name: 'AED' }
+                    { id:"PKR", name:"PKR"},
+                    { id:"USD", name:"USD"},
+                    { id:"EUR", name:"EUR"},
+                    { id:"GBP", name:"GBP"},
+                    { id:"AED", name:"AED"},             
+                    { id:"OMR", name:"OMR"},
+                    { id:"BDT", name:"BDT"},             
+                    { id:"CHF", name:"CHF"},
                 ]}
             />
         </td>

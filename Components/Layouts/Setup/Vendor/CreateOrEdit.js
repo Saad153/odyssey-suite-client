@@ -294,7 +294,12 @@ const CreateOrEdit = ({state, dispatch, baseValues, vendorData, id}) => {
                         {id:'PKR', name:'PKR'},
                         {id:'INR', name:'INR'},
                         {id:'AED', name:'AED'},
-                        {id:'AUD', name:'AUD'}
+                        {id:'AUD', name:'AUD'},
+                        { id:"EUR", name:"EUR"},
+                        { id:"GBP", name:"GBP"},
+                        { id:"OMR", name:"OMR"},
+                        { id:"BDT", name:"BDT"},             
+                        { id:"CHF", name:"CHF"},
                 ]}/>
             </Col><div style={{height:370}}></div>
         </Row>

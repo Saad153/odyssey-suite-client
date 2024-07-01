@@ -4,7 +4,8 @@ import parse from "html-react-parser";
 import ReactToPrint  from "react-to-print";
 
 const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, line, grossWeight, netWeight,  containerData, formE, cbm}) => {
-
+  // console.log("grossWeight",allValues.Container_Infos[0].gross)
+  const gross_weight = allValues.Container_Infos[0].gross
   return (
     <div style={{ width: "10%" }}>
     <ReactToPrint
@@ -36,9 +37,9 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                 <div style={{ borderBottom: border, height: 103, position:"relative" }}>
                   <div className={`fw-5 ${heading}`} style={{ lineHeight:1.4 }}>Consignee Or Order</div>
                   <div className="bl-print" style={{marginTop:10}}>{parse(state.consigneeContent)}</div>
-                  <div className="bl-print" style={{position:"absolute", top:"85px", width: "250px"  }}> <b>  {!formE && `FORM E NUMBER : "  ${allValues.formE}`}</b> </div>
-                  <div className="bl-print" style={{position:"absolute", top:"85px", left:"220px"  }}>
-                    <b> {!formE && `DATE : ${allValues.formEDate._i?.slice(0, 10)}`}</b> 
+                  <div className="bl-print" style={{position:"absolute", top:"85px", width: "250px"  }}> <b>  {!formE && allValues.formE ? `FORM E NUMBER : ${allValues.formE}`:null}</b> </div>
+                  <div className="bl-print" style={{position:"absolute", top:"85px", left:"250px"  }}>
+                    <b> {!formE && allValues.formEDate._i ? `DATE : ${allValues.formEDate._i?.slice(0, 10)}`:null}</b> 
                     </div>
 
                 </div>
@@ -144,14 +145,14 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
               <Col className="px-0" style={{ borderRight: border, maxHeight: 5, minWidth: 130, maxWidth: 130 }}>
                 <div style={{ height: 42 }} className="px-1">
                   <div className={` ${heading} text-center`}>
-                    Weight{"("}kg{")"} of Cargo
+                    `Weight (kg) of Cargo`
                   </div>
                 </div>
               </Col>
               <Col className="px-0" style={{ maxWidth: 90, maxHeight: 5 }}>
                 <div style={{ height: 42 }} className="px-1">
                   <div className={` ${heading} text-center`} style={{ lineHeight: 1 }}>
-                    Measurement {"("}cbm{")"} of Cargo
+                    `Measurement (cbm) of Cargo`
                   </div>
                 </div>
               </Col>
@@ -171,9 +172,9 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                 <Col md={1}></Col>
                 <Col md={2} style={{ fontWeight: "bold" }}>
                   <div >
-                  <span>{!grossWeight && parseFloat(allValues.gross).toFixed(3)} {allValues.wtUnit} </span>
-                  <span style={{ marginTop: "15px" }}>Net Weight:</span>
-                  <span>{!netWeight &&  parseFloat(allValues.net).toFixed(3)} {allValues.wtUnit}</span>
+                  <span>{!grossWeight && parseFloat(gross_weight).toFixed(3)} {allValues.wtUnit} </span> <br />
+                  <span style={{ marginTop: "15px" }}>Net Weight:</span><br /> 
+                  <span>{!netWeight &&  parseFloat(allValues.net).toFixed(3)} {allValues.wtUnit}</span> 
                   <div style={{ display: "flex", flexDirection: "column", marginTop: "15px"}}>
                     <span>{allValues.stamps?.length > 0 && allValues.stamps.map((x) => x.stamp_group == '2' ? stamps[Number(x.code) - 1].label : "" )}</span>
                     <span style={{marginLeft: "35px"}}> {allValues.stamps?.length > 0 && allValues.stamps?.map((x) => x?.stamp_group=="1"? stamps[Number(x.code) - 1]?.label: "")}</span>

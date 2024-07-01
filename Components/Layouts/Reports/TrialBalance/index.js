@@ -98,11 +98,14 @@ const TrialBalance = () => {
         <Col md={9} className="mb-3">
           <b>Currency</b><br />
           <Radio.Group className="mt-1" value={currency} onChange={(e) => setCurrency(e.target.value)}>
-            <Radio value={"PKR"}>PKR</Radio>
+          <Radio value={"PKR"}>PKR</Radio>
             <Radio value={"USD"}>USD</Radio>
             <Radio value={"GBP"}>GBP</Radio>
             <Radio value={"CHF"}>CHF</Radio>
             <Radio value={"EUR"}>EUR</Radio>
+            <Radio value={"AED"}>AED</Radio>
+            <Radio value={"OMR"}>OMR</Radio>
+            <Radio value={"BDT"}>BDT</Radio>
           </Radio.Group>
         </Col>
         <Col md={12}></Col>

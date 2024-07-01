@@ -267,9 +267,14 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
             <SelectComp className="form-select" name={`currency`} label="Currency" register={register} control={control}
               width={"100%"}
               options={[
-                { id: "USD", name: "USD" },
-                { id: "PKR", name: "PKR" },
-                { id: "GBP", name: "GBP" },
+                { id:"PKR", name:"PKR"},
+                { id:"USD", name:"USD"},
+                { id:"EUR", name:"EUR"},
+                { id:"GBP", name:"GBP"},
+                { id:"AED", name:"AED"},             
+                { id:"OMR", name:"OMR"},
+                { id:"BDT", name:"BDT"},             
+                { id:"CHF", name:"CHF"},
               ]}
             />
           </Col>

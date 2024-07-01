@@ -194,9 +194,14 @@ const InvoiceBalaincing = () => {
               <Select defaultValue="" style={{ width: '100%', marginBottom: 5 }} size='small'
                 onChange={(e) => { setCurrency(e) }}
                 options={[
-                  { value: "PKR", label: "PKR" },
-                  { value: "USD", label: "USD" },
-                  { value: "GBP", label: "GBP" },
+                  { value:"PKR", label:"PKR"},
+                  { value:"USD", label:"USD"},
+                  { value:"EUR", label:"EUR"},
+                  { value:"GBP", label:"GBP"},
+                  { value:"AED", label:"AED"},             
+                  { value:"OMR", label:"OMR"},
+                  { value:"BDT", label:"BDT"},             
+                  { value:"CHF", label:"CHF"},
                 ]}
               />
             </Col>

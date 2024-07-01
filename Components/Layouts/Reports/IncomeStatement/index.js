@@ -104,6 +104,9 @@ const IncomeStatement = () => {
             <Radio value={"GBP"}>GBP</Radio>
             <Radio value={"CHF"}>CHF</Radio>
             <Radio value={"EUR"}>EUR</Radio>
+            <Radio value={"AED"}>AED</Radio>
+            <Radio value={"OMR"}>OMR</Radio>
+            <Radio value={"BDT"}>BDT</Radio>
           </Radio.Group>
         </Col>
         <Col md={12}></Col>
