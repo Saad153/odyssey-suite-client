@@ -10,28 +10,22 @@ const LedgerReport = ({ voucherData, from, to, name, company, currency }) => {
   useEffect(() => {
     if (voucherData.status == "success") {
       let openingBalance = 0.0, closingBalance = 0.0, tempArray = [], prevBalance = 0, isDone = false, finalClosing = 0;
-
       voucherData.result.forEach((y) => {
-        // console.log("Transaction:", y);
         let exRate = parseFloat(y["Voucher.exRate"])>0?parseFloat(y["Voucher.exRate"]):1;
         const createdAtDate = moment(y.createdAt);
         if (
-          createdAtDate.isBetween(moment(from), moment(to), "day", "[]") ||
-          createdAtDate.isSame(moment(to), "day")
+          createdAtDate.isBetween(moment(from),moment(to),"day","[]") ||
+          createdAtDate.isSame(moment(to),"day")
         ) {
           closingBalance =
-            y.type === "debit"
-              ? closingBalance +
-                (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
-              : closingBalance -
-                (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
+            y.type === "debit" ? 
+              closingBalance + (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate): 
+              closingBalance - (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
           if (y["Voucher.vType"] === "OP") {
             openingBalance =
-              y.type === "debit"
-                ? openingBalance +
-                  (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
-                : openingBalance -
-                  (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
+              y.type === "debit" ? 
+                openingBalance + (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate): 
+                openingBalance - (currency=="PKR"? parseFloat(y.amount):parseFloat(y.amount) / exRate)
           } else {
             let tempBalance = parseFloat(closingBalance) + parseFloat(prevBalance)
             tempArray.push({

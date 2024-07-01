@@ -131,7 +131,7 @@ return(
     {(type=="SE"||type=="SI") && 
     <Col md={3}>
       <Row>
-        <Col md={7} className='mt-1'>
+        <Col md={6} className='mt-1'>
           Freight Type
           <div className='dummy-input'>{allValues.freightType}</div>
         </Col>

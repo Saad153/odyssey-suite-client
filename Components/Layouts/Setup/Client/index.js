@@ -8,41 +8,41 @@ import axios from 'axios';
 import {Input, Select} from 'antd'
 
 function recordsReducer(state, action){
-    switch (action.type) {
-      case 'toggle': { 
-        return { ...state, [action.fieldName]: action.payload } 
-      }
-      case 'create': {
-        return {
-            ...state,
-            edit: false,
-            visible: true,
-        }
-      }
-      case 'history': {
-        return {
-            ...state,
-            edit: false,
-            viewHistory:true,
-            visible: true,
-        }
-      }
-      case 'edit': {
-        return {
-            ...state,
-            selectedRecord:{},
-            edit: true,
-            visible: true,
-            selectedRecord:action.payload
-        }
-      }
-      case 'modalOff': {
-        let returnVal = { ...state, visible: false, edit: false, viewHistory:false };
-        state.edit?returnVal.selectedRecord={}:null
-        return returnVal
-      }
-      default: return state 
+  switch (action.type) {
+    case 'toggle': { 
+      return { ...state, [action.fieldName]: action.payload } 
     }
+    case 'create': {
+      return {
+          ...state,
+          edit: false,
+          visible: true,
+      }
+    }
+    case 'history': {
+      return {
+        ...state,
+        edit: false,
+        viewHistory:true,
+        visible: true,
+      }
+    }
+    case 'edit': {
+      return {
+        ...state,
+        selectedRecord:{},
+        edit: true,
+        visible: true,
+        selectedRecord:action.payload
+      }
+    }
+    case 'modalOff': {
+      let returnVal = { ...state, visible: false, edit: false, viewHistory:false };
+      state.edit?returnVal.selectedRecord={}:null
+      return returnVal
+    }
+    default: return state 
+  }
 }
 
 const initialState = {
@@ -102,10 +102,14 @@ const Client = ({sessionData, clientData}) => {
       />
     </Col>
     <Col md={2}>
-      <button className='btn-custom right' onClick={()=>{
+      <button className='btn-custom right' 
+        onClick={()=>{
           dispatchNew(incrementTab({"label":"Client","key":"2-7","id":"new"}));
           Router.push(`/setup/client/new`);
-      }}>Create</button>
+        }}
+      >
+        Create
+      </button>
     </Col>
     </Row>
     <hr className='my-2' />
@@ -120,6 +124,7 @@ const Client = ({sessionData, clientData}) => {
             <th>Contact Persons</th>
             <th>Telephones</th>
             <th>Address</th>
+            <th>Status</th>
             {/* <th>History</th> */}
           </tr>
         </thead>
@@ -132,11 +137,12 @@ const Client = ({sessionData, clientData}) => {
               Router.push(`/setup/client/${x.id}`);
             }}
           >
-            <td> <span className=''>{x.code}</span></td>
-            <td> <span className='blue-txt fw-7'>{x.name}</span></td>
-            <td> {x.person1} {x.mobile1}<br/> {x.person2} {x.mobile2}<br/> </td>
-            <td> {x.telephone1}<br/>{x.telephone2}</td>
-            <td> {x.address1?.slice(0,30)}<br/> {x.address2?.slice(0,30)}<br/> </td>
+            <td><span className=''>{x.code}</span></td>
+            <td><span className='blue-txt fw-7'>{x.name}</span></td>
+            <td>{x.person1} {x.mobile1}<br/> {x.person2} {x.mobile2}<br/> </td>
+            <td>{x.telephone1}<br/>{x.telephone2}</td>
+            <td>{x.address1?.slice(0,30)}<br/> {x.address2?.slice(0,30)}<br/></td>
+            <td>{x.active?<b className='green-txt'>Active</b>:<b className='red-txt'>Disabled</b>}</td>
           </tr>
         )})}
         </tbody>

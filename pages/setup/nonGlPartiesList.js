@@ -4,7 +4,6 @@ import axios from 'axios';
 import Cookies from 'cookies';
 
 const nonGlParties = ({clientData, sessionData}) => {
-  console.log({clientData})
   return (
     <div>
       <Non_Gl_Parties clientData={clientData} sessionData={sessionData}/>

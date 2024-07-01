@@ -46,46 +46,39 @@ const CreateOrEdit = ({state, dispatch, baseValues, clientData, id}) => {
 
     const company = useSelector((state) => state.company.companies);
     const { register, control, handleSubmit, reset, formState: { errors } } = useForm({
-        resolver: yupResolver(SignupSchema),
-        defaultValues:state.values
+      resolver: yupResolver(SignupSchema),
+      defaultValues:state.values
     });
-    console.log(clientData)
     const { oldRecord, Representatives } = state;
     const { refetch } = useQuery({
-        queryKey:['values'],
-        queryFn:getJobValues
+      queryKey:['values'],
+      queryFn:getJobValues
     });
-
-    //const values = useWatch({control})
 
     useEffect(() => {
     //Edit
     if(id!="new") {
-        let tempState = {...clientData};
-        let tempCompanyList = [...state.editCompanyList];
-        tempState.operations = tempState.operations.split(', ');
-        tempState.types = tempState.types.split(', ');
-        tempState.registerDate = tempState.registerDate ? moment(tempState.registerDate) : "";
-        tempState.bankAuthorizeDate = moment(tempState.bankAuthorizeDate);
-        tempState.companies = [];
-        clientData.Client_Associations.forEach((x)=>{ tempState.companies.push(x.CompanyId) })
-        tempCompanyList.forEach((x, i)=>{
-            for(let j=0; j<tempState.Client_Associations.length; j++){
-                if(tempState.Client_Associations[j].CompanyId==x.value){
-                    tempCompanyList[i].disabled=true;
-                    break;
-                }else{
-                    tempCompanyList[i].disabled=false;
-                }
-            }
-        })
-        // dispatch({type:'set', payload:{
-        //     editCompanyList:tempCompanyList,
-        //     oldRecord:tempState
-        // }});
-        dispatch({type:'toggle', fieldName:'editCompanyList', payload:tempCompanyList});
-        dispatch({type:'toggle', fieldName:'oldRecord', payload:tempState});
-        reset({...tempState, parentAccount:state.parentAccount});
+      let tempState = {...clientData};
+      let tempCompanyList = [...state.editCompanyList];
+      tempState.operations = tempState.operations.split(', ');
+      tempState.types = tempState.types.split(', ');
+      tempState.registerDate = tempState.registerDate ? moment(tempState.registerDate) : "";
+      tempState.bankAuthorizeDate = moment(tempState.bankAuthorizeDate);
+      tempState.companies = [];
+      clientData.Client_Associations.forEach((x)=>{ tempState.companies.push(x.CompanyId) })
+      tempCompanyList.forEach((x, i)=>{
+        for(let j=0; j<tempState.Client_Associations.length; j++){
+          if(tempState.Client_Associations[j].CompanyId==x.value){
+            tempCompanyList[i].disabled=true;
+            break;
+          } else {
+            tempCompanyList[i].disabled=false;
+          }
+        }
+      })
+      dispatch({type:'toggle', fieldName:'editCompanyList', payload:tempCompanyList});
+      dispatch({type:'toggle', fieldName:'oldRecord', payload:tempState});
+      reset({...tempState, parentAccount:state.parentAccount});
     }
     if(id=="new") { 
         reset({...baseValues, parentAccount:state.parentAccount}) 
@@ -165,10 +158,20 @@ const CreateOrEdit = ({state, dispatch, baseValues, clientData, id}) => {
         <Tabs.TabPane tab="Basic Info" key="1">
         <Row>
             <Col md={12} className='py-1'>
-                <Col md={3}>
-                <InputComp disabled  register={register} name='code' control={control} label='Code' />
-                {errors.code && <div className='error-line'>{errors.code.message}*</div>}
-                </Col>
+                <Row>
+                    <Col md={3}>
+                        <InputComp disabled  register={register} name='code' control={control} label='Code' />
+                        {errors.code && <div className='error-line'>{errors.code.message}*</div>}
+                    </Col>
+                    <Col md={3}>
+                        <SelectComp width={100} register={register} name='active' control={control} label='Status'
+                            options={[
+                                {name:'Active', id:true},
+                                {name:'Inactive', id:false},
+                            ]}
+                        />
+                    </Col>
+                </Row>
             </Col>
             <Col md={6} className='py-1'>
                 <InputComp  register={register} name='name' control={control} label='Name*' />
@@ -284,7 +287,8 @@ const CreateOrEdit = ({state, dispatch, baseValues, clientData, id}) => {
             </Col>
             <Col md={3} className='py-1'>     
                 <SelectComp width={100} register={register} name='authorizedById' control={control} label='Authorized By:'
-                    options={state.Representatives[0].records} />
+                    options={state.Representatives[0].records}
+                />
             </Col>
             <div style={{height:185}}></div>
         </Row>

@@ -22,14 +22,14 @@ const Voucher = ({ id }) => {
   const [child, setChild] = useState([]);
   const [settlement, setSettlement] = useState([]);
   const [load, setLoad] = useState(false);
-  const [voucherData, setVoucherData] = useState({})
+  const [voucherData, setVoucherData] = useState({});
   //getting employeeid and name from cookies
   const employeeId = Cookies.get("loginId");
   const employeeName = Cookies.get("username");
 
   const { data:newData, isSuccess, refetch } = useQuery({
     queryKey:["voucherData", {id}], queryFn: () => getVoucherById({id}),
-  })
+  });
 
   const { register, handleSubmit, control, reset, formState: { errors } } = useForm({
     resolver: yupResolver(validationSchema),
@@ -38,25 +38,24 @@ const Voucher = ({ id }) => {
 
   //funtion responsible for creating and updating voucher history
   async function createHistory (id,mode){
-      const data = {
-        html:mode == "Create" ? `Created by ${employeeName}` : `Updated by ${employeeName}`,
-        updateDate:new Date().toISOString(),
-        type:mode == "Create" ? "Create" : "Update"
-      }
-      try {
-          const result = await axios.post(process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER_HISTORY,data,{
-            headers:{
-                recordId:id,
-                EmployeeId:employeeId
-            }
-        }) 
-          return result
-      } catch (error) {
-          console.log(error)
-      }
+    const data = {
+      html:mode == "Create" ? `Created by ${employeeName}` : `Updated by ${employeeName}`,
+      updateDate:new Date().toISOString(),
+      type:mode == "Create" ? "Create" : "Update"
+    }
+    try {
+      const result = await axios.post(process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER_HISTORY,data,{
+        headers:{
+          recordId:id,
+          EmployeeId:employeeId
+        }
+      }) 
+      return result
+    } catch (error) {
+      console.log(error)
+    }
   }
    
-
   const onSubmit = async (data) => {
     setLoad(true)
     let settlementAmmount = 0.00;
@@ -87,8 +86,6 @@ const Voucher = ({ id }) => {
     voucher.CompanyId = CompanyId ? CompanyId : 1;
     voucher.type = (voucher.vType == "BPV" || voucher.vType == "CPV") ? "Payble" : (voucher.vType == "BRV" || voucher.vType == "CRV") ? "Recievable" : voucher.vType == "TV" ? "Trasnfer Voucher" : "General Voucher"
 
-    //voucher.createdAt = voucherData.createdAt
-    console.log(voucher)
     // <----- Create New Voucher ----->
     if (id == "new") {
       delete voucher.id;
@@ -120,10 +117,6 @@ const Voucher = ({ id }) => {
     await delay(1000);
     setLoad(false)
   };
-
-  // useEffect(() => {
-  //   isSuccess?console.log(newData):null
-  // }, [isSuccess])
   
   return (
     <div className="base-page-layout fs-11">

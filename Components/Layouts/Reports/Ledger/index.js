@@ -33,7 +33,7 @@ const Ledger = () => {
       }
     }).then((x) => {
       let temprecords = [];
-      x.data.result.map((x) => {
+      x?.data?.result?.map((x) => {
         return temprecords.push({ value: x.id, label: x.title, });
       });
       setRecords(temprecords);

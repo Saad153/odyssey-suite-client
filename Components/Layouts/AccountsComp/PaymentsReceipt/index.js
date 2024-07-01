@@ -12,7 +12,6 @@ import axios from 'axios';
 import React, { useState, useRef, useEffect, useMemo, useCallback, useReducer} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import ReactToPrint from 'react-to-print';
-import { RiPrinterFill } from "react-icons/ri";
 
 const PaymentsReceipt = ({id, voucherData}) => {
 
@@ -127,11 +126,10 @@ const PaymentsReceipt = ({id, voucherData}) => {
               query:{
                 name:item.name, partyid:item.id, type:state.partytype,
                 paytype:state.payType, currency:state.invoiceCurrency
-              }
-            }, 
-            undefined,
-            {shallow:true}
-          );
+              }}, 
+              undefined,
+              {shallow:true}
+            );
             dispatchNew(incrementTab({
               "label": "Payment / Receipt",
               "key": "3-4",

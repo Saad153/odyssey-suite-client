@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { Row, Col, Table } from 'react-bootstrap';
 import { incrementTab } from '/redux/tabs/tabSlice';
 import { RiDeleteBin2Fill, RiEdit2Fill } from "react-icons/ri";
+import PopConfirm from '/Components/Shared/PopConfirm';
+import Pagination from '/Components/Shared/Pagination';
 import Router from 'next/router';
 import moment from 'moment';
 import axios from 'axios';
-import PopConfirm from '../../../../Shared/PopConfirm';
-import Pagination from '../../../../Shared/Pagination';
-import { Input, Tabs } from 'antd';
+import { Input } from 'antd';
 
 const commas = (a) => a == 0 ? '0' : parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")
 
@@ -22,14 +22,15 @@ const ListData = ({ voucherData }) => {
 
   const handleDelete = (id) => {
     PopConfirm("Confirmation", "Are You Sure To Remove This Charge?",
-      () => {
-        axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_DELETE_BASE_VOUCHER, {
-          id: id
-        }).then((x) => {
-          Router.push("/accounts/voucherList")
-        })
+    () => {
+      axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_DELETE_BASE_VOUCHER, {
+        id: id
+      }).then((x) => {
+        Router.push("/accounts/voucherList")
       })
-  }
+    })
+  };
+  
   const handleEdit = async (voucherId) => {
     await Router.push(`/accounts/vouchers/${voucherId}`);
     dispatch(incrementTab({ "label": "Voucher", "key": "3-5", "id": `${voucherId}` }));
@@ -55,7 +56,7 @@ const ListData = ({ voucherData }) => {
     });
     setRowData(tempData);
     setOriginalData(tempData);
-  }
+  };
 
   return (
     <>

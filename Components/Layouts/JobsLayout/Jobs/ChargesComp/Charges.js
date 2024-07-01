@@ -18,7 +18,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
     
     const queryClient = useQueryClient();
     const { permissions } = state;
-    const [fieldValue, setFieldValue] = useState('PP');
+    const [ fieldValue, setFieldValue ] = useState('PP');
 
     useEffect(() => {
         if(chargeList){
@@ -33,7 +33,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         }
     }, [chargeList])
 
-    console.log("chargeList",chargeList)
+    // console.log("chargeList",chargeList)
     const calculate  = () => {
         let tempChargeList = [...chargeList];
         for(let i = 0; i<tempChargeList.length; i++){
@@ -87,7 +87,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
             await makeInvoice(chargeList, companyId, reset, operationType, dispatch, state);
         }
     }
-    console.log("chargeList",chargeList)
+    // console.log("chargeList",chargeList)
   return(
 <>
     <Row>
@@ -183,7 +183,6 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
                 let tempChargeList = [...chargeList];
                 state.fields.chargeList.forEach(async (y, i) => {
                 if (y.code == e) {
-                    console.log(y)
                     tempChargeList[index] = {
                         ...tempChargeList[index],
                         charge: e,

@@ -115,7 +115,7 @@ const Vendor = ({sessionData, vendorData}) => {
             <th>Type</th>
             <th>Contact Persons</th>
             <th>Telephones</th>
-            <th>History</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -137,7 +137,7 @@ const Vendor = ({sessionData, vendorData}) => {
             <td>{x.person1} {x.mobile1}<br/>{x.person2} {x.mobile2}</td>
             <td>{x.telephone1}<br/>{x.telephone2}</td>
             <td>
-              Created By: <span className='blue-txt fw-5'>{x.createdBy}</span>
+              <td>{x.active?<b className='green-txt'>Active</b>:<b className='red-txt'>Disabled</b>}</td>
             </td>
           </tr>
           )

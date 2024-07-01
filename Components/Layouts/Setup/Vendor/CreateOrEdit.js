@@ -132,10 +132,20 @@ const CreateOrEdit = ({state, dispatch, baseValues, vendorData, id}) => {
         <Tabs.TabPane tab="Basic Info" key="1">
         <Row>
             <Col md={12} className='py-1'>
-                <Col md={3}>
-                <InputComp disabled register={register} name='code' control={control} label='Code' />
-                {errors.code && <div className='error-line'>{errors.code.message}*</div>}
-                </Col>
+                <Row>
+                    <Col md={3}>
+                        <InputComp disabled  register={register} name='code' control={control} label='Code' />
+                        {errors.code && <div className='error-line'>{errors.code.message}*</div>}
+                    </Col>
+                    <Col md={3}>
+                        <SelectComp width={100} register={register} name='active' control={control} label='Status'
+                            options={[
+                                {name:'Active', id:true},
+                                {name:'Inactive', id:false},
+                            ]}
+                        />
+                    </Col>
+                </Row>
             </Col>
             <Col md={6} className='py-1'>
                 <InputComp  register={register} name='name' control={control} label='Name' />

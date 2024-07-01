@@ -187,7 +187,7 @@ const InvoicePrint = ({logo, compLogo, records, bank, bankDetails, invoice, calc
                         {
                             (invoice.operation=="AI"||invoice.operation=="SI") ?
                             <>
-                                {invoice.SE_Job?.eta?moment(invoice.SE_Job?.eta).format("DD-MMM-YYYY"):''}
+                                {invoice.SE_Job?.arrivalDate?moment(invoice.SE_Job?.arrivalDate).format("DD-MMM-YYYY"):''}
                                 </>
                             :
                             <>

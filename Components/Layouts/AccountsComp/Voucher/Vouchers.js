@@ -41,9 +41,9 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
     },
   });
   const [accountLoad, setAccountLoad] = useState(true);
-  const [invoiceId, setInvoiceId] = useState("");
   const [totalDebit, setTotalDebit] = useState(0);
   const [totalCredit, setTotalCredit] = useState(0);
+  const [closing, setClosing] = useState(0);
   const [first, setFirst] = useState(true);
   const allValues = useWatch({ control });
 
@@ -73,28 +73,25 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
   }, [allValues.Voucher_Heads]);
 
   async function getValues() {
-      // voucherData.invoice_Voucher == "1" ?
-      //   setInvoiceId(voucherData.invoice_Id) :
-      //   setInvoiceId("");
-      const { chequeNo, payTo, vType, type, exRate, currency } = voucherData;
-      let iD = "";
-      let settleId = "";
-      let ChildAccountId = "";
-      let createdAt = voucherData.createdAt ? moment(voucherData.createdAt) : "";
-      let chequeDate = voucherData.chequeDate ? moment(voucherData.chequeDate) : "";
-      let Voucher_Heads = voucherData.Voucher_Heads?.filter((x) => x.settlement !== "1");
-      voucherData?.Voucher_Heads?.filter((x) => {
-        if (x.settlement === "1") {
-          ChildAccountId = x.ChildAccountId;
-          settleId = x.id;
-          iD = voucherData.id
-        }
-      });
-      reset({
-        CompanyId, vType, chequeDate, chequeNo, payTo, type, createdAt,
-        Voucher_Heads, exRate, currency: currency == undefined ? "PKR" : currency,
-        ChildAccountId, settleId, id: iD
-      });
+    const { chequeNo, payTo, vType, type, exRate, currency } = voucherData;
+    let iD = "";
+    let settleId = "";
+    let ChildAccountId = "";
+    let createdAt = voucherData.createdAt ? moment(voucherData.createdAt) : "";
+    let chequeDate = voucherData.chequeDate ? moment(voucherData.chequeDate) : "";
+    let Voucher_Heads = voucherData.Voucher_Heads?.filter((x) => x.settlement !== "1");
+    voucherData?.Voucher_Heads?.filter((x) => {
+      if (x.settlement === "1") {
+        ChildAccountId = x.ChildAccountId;
+        settleId = x.id;
+        iD = voucherData.id
+      }
+    });
+    reset({
+      CompanyId, vType, chequeDate, chequeNo, payTo, type, createdAt,
+      Voucher_Heads, exRate, currency: currency == undefined ? "PKR" : currency,
+      ChildAccountId, settleId, id: iD, voucher_Id:voucherData.voucher_Id
+    });
     
     await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_ALL_CHILD_ACCOUNTS, {
       headers: {
@@ -137,7 +134,6 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
       await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_ACCOUNT_FOR_TRANSACTION_VOUCHER, {
         headers: { companyid: CompanyId, type: y }
       }).then((x) => {
-        //console.log("settlements", x.data.result)
         setSettlement(x.data.result);
         let tempHeads = allValues.Voucher_Heads || [];
         tempHeads.forEach((x) => {
@@ -151,8 +147,8 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
           ChildAccountId: id == "new" ? (first?allValues.ChildAccountId:null) : allValues.ChildAccountId
         });
         first?setFirst(false):null
-        // This first actualyy loades the cached version of the data then after changing 
-        // the voucher types voucher heads tyoes changes according to their corresponding types
+        // This first actually loades the cached version of the data then after changing 
+        // the voucher types voucher heads types changes according to their corresponding types
       })
     } else {
       reset({ ...allValues, ChildAccountId: id == "new" ? null : allValues.ChildAccountId });
@@ -160,12 +156,34 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
     setAccountLoad(false)
   };
 
+  // calculationg closing balance
   useEffect(() => {
-    if(id=="new"){
-      preserveData();
+    if(allValues.ChildAccountId && id!="new"){
+      axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_VOUCEHR_LEDGER_FOR_CLOSING,{
+        headers:{
+          currency:allValues.currency,
+          id:allValues.ChildAccountId,
+        }
+      }).then((x)=>{
+        if(x?.data?.status=="success"){
+          let closingBalance = 0;
+          x?.data?.result?.forEach((x)=>{
+            x.type == "debit" ?
+            closingBalance = closingBalance + parseFloat(x.amount): 
+            closingBalance = closingBalance - parseFloat(x.amount)
+          })
+          setClosing(closingBalance)
+        }
+      })
     }
+  }, [allValues.ChildAccountId]);
+
+  useEffect(() => {
+    // if(id=="new"){
+      preserveData();
+    // }
   }, [allValues]);
-  
+
   async function preserveData(){
     let data = {...allValues};
     data.id = id;
@@ -187,7 +205,7 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
       await newHeads.push({
         ChildAccountId: voucher.ChildAccountId,
         amount: difference > 0 ? difference : -1 * (difference),
-        type: difference > 0 ? 'credit' : 'debit', //voucher.vType==("CRV"||"BRV")?"debit":"credit",
+        type: difference > 0 ? 'credit' : 'debit',
         settlement: "1",
         narration: voucher.payTo,
         defaultAmount: voucher.currency == "PKR" ? 0 : parseFloat(difference) / parseFloat(voucher.exRate)
@@ -196,12 +214,11 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
     }
     voucher.CompanyId = await CompanyId ? CompanyId : 1;
     voucher.type = await (voucher.vType == "BPV" || voucher.vType == "CPV") ? "Payble" : (voucher.vType == "BRV" || voucher.vType == "CRV") ? "Recievable" : voucher.vType == "TV" ? "Trasnfer Voucher" : "General Voucher"
-    // console.log(voucher)
-    queryClient.setQueryData(
-      ['voucherData', {id}],
-      (x) => voucher
-    )
-  }
+    if(id!="new"){
+      voucher.voucher_Id = data.voucher_Id
+    }
+    queryClient.setQueryData(['voucherData', {id}], (x)=>voucher)
+  };
 
   return (
     <>
@@ -274,6 +291,9 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
         <div style={{ color: 'grey', paddingTop: 3, paddingRight: 6, border: '1px solid grey', fontSize: 16, textAlign: 'right' }}>{commas(totalDebit)}</div>
         <div className="mt-2">Credit Total</div>
         <div style={{ color: 'grey', paddingTop: 3, paddingRight: 6, border: '1px solid grey', fontSize: 16, textAlign: 'right' }}>{commas(totalCredit)}</div>
+        <hr/>
+        <div className="mt-2"><b>Closing Balance</b></div>
+        <div style={{ color: closing>0?'green':'red', paddingTop: 3, paddingRight: 6, border: '1px solid grey', fontSize: 16, textAlign: 'right' }}><b>{commas(closing)}</b></div>
       </Col>
       <Col md={4}>
         <button type="button" className="btn-custom fs-11 px-4" 
