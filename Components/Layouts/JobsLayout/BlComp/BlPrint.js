@@ -34,18 +34,18 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                   </div>
                   <div className="bl-print mt-1">{parse(state.shipperContent)}</div>
                 </div>
-                <div style={{ borderBottom: border, height: 103, position:"relative" }}>
-                  <div className={`fw-5 ${heading}`} style={{ lineHeight:1.4 }}>Consignee Or Order</div>
-                  <div className="bl-print" style={{marginTop:10}}>{parse(state.consigneeContent)}</div>
-                  <div className="bl-print" style={{position:"absolute", top:"85px", width: "250px"  }}> <b>  {!formE && allValues.formE ? `FORM E NUMBER : ${allValues.formE}`:null}</b> </div>
-                  <div className="bl-print" style={{position:"absolute", top:"85px", left:"250px"  }}>
+                <div style={{ borderBottom: border, height: 95, position:"relative" }}>
+                  <div className={`fw-5 ${heading}`} style={{ lineHeight:1.2 }}>Consignee Or Order</div>
+                  <div className="bl-print" style={{marginTop:2}}>{parse(state.consigneeContent)}</div>
+                  <div className="bl-print" style={{position:"absolute", top:"60px", width: "250px"  }}> <b>  {!formE && allValues.formE ? `FORM E NUMBER : ${allValues.formE}`:null}</b> </div>
+                  <div className="bl-print" style={{position:"absolute", top:"60px", left:"250px"  }}>
                     <b> {!formE && allValues.formEDate._i ? `DATE : ${allValues.formEDate._i?.slice(0, 10)}`:null}</b> 
                     </div>
 
                 </div>
-                <div className="pb-2" style={{ height: 96 }}>
-                  <div className={`fw-5  ${heading}`} style={{ lineHeight:1.4 }}>Notify Party / Address</div>
-                  <div className="bl-print" style={{marginTop:15}}>{parse(state.notifyOneContent)}</div>
+                <div className="pb-2" style={{ height: 95 }}>
+                  <div className={`fw-5  ${heading}`} style={{ lineHeight:1.2}}>Notify Party / Address</div>
+                  <div className="bl-print" style={{marginTop:5}}>{parse(state.notifyOneContent)}</div>
                 </div>
               </Col>
               {/*1st row right side block  */}
@@ -71,7 +71,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                     <div className="grey-txt">
                       <img src={"/seanet-logo.png"} height={120} className="invert"/>
                       <div style={{ fontFamily: "sans-serif" }} className="fs-15"> SHIPPING & LOGISTICS</div>
-                      <div className="mt-2" style={{ lineHeight: 1.5 }}>House# D-213, DMCHS, Siraj Ud Daula Road, Karachi</div>
+                      <div className="mt-2" style={{ lineHeight: 1.3 }}>House# D-213, DMCHS, Siraj Ud Daula Road, Karachi</div>
                       <div style={{ lineHeight: 1.5 }}> Tel: {"("}92-21{")"} 34547575, 34395444, 34395444, 34395444</div>
                       <div style={{ lineHeight: 1.5 }}> Email info@seanetpk.com, URL www.seanetpk.com{" "}</div>
                     </div>
@@ -83,7 +83,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
             {/* 2nd row starts  */}
             <Row style={{ borderTop: border }}>
               <Col style={{ borderRight: border }} className="px-0">
-                <div style={{ height: 37 }}>
+                <div style={{ height: 10 }}>
                   <div className={` ${heading}`}>
                     Initial Carriage {"("}Mode{")"}
                   </div>
@@ -97,7 +97,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
               <Col className="px-0">
                 <div  className="px-1">
                   <div className={` ${heading}`}>Port Of Discharge</div>
-                  <div className="fw-7" style={{marginTop:18}}>{allValues.podTwo}</div>
+                  <div className="fw-7" style={{marginTop:10}}>{allValues.podTwo}</div>
                 </div>
               </Col>
             </Row>
@@ -106,7 +106,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
               <Col style={{ borderRight: border }} className="px-0">
                 <div style={{ height: 42 }}>
                   <div className={` ${heading}`}>Vessel and Voyage</div>
-                  <div className="fw-7" style={{marginTop:20}}>
+                  <div className="fw-7" style={{marginTop:10}}>
                     <span className="fw-7">{allValues.vessel}</span>
                     <span className="mx-4"></span>
                     <span className="fw-7">{allValues.voyage}</span>
@@ -116,13 +116,13 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
               <Col style={{ borderRight: border }} className="px-0">
                 <div  className="px-1">
                   <div className={` ${heading}`}>Port Of Loading</div>
-                  <div className="fw-7" style={{marginTop:20}}>{allValues.polTwo}</div>
+                  <div className="fw-7" style={{marginTop:10}}>{allValues.polTwo}</div>
                 </div>
               </Col>
               <Col className="px-0">
-                <div style={{ height: 42 }} className="px-1">
+                <div style={{ height: 35 }} className="px-1">
                   <div className={` ${heading}`}>Place Of Delivery</div>
-                  <div className="fw-7" style={{marginTop:20}}>{allValues.poDeliveryTwo}</div>
+                  <div className="fw-7" style={{marginTop:10}}>{allValues.poDeliveryTwo}</div>
                 </div>
               </Col>
             </Row>
@@ -188,7 +188,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                 </Col>
               </Col>
               <Col style={{ display: "flex", justifyContent: "space-between", marginTop: "0px"}}>
-                <Col md={3} className="bl-print" style={{marginTop: "60px"}} >
+                <Col md={3} className="bl-print" style={{marginTop: "50px"}} >
                   <p className="bl-print" style={{  borderBottom: border }}>CONTAINER NO .SIZE SEAL</p>
                   { !containerData &&
                     <p className="bl-print" style={{ color:"black" }}>
@@ -226,7 +226,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
           {/* Bill of loading ends here */}
         </Row>
             {/* PARTICULARS blocks start here  */}
-        <div style={{ position: "relative", top: 10, marginTop:55 }}>
+        <div style={{ position: "relative", top: 5}}>
           <Row style={{ fontFamily: "serif" }}>
             <Col md={3}></Col>
             <Col md={6} className={`bl-print  ${heading} text-center fs-13 fw-7`}>
