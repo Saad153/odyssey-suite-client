@@ -8,6 +8,7 @@ import moment from 'moment';
 const CustomBoxSelect = ({reset, useWatch, control, state, dispatch}) => {
 
     const all = useWatch({control});
+    console.log("state", state)
 
 return(
     <Modal open={state.voyageVisible}
@@ -56,10 +57,10 @@ return(
             >
                 <td className='pt-1 px-3'>{x.check?<CheckCircleOutlined style={{color:'green',position:'relative',bottom:2}}/>:i+1}</td>
                 <td className='pt-1'>{x.voyage}</td>
-                <td className='pt-1'>{moment(x.importArrivalDate   ).format("DD-MM-YYYY")}</td>
-                <td className='pt-1'>{moment(x.importOriginSailDate).format("DD-MM-YYYY")}</td>
-                <td className='pt-1'>{moment(x.cutOffDate          ).format("DD-MM-YYYY")}</td>
-                <td className='pt-1'>{moment(x.cutOffTime          ).format("DD-MM-YYYY")}</td>
+                <td className='pt-1'>{moment(x.importArrivalDate).format("DD-MM-YYYY")}</td>
+                <td className='pt-1'>{moment(x.exportSailDate).format("DD-MM-YYYY")}</td>
+                <td className='pt-1'>{moment(x.cutOffDate).format("DD-MM-YYYY")}</td>
+                <td className='pt-1'>{moment(x.cutOffTime).format("DD-MM-YYYY")}</td>
             </tr>
         )})}
         </tbody>
