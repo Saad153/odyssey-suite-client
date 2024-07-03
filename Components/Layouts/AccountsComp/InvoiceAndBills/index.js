@@ -13,11 +13,18 @@ const InvoiceAndBills = ({invoiceData}) => {
   const companyId = useSelector((state) => state.company.value);
   const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
   const [visible, setVisible] = useState(false);
   const [invoice, setInvoice] = useState({});
   const [records, setRecords] = useState([]);
   const [type, setType] = useState("Job Invoice");
+  const currentRecords = (search!='' && search!=null && search!=undefined)?records.filter((x)=>{
+    return  x.invoice_No.toLowerCase().includes(search.toLowerCase()) ||
+            x.SE_Job.jobNo.toLowerCase().includes(search.toLowerCase()) ||
+            x.party_Name.toLowerCase().includes(search.toLowerCase()) ||
+            x.total.toLowerCase().includes(search.toLowerCase())
+
+       }):records;
 
   const onChange = async(e) => {
     setType(e.target.value);
@@ -51,7 +58,7 @@ const InvoiceAndBills = ({invoiceData}) => {
     setLoad(false);
   }
   
-  return (
+    return (
     <div className='base-page-layout fs-13'>
       <Row>
         <Col md={12} xs={12}>
@@ -109,7 +116,7 @@ const InvoiceAndBills = ({invoiceData}) => {
               </thead>
             <tbody>
             {
-            records.map((x, index) => {
+            currentRecords.map((x, index) => {
             return (
               <tr key={index} className='f row-hov' onClick={async ()=>{
                 // searchInvoice(x.invoice_No)
