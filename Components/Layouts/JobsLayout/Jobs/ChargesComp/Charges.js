@@ -249,11 +249,10 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         <td>{x.basis=="Per Shipment"?'P/Shp':'P/Unit'} {/* Basis */}
         </td>
         <td style={{ padding: 3, minWidth: 50 }}> {/* PP?CC */}
-            <SelectComp register={register} name="PP"
-                control={control} width={60} font={13} 
+        <SelectComp register={register} name={`chargeList.${index}.pp_cc`} 
+        control={control} width={60} font={13} 
                 disabled={permissionAssign(permissions, x)}
-                defaultValue="PP"
-                options={[
+                    options={[
                     { id: 'PP', name: 'PP' },
                     { id: 'CC', name: 'CC' }
                 ]}
