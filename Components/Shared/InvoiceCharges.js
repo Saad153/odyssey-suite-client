@@ -425,6 +425,9 @@ return (
               {value: 'CHF', label: 'CHF'},
               {value: 'GBP', label: 'GBP'},
               {value: 'OMR', label: 'OMR'},
+              { value:"AED", label:"AED"},
+              { value:"BDT", label:"BDT"},  
+
           ]}
         />
       </Col>

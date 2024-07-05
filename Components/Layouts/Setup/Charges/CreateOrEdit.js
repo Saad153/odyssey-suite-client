@@ -108,9 +108,15 @@ const CreateOrEdit = ({state, dispatch, baseValues}) => {
           <Col md={3} className='py-1'>     
               <SelectComp register={register} width={100} name='currency' control={control} label='Currency'
                   options={[
-                    {id:'PKR', name:'PKR'},
-                    {id:'USD', name:'USD'},
-                    {id:'AED', name:'AED'},
+                    { id:"PKR", name:"PKR"},
+                    { id:"USD", name:"USD"},
+                    { id:"EUR", name:"EUR"},
+                    { id:"GBP", name:"GBP"},
+                    { id:"AED", name:"AED"},             
+                    { id:"OMR", name:"OMR"},
+                    { id:"BDT", name:"BDT"},             
+                    { id:"CHF", name:"CHF"},
+                    
                   ]} />
                 {errors.currency && <div className='error-line'>{errors.currency.message}*</div>}
           </Col>

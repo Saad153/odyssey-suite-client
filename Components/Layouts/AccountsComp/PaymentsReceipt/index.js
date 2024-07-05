@@ -264,10 +264,14 @@ const PaymentsReceipt = ({id, voucherData}) => {
       <Select disabled={state.partytype!="agent"?true:false} value={state.invoiceCurrency} size='small'
         onChange={(e)=> setAll({invoiceCurrency:e})}
         options={[
-          { value:'PKR', label:'PKR' },
-          { value:'USD', label:'USD' },
-          { value:'GBP', label:'GBP' },
-          { value:'EUR', label:'EUR' },
+          { value:"PKR", label:"PKR"},
+          { value:"USD", label:"USD"},
+          { value:"EUR", label:"EUR"},
+          { value:"GBP", label:"GBP"},
+          { value:"AED", label:"AED"},             
+          { value:"OMR", label:"OMR"},
+          { value:"BDT", label:"BDT"},             
+          { value:"CHF", label:"CHF"},
           { value:'Multi', label:'Multi' },
         ]}
       />
