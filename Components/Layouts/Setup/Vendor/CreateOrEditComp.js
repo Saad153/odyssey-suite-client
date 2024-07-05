@@ -32,6 +32,7 @@ const baseValues = {
   name:"",
   registerDate:"",
   person1:"",
+  active:true,
   mobile1:"",
   person2:"",
   mobile2:"",
