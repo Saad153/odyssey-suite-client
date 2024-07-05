@@ -4,8 +4,8 @@ import parse from "html-react-parser";
 import ReactToPrint  from "react-to-print";
 
 const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, line, grossWeight, netWeight,  containerData, formE, cbm}) => {
-  // console.log("grossWeight",allValues.Container_Infos[0].gross)
-  const gross_weight = allValues.Container_Infos[0].gross
+
+  const gross_weight = allValues?.Container_Infos?.[0]?.gross
   return (
     <div style={{ width: "10%" }}>
     <ReactToPrint
@@ -39,6 +39,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                   <div className="bl-print" style={{marginTop:2}}>{parse(state.consigneeContent)}</div>
                   <div className="bl-print" style={{position:"absolute", top:"60px", width: "250px"  }}> <b>  {!formE && allValues.formE ? `FORM E NUMBER : ${allValues.formE}`:null}</b> </div>
                   <div className="bl-print" style={{position:"absolute", top:"60px", left:"250px"  }}>
+
                     <b> {!formE && allValues.formEDate._i ? `DATE : ${allValues.formEDate._i?.slice(0, 10)}`:null}</b> 
                     </div>
 

@@ -9,7 +9,7 @@ const openNotification = (title, message, color) => {
       onClick: () => {
         console.log('Notification Clicked!');
       },
-      duration:2
+      duration:4
     });
 };
 

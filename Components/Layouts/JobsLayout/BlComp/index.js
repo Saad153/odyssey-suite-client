@@ -103,6 +103,8 @@ const BlComp = ({id, blData, partiesData, type}) => {
           })
         );
         Router.push(type=="SE"?`/seaJobs/export/bl/${x.data.result}`:type=="SI"?`/seaJobs/import/bl/${x.data.result}`:type=="AE"?`/airJobs/export/bl/${x.data.result}`:`/airJobs/import/bl/${x.data.result}`);
+      } else if(x.data.status == 'warning') {
+        openNotification("Error","The entered HBL or MBL already exists","red");
       } else {
         openNotification("Error","something went wrong, try again with correct values","red");
       }
@@ -175,6 +177,7 @@ const BlComp = ({id, blData, partiesData, type}) => {
   useEffect(() => {
     calculateContainerInfos(state, set, reset, allValues)
   }, [state.Container_Infos]);
+
   useEffect(() => {
     calculateItemInfos(state, set, reset, allValues)
   }, [state.Item_Details]);

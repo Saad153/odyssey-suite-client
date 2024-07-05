@@ -18,7 +18,6 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
     
     const queryClient = useQueryClient();
     const { permissions } = state;
-    const [ fieldValue, setFieldValue ] = useState('PP');
 
     useEffect(() => {
         if(chargeList){
@@ -72,7 +71,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         if(!state.chargeLoad){
         append({
             type:type, description:'', basis:'', key_id:uuidv4(),
-            new:true,  ex_rate: parseFloat(state.exRate), pp_cc:state.selectedRecord.freightType=="Prepaid"?'PP':'CC', 
+            new:true,  ex_rate: parseFloat(state.exRate), pp_cc:'PP', 
             local_amount: 0,  size_type:'40HC', dg_type:state.selectedRecord.dg=="Mix"?"DG":state.selectedRecord.dg, 
             qty:1, rate_charge:1, currency:'USD', amount:1, check: false, bill_invoice: '', charge: '', particular: '',
             discount:0, tax_apply:false, taxPerc:0.00, tax_amount:0, net_amount:0, invoiceType:"", name: "", 
@@ -250,11 +249,10 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
         <td>{x.basis=="Per Shipment"?'P/Shp':'P/Unit'} {/* Basis */}
         </td>
         <td style={{ padding: 3, minWidth: 50 }}> {/* PP?CC */}
-            <SelectComp register={register} name="PP"
-                control={control} width={60} font={13} 
+        <SelectComp register={register} name={`chargeList.${index}.pp_cc`} 
+        control={control} width={60} font={13} 
                 disabled={permissionAssign(permissions, x)}
-                defaultValue="PP"
-                options={[
+                    options={[
                     { id: 'PP', name: 'PP' },
                     { id: 'CC', name: 'CC' }
                 ]}
