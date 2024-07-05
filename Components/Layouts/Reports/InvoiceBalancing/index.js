@@ -22,7 +22,7 @@ const InvoiceBalaincing = () => {
   const [balance, setBalance] = useState("all");
   const [jobTypes, setJobTypes] = useState([]);
   const [values, setValues] = useState();
-  const [payType, setPayType] = useState("Payble");
+  const [payType, setPayType] = useState("All");
   const { data, status } = useQuery({ queryKey: ['values'], queryFn: getJobValues });
   const commas = (a) => a ? parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") : '0.0';
 

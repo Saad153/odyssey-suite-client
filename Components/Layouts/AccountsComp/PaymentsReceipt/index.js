@@ -268,11 +268,10 @@ const PaymentsReceipt = ({id, voucherData}) => {
           { value:"USD", label:"USD"},
           { value:"EUR", label:"EUR"},
           { value:"GBP", label:"GBP"},
-          { value:"AED", label:"AED"},             
+          { value:"AED", label:"AED"},
           { value:"OMR", label:"OMR"},
-          { value:"BDT", label:"BDT"},             
+          { value:"BDT", label:"BDT"},
           { value:"CHF", label:"CHF"},
-          { value:'Multi', label:'Multi' },
         ]}
       />
      </Col>

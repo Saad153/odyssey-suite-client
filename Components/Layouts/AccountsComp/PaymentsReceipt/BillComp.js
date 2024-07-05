@@ -430,7 +430,6 @@ const BillComp = ({companyId, state, dispatch}) => {
         </Col>
         <Col md={4} className="mt-3">
           <div className='grey-txt fs-14'>
-            
             {/* 
             {(state.gainLossAmount>0 && payType!="Recievable") && <span style={{color:'red'}}><b>Loss</b></span>}
             {(state.gainLossAmount>0 && payType=="Recievable") && <span style={{color:'green'}}><b>Gain</b></span>}*/}

@@ -154,7 +154,7 @@ const CreateOrEditComp = ({sessionData, representativeData, vendorData, id}) => 
   const createCompanyList = (list) => {
     let tempState = [];
     list.forEach((x, index)=>{
-          tempState.push({value:x.id, label:x.title, disabled:false})
+      tempState.push({value:x.id, label:x.title, disabled:false})
     })
     return tempState
   }

@@ -27,7 +27,7 @@ const SelectSearchComp = (props) => {
           // ((option?.country) ?? '').toLowerCase().includes(input.toLowerCase())
         }
         options={tempVal}
-        allowClear
+        allowClear={props.clear}
         {...rest}
       />
     )

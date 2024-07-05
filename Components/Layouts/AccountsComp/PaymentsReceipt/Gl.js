@@ -48,25 +48,38 @@ const Gl = ({state, dispatch, companyId}) => {
           parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))<(parseFloat(x.inVbalance))?"3":
           parseFloat(x.paid) - parseFloat(state.edit?x.Invoice_Transactions[0].amount:0) + (parseFloat(x.receiving))>(parseFloat(x.inVbalance))?"3":
           "2"
-  
+        if(state.partytype=='agent'){
+          if((x.receiving || state.edit) && x.payType=="Recievable"){
+            invoicesIds.push(x.id)
+            tempInvoices.unshift({
+              id:x.id,
+              recieved:tempReceiving,
+              status:tempRecStatus,
+            })
+          } else if((x.receiving>0 || state.edit) && x.payType!="Recievable"){
+            invoicesIds.push(x.id)
+            tempInvoices.unshift({
+              id:x.id,
+              paid:tempPaying,
+              status:tempPayStatus,
+            })
+          }
+        } else {
           if((x.receiving>0 || state.edit) && payType=="Recievable"){
-          invoicesIds.push(x.id)
-          tempInvoices.unshift({
-            id:x.id,
-            //recieved:parseFloat(x.total)+parseFloat(x.roundOff) == parseFloat(x.recieved)?x.recieved:tempReceiving, //this logic does not let over receive
-            recieved:tempReceiving, //this logic does not let over receive
-            status:tempRecStatus,
-            //inVbalance:x.inVbalance
-          })
-        }else if((x.receiving>0 || state.edit) && payType!="Recievable"){
-          invoicesIds.push(x.id)
-          tempInvoices.unshift({
-            id:x.id,
-            //paid:parseFloat(x.total)+parseFloat(x.roundOff) == parseFloat(x.paid)?x.paid:tempPaying, //this logic does not let over pay
-            paid:tempPaying, //this logic does not let over pay
-            status:tempPayStatus,
-            //inVbalance:x.inVbalance
-          })
+            invoicesIds.push(x.id)
+            tempInvoices.unshift({
+              id:x.id,
+              recieved:tempReceiving,
+              status:tempRecStatus,
+            })
+          } else if((x.receiving>0 || state.edit) && payType!="Recievable"){
+            invoicesIds.push(x.id)
+            tempInvoices.unshift({
+              id:x.id,
+              paid:tempPaying,
+              status:tempPayStatus,
+            })
+          }
         }
       });
       let voucher = {
@@ -110,7 +123,7 @@ const Gl = ({state, dispatch, companyId}) => {
       voucher.tranDate = moment(state.date).format("yyyy-MM-DD");
       state.edit?voucher.id = state.id : null;
       voucher.createdAt = state.createdAt;
-      
+      // console.log(tempInvoices)
       await axios.post(
        state.edit?
          process.env.NEXT_PUBLIC_CLIMAX_UPDATE_VOUCEHR:
