@@ -4,13 +4,8 @@ import parse from "html-react-parser";
 import ReactToPrint  from "react-to-print";
 
 const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, line, grossWeight, netWeight,  containerData, formE, cbm}) => {
-<<<<<<<<< Temporary merge branch 1
-  // console.log("grossWeight",allValues.Container_Infos[0].gross)
-  const gross_weight = allValues.Container_Infos[0].gross
-=========
   // console.log("grossWeight",allValues)
   const gross_weight = allValues?.Container_Infos?.[0]?.gross
->>>>>>>>> Temporary merge branch 2
   return (
     <div style={{ width: "10%" }}>
     <ReactToPrint
