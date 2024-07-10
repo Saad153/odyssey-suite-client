@@ -95,12 +95,12 @@ const ListData = ({ voucherData }) => {
           <tbody>
             {(query?originalData:currentRecords)?.filter((x)=>{
                 return x.voucher_Id.toLowerCase().includes(query.toLowerCase()) ||
-                x.chequeNo.toLowerCase().includes(query.toLowerCase()) ||
-                x.payTo.toLowerCase().includes(query.toLowerCase()) ||
-                x.chequeDate.toLowerCase().includes(query.toLowerCase()) ||
-                x.vType.toLowerCase().includes(query.toLowerCase()) ||
-                x.currency.toLowerCase().includes(query.toLowerCase()) ||
-                x.amount.toString().includes(query)
+                x?.chequeNo?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.payTo?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.chequeDate?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.vType?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.currency?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.amount?.toString().includes(query)
               }).map((x, index) => {
                 return (
                   <tr key={index}>

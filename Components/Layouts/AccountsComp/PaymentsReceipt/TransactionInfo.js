@@ -16,8 +16,7 @@ const AgentTransactionInfo = ({state, dispatch}) => {
     <Row>
         <Col md={5}>
             <div className='grey-txt mb-1 fs-14'>Transaction Mode</div>
-            <Radio.Group value={state.transaction} 
-              onChange={(e)=>{set('payAccountRecord', {}); set('transaction', e.target.value)}}>
+            <Radio.Group value={state.transaction} onChange={(e)=>{set('payAccountRecord', {}); set('transaction', e.target.value)}}>
                 <Radio value={"Cash"}>  Cash  </Radio>
                 <Radio value={"Bank"}>  Bank  </Radio>
                 <Radio value={"Adjust"}>Adjust</Radio>

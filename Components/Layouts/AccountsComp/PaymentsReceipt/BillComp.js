@@ -148,152 +148,161 @@ const BillComp = ({companyId, state, dispatch}) => {
   };
 
   const submitPrices = async() => {
-    
-    let transTwo = [];
-    let removing = 0;
-    let tempInvoices = [...state.invoices];
-    let invNarration = "";
-    let gainAndLossAmount = 0
-    tempInvoices.forEach((x)=>{
-      if(x.check){
-        invNarration = invNarration + `Inv# ${x.invoice_No} for Job# ${x.jobId},`
-      }
-    });
-
-    invNarration = invNarration + ` For ${state.selectedParty.name}`;
-    //Create Account Transactions
-    if((Object.keys(state.payAccountRecord).length!=0) && (state.totalrecieving!=0)){ // <- Checks if The Recieving Account is Selected
-      // Tax Account
-      if((Object.keys(state.taxAccountRecord).length!=0) && (state.finalTax!=0) && (state.finalTax!=null) && (state.totalrecieving!=0)){
-        removing = parseFloat(state.finalTax);
-        transTwo.push({
-          particular:state.taxAccountRecord,
-          tran:{
-            type:'debit',
-            amount:state.finalTax,
-            defaultAmount:parseFloat(state.finalTax)/parseFloat(state.autoOn?state.exRate:state.manualExRate),//0
-            narration:`Tax Paid Against ${invNarration}`,
-            accountType:'Tax'
-          }
-        })
-      }
-      // Bank Charges Account
-      if((Object.keys(state.bankChargesAccountRecord).length!=0) && (state.bankCharges!=0) && (state.bankCharges!=null) && (state.totalrecieving!=0)){
-        removing = removing + parseFloat(state.bankCharges)*parseFloat(state.autoOn?state.exRate:state.manualExRate);
-        transTwo.push({
-          particular:state.bankChargesAccountRecord,
-          tran:{
-            type:'debit',
-            amount:(parseFloat(state.bankCharges)*parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2),
-            defaultAmount:parseFloat(state.bankCharges).toFixed(2),//0
-            narration:`Bank Charges Paid Against ${invNarration}`,
-            accountType:'BankCharges'
-          }
-        })
-      }
-      let partyAmount = state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)
-      let payAmount = state.debitReceiving > state.creditReceiving? 
-        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) - removing:
-        (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) + removing; 
-
-      if(state.partytype=='agent'){
-        // Gain & Loss Account
-        if((Object.keys(state.gainLossAccountRecord).length!=0) && (state.gainLossAmount!=0) && (state.gainLossAmount!=null) && (state.totalrecieving!=0)){
-          gainAndLossAmount = state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount))
+    if(Object.keys(state.payAccountRecord).length==0) {
+      openNotification('Alert', 'Please Select Receiving / Paying Account', 'orange');
+    } else if(state.transaction=="Bank" && (state.checkNo==null || state.checkNo=="" || state.checkNo==undefined)){
+      openNotification('Alert', 'Please Enter Cheque / Transaction #', 'orange');
+    } else if(state.partytype=='agent' && ((state.exRate==1 && state.autoOn) || (state.manualExRate==1 && !state.autoOn) )){
+      openNotification('Alert', 'Please Set Appropriate Exchange-Rate', 'orange');
+    } else if(state.partytype=='agent' && Object.keys(state.gainLossAccountRecord).length==0){
+      openNotification('Alert', 'Please Select Gain / Loss Account', 'orange');
+    } else {
+      let transTwo = [];
+      let removing = 0;
+      let tempInvoices = [...state.invoices];
+      let invNarration = "";
+      let gainAndLossAmount = 0
+      tempInvoices.forEach((x)=>{
+        if(x.check){
+          invNarration = invNarration + `Inv# ${x.invoice_No} for Job# ${x.jobId},`
+        }
+      });
+  
+      invNarration = invNarration + ` For ${state.selectedParty.name}`;
+      //Create Account Transactions
+      if((Object.keys(state.payAccountRecord).length!=0) && (state.totalrecieving!=0)){ // <- Checks if The Recieving Account is Selected
+        // Tax Account
+        if((Object.keys(state.taxAccountRecord).length!=0) && (state.finalTax!=0) && (state.finalTax!=null) && (state.totalrecieving!=0)){
+          removing = parseFloat(state.finalTax);
           transTwo.push({
-            particular:state.gainLossAccountRecord,
+            particular:state.taxAccountRecord,
             tran:{
-              type:parseFloat(state.gainLossAmount)>0?'credit':'debit',
-              amount:parseFloat(gainAndLossAmount).toFixed(2),//state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount)),
-              defaultAmount:(parseFloat(gainAndLossAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
-              narration:`Ex-Rate ${parseFloat(state.gainLossAmount)<0?'Loss':"Gain"} Against ${invNarration}`,
-              accountType:'gainLoss'
+              type:'debit',
+              amount:state.finalTax,
+              defaultAmount:parseFloat(state.finalTax)/parseFloat(state.autoOn?state.exRate:state.manualExRate),//0
+              narration:`Tax Paid Against ${invNarration}`,
+              accountType:'Tax'
             }
           })
         }
-        transTwo.push({
-          particular:state.partyAccountRecord,
-          tran:{
-            type:parseFloat(state.gainLossAmount)<0?'credit':'debit',
-            amount:Math.abs(parseFloat(state.gainLossAmount)).toFixed(2),
-            defaultAmount:(Math.abs(parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
-            narration:`Ex-Rate ${parseFloat(state.gainLossAmount)<0?'Loss':"Gain"} Against ${invNarration}`,
-            accountType:'partyAccount'
-          }
-        })
-
-        // console.log(state.totalrecieving)
-        let newPartyAmount = 0;
-        let newPayAmount = 0;
-        // console.log(state.debitReceiving, 'debit')
-        // console.log(state.creditReceiving, 'credit')
-        // console.log(parseFloat(state.gainLossAmount), 'gain-loss')
-        let TempTotalReceing = Math.abs(state.debitReceiving - state.creditReceiving) * parseFloat(state.autoOn?state.exRate:state.manualExRate)
-        // console.log(TempTotalReceing, 'Total')
-        newPartyAmount = ((TempTotalReceing).toFixed(2));
-
-        if(state.debitReceiving>state.creditReceiving){
-          newPayAmount = (TempTotalReceing - removing )//+ parseFloat(state.gainLossAmount))
-        } else {
-          newPayAmount = (TempTotalReceing + removing )//- parseFloat(state.gainLossAmount))
+        // Bank Charges Account
+        if((Object.keys(state.bankChargesAccountRecord).length!=0) && (state.bankCharges!=0) && (state.bankCharges!=null) && (state.totalrecieving!=0)){
+          removing = removing + parseFloat(state.bankCharges)*parseFloat(state.autoOn?state.exRate:state.manualExRate);
+          transTwo.push({
+            particular:state.bankChargesAccountRecord,
+            tran:{
+              type:'debit',
+              amount:(parseFloat(state.bankCharges)*parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2),
+              defaultAmount:parseFloat(state.bankCharges).toFixed(2),//0
+              narration:`Bank Charges Paid Against ${invNarration}`,
+              accountType:'BankCharges'
+            }
+          })
         }
-        // console.log(newPartyAmount, 'Party')
-        // console.log(newPayAmount, 'Company')
-        // console.log(removing, 'tax & Charges')
-        // console.log(state.gainLossAmount, 'tax & Charges')
-        transTwo.push({
-          particular:state.partyAccountRecord,
-          tran:{
-            type:state.debitReceiving < state.creditReceiving?'debit':'credit',
-            amount:newPartyAmount,
-            defaultAmount:parseFloat(newPartyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
-            narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
-            accountType:'partyAccount'
+        let partyAmount = state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)
+        let payAmount = state.debitReceiving > state.creditReceiving? 
+          (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) - removing:
+          (state.totalrecieving * parseFloat(state.autoOn?state.exRate:state.manualExRate)) + removing; 
+  
+        if(state.partytype=='agent'){
+          // Gain & Loss Account
+          if((Object.keys(state.gainLossAccountRecord).length!=0) && (state.gainLossAmount!=0) && (state.gainLossAmount!=null) && (state.totalrecieving!=0)){
+            gainAndLossAmount = state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount))
+            transTwo.push({
+              particular:state.gainLossAccountRecord,
+              tran:{
+                type:parseFloat(state.gainLossAmount)>0?'credit':'debit',
+                amount:parseFloat(gainAndLossAmount).toFixed(2),//state.gainLossAmount>0?parseFloat(state.gainLossAmount):(-1*parseFloat(state.gainLossAmount)),
+                defaultAmount:(parseFloat(gainAndLossAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
+                narration:`Ex-Rate ${parseFloat(state.gainLossAmount)<0?'Loss':"Gain"} Against ${invNarration}`,
+                accountType:'gainLoss'
+              }
+            })
           }
-        })
-
-        transTwo.push({
-          particular:state.payAccountRecord,  
-          tran:{ 
-            type:state.debitReceiving < state.creditReceiving?'credit':'debit',
-            amount:parseFloat(newPayAmount).toFixed(2), 
-            defaultAmount:((parseFloat(newPayAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2),//-removing
-            narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
-            accountType:'payAccount'
+          transTwo.push({
+            particular:state.partyAccountRecord,
+            tran:{
+              type:parseFloat(state.gainLossAmount)<0?'credit':'debit',
+              amount:Math.abs(parseFloat(state.gainLossAmount)).toFixed(2),
+              defaultAmount:(Math.abs(parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
+              narration:`Ex-Rate ${parseFloat(state.gainLossAmount)<0?'Loss':"Gain"} Against ${invNarration}`,
+              accountType:'partyAccount'
+            }
+          })
+  
+          // console.log(state.totalrecieving)
+          let newPartyAmount = 0;
+          let newPayAmount = 0;
+          // console.log(state.debitReceiving, 'debit')
+          // console.log(state.creditReceiving, 'credit')
+          // console.log(parseFloat(state.gainLossAmount), 'gain-loss')
+          let TempTotalReceing = Math.abs(state.debitReceiving - state.creditReceiving) * parseFloat(state.autoOn?state.exRate:state.manualExRate)
+          // console.log(TempTotalReceing, 'Total')
+          newPartyAmount = ((TempTotalReceing).toFixed(2));
+  
+          if(state.debitReceiving>state.creditReceiving){
+            newPayAmount = (TempTotalReceing - removing )//+ parseFloat(state.gainLossAmount))
+          } else {
+            newPayAmount = (TempTotalReceing + removing )//- parseFloat(state.gainLossAmount))
           }
-        })
-      } else {
-        transTwo.push({
-          particular:state.partyAccountRecord,
-          tran:{
-            type:payType=="Recievable"?'credit':'debit',
-            amount:parseFloat(partyAmount).toFixed(2),
-            defaultAmount:(parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
-            narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
-            accountType:'partyAccount'
-          }
-        })
-        transTwo.push({
-          particular:state.payAccountRecord,  
-          tran:{ 
-            type:payType=="Recievable"?'debit':'credit',// <-Checks the account type to make Debit or Credit
-            amount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount)).toFixed(2), 
-            defaultAmount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate).toFixed(2),//-removing
-            narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
-            accountType:'payAccount'
-          }
-        })
-      }
-    };
-
-    // console.log(getTotal('debit', transTwo,'PKR'))
-    // console.log(getTotal('credit', transTwo,'PKR'))
-    
-    dispatch({type:'setAll', payload:{
-      removing:removing,
-      transactionCreation:transTwo,
-      glVisible:true
-    }})
+          // console.log(newPartyAmount, 'Party')
+          // console.log(newPayAmount, 'Company')
+          // console.log(removing, 'tax & Charges')
+          // console.log(state.gainLossAmount, 'tax & Charges')
+          transTwo.push({
+            particular:state.partyAccountRecord,
+            tran:{
+              type:state.debitReceiving < state.creditReceiving?'debit':'credit',
+              amount:newPartyAmount,
+              defaultAmount:parseFloat(newPartyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate), //- removing
+              narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+              accountType:'partyAccount'
+            }
+          })
+  
+          transTwo.push({
+            particular:state.payAccountRecord,  
+            tran:{ 
+              type:state.debitReceiving < state.creditReceiving?'credit':'debit',
+              amount:parseFloat(newPayAmount).toFixed(2), 
+              defaultAmount:((parseFloat(newPayAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2),//-removing
+              narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+              accountType:'payAccount'
+            }
+          })
+        } else {
+          transTwo.push({
+            particular:state.partyAccountRecord,
+            tran:{
+              type:payType=="Recievable"?'credit':'debit',
+              amount:parseFloat(partyAmount).toFixed(2),
+              defaultAmount:(parseFloat(partyAmount)/parseFloat(state.autoOn?state.exRate:state.manualExRate)).toFixed(2), //- removing
+              narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+              accountType:'partyAccount'
+            }
+          })
+          transTwo.push({
+            particular:state.payAccountRecord,  
+            tran:{ 
+              type:payType=="Recievable"?'debit':'credit',// <-Checks the account type to make Debit or Credit
+              amount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount)).toFixed(2), 
+              defaultAmount:(parseFloat(payAmount)),// + parseFloat(state.gainLossAmount))/parseFloat(state.autoOn?state.exRate:state.manualExRate).toFixed(2),//-removing
+              narration:`${payType=="Payble"?"Paid":"Received"} Against ${invNarration}`,
+              accountType:'payAccount'
+            }
+          })
+        }
+      };
+  
+      // console.log(getTotal('debit', transTwo,'PKR'))
+      // console.log(getTotal('credit', transTwo,'PKR'))
+      
+      dispatch({type:'setAll', payload:{
+        removing:removing,
+        transactionCreation:transTwo,
+        glVisible:true
+      }})
+    }
   };
 
   const getContainers = (data) => {
