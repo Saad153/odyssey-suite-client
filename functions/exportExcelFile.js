@@ -19,8 +19,7 @@ export default function exportExcelFile(data, columns){
     };
 
     sheet.getRow(1).font = {
-        family: 4,
-        size: 16,
+        size: 14,
         bold: true,
     };
     sheet.columns = [...columns];
@@ -32,6 +31,10 @@ export default function exportExcelFile(data, columns){
             });
         })
     );
+    // sheet.getCell('A2').font = {
+    //     size: 16,
+    //     bold: true,
+    // }
 
     promise.then(() => {
         workbook.xlsx.writeBuffer().then(function (data) {

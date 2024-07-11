@@ -54,8 +54,8 @@ const Report = ({query, result}) => {
 
     useEffect(() => {
       let temp = [];
-      result.result.forEach((x)=>{
-        if(x.Child_Accounts.length>0){
+      result?.result?.forEach((x)=>{
+        if(x?.Child_Accounts?.length>0){
           temp.push({
             title:x.title, type:'parent'
           });
@@ -95,14 +95,12 @@ const Report = ({query, result}) => {
     }
 
     const exportData = () => {
-      // console.log(records[0])
-      // console.log(records[1])
       let temp = [...records];
       temp.push({title:'', ...total})
       exportExcelFile(
         temp,
         [
-          { header: "Account", key: "title", width: 30, height:10 },
+          { header: "Account", key: "title", width: 25, height:10 },
           { header: "Opening Dr.", key: "opDebit", width: 25, height:10 },
           { header: "Opening Cr.", key: "opCredit", width: 25, height:10 },
           { header: "Transaction Dr.", key: "trDebit", width: 25, height:10 },
