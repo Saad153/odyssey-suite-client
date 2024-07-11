@@ -54,11 +54,9 @@ const JobPL = () => {
   }, [filters]);
 
   const handleChange = (event) => {
-    console.log("event", event)
     setCompany(event);
   };
 
-  console.log("company",company)
 
   return (
     <>
