@@ -45,9 +45,9 @@ const Pagination = ({ noOfPages, currentPage, setCurrentPage }) => {
                 <li className="mx-2 text-dark" style={{cursor:"pointer"}} onClick={()=>setCurrentPage(1)}>
                     First
                 </li>
-                <li className="mx-2">
+                {/* <li className="mx-2">
                     <DoubleLeftOutlined onClick={() => decrementPage(5)} />
-                </li>
+                </li> */}
                 <li className="mx-2">
                     <LeftOutlined onClick={() => decrementPage(1)} />
                 </li>
@@ -56,9 +56,9 @@ const Pagination = ({ noOfPages, currentPage, setCurrentPage }) => {
                 <li className={`mx-2 ${isLastPage ? 'disabled' : ''}`}>
                     <RightOutlined onClick={() => incrementPage(1)} disabled={isLastPage} />
                 </li>
-                <li className={`mx-2 ${isLastPage ? 'disabled ' : ''}`}>
+                {/* <li className={`mx-2 ${isLastPage ? 'disabled ' : ''}`}>
                     <DoubleRightOutlined onClick={() => incrementPage(5)} disabled={isLastPage} />
-                </li>
+                </li> */}
                 <li className="mx-2 text-dark" style={{cursor:"pointer"}} onClick={()=>setCurrentPage(noOfPages)}>
                     Last
                 </li>
