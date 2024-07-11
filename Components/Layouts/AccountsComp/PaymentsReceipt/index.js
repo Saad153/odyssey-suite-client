@@ -16,12 +16,13 @@ import ReactToPrint from 'react-to-print';
 const PaymentsReceipt = ({id, voucherData}) => {
 
   let inputRef = useRef(null);
+  const gridRef = useRef();
+
   const dispatchNew = useDispatch();
   const [ state, dispatch ] = useReducer(recordsReducer, initialState);
   const setAll = (x) => dispatch({type:'setAll', payload:x})
   const router = useRouter()
   const companyId = useSelector((state) => state.company.value);
-
   const commas = (a) =>  { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")};  
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
       }
     })
     }
-  }
+  };
 
   const ListComp = ({data}) => {
   return(
@@ -140,9 +141,8 @@ const PaymentsReceipt = ({id, voucherData}) => {
         >{item.name}</List.Item>
       }
     />
-  )}
+  )};
 
-  const gridRef = useRef(); 
   const [columnDefs, setColumnDefs] = useState([
     {headerName: '#', field:'no', width: 50, filter:false },
     {headerName: 'Voucher No.', field:'voucher_Id', filter: true},
@@ -150,16 +150,24 @@ const PaymentsReceipt = ({id, voucherData}) => {
     {headerName: 'Party', field:'partyType', filter: true},
     {headerName: 'Type', field:'vType', width:124, filter: true},
     {headerName: 'Date', field:'tranDate', filter: true},
+    {headerName: 'Currency', field:'currency', filter: true, 
+      cellRenderer:(params) => {
+        return(
+          <>
+            <span style={{fontWeight:600, color:params.data.currency=="PKR"?'green':'#2EA2D5'}}>{params.data.currency}</span>
+          </>
+        )
+      }
+    },
     {headerName: 'Amount', field:'amount', filter: true, 
-    cellRenderer:(params)=>{
-      return(
-        <div>
-          {commas(params.value)}
-        </div>
-      )
-    }
-  },
+      cellRenderer:(params) => {
+        return(
+          <>{commas(params.value)}</>
+        )
+      }
+    },
   ]);
+
   const defaultColDef = useMemo( ()=> ({
     sortable: true,
     filter: "agTextColumnFilter",
@@ -169,10 +177,6 @@ const PaymentsReceipt = ({id, voucherData}) => {
   const cellClickedListener = useCallback((e)=> {
     dispatchNew(incrementTab({"label": "Payment / Receipt","key": "3-4","id":e.data.id}))
     Router.push(`/accounts/paymentReceipt/${e.data.id}`)
-  }, []);
-
-  const getRowHeight = useCallback(() => {
-    return 38;
   }, []);
 
   return (
@@ -222,14 +226,14 @@ const PaymentsReceipt = ({id, voucherData}) => {
         />
       }
       <button className='btn-custom' style={{fontSize:11}}
-        onClick={()=>{
+        onClick={() => {
           axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS,{headers:{companyid:companyId}})
-          .then((x)=>{
-            let tempData = []
-            x.data?.result?.forEach((y, i)=>{
+          .then((x) => {
+            let tempData = [];
+            x.data?.result?.forEach((y, i) => {
               tempData.push({
                 ...y, no:i+1,
-                amount: y.Voucher_Heads?.reduce((x, cur) => x + Number(cur.amount), 0)||null
+                amount:( y.Voucher_Heads?.reduce((x, cur) => x + Number(cur.amount), 0)||0 )/Number(y.exRate)
               })
             });
             setAll({oldVouchers:true, oldVouchersList:tempData});
@@ -304,7 +308,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
           animateRows={true} // Optional - set to 'true' to have rows animate when sorted
           rowSelection='multiple' // Options - allows click selection of rows
           onCellClicked={cellClickedListener} 
-          getRowHeight={getRowHeight}
+          getRowHeight={30}
         />
       </div>
     }
