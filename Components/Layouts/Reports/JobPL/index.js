@@ -1,7 +1,7 @@
-import { recordsReducer, initialState, companies, plainOptions } from './states';
+import { recordsReducer, initialState, plainOptions } from './states';
 import { Row, Col, Form, Spinner } from "react-bootstrap";
 import { Select, Checkbox, Modal, Radio } from 'antd';
-import React, { useEffect, useReducer } from 'react';
+import React, {useState, useEffect, useReducer } from 'react';
 import Search from './Search';
 import Sheet from './Sheet';
 import AdvanceSearch from './AdvanceSearch';
@@ -12,16 +12,17 @@ import Router from "next/router";
 import { setFilterValues } from '/redux/filters/filterSlice';
 
 const JobPL = () => {
-
   const dispatchNew = useDispatch();
   const [state, dispatch] = useReducer(recordsReducer, initialState);
   const set = (obj) => dispatch({ type: 'set', payload: obj });
+  const [ jobType, setJobType ] = useState(['SE','SI','AE','AI']);
+  const [ company, setCompany ] = useState(1);
 
   const stateValues = {
     from: state.from,
     to: state.to,
-    jobType: state.jobType,
-    company: state.company,
+    jobType: jobType,
+    company: company,
     salesRepresentative: state.salesrepresentative,
     overSeasagent: state.overseasagent,
     client: state.client,
@@ -47,7 +48,17 @@ const JobPL = () => {
         reportType: values ? values.reportType : 'viewer',
       });
     }
+    else {
+      set({ jobType: plainOptions }); // Automatically check all job types if no filters
+    }
   }, [filters]);
+
+  const handleChange = (event) => {
+    console.log("event", event)
+    setCompany(event);
+  };
+
+  console.log("company",company)
 
   return (
     <>
@@ -65,13 +76,22 @@ const JobPL = () => {
         <Row className='mt-3'>
           <Col md={2}>
             <div>Job Types</div>
-            <Checkbox.Group options={plainOptions} value={state.jobType} onChange={(e) => set({ jobType: e })} />
+            <Checkbox.Group options={plainOptions} value={jobType} onChange={(e) => setJobType(e)} />
           </Col>
         </Row>
         <Row className='mt-3'>
           <Col md={3}>
             <div>Company</div>
-            <Select style={{ width: "100%" }} value={state.company} onChange={(e) => set({ company: e })} options={companies} />
+            <Select style={{ width: "100%" }}
+             value={company} onChange={handleChange}
+             allowClear
+             options={[
+              {value:1,label:"Sea Net Shipping & Logistics"},
+              {value:2,label:"Cargo Linkers"},
+              {value:3,label:"Air Cargo Services"},
+              {value:4,label:"SNS & ACS"},
+            ]}
+            />
           </Col>
         </Row>
         <Row className='mt-3'>
@@ -103,7 +123,7 @@ const JobPL = () => {
         <button className='btn-custom mt-3'
           onClick={() => {
             //handleSubmit(set,state)
-            const { to, from, client, company, jobType, overseasagent, salesrepresentative, reportType } = state
+            const { to, from, client, overseasagent, salesrepresentative, reportType } = state
             dispatchNew(setFilterValues({
               pageName:"jobPLreport",
               values:stateValues
