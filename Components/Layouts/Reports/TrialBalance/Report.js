@@ -91,7 +91,7 @@ const Report = ({query, result}) => {
           temp.clCredit = temp.clCredit + x.clCredit
         }
       });
-      setTotal(temp)
+      setTotal(temp);
     }
 
     const exportData = () => {
