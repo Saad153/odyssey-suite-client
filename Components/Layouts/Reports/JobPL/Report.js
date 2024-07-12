@@ -44,6 +44,8 @@ const Report = ({ query }) => {
     )
   }
 
+  console.log("records ",state.records)
+
   const gridRef = useRef();
   const [columnDefs, setColumnDefs] = useState([
     { headerName: 'Job No', field: 'jobNo', width: 120, filter: true },
@@ -56,7 +58,7 @@ const Report = ({ query }) => {
       }
     },
     {
-      headerName: 'Client', field: 'hbl', filter: true,
+      headerName: 'Client', field: 'hbl',width: 70, filter: true,
       cellRenderer: params => {
         return <>
           {params.data.Client.name}
@@ -64,10 +66,12 @@ const Report = ({ query }) => {
       }
     },
     { headerName: 'F. Dest', field: 'fd', width: 100, filter: true },
-    { headerName: 'Weight', field: 'fd', width: 10, filter: true },
-    { headerName: 'Volume', field: 'ppcc', width: 0, filter: true },
+    { headerName: 'Shipper', field: 'shipper.name', width: 100, filter: true },
+
+    { headerName: 'Local Agent', field: 'local_vendor.name', width: 100, filter: true },
+    { headerName: 'Type', field: 'jobType', width: 100, filter: true },
     {
-      headerName: 'Revenue', field: 'revenue', filter: true,
+      headerName: 'Revenue', field: 'revenue',width: 70, filter: true,
       cellRenderer: params => {
         return <>
           {setCommas(params.value)}
@@ -75,7 +79,7 @@ const Report = ({ query }) => {
       }
     },
     {
-      headerName: 'Cost', field: 'cost', filter: true,
+      headerName: 'Cost', field: 'cost', width: 70,filter: true,
       cellRenderer: params => {
         return <>
           {setCommas(params.value)}
@@ -83,7 +87,7 @@ const Report = ({ query }) => {
       }
     },
     {
-      headerName: 'P/L', field: 'actual', filter: true,
+      headerName: 'P/L', field: 'actual', fiwidth: 70,lter: true,
       cellRenderer: params => {
         return <span>
           {setCommas(params.value)}
@@ -91,7 +95,7 @@ const Report = ({ query }) => {
       }
     },
     {
-      headerName: 'Gain/Loss', field: 'gainLoss', filter: true,
+      headerName: 'Gain/Loss', field: 'gainLoss',width: 70, filter: true,
       cellRenderer: params => {
         return <span style={{ color: params.data.gainLoss < 0 ? 'crimson' : 'green' }}>
           {setCommas(params.value < 0 ? params.value * -1 : params.value)}
@@ -99,7 +103,7 @@ const Report = ({ query }) => {
       }
     },
     {
-      headerName: 'After Gain/Loss', field: 'after', filter: true,
+      headerName: 'After Gain/Loss', field: 'after', width: 70,filter: true,
       cellRenderer: params => {
         return <span>
           {setCommas(params.value)}
