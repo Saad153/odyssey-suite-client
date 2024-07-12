@@ -17,7 +17,7 @@ const Sheet = ({state, overflow, fontSize}) => {
             return 0
         }
     }
-
+    const recordState = state?.records;
   return (
     <div>
     <div className='' style={{maxHeight:overflow ? 600 : "100%", overflowY:'auto'}}>
@@ -41,7 +41,7 @@ const Sheet = ({state, overflow, fontSize}) => {
             </tr>
         </thead>
         <tbody>
-        {state?.records?.map((x,index)=>{
+        {recordState.length>0 && recordState?.map((x,index)=>{
         return (
         <tr key={index} className='f fs-10 text-center'>
             {/* <td>{index + 1}</td> */}
