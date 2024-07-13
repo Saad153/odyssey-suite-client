@@ -44,8 +44,6 @@ const Report = ({ query }) => {
     )
   }
 
-  console.log("records ",state.records)
-
   const gridRef = useRef();
   const [columnDefs, setColumnDefs] = useState([
     { headerName: 'Job No', field: 'jobNo', width: 120, filter: true },
@@ -56,6 +54,10 @@ const Report = ({ query }) => {
           {moment(params.value).format("MM/DD/YY")}
         </>;
       }
+    },
+    {
+      headerName: 'HBL / HAWB', field: 'Bl.hbl', width: 120, filter: true,
+   
     },
     {
       headerName: 'Client', field: 'hbl',width: 70, filter: true,
@@ -70,6 +72,8 @@ const Report = ({ query }) => {
 
     { headerName: 'Local Agent', field: 'local_vendor.name', width: 100, filter: true },
     { headerName: 'Type', field: 'jobType', width: 100, filter: true },
+    { headerName: 'Weight', field: 'weight', width: 100, filter: true },
+
     {
       headerName: 'Revenue', field: 'revenue',width: 70, filter: true,
       cellRenderer: params => {

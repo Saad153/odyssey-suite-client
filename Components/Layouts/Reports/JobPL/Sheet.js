@@ -28,6 +28,7 @@ const Sheet = ({state, overflow, fontSize}) => {
                 <th>Job No</th>
                 <th style={{width:45}}>Date</th>
                 <th style={{width:200}}>Client</th>
+                <th style={{width:200}}> HBL/HAWB</th>
                 <th>F. Dest</th>
                 <th>Shipper</th>
                 <th>Local Agent</th>
@@ -60,13 +61,14 @@ const Sheet = ({state, overflow, fontSize}) => {
             >{x.jobNo}</td>
             <td>{moment(x.createdAt).format("MM/DD/YY")}</td>
             <td>{x.Client.name}</td>
+            <td>{x.Bl?.hbl}</td>
             <td style={{width:80}}>{x.fd}</td>
             <td style={{width:80}}>{x.shipper?.name}</td>
             <td style={{width:80}}>{x.local_vendor?.name}</td>
             <td style={{width:80}}>{x.jobType}</td>
 
 
-            <td></td>
+            <td style={{width:80}}>{x.weight}</td>
             <td>{setCommas(x.revenue)}</td>
             <td>{setCommas(x.cost)}</td>
             <td>{setCommas(x.actual)}</td>
