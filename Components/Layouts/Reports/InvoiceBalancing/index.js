@@ -14,7 +14,7 @@ const InvoiceBalaincing = () => {
   const dispatch = useDispatch();
   const [from, setFrom] = useState(moment("2023-07-01").format("YYYY-MM-DD"));
   const [to, setTo] = useState(moment().format("YYYY-MM-DD"));
-  const [company, setCompany] = useState(1);
+  const [company, setCompany] = useState(4);
   const [overseasAgent, setOverseasAgent] = useState("");
   const [representator, setRepresentator] = useState("");
   const [currency, setCurrency] = useState("");

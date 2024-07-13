@@ -16,7 +16,7 @@ const JobPL = () => {
   const [state, dispatch] = useReducer(recordsReducer, initialState);
   const set = (obj) => dispatch({ type: 'set', payload: obj });
   const [ jobType, setJobType ] = useState(['SE','SI','AE','AI']);
-  const [ company, setCompany ] = useState(1);
+  const [ company, setCompany ] = useState(4);
 
   const stateValues = {
     from: state.from,

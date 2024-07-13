@@ -14,7 +14,7 @@ const JobBalancing = () => {
   const dispatch = useDispatch();  
   const [from, setFrom] = useState(moment("2023-07-01").format("YYYY-MM-DD"));
   const [to, setTo] = useState(moment().format("YYYY-MM-DD"));
-  const [ company, setCompany ] = useState(1);
+  const [ company, setCompany ] = useState(4);
   const [ party, setParty ] = useState("");
   const [ overseasAgent, setOverseasAgent ] = useState("");
   const [ reportType, setReportType ] = useState("viewer");

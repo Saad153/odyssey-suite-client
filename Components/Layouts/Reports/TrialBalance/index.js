@@ -24,11 +24,12 @@ const TrialBalance = () => {
     from,
     to,
     company,
+    currency,
     debitAccount,
   };
 
   const filterValues = useSelector(state => state.filterValues);
-  const filters = filterValues.find(page => page.pageName === "accountActivity");
+  const filters = filterValues.find(page => page.pageName === "trialBalance");
   const values = filters ? filters.values : null;
 
   useEffect(() => { getAccounts(); }, [company]);
@@ -37,8 +38,13 @@ const TrialBalance = () => {
       setFrom(values.from);
       setTo(values.to);
       setCompany(values.company);
+      setCurrency(values.currency);
       setDebitAccount(values.debitAccount);
     }
+    
+
+
+
   }, [filters]);
 
   const getAccounts = async () => {
@@ -53,7 +59,7 @@ const TrialBalance = () => {
     })
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     console.log("here")
     console.log(debitAccount)
     // Router.push("/reports/trialBalance/report")
@@ -63,7 +69,21 @@ const TrialBalance = () => {
       "key": "5-10",
       "id": `?from=${from}&to=${to}&company=${company}&currency=${currency}&accountid=${debitAccount}`
     }))
+
+    dispatch(setFilterValues({
+      pageName:"trialBalance",
+      values:stateValues
+    }))
   }
+
+  const handleCompanyChange = (event) => {
+        setCompany(event.target.value);
+  };
+
+  const handleCurrencyChange = (event) => {
+    setCurrency(event.target.value);
+
+};
 
   return (
   <div className='base-page-layout'>
@@ -85,17 +105,17 @@ const TrialBalance = () => {
         <div>Company</div>
         <Radio.Group className='mt-1'
           value={company}
-          onChange={(e) => {
-            setCompany(e.target.value);
-          }}
+          onChange={handleCompanyChange}
         >
           <Radio value={1}>SEA NET SHIPPING & LOGISTICS</Radio>
-          <Radio value={3}>AIR CARGO SERVICES</Radio>
+          <Radio value={2}>AIR CARGO SERVICES</Radio>
         </Radio.Group>
       </Col>
       <Col md={9} className="mb-3">
         <b>Currency</b><br />
-        <Radio.Group className="mt-1" value={currency} onChange={(e) => setCurrency(e.target.value)}>
+        <Radio.Group className="mt-1"
+         value={currency}
+         onChange={handleCurrencyChange}>
         <Radio value={"PKR"}>PKR</Radio>
           <Radio value={"USD"}>USD</Radio>
           <Radio value={"GBP"}>GBP</Radio>
