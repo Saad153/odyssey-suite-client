@@ -67,6 +67,10 @@ const Report = ({ query }) => {
         </>;
       }
     },
+    {
+      headerName: 'SubType', field: 'subType', width: 120, filter: true,
+   
+    },
     { headerName: 'F. Dest', field: 'fd', width: 100, filter: true },
     { headerName: 'Shipper', field: 'shipper.name', width: 100, filter: true },
 

@@ -148,7 +148,7 @@ const initialState = {
 
   const excelDataFormatter = (records, set) => {
     let tempData = [
-      ["Job No", "Date", "HBL / HAWB", "Client", "Shipper", "Local Agent" ,"F. Dest", "Weight", "Revenue", "Cost","P/L", "Gain/Loss", "After Gain/Loss"],
+      ["Job No", "Date", "HBL / HAWB", "Client", "SubType", "Shipper", "Local Agent" ,"F. Dest", "Weight", "Revenue", "Cost","P/L", "Gain/Loss", "After Gain/Loss"],
     ];
     for (let index = 0; index < records.length; index++) {
       let data = [
@@ -156,6 +156,7 @@ const initialState = {
         records[index].createdAt ? records[index].createdAt.slice(0, 10) : "",
         records[index].Bl? records[index].Bl.hbl : "",
         records[index].Client.name ? records[index].Client.name : "",
+        records[index].subType? records[index].subType: "" ,
         records[index].shipper?.name ?  records[index].shipper.name  :"",
         records[index].local_vendor?.name ?  records[index].local_vendor.name  :"",
         records[index].fd ? records[index].fd : "",

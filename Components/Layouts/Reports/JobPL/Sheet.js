@@ -28,6 +28,7 @@ const Sheet = ({state, overflow, fontSize}) => {
                 <th>Job No</th>
                 <th style={{width:45}}>Date</th>
                 <th style={{width:200}}>Client</th>
+                <th style={{width:200}}>SubType</th>
                 <th style={{width:200}}> HBL/HAWB</th>
                 <th>F. Dest</th>
                 <th>Shipper</th>
@@ -61,6 +62,7 @@ const Sheet = ({state, overflow, fontSize}) => {
             >{x.jobNo}</td>
             <td>{moment(x.createdAt).format("MM/DD/YY")}</td>
             <td>{x.Client.name}</td>
+            <td>{x.subType}</td>
             <td>{x.Bl?.hbl}</td>
             <td style={{width:80}}>{x.fd}</td>
             <td style={{width:80}}>{x.shipper?.name}</td>
