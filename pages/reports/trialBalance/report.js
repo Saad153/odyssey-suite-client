@@ -21,7 +21,8 @@ export async function getServerSideProps(context) {
       "to":query.to,
       "accountid":query.accountid,
       "currency":query.currency
-  }}).then((x)=>x.data);
+    }
+  }).then((x)=>x.data);
 
   return{ 
     props: {
