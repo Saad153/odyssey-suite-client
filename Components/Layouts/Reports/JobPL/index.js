@@ -1,4 +1,4 @@
-import { recordsReducer, initialState, plainOptions } from './states';
+import { recordsReducer, initialState, plainOptions,typeOptions } from './states';
 import { Row, Col, Form, Spinner } from "react-bootstrap";
 import { Select, Checkbox, Modal, Radio } from 'antd';
 import React, {useState, useEffect, useReducer } from 'react';
@@ -17,17 +17,21 @@ const JobPL = () => {
   const set = (obj) => dispatch({ type: 'set', payload: obj });
   const [ jobType, setJobType ] = useState(['SE','SI','AE','AI']);
   const [ company, setCompany ] = useState(4);
+  const [ subType, setSubtype ] = useState([]);
 
   const stateValues = {
     from: state.from,
     to: state.to,
     jobType: jobType,
     company: company,
+    subType:state.subType,
     salesRepresentative: state.salesrepresentative,
     overSeasagent: state.overseasagent,
     client: state.client,
     reportType: state.reportType,
   }
+
+
 
   //getting selected Filter values from state by filter name
   const filterValues = useSelector((state) => state.filterValues);
@@ -35,6 +39,7 @@ const JobPL = () => {
   const values = filters ? filters.values : null;
 
   useEffect(() => {
+    
     // setting default values from Redux state when component remounts
     if (filters) {
       set({
@@ -42,11 +47,15 @@ const JobPL = () => {
         to: values?  values.to : '',
         jobType: values ? values.jobType : [],
         company: values? values.company : '',
+        subType: values? values.subType : [],
         salesrepresentative: values ? values.salesRepresentative : undefined,
         overseasagent: values ? values.overSeasagent : undefined,
         client: values? values.client : undefined,
         reportType: values ? values.reportType : 'viewer',
       });
+
+
+
     }
     else {
       set({ jobType: plainOptions }); // Automatically check all job types if no filters
@@ -56,6 +65,12 @@ const JobPL = () => {
   const handleChange = (event) => {
     setCompany(event);
   };
+
+  // const handleSubtypeChange = (event) => {
+  //   console.log("e",event)
+  //     setSubtype(event);
+  // };
+
 
 
   return (
@@ -76,6 +91,11 @@ const JobPL = () => {
             <div>Job Types</div>
             <Checkbox.Group options={plainOptions} value={jobType} onChange={(e) => setJobType(e)} />
           </Col>
+          <Col md={2}>
+            <div>Sub Types</div>
+            <Checkbox.Group options={typeOptions} value={subType} onChange={(e) => setSubtype(e)} />
+          </Col>
+          
         </Row>
         <Row className='mt-3'>
           <Col md={3}>
@@ -124,7 +144,7 @@ const JobPL = () => {
             const { to, from, client, overseasagent, salesrepresentative, reportType } = state
             dispatchNew(setFilterValues({
               pageName:"jobPLreport",
-              values:stateValues
+              values:stateValues    
             }));
             Router.push({
               pathname: `/reports/jobPLReport/report`,
@@ -133,6 +153,7 @@ const JobPL = () => {
                 from: from,
                 client: client,
                 company: company,
+                subtype:subType,
                 jobtype: jobType,
                 overseasagent: overseasagent,
                 salesrepresentative: salesrepresentative,
@@ -142,6 +163,7 @@ const JobPL = () => {
             let url = `?to=${state.to}&from=${state.from}`;
             client? url = url + `&client=${client}`: null;
             company? url = url + `&company=${company}`: null;
+            subType? url = url + `&subtype=${subType}`: null;
             jobType? url = url + `&jobtype=${jobType}`: null;
             salesrepresentative? url = url + `&salesrepresentative=${salesrepresentative}`: null;
             reportType? url = url + `&report=${reportType}`: null;

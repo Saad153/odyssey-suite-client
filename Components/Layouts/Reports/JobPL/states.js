@@ -146,6 +146,13 @@ const initialState = {
     {label:'Air Import', value:"AI"},
   ];
 
+  
+  const typeOptions = [
+    {label:'FCL', value:'FCL'},
+    {label:'LCL', value:"LCL"},
+    {label:'Air', value:"AIR"},
+  ];
+
   const excelDataFormatter = (records, set) => {
     let tempData = [
       ["Job No", "Date", "HBL / HAWB", "Client", "SubType", "Shipper", "Local Agent" ,"F. Dest", "Weight", "Revenue", "Cost","P/L", "Gain/Loss", "After Gain/Loss"],
@@ -174,4 +181,4 @@ const initialState = {
     })
   };
   
-export { recordsReducer, initialState, companies, fetchData, plainOptions, excelDataFormatter }
+export { recordsReducer, initialState, companies, fetchData, plainOptions, typeOptions, excelDataFormatter }
