@@ -15,7 +15,7 @@ export async function getServerSideProps(context) {
         voucherData = await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_VOUCHER_BY_ID_ADVANCED,{
         headers:{ "id": `${params.id}` }
         }).then((x)=>x.data.result);
-        if (!voucherData.id) {
+        if (!voucherData?.id) {
             return {
                 notFound: true
             }

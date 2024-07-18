@@ -39,6 +39,7 @@ const initialState = {
   load:false,
   visible:false,
   glVisible:false,
+  deleteVisible:false,
   searchTerm:'',
 
   tranVisible:false,

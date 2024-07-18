@@ -165,6 +165,9 @@
   color: white;
   padding: 5px 10px 5px 10px;
   border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   border: none;
   cursor: pointer;
 }
@@ -196,6 +199,9 @@
   background-color: rgb(146, 26, 18)!important;
   color: white;
   padding: 5px 20px 5px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   border-radius: 15px;
   border: none;
   cursor: pointer;

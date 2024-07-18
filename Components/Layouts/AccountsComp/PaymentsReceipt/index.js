@@ -1,4 +1,6 @@
+import React, { useState, useRef, useEffect, useMemo, useCallback, useReducer} from 'react';
 import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { MdHistory } from "react-icons/md";
 import { Input, List, Radio, Modal, Select } from 'antd';
 import { recordsReducer, initialState } from './states';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,9 +11,9 @@ import BillComp from './BillComp';
 import PrintTransaction from './PrintTransaction';
 import moment from 'moment';
 import axios from 'axios';
-import React, { useState, useRef, useEffect, useMemo, useCallback, useReducer} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import ReactToPrint from 'react-to-print';
+import DeleteVoucher from './DeleteVoucher';
 
 const PaymentsReceipt = ({id, voucherData}) => {
 
@@ -95,7 +97,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
     }
   }, [router]);
 
-  const addNew = () => router.push("/accounts/paymentReceipt/new")
+  const addNew = () => router.push("/accounts/paymentReceipt/new");
 
   useEffect(() => { searchParties() }, [state.search]);
 
@@ -146,11 +148,11 @@ const PaymentsReceipt = ({id, voucherData}) => {
   const [columnDefs, setColumnDefs] = useState([
     {headerName: '#', field:'no', width: 50, filter:false },
     {headerName: 'Voucher No.', field:'voucher_Id', filter: true},
-    {headerName: 'Name', field:'partyName', flex:1, filter: true},
-    {headerName: 'Party', field:'partyType', filter: true},
-    {headerName: 'Type', field:'vType', width:124, filter: true},
+    {headerName: 'Name', field:'partyName', flex:1, minWidth:100, filter: true},
+    {headerName: 'Party', field:'partyType', filter: true, width:100,},
+    {headerName: 'Type', field:'vType', width:104, filter: true},
     {headerName: 'Date', field:'tranDate', filter: true},
-    {headerName: 'Currency', field:'currency', filter: true, 
+    {headerName: 'Currency', field:'currency', filter: true, width:90,
       cellRenderer:(params) => {
         return(
           <>
@@ -172,6 +174,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
     sortable: true,
     filter: "agTextColumnFilter",
     floatingFilter: true,
+    resizable:true
   }));
 
   const cellClickedListener = useCallback((e)=> {
@@ -181,138 +184,139 @@ const PaymentsReceipt = ({id, voucherData}) => {
 
   return (
     <div className='base-page-layout'>
-    <Row>
-     <Col md={4}>
-      <b>Type: </b>
-      <Radio.Group className='mt-1' size='small' value={state.partytype}
-        onChange={(e) => {
-        let value="", TempInvoiceCurrency = "";
-        if(e.target.value=="vendor"){
-          value="Payble"
-          TempInvoiceCurrency="PKR"
-        } else if(e.target.value=="client"){
-          value="Recievable";
-          TempInvoiceCurrency="PKR"
-        } else if(e.target.value=="agent"){
-          value="Payble";
-          TempInvoiceCurrency="USD"
-        }
-        setAll({
-          selectedParty:{id:"", name:""}, partytype:e.target.value, 
-          search:"", payType:value, invoiceCurrency:TempInvoiceCurrency
-        })
-      }}>
-        <Radio value={"client"}>Client</Radio>
-        <Radio value={"vendor"}>Vendor</Radio>
-        <Radio value={"agent"} >Agent </Radio>
-      </Radio.Group>
-     </Col>
-     <Col md={4}>
-            <b>Pay Type: </b>
-            <Radio.Group className='mt-1' value={state.payType} onChange={(e)=> setAll({search:"", payType:e.target.value})} 
-                disabled={state.partytype=="agent"}
-            >
-                <Radio value={"Payble"}>Payable</Radio>
-                <Radio value={"Recievable"}>Receivable</Radio>
-            </Radio.Group>
-     </Col>
-     <Col md={4} style={{ display:'flex', justifyContent:'end'}}>
-      {state.edit &&
-        <ReactToPrint
-          content={() => inputRef}
-          trigger={() => (
-            <div className="div-btn-custom text-center p-1 px-2 mx-3" style={{width:80}}>Print</div>
-          )}
-        />
-      }
-      <button className='btn-custom' style={{fontSize:11}}
-        onClick={() => {
-          axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS,{headers:{companyid:companyId}})
-          .then((x) => {
-            let tempData = [];
-            x.data?.result?.forEach((y, i) => {
-              tempData.push({
-                ...y, no:i+1,
-                amount:( y.Voucher_Heads?.reduce((x, cur) => x + Number(cur.amount), 0)||0 )/Number(y.exRate)
-              })
-            });
-            setAll({oldVouchers:true, oldVouchersList:tempData});
+      <Row>
+      <Col md={4}>
+        <b>Type: </b>
+        <Radio.Group className='mt-1' size='small' value={state.partytype}
+          onChange={(e) => {
+          let value="", TempInvoiceCurrency = "";
+          if(e.target.value=="vendor"){
+            value="Payble"
+            TempInvoiceCurrency="PKR"
+          } else if(e.target.value=="client"){
+            value="Recievable";
+            TempInvoiceCurrency="PKR"
+          } else if(e.target.value=="agent"){
+            value="Payble";
+            TempInvoiceCurrency="USD"
+          }
+          setAll({
+            selectedParty:{id:"", name:""}, partytype:e.target.value, 
+            search:"", payType:value, invoiceCurrency:TempInvoiceCurrency
           })
-        }}
-      >Show Old</button>
-     </Col>
-     <Col md={6} className='mt-3'>
-      {!state.selectedParty.name && <>
-        <Input placeholder="Search" size='small'
-          suffix={state.search.length>2?<CloseCircleOutlined onClick={()=>setAll({search:""})} />:<SearchOutlined/>} 
-          value={state.search} onChange={(e)=>setAll({search:e.target.value})}
-        />
-        {state.search.length>2 &&
-          <div style={{position:"absolute", zIndex:10}}>
-            <ListComp data={state.partyOptions} />
-          </div>
+        }}>
+          <Radio value={"client"}>Client</Radio>
+          <Radio value={"vendor"}>Vendor</Radio>
+          <Radio value={"agent"} >Agent </Radio>
+        </Radio.Group>
+      </Col>
+      <Col md={4}>
+              <b>Pay Type: </b>
+              <Radio.Group className='mt-1' value={state.payType} onChange={(e)=> setAll({search:"", payType:e.target.value})} 
+                  disabled={state.partytype=="agent"}
+              >
+                  <Radio value={"Payble"}>Payable</Radio>
+                  <Radio value={"Recievable"}>Receivable</Radio>
+              </Radio.Group>
+      </Col>
+      <Col md={4} style={{ display:'flex', justifyContent:'end'}}>
+        {state.edit &&
+          <ReactToPrint
+            content={() => inputRef}
+            trigger={() => (
+              <div className="div-btn-custom text-center p-1 px-2 mx-3" style={{width:80}}>Print</div>
+            )}
+          />
         }
-      </>
-      }
-      {state.selectedParty.name && <>
-        <button 
-          className="btn-custom-green"
-          onClick={addNew}
-        >
-          Add New
-        </button>
-      </>
-      }
-     </Col>
-     <Col md={1} className='mt-3'>
-      <Select disabled={state.partytype!="agent"?true:false} value={state.invoiceCurrency} size='small'
-        onChange={(e)=> setAll({invoiceCurrency:e})}
-        options={[
-          { value:"PKR", label:"PKR"},
-          { value:"USD", label:"USD"},
-          { value:"EUR", label:"EUR"},
-          { value:"GBP", label:"GBP"},
-          { value:"AED", label:"AED"},
-          { value:"OMR", label:"OMR"},
-          { value:"BDT", label:"BDT"},
-          { value:"CHF", label:"CHF"},
-        ]}
-      />
-     </Col>
-     <Col md={4} className='mt-3'style={{border:'1px solid silver'}}>{state.selectedParty.name}</Col>
-     <Col md={12}><hr className='p-0 my-3' /></Col>
-    </Row>
-    {state.tranVisible && <BillComp companyId={companyId} state={state} dispatch={dispatch} />}
-    <div className="d-none">
-      <div ref={(res) => (inputRef = res)} className="px-2">
-        <PrintTransaction companyId={companyId} state={state} dispatch={dispatch} />
-      </div>
-    </div>
-    <Modal 
-      width={'80%'}
-      open={state.oldVouchers}
-      onOk={()=>setAll({oldVouchers:false})}
-      onCancel={()=> setAll({oldVouchers:false})}
-      footer={false}
-      centered
-      maskClosable={false}
-      title={<>Old Vouchers</>}
-    >   
-    {state.oldVouchers &&
-      <div className="ag-theme-alpine" style={{width:"100%", height:'72vh'}}>
-        <AgGridReact
-          ref={gridRef} // Ref for accessing Grid's API
-          rowData={state.oldVouchersList} // Row Data for Rows
-          columnDefs={columnDefs} // Column Defs for Columns
-          defaultColDef={defaultColDef} // Default Column Properties
-          animateRows={true} // Optional - set to 'true' to have rows animate when sorted
-          rowSelection='multiple' // Options - allows click selection of rows
-          onCellClicked={cellClickedListener} 
-          getRowHeight={30}
+        <button className='btn-custom px-3' style={{fontSize:11}}
+          onClick={() => {
+            axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS,{headers:{companyid:companyId}})
+            .then((x) => {
+              let tempData = [];
+              x.data?.result?.forEach((y, i) => {
+                tempData.push({
+                  ...y, no:i+1,
+                  amount:( y.Voucher_Heads?.reduce((x, cur) => x + Number(cur.amount), 0)||0 )/Number(y.exRate)
+                })
+              });
+              setAll({oldVouchers:true, oldVouchersList:tempData});
+            })
+          }}
+        >Show Old <MdHistory /></button>
+        { id!="new" && <DeleteVoucher companyId={companyId} setAll={setAll} state={state} id={id} />}
+      </Col>
+      <Col md={6} className='mt-3'>
+        {!state.selectedParty.name && <>
+          <Input placeholder="Search" size='small'
+            suffix={state.search.length>2?<CloseCircleOutlined onClick={()=>setAll({search:""})} />:<SearchOutlined/>} 
+            value={state.search} onChange={(e)=>setAll({search:e.target.value})}
+          />
+          {state.search.length>2 &&
+            <div style={{position:"absolute", zIndex:10}}>
+              <ListComp data={state.partyOptions} />
+            </div>
+          }
+        </>
+        }
+        {state.selectedParty.name && <>
+          <button 
+            className="btn-custom-green"
+            onClick={addNew}
+          >
+            Add New
+          </button>
+        </>
+        }
+      </Col>
+      <Col md={1} className='mt-3'>
+        <Select disabled={state.partytype!="agent"?true:false} value={state.invoiceCurrency} size='small'
+          onChange={(e)=> setAll({invoiceCurrency:e})}
+          options={[
+            { value:"PKR", label:"PKR"},
+            { value:"USD", label:"USD"},
+            { value:"EUR", label:"EUR"},
+            { value:"GBP", label:"GBP"},
+            { value:"AED", label:"AED"},
+            { value:"OMR", label:"OMR"},
+            { value:"BDT", label:"BDT"},
+            { value:"CHF", label:"CHF"},
+          ]}
         />
+      </Col>
+      <Col md={4} className='mt-3'style={{border:'1px solid silver'}}>{state.selectedParty.name}</Col>
+      <Col md={12}><hr className='p-0 my-3' /></Col>
+      </Row>
+      {state.tranVisible && <BillComp companyId={companyId} state={state} dispatch={dispatch} />}
+      <div className="d-none">
+        <div ref={(res) => (inputRef = res)} className="px-2">
+          <PrintTransaction companyId={companyId} state={state} dispatch={dispatch} />
+        </div>
       </div>
-    }
-    </Modal>
+      <Modal 
+        width={'80%'}
+        open={state.oldVouchers}
+        onOk={()=>setAll({oldVouchers:false})}
+        onCancel={()=> setAll({oldVouchers:false})}
+        footer={false}
+        centered
+        maskClosable={false}
+        title={<>Old Vouchers</>}
+      >   
+      {state.oldVouchers &&
+        <div className="ag-theme-alpine" style={{width:"100%", height:'72vh'}}>
+          <AgGridReact
+            ref={gridRef} // Ref for accessing Grid's API
+            rowData={state.oldVouchersList} // Row Data for Rows
+            columnDefs={columnDefs} // Column Defs for Columns
+            defaultColDef={defaultColDef} // Default Column Properties
+            animateRows={true} // Optional - set to 'true' to have rows animate when sorted
+            rowSelection='multiple' // Options - allows click selection of rows
+            onCellClicked={cellClickedListener} 
+            getRowHeight={30}
+          />
+        </div>
+      }
+      </Modal>
     </div>
   )
 }
