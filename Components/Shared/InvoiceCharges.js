@@ -18,6 +18,7 @@ const { TextArea } = Input;
 
 const InvoiceCharges = ({data, companyId, reload}) => {
 
+
   const commas = (a) => parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ");
 
   let inputRef = useRef(null);
@@ -374,6 +375,7 @@ const InvoiceCharges = ({data, companyId, reload}) => {
     );
   };
 
+
 return (
   <>
     {load && <FullScreenLoader/>}
@@ -394,7 +396,7 @@ return (
           </div>
         </div>
         <Row className='py-3'>
-          <Col md={3} className="mb-3">
+          <Col md={2} className="mb-3">
             <div>
               <span className='inv-label'>Invoice No#:</span>
               <span className='inv-value'>{" "}{invoice?.invoice_No}</span>
@@ -406,12 +408,23 @@ return (
               <span className='inv-value'>{" "}{invoice?.party_Name}</span>
             </div>
           </Col>
-          <Col md={3} className="mb-3">
+          <Col md={2} className="mb-3">
             <div>
               <span className='inv-label'>Pay Type:</span>
               <span className='inv-value'>{" "}{invoice?.payType}</span>
             </div>
           </Col>
+          <Col md={2} className="mb-3">
+          <span className='inv-label'>Job#:</span>
+          <span className='inv-value' 
+          style={{cursor:'pointer'}}
+          onClick={async ()=>{
+            await Router.push(`/seaJobs/export/${invoice?.SEJobId}`)
+            dispatchNew(incrementTab({"label":"SE JOB", "key":"4-3", "id":`${invoice?.SEJobId}`}))
+          }}
+          >{" "}{invoice?.SE_Job?.jobNo}</span>
+         
+      </Col>
           <Col md={3} className="mb-3">
             <span className='inv-label'>Currency:</span>
             {" "}
@@ -432,15 +445,15 @@ return (
               ]}
             />
           </Col>
-          <Col md={3} className="mb-3">
+          <Col md={2} className="mb-3">
             <span className='inv-label'>Invoice/Bill:</span>
             <span className='inv-value'>{" "}{invoice?.type}</span>
           </Col>
-          <Col md={3} className="mb-3">
+          <Col md={2} className="mb-3">
             <span className='inv-label'>Created:</span>
             <span className='inv-value'>{" "}{ moment(invoice?.createdAt).format("DD / MMM / YY")}</span>
           </Col>
-          <Col md={3} className="mb-3">
+          <Col md={2} className="mb-3">
             <span className='inv-label'>Round Off:</span>
             <span className='inv-value mx-2'>
               <input className='cur' type={"checkbox"}

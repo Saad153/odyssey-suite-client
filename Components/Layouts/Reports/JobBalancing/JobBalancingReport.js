@@ -135,12 +135,26 @@ const JobBalancingReport = ({ result, query }) => {
                 <th className='text-center'>#</th>
                 <th className='text-center'>Inv. No</th>
                 <th className='text-center'>Job. No</th>
+                <th className='text-center'>Job. Date</th>
                 <th className='text-center'>Date</th>
                 <th className='text-center'>HBL/HAWB</th>
+                <th className='text-center'>MBL/MAWB</th>
+
+                <th className='text-center'>Sailing Date</th>
+                <th className='text-center'>Arrival Date</th>
                 <th className='text-center'>Name</th>
+                <th className='text-center'>Client Code</th>
+                <th className='text-center'>Shipper</th>
+                <th className='text-center'>Consignee</th>
+                <th className='text-center'>Sales Representator</th>
+                <th className='text-center'>Shipping Line</th>
+                <th className='text-center'>Vessel</th>
                 <th className='text-center'>F. Dest</th>
+                <th className='text-center'>J/Tp</th>
                 <th className='text-center'>F/Tp</th>
-                {/* <th className='text-center'>Curr</th> */}
+                <th className='text-center'>Weight</th>
+                <th className='text-center'>Volume</th>
+                <th className='text-center'>Currency</th>
                 <th className='text-center'>Debit</th>
                 <th className='text-center'>Credit</th>
                 <th className='text-center'>Paid/Rcvd</th>
@@ -151,6 +165,18 @@ const JobBalancingReport = ({ result, query }) => {
             <tbody>
               {/* without print  */}
               {overflow ? currentRecords.map((x,i)=>{
+                const date = x.SE_Job?.jobDate;
+                const formattedDate = moment(date).format('DD-MMM-YYYY');
+                const sailDate = x.SE_Job?.shipDate;
+                const formattedSailDate = moment(sailDate).format('DD-MMM-YYYY');
+                const arrivalDate = x.SE_Job?.arrivalDate;
+                let formattedArrivalDate;
+                if(arrivalDate)
+                {
+                 formattedArrivalDate = moment(arrivalDate).format('DD-MMM-YYYY');
+
+                }
+
               return (
                 <tr key={i}>
                   <td style={{ maxWidth: 10 }}>{i + 1}</td>
@@ -181,12 +207,25 @@ const JobBalancingReport = ({ result, query }) => {
                   }>
                     {x?.SE_Job?.jobNo}
                   </td>
+                  <td style={{width:150}}>{formattedDate}</td>
                   <td style={{}}>{x.createdAt}</td>
                   <td style={{width:50}}>{x.hbl}</td>
+                  <td style={{width:50}}>{x.SE_Job?.Bl?.mbl}</td>
+                  <td style={{width:50}}>{formattedSailDate}</td>
+                  <td style={{width:50}}>{formattedArrivalDate}</td> 
                   <td style={{width:150}}><b>{x.party_Name}</b></td>
+                  <td style={{width:150}}><b>{x.SE_Job?.Client?.code}</b></td>
+                  <td style={{width:150}}><b>{x.SE_Job?.Client?.name}</b></td>
+                  <td style={{width:150}}><b>{x.SE_Job?.consignee?.name}</b></td>
+                  <td style={{width:150}}><b>{x.SE_Job?.sales_representator?.name}</b></td>
+                  <td style={{ maxWidth: 70 }}>{x.SE_Job?.shipping_line?.name}</td>
+                  <td style={{ maxWidth: 70 }}>{x.SE_Job?.Vessel?.name}</td>
                   <td style={{ maxWidth: 70 }}>{x.fd}</td>
+                  <td style={{width:20}}>{x.SE_Job?.subType}</td>
                   <td style={{width:20}}>{x.freightType}</td>
-                  {/* <td style={{width:20}}>{x.currency}</td> */}
+                  <td style={{width:20}}>{x.SE_Job?.weight}</td>
+                  <td style={{width:20}}>{x.SE_Job?.vol}</td>
+                  <td style={{width:20}}>{x.currency}</td>
                   <td style={{ textAlign: 'right' }} >{x.recievable}</td>
                   <td style={{ textAlign: 'right' }} >{x.payble}</td>
                   <td style={{ textAlign: 'right' }} >{x.balanced}</td>
@@ -233,6 +272,20 @@ const JobBalancingReport = ({ result, query }) => {
               {/* showing total in the last page  */}
               {overflow && currentPage === noOfPages && (
                 <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                   <td colSpan={8} style={{ textAlign: 'right' }}><b>Total</b></td>
                   <td style={{ textAlign: 'right' }}>{getTotal("Recievable", records)}</td>
                   <td style={{ textAlign: 'right' }}>{getTotal("Payble", records)}</td>
@@ -257,6 +310,11 @@ const JobBalancingReport = ({ result, query }) => {
     </>
   )}
 
+  function dateCellFormatter(params) {
+    const date = moment(params.value);
+    return date.isValid() ? date.format('DD-MMM-YYYY') : null;
+}
+
   const gridRef = useRef();
   const [columnDefs, setColumnDefs] = useState([
     { headerName: '#', field: 'no', width: 50 },
@@ -268,14 +326,33 @@ const JobBalancingReport = ({ result, query }) => {
               }}>{params.data.invoice_No}</span>;
           }
     },
+    { headerName: 'Job. No', field: 'SE_Job.jobNo', filter: true},
+    { headerName: 'Job Date', field: 'SE_Job.jobDate', filter: true,
+      cellRenderer: dateCellFormatter
+    },
     { headerName: 'Date', field: 'createdAt', filter: true },
     { headerName: 'HBL/HAWB', field: 'hbl', filter: true },
+    { headerName: 'MBL/MAWB', field: 'SE_Job.Bl.mbl', filter: true },
+    { headerName: 'Sailing Date', field: 'SE_Job.shipDate', filter: true ,
+      cellRenderer: dateCellFormatter
+    },
+    { headerName: 'Arrival Date', field: 'SE_Job.arrivalDate', filter: true ,
+      cellRenderer: dateCellFormatter
+    },
     { headerName: 'Name', field: 'party_Name', width: 224, filter: true },
+    { headerName: 'Client Code', field: 'SE_Job.Client.code', width: 224, filter: true },
+    { headerName: 'Shipper', field: 'SE_Job.Client.name', width: 224, filter: true },
+    { headerName: 'Consignee', field: 'SE_Job.consignee.name', width: 224, filter: true },
+    { headerName: 'Sales Representator', field: 'SE_Job.sales_representator.name', width: 224, filter: true },
+    { headerName: 'Shipping Line', field: 'SE_Job.shipping_line.name', width: 224, filter: true },
+    { headerName: 'Vessel', field: 'SE_Job.Vessel.name', width: 224, filter: true },
     { headerName: 'F. Dest', field: 'fd', filter: true },
+    { headerName: 'J/Tp', field: 'subType', filter: true },
     { headerName: 'F/Tp', field: 'ppcc', filter: true },
+    { headerName: 'Weight', field: 'SE_Job.weight', filter: true },
+    { headerName: 'Vol', field: 'SE_Job.vol', filter: true },
     { headerName: 'Curr', field: 'currency', filter: true },
-    {
-      headerName: 'Debit', field: 'total', filter: true,
+    {headerName: 'Debit', field: 'total', filter: true,
       cellRenderer: params => {
         return <>{params.data.payType != "Payble" ? commas(params.value) : "-"}</>;
       }
@@ -300,6 +377,7 @@ const JobBalancingReport = ({ result, query }) => {
     },
     { headerName: 'Age', field: 'age', filter: true },
   ]);
+  
   const defaultColDef = useMemo(() => ({ 
     sortable: true,
     resizable: true,
@@ -307,16 +385,21 @@ const JobBalancingReport = ({ result, query }) => {
     floatingFilter: true,
   }));
   const getRowHeight = 38;
-
   const exportData = () => {
+  
     exportExcelFile(
       currentRecords,
       [
           { header: "Invoice No.", key: "invoice_No", width: 18, height:10 },
+          { header: "Job No.", key: "jobNo", width: 18, height:10 },
           { header: "Date", key: "createdAt", width: 15, height:10 },
           { header: "HBL/MBL", key: "hbl", width: 32, height:10 },
           { header: "Party", key: "party_Name", width: 32, height:10 },
+          { header: "F.Dest", key: "fd", width: 32, height:10 },
+          { header: "J/Tp", key: "subType", width: 12, height:10 },
           { header: "F/Tp", key: "freightType", width: 12, height:10 },
+          { header: "Weight", key: "weight", width: 12, height:10 },
+          { header: "volume", key: "vol", width: 12, height:10 },
           { header: "Currency", key: "currency", width: 12, height:10 },
           { header: "Debit", key: "recievable", width: 32, height:10 },
           { header: "Credit", key: "payble", width: 32, height:10 },

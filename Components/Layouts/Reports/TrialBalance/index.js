@@ -17,6 +17,7 @@ const TrialBalance = () => {
   const [from, setFrom] = useState(moment("2023-07-01").format("YYYY-MM-DD"));
   const [to, setTo] = useState(moment().format("YYYY-MM-DD"));
   const [currency, setCurrency] = useState("PKR");
+  const [reportType, setReportType] = useState("6- Columns Simplified View");
 
   const dispatch = useDispatch()
 
@@ -26,6 +27,7 @@ const TrialBalance = () => {
     company,
     currency,
     debitAccount,
+    reportType
   };
 
   const filterValues = useSelector(state => state.filterValues);
@@ -40,6 +42,7 @@ const TrialBalance = () => {
       setCompany(values.company);
       setCurrency(values.currency);
       setDebitAccount(values.debitAccount);
+      setReportType(values.reportType)
     }
     
 
@@ -63,11 +66,11 @@ const TrialBalance = () => {
     console.log("here")
     console.log(debitAccount)
     // Router.push("/reports/trialBalance/report")
-    Router.push({ pathname: `/reports/trialBalance/report`, query: { from: from, to: to, company: company, currency: currency, accountid:debitAccount } });
+    Router.push({ pathname: `/reports/trialBalance/report`, query: { from: from, to: to, company: company, reportType: reportType, currency: currency, accountid:debitAccount } });
     dispatch(incrementTab({
       "label": "Trial Balance Report",
       "key": "5-10",
-      "id": `?from=${from}&to=${to}&company=${company}&currency=${currency}&accountid=${debitAccount}`
+      "id": `?from=${from}&to=${to}&company=${company}&reportType=${reportType}&currency=${currency}&accountid=${debitAccount}`
     }))
 
     dispatch(setFilterValues({
@@ -84,6 +87,8 @@ const TrialBalance = () => {
     setCurrency(event.target.value);
 
 };
+
+
 
   return (
   <div className='base-page-layout'>
@@ -136,6 +141,23 @@ const TrialBalance = () => {
           onChange={(e) => setDebitAccount(e)}
           options={records}
           value={debitAccount}
+          filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
+          filterSort={(a, b) => (a?.label ?? '').toLowerCase().localeCompare((b?.label ?? '').toLowerCase())}
+        />
+      </Col>
+      <Col md={4}>
+      <div>Report</div>
+      <Select
+          showSearch
+          style={{ width: '100%' }}
+          placeholder="Report"
+          onChange={(e) => setReportType(e)}
+          options={[
+            { value:'6- Columns Simplified View', label:'6- Columns Simplified View' },
+            { value:'2- Columns Simplified View', label:'2- Columns Simplified View' },
+           
+          ]}
+          value={reportType}
           filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
           filterSort={(a, b) => (a?.label ?? '').toLowerCase().localeCompare((b?.label ?? '').toLowerCase())}
         />
