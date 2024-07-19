@@ -16,7 +16,7 @@ const ChargesComp = ({state, dispatch, type, allValues}) => {
   const { fields, append, remove } = useFieldArray({ control, name:"chargeList" });
   const chargeList = useWatch({ control, name:'chargeList' });
 
-  const chargesData = useQuery({
+  const { data:chargesData, refetch } = useQuery({
     queryKey:["charges", {id:state.selectedRecord.id}],
     queryFn: () => getChargeHeads({id:state.selectedRecord.id})
   });

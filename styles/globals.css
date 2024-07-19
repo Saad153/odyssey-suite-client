@@ -19,3 +19,7 @@ a {
     overflow: visible;
   }
 }
+
+.edit-charge-body{
+  border: 1px solid grey;
+}

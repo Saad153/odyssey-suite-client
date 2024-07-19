@@ -12,15 +12,16 @@ import CLPrint from './CLPrint';
 import { useDispatch } from 'react-redux';
 import { incrementTab } from '/redux/tabs/tabSlice';
 import Router from 'next/router';
+import InvoiceEditor from './InvoiceEditor';
+
 const { TextArea } = Input;
 
-const InvoiceCharges = ({data, companyId}) => {
+const InvoiceCharges = ({data, companyId, reload}) => {
 
   const commas = (a) => parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ");
 
   let inputRef = useRef(null);
   const dispatchNew = useDispatch();
-
   const queryClient = useQueryClient();
   const [bank, setBank] = useState(1);
   const [invoiceData, setInvoiceData] = useState(false);
@@ -28,15 +29,15 @@ const InvoiceCharges = ({data, companyId}) => {
   const [invoice, setInvoice] = useState({
     Charge_Heads:[],
     SE_Job:{
-        Client:{},
-        shipper:{},
-        consignee:{},
-        sales_representator:{},
-        shipping_line:{},
-        pol:'',
-        pod:'',
-        fd:'',
-        SE_Equipments:[]
+      Client:{},
+      shipper:{},
+      consignee:{},
+      sales_representator:{},
+      shipping_line:{},
+      pol:'',
+      pod:'',
+      fd:'',
+      SE_Equipments:[]
     },
     note:''
   });
@@ -300,16 +301,16 @@ const InvoiceCharges = ({data, companyId}) => {
         exRate:vouchers.exRate
     }).then(async(x)=>{
         if(x.data.status=="success"){
-            openNotification("Success", "Invoice Successfully Approved!", "green")
-            if(tempInv.approved=="1"){
-                await axios.post(process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, vouchers);
-            }else{
-                //console.log("Here")
-                await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_DELETE_VOUCHER, {id:tempInv.id})
-                //.then((x)=>console.log(x.data))
-            }
-        }else{
-            openNotification("Ops", "An Error Occured!", "red")
+          openNotification("Success", "Invoice Successfully Approved!", "green")
+          if(tempInv.approved=="1"){
+            await axios.post(process.env.NEXT_PUBLIC_CLIMAX_CREATE_VOUCHER, vouchers);
+          }else{
+            //console.log("Here")
+            await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_DELETE_VOUCHER, {id:tempInv.id})
+            //.then((x)=>console.log(x.data))
+          }
+        } else {
+          openNotification("Ops", "An Error Occured!", "red")
         }
     });
     await queryClient.removeQueries({ queryKey: ['charges'] })
@@ -376,236 +377,234 @@ const InvoiceCharges = ({data, companyId}) => {
 return (
   <>
     {load && <FullScreenLoader/>}
-    <div className='invoice-styles '>
-    {Object.keys(data).length>0 &&
-    <div className='fs-12' 
-        style={{maxHeight:660, overflowY:'auto', overflowX:'hidden'}}
-    >
-    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-      <Popover content={PrintOptions} placement="bottom" title="Printing Options">
-        <div className='div-btn-custom text-center py-2 px-3'>
-          <b>Print Invoice</b>
-        </div>
-      </Popover>
-      <div className='div-btn-custom text-center py-2 px-3' onClick={routeToPayRec}> 
-        <b>Go to Payment/Receipt</b>
-      </div>
-    </div>
-    <Row className='py-3'>
-      <Col md={3} className="mb-3">
-        <div>
-          <span className='inv-label'>Invoice No#:</span>
-          <span className='inv-value'>{" "}{invoice?.invoice_No}</span>
-        </div>
-      </Col>
-      <Col md={3} className="mb-3">
-        <div>
-          <span className='inv-label'>Party Name:</span>
-          <span className='inv-value'>{" "}{invoice?.party_Name}</span>
-        </div>
-      </Col>
-      <Col md={3} className="mb-3">
-        <div>
-          <span className='inv-label'>Pay Type:</span>
-          <span className='inv-value'>{" "}{invoice?.payType}</span>
-        </div>
-      </Col>
-      <Col md={3} className="mb-3">
-        <span className='inv-label'>Currency:</span>
-        {" "}
-        {/* <span className='inv-value'>{" "}{invoice.currency}</span> */}
-        <Select
-          size='small'
-            value={invoice?.currency} onChange={(e)=>setInvoice({...invoice, currency:e})}
-            style={{ width: 80 }}
-            options={[
-              {value: 'PKR', label: 'PKR'},
-              {value: 'USD', label: 'USD'},
-              {value: 'EUR', label: 'EUR'},
-              {value: 'CHF', label: 'CHF'},
-              {value: 'GBP', label: 'GBP'},
-              {value: 'OMR', label: 'OMR'},
-              { value:"AED", label:"AED"},
-              { value:"BDT", label:"BDT"},  
-
-          ]}
-        />
-      </Col>
-      <Col md={3} className="mb-3">
-        <span className='inv-label'>Invoice/Bill:</span>
-        <span className='inv-value'>{" "}{invoice?.type}</span>
-      </Col>
-      <Col md={3} className="mb-3">
-        <span className='inv-label'>Created:</span>
-        <span className='inv-value'>{" "}{ moment(invoice?.createdAt).format("DD / MMM / YY")}</span>
-      </Col>
-      <Col md={3} className="mb-3">
-        <span className='inv-label'>Round Off:</span>
-        <span className='inv-value mx-2'>
-          <input className='cur' type={"checkbox"}
-            disabled={invoice?.type=="Agent Invoice"?true:invoice?.type=="Agent Bill"?true:invoice?.approved=="1"?true:false} 
-            checked={invoice?.roundOff!="0"} 
-            onChange={roundOff} 
-          />
-        </span>
-      </Col>
-      <Col md={3} className="mb-3">
-        <span className='inv-label'>Approved:</span>
-        <span className='inv-value mx-2'>
-          <input className='cur' type={"checkbox"} checked={invoice?.approved!="0"} 
-            disabled={checkApprovability(invoice)}
-            onChange={approve}
-          />
-        </span>
-      </Col>
-    </Row>
-    <div style={{minHeight:250}}>
-      <div className='table-sm-1 mt-3' style={{maxHeight:300, overflowY:'auto', fontSize:11}}>
-      <Table className='tableFixHead' bordered>
-        <thead>
-          <tr className='table-heading-center'>
-            <th></th>
-            <th>Charge</th>
-            <th>Particular</th>
-            <th>Basis</th>
-            <th>PP/CC</th>
-            <th>Size</th>
-            <th style={{minWidth:60}}>DG</th>
-            <th>Qty</th>
-            <th>Currency</th>
-            <th>Amount</th>
-            <th>Disc</th>
-            <th>Tax</th>
-            <th>Tax</th>
-            <th>Net</th>
-            <th>Ex.</th>
-            <th>Total</th>  
-          </tr>
-        </thead>
-        <tbody style={{fontSize:11}}>
-          {records?.length>0 &&
-          <>
-            {records?.map((x, index) => {
-            return (
-            <tr key={index} className='f table-row-center-singleLine' style={{lineHeight:0.5}}>
-              <td>{index + 1}</td>
-              <td>{x.charge}</td>
-              <td>{x.particular}</td>
-              <td>{x.basis.slice(0, 8)}</td>
-              <td>{x.pp_cc}</td>
-              <td>{x.size_type}</td>
-              <td>{x.dg_type}</td>
-              <td>{x.qty}</td>
-              <td>{x.currency}</td>
-              <td>{x.amount}</td>
-              <td>{x.discount}</td>
-              <td>{x.tax_apply}</td>
-              <td>{x.tax_amount}</td>
-              <td>{x.net_amount}</td>
-              <td>{x.currency=="PKR"?"1.00":x.ex_rate}</td>
-              <td>{x.local_amount}</td>
-            </tr>
-            )})}
-            </>
-            }
-            {invoice!=null && <>
-              {invoice?.roundOff!="0" &&
-              <tr style={{lineHeight:0.5}}>
-                <td>{records.length+1}</td>
-                <td>ROFC</td>
-                <td>Round Off</td>
-                <td> - </td>
-                <td> - </td>
-                <td> - </td>
-                <td> - </td>
-                <td>1</td>
-                <td>PKR</td>
-                <td>{invoice?.roundOff?.slice(1)}</td>
-                <td> 0 </td>
-                <td style={{textAlign:'center'}}>No</td>
-                <td>0.00</td>
-                <td>{invoice?.roundOff?.slice(1)}</td>
-                <td>1.00</td>
-                <td>{invoice?.roundOff}</td>
-              </tr>
-              }
-            </>
-            }
-        </tbody>
-      </Table>
-      </div>
-    </div>
-    <Row>
-      <Col className='mx-2 pt-3' md={4}>
-          <h5>Note</h5>
-          <div style={{border:"1px solid silver"}}>
-            <TextArea rows={4} value={invoice?.note} onChange={(e)=>setInvoice({...invoice, note:e.target.value})} />
+    <div className='invoice-styles'>
+      {Object.keys(data).length>0 &&
+      <div className='fs-12' style={{maxHeight:660, overflowY:'auto', overflowX:'hidden'}}>
+        <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+          <div className='flex'>
+            <Popover content={PrintOptions} placement="bottom" title="Printing Options">
+              <div className='div-btn-custom text-center py-2 px-3'>
+                <b>Print Invoice</b>
+              </div>
+            </Popover>
+            <InvoiceEditor data={data} reload={reload} />
           </div>
-          <button className='btn-custom mt-3' onClick={updateNote} type='button'>Save</button>
-      </Col>
-      <Col md={4} className='mt-4'>
-          <b>Bank Details</b>
-          <div style={{border:"1px solid silver"}}>
-            <div style={{fontSize:12, lineHeight:0.8, whiteSpace:'pre-wrap', paddingBottom:10}}>
-              {bank==1?bankDetails.one:bank==2?bankDetails.two:bank==3?bankDetails.three:bankDetails.four}
+          <div className='div-btn-custom text-center py-2 px-3' onClick={routeToPayRec}> 
+            <b>Go to Payment/Receipt</b>
+          </div>
+        </div>
+        <Row className='py-3'>
+          <Col md={3} className="mb-3">
+            <div>
+              <span className='inv-label'>Invoice No#:</span>
+              <span className='inv-value'>{" "}{invoice?.invoice_No}</span>
             </div>
+          </Col>
+          <Col md={3} className="mb-3">
+            <div>
+              <span className='inv-label'>Party Name:</span>
+              <span className='inv-value'>{" "}{invoice?.party_Name}</span>
+            </div>
+          </Col>
+          <Col md={3} className="mb-3">
+            <div>
+              <span className='inv-label'>Pay Type:</span>
+              <span className='inv-value'>{" "}{invoice?.payType}</span>
+            </div>
+          </Col>
+          <Col md={3} className="mb-3">
+            <span className='inv-label'>Currency:</span>
+            {" "}
+            <Select
+              size='small'
+                value={invoice?.currency} onChange={(e)=>setInvoice({...invoice, currency:e})}
+                style={{ width: 80 }}
+                options={[
+                  {value: 'PKR', label: 'PKR'},
+                  {value: 'USD', label: 'USD'},
+                  {value: 'EUR', label: 'EUR'},
+                  {value: 'CHF', label: 'CHF'},
+                  {value: 'GBP', label: 'GBP'},
+                  {value: 'OMR', label: 'OMR'},
+                  { value:"AED", label:"AED"},
+                  { value:"BDT", label:"BDT"},  
+
+              ]}
+            />
+          </Col>
+          <Col md={3} className="mb-3">
+            <span className='inv-label'>Invoice/Bill:</span>
+            <span className='inv-value'>{" "}{invoice?.type}</span>
+          </Col>
+          <Col md={3} className="mb-3">
+            <span className='inv-label'>Created:</span>
+            <span className='inv-value'>{" "}{ moment(invoice?.createdAt).format("DD / MMM / YY")}</span>
+          </Col>
+          <Col md={3} className="mb-3">
+            <span className='inv-label'>Round Off:</span>
+            <span className='inv-value mx-2'>
+              <input className='cur' type={"checkbox"}
+                disabled={invoice?.type=="Agent Invoice"?true:invoice?.type=="Agent Bill"?true:invoice?.approved=="1"?true:false} 
+                checked={invoice?.roundOff!="0"} 
+                onChange={roundOff} 
+              />
+            </span>
+          </Col>
+          <Col md={3} className="mb-3">
+            <span className='inv-label'>Approved:</span>
+            <span className='inv-value mx-2'>
+              <input className='cur' type={"checkbox"} checked={invoice?.approved!="0"} 
+                disabled={checkApprovability(invoice)}
+                onChange={approve}
+              />
+            </span>
+          </Col>
+        </Row>
+        <div style={{minHeight:250}}>
+          <div className='table-sm-1 mt-3' style={{maxHeight:300, overflowY:'auto', fontSize:11}}>
+          <Table className='tableFixHead' bordered>
+            <thead>
+              <tr className='table-heading-center'>
+                <th></th>
+                <th>Charge</th>
+                <th>Particular</th>
+                <th>Basis</th>
+                <th>PP/CC</th>
+                <th>Size</th>
+                <th style={{minWidth:60}}>DG</th>
+                <th>Qty</th>
+                <th>Currency</th>
+                <th>Amount</th>
+                <th>Disc</th>
+                <th>Tax</th>
+                <th>Tax</th>
+                <th>Net</th>
+                <th>Ex.</th>
+                <th>Total</th>  
+              </tr>
+            </thead>
+            <tbody style={{fontSize:11}}>
+              {records?.length>0 &&
+              <>
+                {records?.map((x, index) => {
+                return (
+                <tr key={index} className='f table-row-center-singleLine' style={{lineHeight:0.5}}>
+                  <td>{index + 1}</td>
+                  <td>{x.charge}</td>
+                  <td>{x.particular}</td>
+                  <td>{x.basis.slice(0, 8)}</td>
+                  <td>{x.pp_cc}</td>
+                  <td>{x.size_type}</td>
+                  <td>{x.dg_type}</td>
+                  <td>{x.qty}</td>
+                  <td>{x.currency}</td>
+                  <td>{x.amount}</td>
+                  <td>{x.discount}</td>
+                  <td>{x.tax_apply}</td>
+                  <td>{x.tax_amount}</td>
+                  <td>{x.net_amount}</td>
+                  <td>{x.currency=="PKR"?"1.00":x.ex_rate}</td>
+                  <td>{x.local_amount}</td>
+                </tr>
+                )})}
+                </>
+                }
+                {invoice!=null && <>
+                  {invoice?.roundOff!="0" &&
+                  <tr style={{lineHeight:0.5}}>
+                    <td>{records.length+1}</td>
+                    <td>ROFC</td>
+                    <td>Round Off</td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td>1</td>
+                    <td>PKR</td>
+                    <td>{invoice?.roundOff?.slice(1)}</td>
+                    <td> 0 </td>
+                    <td style={{textAlign:'center'}}>No</td>
+                    <td>0.00</td>
+                    <td>{invoice?.roundOff?.slice(1)}</td>
+                    <td>1.00</td>
+                    <td>{invoice?.roundOff}</td>
+                  </tr>
+                  }
+                </>
+                }
+            </tbody>
+          </Table>
           </div>
-      </Col>
-      <Col className='mt-5 p-0' md={2}>
-          <Radio.Group onChange={(e)=>setBank(e.target.value)} value={bank}>
-            <Radio value={1}>BANK-A {"(ACS)"}</Radio>
-            <Radio value={4}>BANK-B {"(ACS)"}</Radio>
-            <Radio value={2}>BANK-C {"(SNS)"}</Radio>
-            <Radio value={3}>BANK-D {"(SNS)"}</Radio>
-          </Radio.Group>
-      </Col>
-    </Row>
-    <hr className='mb-1' />
-    <div>
-      <Row>
-        <Col md={6}>
-          {invoice?.currency!="PKR" && 
-          <>
-            <span className='inv-label mx-2'>Total Amount {`(${invoice?.currency})`}: </span>
+        </div>
+        <Row>
+          <Col className='mx-2 pt-3' md={4}>
+              <h5>Note</h5>
+              <div style={{border:"1px solid silver"}}>
+                <TextArea rows={4} value={invoice?.note} onChange={(e)=>setInvoice({...invoice, note:e.target.value})} />
+              </div>
+              <button className='btn-custom mt-3' onClick={updateNote} type='button'>Save</button>
+          </Col>
+          <Col md={4} className='mt-4'>
+              <b>Bank Details</b>
+              <div style={{border:"1px solid silver"}}>
+                <div style={{fontSize:12, lineHeight:0.8, whiteSpace:'pre-wrap', paddingBottom:10}}>
+                  {bank==1?bankDetails.one:bank==2?bankDetails.two:bank==3?bankDetails.three:bankDetails.four}
+                </div>
+              </div>
+          </Col>
+          <Col className='mt-5 p-0' md={2}>
+              <Radio.Group onChange={(e)=>setBank(e.target.value)} value={bank}>
+                <Radio value={1}>BANK-A {"(ACS)"}</Radio>
+                <Radio value={4}>BANK-B {"(ACS)"}</Radio>
+                <Radio value={2}>BANK-C {"(SNS)"}</Radio>
+                <Radio value={3}>BANK-D {"(SNS)"}</Radio>
+              </Radio.Group>
+          </Col>
+        </Row>
+        <hr className='mb-1' />
+        <Row>
+          <Col md={6}>
+            {invoice?.currency!="PKR" && 
+            <>
+              <span className='inv-label mx-2'>Total Amount {`(${invoice?.currency})`}: </span>
+              <span className='inv-value charges-box'> 
+                {" "}
+                {commas((parseFloat(invoice?.total)/parseFloat(invoice?.ex_rate)).toFixed(2))}
+              </span>
+              <span className='mx-4'></span>
+            </>
+            }
+            <span className='inv-label mx-2'>Total Amount {"(Local)"}:</span>
             <span className='inv-value charges-box'> 
               {" "}
-              {commas((parseFloat(invoice?.total)/parseFloat(invoice?.ex_rate)).toFixed(2))}
+              {commas((parseFloat(invoice?.total) + parseFloat(invoice?.roundOff)).toFixed(2))}
             </span>
-            <span className='mx-4'></span>
-          </>
-          }
-          <span className='inv-label mx-2'>Total Amount {"(Local)"}:</span>
-          <span className='inv-value charges-box'> 
-            {" "}
-            {commas((parseFloat(invoice?.total) + parseFloat(invoice?.roundOff)).toFixed(2))}
-          </span>
-        </Col>
-      </Row>
-    </div>
-    </div>
-    }
-    {/* Printing Component */}
-    <div 
-      style={{
-        display:"none"
-      }}
-    >
-      <div ref={(response)=>(inputRef=response)}>
-        {invoice && companyId !== "2" ?
-          <InvoicePrint 
-            logo={logo} 
-            compLogo={compLogo} 
-            records={records} 
-            bank={bank} 
-            bankDetails={bankDetails} 
-            invoice={invoice} 
-            calculateTotal={calculateTotal} 
-          /> 
-        :
-        <CLPrint records={records} invoice={invoice} />
-        }
+          </Col>
+        </Row>
       </div>
-    </div>
+      }
+      {/* Printing Component */}
+      <div 
+        style={{
+          display:"none"
+        }}
+      >
+        <div ref={(response)=>(inputRef=response)}>
+          {invoice && companyId !== "2" ?
+            <InvoicePrint 
+              logo={logo} 
+              compLogo={compLogo} 
+              records={records} 
+              bank={bank} 
+              bankDetails={bankDetails} 
+              invoice={invoice} 
+              calculateTotal={calculateTotal} 
+            /> 
+          :
+          <CLPrint records={records} invoice={invoice} />
+          }
+        </div>
+      </div>
     </div>
   </>
 )}

@@ -216,11 +216,6 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
           <ChargesComp state={state} dispatch={dispatch} type={type} allValues={allValues} />
         </Tabs.TabPane>
       }
-      {/* {state.edit &&
-        <Tabs.TabPane tab="Charge" key="8">
-          <Charges state={state} dispatch={dispatch} type={type} allValues={allValues} />
-        </Tabs.TabPane>
-      } */}
       {(state.selectedInvoice!='') &&
         <Tabs.TabPane tab="Invoice / Bills" key="5">
           <Invoice state={state} dispatch={dispatch} companyId={companyId} />
@@ -238,7 +233,7 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
       }
       </Tabs>
       {(state.tabState=="1"||state.tabState=="2"||state.tabState=="3") &&
-      <>
+      <div className='flex'>
         <button type="submit" disabled={state.load?true:false} className='btn-custom mt-3'>
           {state.load?<Spinner animation="border" size='sm' className='mx-3' />:'Save Job'}
         </button>
@@ -261,7 +256,7 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
           }}
         >Delete Job {allValues.approved}
         </button>
-      </>
+      </div>
       }
     </form>
     {state.load && <FullScreenLoader/>}
