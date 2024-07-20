@@ -155,6 +155,9 @@ const TrialBalance = () => {
           options={[
             { value:'6- Columns Simplified View', label:'6- Columns Simplified View' },
             { value:'2- Columns Simplified View', label:'2- Columns Simplified View' },
+            { value:'Debitors List', label:'Debitors List' },
+            { value:'Creditors List', label:'Creditors List' },
+
            
           ]}
           value={reportType}

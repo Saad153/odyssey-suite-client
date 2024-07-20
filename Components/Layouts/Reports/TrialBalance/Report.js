@@ -8,7 +8,6 @@ import Pagination from "/Components/Shared/Pagination";
 const Report = ({query, result}) => {
   // console.log("query",query)
   const reportView = query.reportType;
-
     const [ records, setRecords ] = useState([]);
     const [ total, setTotal ] = useState({
       opDebit:0,
@@ -140,6 +139,7 @@ const Report = ({query, result}) => {
                 </tr>
                 <tr className="custom-width">
                   <th className="class-1">Account Title</th>
+           
                   {reportView =="6- Columns Simplified View"? <th className="class-1">Debit </th> :null}
                       {reportView =="6- Columns Simplified View"?  <th className="class-1">Credit</th> :null}
                       {reportView =="6- Columns Simplified View"?  <th className="class-1">Debit </th>:null}
@@ -149,7 +149,10 @@ const Report = ({query, result}) => {
                 </tr>
               </thead>
               <tbody>
-                {currentRecords.map((x, i) => {
+              {reportView =="6- Columns Simplified View" || reportView =="2- Columns Simplified View" && <>
+                {                 
+                currentRecords.map((x, i) => {
+             
                   if(x.type=="parent"){
                     return(
                     <tr key={i}>
@@ -169,15 +172,104 @@ const Report = ({query, result}) => {
                       </tr>
                     )
                 }})}
+                </>
+              }
+                {
+                  reportView =="Debitors List" && <>
+                   {currentRecords.filter(x => x.clDebit !== 0).map((x, i) => {
+                    console.log("x",x)
+    if (x.type === "parent") {
+        return (
+            <tr key={i}>
+                <td colSpan={7}><b>{x.title}</b></td>
+            </tr>
+        );
+    } else {
+        return (
+            <tr key={i}>
+              <td className="blue-txt fs-12 px-5">{x.title}</td> 
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.opDebit)}</td> : null}
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.opCredit)}</td> : null}
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.trDebit)}</td> : null}
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.trCredit)}</td> : null}
+                <td className="fs-12">{commas(x.clDebit)}</td>
+                <td className="fs-12">{commas(x.clCredit)}</td> 
+            </tr>
+        );
+    }
+})}
+                  
+                  </>
+                }
+                               {
+                  reportView =="Creditors List" && <>
+                   {currentRecords.filter(x => x.clCredit !== 0).map((x, i) => {
+                   
+    if (x.type === "parent") {
+        return (
+            <tr key={i}>
+                <td colSpan={7}><b>{x.title}</b></td>
+            </tr>
+        );
+    } else {
+        return (
+            <tr key={i}>
+              <td className="blue-txt fs-12 px-5">{x.title}</td> 
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.opDebit)}</td> : null}
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.opCredit)}</td> : null}
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.trDebit)}</td> : null}
+                {reportView === "6- Columns Simplified View" ? <td className="fs-12">{commas(x.trCredit)}</td> : null}
+                <td className="fs-12">{commas(x.clDebit)}</td>
+                <td className="fs-12">{commas(x.clCredit)}</td> 
+            </tr>
+        );
+    }
+})}
+                  
+                  </>
+                }
+                { reportView =="Debitors List" && <> 
+                  <tr>
+                      <td className='text-end'><b>Grand Total:</b></td>
+                      {reportView =="6- Columns Simplified View"?     <td className='fs-12'>{commas(total.opDebit)}</td>:null}
+                      {reportView =="6- Columns Simplified View"?    <td className='fs-12'>{commas(total.opCredit)}</td>:null}
+                      {reportView =="6- Columns Simplified View"?   <td className='fs-12'>{commas(total.trDebit)}</td>:null}
+                      {reportView =="6- Columns Simplified View"?   <td className='fs-12'>{commas(total.trCredit)}</td>:null}
+                      <td className='fs-12'>{commas(total.clDebit)}</td>
+                      <td className='fs-12'>{commas(total.clCredit)}</td>
+                    </tr>
+                </>
+                     
+                }
+                 { reportView =="Creditors List" && <> 
+                  <tr>
+                      <td className='text-end'><b>Grand Total:</b></td>
+                      {reportView =="6- Columns Simplified View"?     <td className='fs-12'>{commas(total.opDebit)}</td>:null}
+                      {reportView =="6- Columns Simplified View"?    <td className='fs-12'>{commas(total.opCredit)}</td>:null}
+                      {reportView =="6- Columns Simplified View"?   <td className='fs-12'>{commas(total.trDebit)}</td>:null}
+                      {reportView =="6- Columns Simplified View"?   <td className='fs-12'>{commas(total.trCredit)}</td>:null}
+                      <td className='fs-12'>{commas(total.clDebit)}</td>
+                      <td className='fs-12'>{commas(total.clCredit)}</td>
+                    </tr>
+                </>
+                     
+                }
+              
+              { reportView == "6- Columns Simplified View" || reportView == "2- Columns Simplified View" &&
+              <>
                 <tr>
-                  <td className='text-end'><b>Grand Total:</b></td>
-                  {reportView =="6- Columns Simplified View"?     <td className='fs-12'>{commas(total.opDebit)}</td>:null}
-                  {reportView =="6- Columns Simplified View"?    <td className='fs-12'>{commas(total.opCredit)}</td>:null}
-                  {reportView =="6- Columns Simplified View"?   <td className='fs-12'>{commas(total.trDebit)}</td>:null}
-                  {reportView =="6- Columns Simplified View"?   <td className='fs-12'>{commas(total.trCredit)}</td>:null}
-                  <td className='fs-12'>{commas(total.clDebit)}</td>
-                  <td className='fs-12'>{commas(total.clCredit)}</td>
-                </tr>
+                    <td className='text-end'><b>Grand Total:</b></td>
+                    {reportView == "6- Columns Simplified View" ? <td className='fs-12'>{commas(total.opDebit)}</td> : null}
+                    {reportView == "6- Columns Simplified View" ? <td className='fs-12'>{commas(total.opCredit)}</td> : null}
+                    {reportView == "6- Columns Simplified View" ? <td className='fs-12'>{commas(total.trDebit)}</td> : null}
+                    {reportView == "6- Columns Simplified View" ? <td className='fs-12'>{commas(total.trCredit)}</td> : null}
+                    <td className='fs-12'>{commas(total.clDebit)}</td>
+                    <td className='fs-12'>{commas(total.clCredit)}</td>
+              </tr> 
+              </>
+              }
+                  
+               
               </tbody>
             </Table>
           </div>
