@@ -26,15 +26,15 @@ export default function exportExcelFile(data, columns){
 
     const promise = Promise.all(
         data.map(async (product) => {
+            const { SE_Job, ...restProduct } = product;
+            const obj = {...SE_Job, ...restProduct};
+            // console.log("obj",obj)
             sheet.addRow({
-                ...product
+               ...obj
             });
         })
     );
-    // sheet.getCell('A2').font = {
-    //     size: 16,
-    //     bold: true,
-    // }
+
 
     promise.then(() => {
         workbook.xlsx.writeBuffer().then(function (data) {
