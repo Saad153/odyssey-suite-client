@@ -13,7 +13,7 @@ import { saveHeads, calculateChargeHeadsTotal, makeInvoice, getHeadsNew } from "
 import { v4 as uuidv4 } from 'uuid';
 
 const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, remove, control, register, companyId, operationType, allValues, chargesData}) => {
-  
+
   const { permissions } = state;
   const permissionAssign = (perm, x) => x.Invoice?.approved=="1"? true : false;
 

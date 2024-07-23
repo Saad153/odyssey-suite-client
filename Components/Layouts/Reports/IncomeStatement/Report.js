@@ -61,9 +61,48 @@ const Report = ({query, result}) => {
         }
       })
     })
-    makeTotal(temp)
-    setRecords(temp)
+
+    let listWithTotals = [];
+    let parentCount = 0;
+    let incomeTotal = {credit:0, debit:0};
+    let expenseTotal = {credit:0, debit:0};
+    temp.forEach((x, i)=>{
+      
+      if(x.type == "parent" & parentCount == 0){
+        parentCount = parentCount + 1
+        listWithTotals.push(x)
+      } else if (x.type != "parent" && parentCount==1){
+        incomeTotal.credit = incomeTotal.credit + x.credit  
+        incomeTotal.debit = incomeTotal.debit + x.debit
+        listWithTotals.push(x)
+      } else if(x.type == "parent" & parentCount == 1){
+        parentCount = parentCount + 1
+        listWithTotals.push({
+          type:'total',
+          credit:incomeTotal.credit,
+          debit:incomeTotal.debit,
+        })
+        listWithTotals.push(x)
+      } else {
+        expenseTotal.credit = expenseTotal.credit + x.credit  
+        expenseTotal.debit = expenseTotal.debit + x.debit
+        listWithTotals.push(x)
+        if(i+1==temp.length){
+          listWithTotals.push({
+            type:'total',
+            credit:expenseTotal.credit,
+            debit:expenseTotal.debit,
+          })
+        }
+      }
+    })
+    // console.log(expenseTotal)
+    // console.log(incomeTotal)
+    
     // monthWise(result)
+    makeTotal(temp)
+    setRecords(listWithTotals)
+    console.log(listWithTotals)
   }, []);
 
   const checkMonth = (date) => {
@@ -161,6 +200,15 @@ const Report = ({query, result}) => {
                       <td colSpan={7}><b>{x.title}</b></td>
                     </tr>
                     )
+                  }else if(x.type=="total"){
+                    return(
+                    <tr key={i}>
+                      <td></td>
+                      <td colSpan={1} className='text-end'><b>Total</b></td>
+                      <td  className="fs-12"><b>{commas(x.debit)} </b></td>
+                      <td  className="fs-12"><b>{commas(x.credit)}</b></td>
+                    </tr>
+                    )
                   } else {
                     return (
                       <tr key={i}>
@@ -174,8 +222,8 @@ const Report = ({query, result}) => {
                 <tr>
                   <td></td>
                   <td className='text-end'><b>Profit & Loss {"( Total )"}:</b></td>
-                  <td className='fs-12'>{total.debit-total.credit>0?commas(total.debit-total.credit):'0.00'}</td>
-                  <td className='fs-12'>{total.debit-total.credit<0?commas(total.debit-total.credit*-1):'0.00'}</td>
+                  <td className='fs-12'><b>{commas(total.debit) || '0.00'}</b></td>
+                  <td className='fs-12'><b>{commas(total.credit>=0? total.credit : total.credit*-1) || '0.00'}</b></td>
                 </tr>
               </tbody>
             </Table>
