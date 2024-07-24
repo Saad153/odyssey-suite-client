@@ -20,19 +20,15 @@ import { Tabs } from 'antd';
     }
   }, [sessionData]);
 
-  const onChange = (key) => {
-    console.log(key);
-  };
+  const onChange = (key) => { };
 
   const items = [
     {
       key: '1',
-      label: access?.includes("accounts") ?'Notifications':'Notes',
+      label: 'Notifications / Notes',
       children: <div>
-      {access?.includes("accounts")? 
-        <Notifications dispatch={dispatch} incrementTab={incrementTab} Router={Router} moment={moment} />:
+        <Notifications dispatch={dispatch} incrementTab={incrementTab} Router={Router} moment={moment} />
         <Notes dispatch={dispatch} incrementTab={incrementTab} Router={Router} moment={moment} />
-      }
     </div>,
     },
     {
