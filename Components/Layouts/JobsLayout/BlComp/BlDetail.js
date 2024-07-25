@@ -217,7 +217,8 @@ return(
         <Col md={5}>
         <div>Measurement</div>
         <div className='brdr-grey mb-2'>
-          <EditorContent editor={Editor('measurementContent')} style={partyDetail} />
+          {state.Container_Infos[0]?.cbm }
+          {/* <EditorContent editor={Editor('measurementContent')} style={partyDetail} /> */}
         </div>
         </Col>
         <Col md={7} style={{paddingRight:20}}>
