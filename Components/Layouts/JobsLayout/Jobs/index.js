@@ -21,7 +21,7 @@ const SeJob = ({id, type}) => {
   }, [dataSuccess, isSuccess])
   
   const getData = async() => {
-    let tempPerms = await JSON.parse(Cookies.get('permissions'));
+    // let tempPerms = await JSON.parse(Cookies.get('permissions'));
     if(dataSuccess && newdata) {
       dispatch({type:'set',
         payload:{
@@ -29,7 +29,7 @@ const SeJob = ({id, type}) => {
           selectedRecord:dataSuccess?newdata?.result:{},
           fetched:true,
           edit:id=="new"?false:true,
-          permissions:tempPerms
+          // permissions:tempPerms
         }
       })
     }
