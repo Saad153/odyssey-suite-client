@@ -24,7 +24,7 @@ const Sheet = ({state, overflow, fontSize}) => {
         <Table className='tableFixHead vertical' bordered>
         <thead>
             <tr className='fs-10 text-center'>
-                {/* <th>#</th> */}
+                <th>#</th>
                 <th>Job No</th>
                 <th style={{width:45}}>Date</th>
                 <th style={{width:200}}>Client</th>
@@ -46,7 +46,7 @@ const Sheet = ({state, overflow, fontSize}) => {
         {recordState.length>0 && recordState?.map((x,index)=>{
         return (
         <tr key={index} className='f fs-10 text-center'>
-            {/* <td>{index + 1}</td> */}
+            <td>{index + 1}</td>
             <td className='row-hov blue-txt'
                 onClick={()=>{
                     let type = x.operation;

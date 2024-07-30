@@ -154,26 +154,47 @@ const initialState = {
   ];
 
   const excelDataFormatter = (records, set) => {
+    console.log("records", records)
     let tempData = [
-      ["Job No", "Date", "HBL / HAWB", "Client", "SubType", "Shipper", "Local Agent" ,"F. Dest", "Weight", "Revenue", "Cost","P/L", "Gain/Loss", "After Gain/Loss"],
+      ["Sr","Job No","OperationType","VesselName", "Date", "HBL / HAWB", "MBL / MAWB", "Client", "SubType", "Shipper","Shipper/Consignee","Sales Rep","OverSeas Agent","Shipping Line", "Local Agent" ,"F. Dest","Teu", "Weight", "Revenue", "Cost","P/L", "Gain/Loss", "After Gain/Loss","CompanyName","Commodity","Packages"],
     ];
     for (let index = 0; index < records.length; index++) {
+      let companyName = 
+      records[index].companyId === "1" ? "Sea Net Shipping" :
+      records[index].companyId === "2" ? "Cargo Linkers" :
+      records[index].companyId === "3" ? "Air Cargo Service" :
+      records[index].companyId;
       let data = [
+        index+1,
         records[index].jobNo,
+        records[index].operation,
+        records[index].local_vendor?.name,
         records[index].createdAt ? records[index].createdAt.slice(0, 10) : "",
         records[index].Bl? records[index].Bl.hbl : "",
+        records[index].Bl? records[index].Bl.mbl : "",
         records[index].Client.name ? records[index].Client.name : "",
         records[index].subType? records[index].subType: "" ,
         records[index].shipper?.name ?  records[index].shipper.name  :"",
+        records[index].consignee?.name ?  records[index].consignee.name  :"",
+        records[index].sales_representator?.name ?  records[index].sales_representator.name  :"",
+        records[index].shipping_line?.name ?  records[index].shipping_line.name  :"",
+
+        records[index].overseas_agent?.name ?  records[index].overseas_agent.name  :"",
+
         records[index].local_vendor?.name ?  records[index].local_vendor.name  :"",
         records[index].fd ? records[index].fd : "",
+        records[index].SE_Equipments ?records[index].SE_Equipments.teu : "",
         records[index].weight ?records[index].weight : "",
         records[index].revenue ? records[index].revenue.toFixed(2) : "",
         records[index].cost ? records[index].cost.toFixed(2) : "",
         records[index].actual ? records[index].actual.toFixed(2) : "",
         records[index].gainLoss ? records[index].gainLoss.toFixed(2) : "",
         records[index].after ? records[index].after.toFixed(2) : "",
-      ];
+        companyName,
+        records[index].commodity?.name?  records[index].commodity.name  :"",
+        records[index].pcs? records[index].pcs :"",
+
+            ];
       tempData.push(data);
     }
     set({
