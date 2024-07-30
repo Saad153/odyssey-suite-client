@@ -18,6 +18,7 @@ const TrialBalance = () => {
   const [to, setTo] = useState(moment().format("YYYY-MM-DD"));
   const [currency, setCurrency] = useState("PKR");
   const [reportType, setReportType] = useState("6- Columns Simplified View");
+  const [options, setOptions ] = useState("showall");
 
   const dispatch = useDispatch()
 
@@ -27,7 +28,8 @@ const TrialBalance = () => {
     company,
     currency,
     debitAccount,
-    reportType
+    reportType,
+    options
   };
 
   const filterValues = useSelector(state => state.filterValues);
@@ -42,7 +44,9 @@ const TrialBalance = () => {
       setCompany(values.company);
       setCurrency(values.currency);
       setDebitAccount(values.debitAccount);
-      setReportType(values.reportType)
+      setReportType(values.reportType);
+      setOptions(values.options)
+
     }
     
 
@@ -66,11 +70,11 @@ const TrialBalance = () => {
     console.log("here")
     console.log(debitAccount)
     // Router.push("/reports/trialBalance/report")
-    Router.push({ pathname: `/reports/trialBalance/report`, query: { from: from, to: to, company: company, reportType: reportType, currency: currency, accountid:debitAccount } });
+    Router.push({ pathname: `/reports/trialBalance/report`, query: { from: from, to: to, company: company, reportType: reportType, currency: currency, accountid:debitAccount, options:options } });
     dispatch(incrementTab({
       "label": "Trial Balance Report",
       "key": "5-10",
-      "id": `?from=${from}&to=${to}&company=${company}&reportType=${reportType}&currency=${currency}&accountid=${debitAccount}`
+      "id": `?from=${from}&to=${to}&company=${company}&reportType=${reportType}&currency=${currency}&accountid=${debitAccount}&options=${options}`
     }))
 
     dispatch(setFilterValues({
@@ -165,7 +169,21 @@ const TrialBalance = () => {
           filterSort={(a, b) => (a?.label ?? '').toLowerCase().localeCompare((b?.label ?? '').toLowerCase())}
         />
       </Col>
+
+     
     </Row>
+    <hr/>
+    <Row>
+    <Col md={4} style={{border:'1px solid silver', marginLeft:12}} className='py-1'>
+            Options
+            <br/>            <br/>
+
+            <Radio.Group onChange={(e)=>setOptions(e.target.value)} value={options}>
+                <Radio value={"exclude"}>Exclude 0 </Radio>
+                <Radio value={"showall"}>Show All</Radio>
+            </Radio.Group>
+          </Col>
+          </Row>
     <button className='btn-custom mt-3 px-3' onClick={handleSubmit}>
       Go
     </button>

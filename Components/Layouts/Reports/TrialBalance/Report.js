@@ -8,6 +8,8 @@ import Pagination from "/Components/Shared/Pagination";
 const Report = ({query, result}) => {
   // console.log("query",query)
   const reportView = query.reportType;
+  const option = query.options;
+  // console.log(option)
     const [ records, setRecords ] = useState([]);
     const [ total, setTotal ] = useState({
       opDebit:0,
@@ -149,10 +151,13 @@ const Report = ({query, result}) => {
                 </tr>
               </thead>
               <tbody>
-              {reportView =="6- Columns Simplified View" || reportView =="2- Columns Simplified View" && <>
+                {/* exclude 0 */}
+              {reportView =="6- Columns Simplified View" && option == "exclude" &&<>
                 {                 
-                currentRecords.map((x, i) => {
-             
+                
+                currentRecords.filter(x => x.clDebit !== 0 && x.clCredit !== 0)
+                
+                .map((x, i) => {
                   if(x.type=="parent"){
                     return(
                     <tr key={i}>
@@ -160,7 +165,8 @@ const Report = ({query, result}) => {
                     </tr>
                     )
                   } else {
-                    return (
+                  return (
+
                       <tr key={i}>
                         <td className="blue-txt fs-12 px-5">{x.title}</td>
                         {reportView =="6- Columns Simplified View"?   <td className="fs-12">{commas(x.opDebit)}</td> :null}
@@ -174,6 +180,86 @@ const Report = ({query, result}) => {
                 }})}
                 </>
               }
+                {/* showall view */}
+              {reportView =="6- Columns Simplified View"&& <>
+                {                 
+                currentRecords.map((x, i) => {
+             
+                  if(x.type=="parent"){
+                    return(
+                    <tr key={i}>
+                      <td colSpan={7}><b>{x.title}</b></td>
+                    </tr>
+                    )
+                  } else {
+                    return (
+                      <tr key={i}>
+                        <td className="blue-txt fs-12 px-5">{x.title}</td>
+                        {reportView =="6- Columns Simplified View" && <td className="fs-12">{commas(x.opDebit)}</td> }
+                        {reportView =="6- Columns Simplified View" && <td className="fs-12">{commas(x.opCredit)}</td>}
+                        {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trDebit)}</td>}
+                        {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trCredit)}</td>}
+                        <td className="fs-12">{commas(x.clDebit)}</td>
+                        <td className="fs-12">{commas(x.clCredit)}</td>
+                      </tr>
+                    )
+                }})}
+                </>
+              }
+
+                  {/* 2-column */}
+                {/* exclude 0 */}
+                {reportView =="2- Columns Simplified View" && option == "exclude" &&<>
+                {                 
+                currentRecords.filter(x => x.clDebit !== 0 && x.clCredit !== 0)
+                .map((x, i) => {
+                  console.log("executed")
+                  if(x.type=="parent"){
+                    return(
+                    <tr key={i}>
+                      {/* <td colSpan={7}><b>{x.title}</b></td> */}
+                    </tr>
+                    )
+                  } else {
+                  return (
+
+                      <tr key={i}>
+                        <td className="blue-txt fs-12 px-5">{x.title}</td>
+                       
+                        <td className="fs-12">{commas(x.clDebit)}</td>
+                        <td className="fs-12">{commas(x.clCredit)}</td>
+                      </tr>
+                    )
+                }})}
+                </>
+              }
+                {/* showall view */}
+              {reportView =="2- Columns Simplified View"&& <>
+                {                 
+                currentRecords.map((x, i) => {
+             
+                  if(x.type=="parent"){
+                    return(
+                    <tr key={i}>
+                      <td colSpan={7}><b>{x.title}</b></td>
+                    </tr>
+                    )
+                  } else {
+                    return (
+                      <tr key={i}>
+                        <td className="blue-txt fs-12 px-5">{x.title}</td>
+                        <td className="fs-12">{commas(x.clDebit)}</td>
+                        <td className="fs-12">{commas(x.clCredit)}</td>
+                      </tr>
+                    )
+                }})}
+                </>
+              }
+
+                              
+
+                  {/* 2-column */}
+
                 {
                   reportView =="Debitors List" && <>
                    {currentRecords.filter(x => x.clDebit !== 0).map((x, i) => {
@@ -255,7 +341,7 @@ const Report = ({query, result}) => {
                      
                 }
               
-              { reportView == "6- Columns Simplified View" || reportView == "2- Columns Simplified View" &&
+              {/* { reportView == "6- Columns Simplified View" || reportView == "2- Columns Simplified View" &&
               <>
                 <tr>
                     <td className='text-end'><b>Grand Total:</b></td>
@@ -267,7 +353,7 @@ const Report = ({query, result}) => {
                     <td className='fs-12'>{commas(total.clCredit)}</td>
               </tr> 
               </>
-              }
+              } */}
                   
                
               </tbody>

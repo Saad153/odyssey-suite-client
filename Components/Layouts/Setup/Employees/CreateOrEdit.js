@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import Vouchers from "./Vouchers";
 import { getJobValues } from '/apis/jobs';
 import { useQuery } from '@tanstack/react-query';
+// import { useFormikContext } from 'formik';
 
 const SignupSchema = Yup.object().shape({
   empName: Yup.string().min(3, 'Too Short!').max(45, 'Too Long!').required('Required'),
@@ -26,7 +27,10 @@ const MyField = () => {
   const [req, setReq] = useState(false);
   const [managers, setManagers] = useState([]);
   const { values: { selectDesignation }, touched, setFieldValue } = useFormikContext();
-  useEffect(() => { getManagers() },[])
+
+  console.log("selectDesignation",selectDesignation)
+  useEffect(() => { getManagers() 
+  },[])
   const getManagers = async() => {
     await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_ALL_MANAGERS).then((x)=>{
       if(x.data.status=='success'){ setManagers(x.data.result) }
@@ -51,11 +55,15 @@ const MyField = () => {
 
 const CreateOrEdit = ({appendClient, edit, setVisible, setEdit, selectedEmployee, updateUser, company}) => {
 
+  // console.log("selectedEmployee",selectedEmployee.Access_Levels[0].access_name)
   const formikRef = useRef(null);
   const { refetch } = useQuery({
     queryKey:['values'],
     queryFn:getJobValues
   });
+  const [selectedAccessLevels, setSelectedAccessLevels] = useState([]);
+  const [isAdminSelected, setIsAdminSelected] = useState(false);
+// New state to manage disabled status
 
   const [values, setValues] = useState({
     selectDesignation:'', selectManager: '', //selectCompany:'',
@@ -118,7 +126,38 @@ const CreateOrEdit = ({appendClient, edit, setVisible, setEdit, selectedEmployee
       setLoad(false);
     })
   }
+  useEffect(() => {
 
+    const accessLevels = selectedEmployee.Access_Levels[0].access_name;
+    if (accessLevels == "admin") {
+        setIsAdminSelected(true)
+        setSelectedAccessLevels(['admin'])
+ 
+ 
+    }
+
+  }, []);
+
+
+  const handleAccessLevelChange = (value) => {
+    const admin = value.includes("admin")
+    if(admin){
+      setSelectedAccessLevels([]);
+      console.log("admin",admin)
+      console.log("selected level",selectedAccessLevels)
+      setSelectedAccessLevels(admin)
+      console.log("selected level21",selectedAccessLevels)
+    }
+
+     if(value == "admin"){
+      setIsAdminSelected(true)
+    }else{
+      setIsAdminSelected(false)
+
+    }
+  };
+
+  // console.log(isAdminSelected)
 return( 
   <div className='employee-styles'>
   <Formik innerRef={formikRef} validateOnChange={false} initialValues={values} validationSchema={SignupSchema} enableReinitialize
@@ -268,13 +307,42 @@ return(
         <h5 className="mt-3">Define Access <UnlockOutlined style={{position:'relative', bottom:5}} /></h5>
         <Form.Item name="accessLevels" hasFeedback={true} showValidateSuccess={true}>
           <span>Provide Access.</span>
-          <Select name="accessLevels" style={{ width: "100%" }} placeholder="Provide Access" mode="multiple">
-            <Select.Option value={'admin'}>Admin</Select.Option>
-            <Select.Option value={'accounts'}>Accounts</Select.Option>
-            <Select.Option value={'setup'}>Setup</Select.Option>
-            <Select.Option value={'se'}>SEA Operations</Select.Option>
-            <Select.Option value={'ae'}>AIR Operations</Select.Option>
-          </Select>
+          <Select 
+  name="accessLevels" 
+  style={{ width: "100%" }} 
+  placeholder="Provide Access" 
+  mode="multiple" 
+  onChange={handleAccessLevelChange}
+>
+  <Select.Option value={'ExSea'} disabled={isAdminSelected}>EX Sea Operations</Select.Option>
+  <Select.Option value={'ImSea'} disabled={isAdminSelected}>IM Sea Operations</Select.Option>
+  <Select.Option value={'ExAir'} disabled={isAdminSelected}>EX AIR Operations</Select.Option>
+  <Select.Option value={'ImAir'} disabled={isAdminSelected}>IM AIR Operations</Select.Option>
+  <Select.Option value={'Employees'} disabled={isAdminSelected}>Employees</Select.Option>
+  <Select.Option value={'ClientList'} disabled={isAdminSelected}>Client List</Select.Option>
+  <Select.Option value={'VendorList'} disabled={isAdminSelected}>Vendor List</Select.Option>
+  <Select.Option value={'NonGLParties'} disabled={isAdminSelected}>Non-GL Parties</Select.Option>
+  <Select.Option value={'Commodity'} disabled={isAdminSelected}>Commodity</Select.Option>
+  <Select.Option value={'Voyage'} disabled={isAdminSelected}>Voyage</Select.Option>
+  <Select.Option value={'Charges'} disabled={isAdminSelected}>Charges</Select.Option>
+  <Select.Option value={'ChartOfAccount'} disabled={isAdminSelected}>Chart of Account</Select.Option>
+  <Select.Option value={'Invoice/Bills'} disabled={isAdminSelected}>Invoice</Select.Option>
+  <Select.Option value={'Payment/Reciept'} disabled={isAdminSelected}>Payment/Reciept</Select.Option>
+  <Select.Option value={'Voucher'} disabled={isAdminSelected}>Voucher</Select.Option>
+  <Select.Option value={'VoucherList'} disabled={isAdminSelected}>Voucher List</Select.Option>
+  <Select.Option value={'OfficeVoucherList'} disabled={isAdminSelected}>Office Voucher List</Select.Option>
+  <Select.Option value={'OpeningBalances'} disabled={isAdminSelected}>Opening Balances</Select.Option>
+  <Select.Option value={'OpeningInvoises'} disabled={isAdminSelected}>Opening Invoices</Select.Option>
+  <Select.Option value={'JobBalancing'} disabled={isAdminSelected}>Job Balancing</Select.Option>
+  <Select.Option value={'AccountActivity'} disabled={isAdminSelected}>Account Activity</Select.Option>
+  <Select.Option value={'BalanceSheet'} disabled={isAdminSelected}>Balance Sheet</Select.Option>
+  <Select.Option value={'JobProfit/Loss'} disabled={isAdminSelected}>Job Profit/Loss</Select.Option>
+  <Select.Option value={'Ledger'} disabled={isAdminSelected}>Ledger</Select.Option>
+  <Select.Option value={'AgentInvBalance'} disabled={isAdminSelected}>Agent Inv Balance</Select.Option>
+  <Select.Option value={'TrialBalance'} disabled={isAdminSelected}>Trial Balance</Select.Option>
+  <Select.Option value={'IncomeStatement'} disabled={isAdminSelected}>Income Statement</Select.Option>
+  <Select.Option value={'admin'}>Admin</Select.Option>
+</Select>
         </Form.Item>
         </Col>
         <div className='my-2' style={{backgroundColor:'silver', height:1}}></div>
