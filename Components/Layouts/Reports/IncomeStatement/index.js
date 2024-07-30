@@ -17,6 +17,7 @@ const IncomeStatement = () => {
   const [from, setFrom] = useState(moment("2023-07-01").format("YYYY-MM-DD"));
   const [to, setTo] = useState(moment().format("YYYY-MM-DD"));
   const [currency, setCurrency] = useState("PKR");
+  const [accountLevel, setAccountLevel] = useState("6");
 
   const dispatch = useDispatch()
 
@@ -25,6 +26,7 @@ const IncomeStatement = () => {
     to,
     company,
     debitAccount,
+    accountLevel
   }
 
   const filterValues = useSelector(state => state.filterValues);
@@ -39,6 +41,7 @@ const IncomeStatement = () => {
       setTo(values.to);
       setCompany(values.company);
       setDebitAccount(values.debitAccount);
+      setAccountLevel(values.accountLevel);
     }
   }, [filters]);
 
@@ -58,12 +61,12 @@ const IncomeStatement = () => {
   const handleSubmit = async () => {
     Router.push({ 
       pathname: `/reports/incomeStatement/report`, 
-      query: { from: from, to: to, company: company, currency: currency } 
+      query: { from: from, to: to, company: company, currency: currency, accountLevel:accountLevel } 
     });
     dispatch(incrementTab({
       "label": "Income Statement",
       "key": "5-12",
-      "id": `?from=${from}&to=${to}&company=${company}&currency=${currency}`
+      "id": `?from=${from}&to=${to}&company=${company}&currency=${currency}&accountLevel=${accountLevel}`
     }))
   }
 
@@ -109,7 +112,25 @@ const IncomeStatement = () => {
             <Radio value={"BDT"}>BDT</Radio>
           </Radio.Group>
         </Col>
-        <Col md={12}></Col>
+        <Col md={4}>
+        <div>Account Level</div>
+      <Select
+          showSearch
+          style={{ width: '100%' }}
+          placeholder="Account Level"
+          onChange={(e) => setAccountLevel(e)}
+          options={[
+            { value:'1', label:'1' },
+            { value:'6', label:'6' },
+
+                    
+          ]}
+          value={accountLevel}
+          filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
+          filterSort={(a, b) => (a?.label ?? '').toLowerCase().localeCompare((b?.label ?? '').toLowerCase())}
+        />
+
+        </Col>
         {/* <Col md={4}>
           <div>Account</div>
           <Select

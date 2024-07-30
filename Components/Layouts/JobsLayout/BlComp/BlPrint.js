@@ -171,9 +171,9 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                 <Col md={1}></Col>
                 <Col md={2} style={{ fontWeight: "bold" }}>
                   <div >
-                  <span>{!grossWeight && parseFloat(gross_weight).toFixed(3)} {allValues.wtUnit} </span> <br /> <br />
+                  <span>{!grossWeight && parseFloat(gross_weight).toFixed(3)} {allValues.wtUnit} kgs</span> <br /> <br />
                   <span style={{ marginTop: "15px" }}>Net Weight:</span><br /> 
-                  <span>{!netWeight &&  parseFloat(allValues.net).toFixed(3)} {allValues.wtUnit}</span> 
+                  <span>{!netWeight &&  parseFloat(allValues.net).toFixed(3)} {allValues.wtUnit} kgs</span> 
                   <div style={{ display: "flex", flexDirection: "column", marginTop: "15px"}}>
                     <span>{allValues.stamps?.length > 0 && allValues.stamps.map((x) => x.stamp_group == '2' ? stamps[Number(x.code) - 1].label : "" )}</span>
                     <span style={{marginLeft: "35px"}}> {allValues.stamps?.length > 0 && allValues.stamps?.map((x) => x?.stamp_group=="1"? stamps[Number(x.code) - 1]?.label: "")}</span>
@@ -182,7 +182,7 @@ const BlPrint = ({allValues, state, borders, heading, border, inputRef, stamps, 
                 </Col>
                 <Col md={2} style={{ fontWeight: "bold" }}>
                 <div >
-                  {!cbm && parseFloat(allValues.cbm).toFixed(3)} 
+                  {!cbm && parseFloat(allValues.cbm).toFixed(3)} cbm 
                 </div>
                 </Col>
               </Col>

@@ -242,19 +242,31 @@ const Index=({awbNo, manifest})=>{
       </Table>
     </div>
 
-    <button className="btn-custom" disabled={load ? true : false} type="submit">
-      {load ? <Spinner size="sm" className="mx-3" /> : "Save"}
-    </button>
-    {manifestData &&
-    <CSVLink filename={"manifest.csv"} data={manifestData} className='btn-custom mx-3 px-4 py-2 mb-2' style={{color:'white'}}>
-    Download Manifest
+    <div className="button-container" style={{ display: 'flex' }}>
+  <button className="btn-custom mx-3 px-4 py-2 mb-2" disabled={load ? true : false} type="submit">
+    {load ? <Spinner size="sm" className="mx-3" /> : "Save"}
+  </button>
+  {manifestData && (
+    <CSVLink
+      filename={"manifest.csv"}
+      data={manifestData}
+      className="btn-custom mx-3 px-4 py-2 mb-2"
+      style={{ color: 'white' }}
+    >
+      Download Manifest
     </CSVLink>
-    }
-      {manifestJobData &&
-    <CSVLink filename={"jobs.csv"} data={manifestJobData} className='btn-custom mx-3 px-4 py-2 mb-2' style={{color:'white'}}>
-    Download Jobs
+  )}
+  {manifestJobData && (
+    <CSVLink
+      filename={"jobs.csv"}
+      data={manifestJobData}
+      className="btn-custom mx-3 px-4 py-2 mb-2"
+      style={{ color: 'white', width: '150px' }}
+    >
+      Download Jobs
     </CSVLink>
-    }
+  )}
+</div>
   </form>
   </div>
   </>

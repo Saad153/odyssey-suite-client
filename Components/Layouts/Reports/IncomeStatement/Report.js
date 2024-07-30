@@ -6,8 +6,9 @@ import exportExcelFile from "/functions/exportExcelFile";
 import Pagination from "/Components/Shared/Pagination";
 
 const Report = ({query, result}) => {
-
+const accountlevel = query.accountLevel;
   const [ records, setRecords ] = useState([]);
+  const [accLevelOneArray, setaAcLevelOneArray] = useState([]);
   const [ total, setTotal ] = useState({
     opDebit:0,
     opCredit:0,
@@ -102,7 +103,16 @@ const Report = ({query, result}) => {
     // monthWise(result)
     makeTotal(temp)
     setRecords(listWithTotals)
-    console.log(listWithTotals)
+    console.log("list with totals",listWithTotals)
+    let accLevelOne = [
+      listWithTotals.find(item => item.title === 'Expense' && item.type === 'parent'),
+      listWithTotals.find(item => item.type === 'total'),
+      listWithTotals.find(item => item.title === 'Income/Sales' && item.type === 'parent'),
+      listWithTotals.filter(item => item.type === 'total')[1]
+  ];
+  setaAcLevelOneArray(accLevelOne)
+
+
   }, []);
 
   const checkMonth = (date) => {
@@ -180,6 +190,7 @@ const Report = ({query, result}) => {
         </div>
         <PrintTopHeader company={query.company} from={query.from} to={query.to} />
         {/* <hr className="" /> */}
+       {accountlevel =="6" ?
         <div className="printDiv mt-2" style={{ maxHeight: overFlow ? "60vh" : "100%", overflowY: "auto", overflowX: "hidden" , height:"auto" }}>
           <div className="table-sm-1 mt-2">
             <Table className="tableFixHead" bordered>
@@ -192,7 +203,7 @@ const Report = ({query, result}) => {
                 </tr>
               </thead>
               <tbody>
-                {currentRecords.map((x, i) => {
+                  {currentRecords.map((x, i) => {
                   if(x.type=="parent"){
                     return(
                     <tr key={i}>
@@ -211,20 +222,26 @@ const Report = ({query, result}) => {
                     )
                   } else {
                     return (
-                      <tr key={i}>
+                    <>
+                         <tr key={i}>
                         <td className="fs-12 text-center">{x.index}</td>
                         <td className="blue-txt fs-12 px-5">{x.title}</td>
                         <td className="fs-12">{commas(x.debit)}</td>
                         <td className="fs-12">{commas(x.credit)}</td>
                       </tr>
+                        
+                      </>
                     )
-                }})}
+                }})}   
+
                 <tr>
                   <td></td>
                   <td className='text-end'><b>Profit & Loss {"( Total )"}:</b></td>
                   <td className='fs-12'><b>{commas(total.debit) || '0.00'}</b></td>
                   <td className='fs-12'><b>{commas(total.credit>=0? total.credit : total.credit*-1) || '0.00'}</b></td>
                 </tr>
+            
+   
               </tbody>
             </Table>
           </div>
@@ -233,7 +250,80 @@ const Report = ({query, result}) => {
             <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
           </div>
           }
+        </div> :
+        <>
+                <div className="printDiv mt-2" style={{ maxHeight: overFlow ? "60vh" : "100%", overflowY: "auto", overflowX: "hidden" , height:"auto" }}>
+          <div className="table-sm-1 mt-2">
+            <Table className="tableFixHead" bordered>
+              <thead>
+                <tr className="custom-width">
+                  <th className='text-center'>#</th>
+                  <th>Account Title</th>
+                  <th>Debit </th>
+                  <th>Credit</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {accLevelOneArray.map((x, i) => {
+                  if(x.type=="parent"){
+                    return(
+                    <tr key={i}>
+                      <td></td>
+                      <td colSpan={7}><b>{x.title}</b></td>
+                    </tr>
+                    )
+                  }else if(x.type=="total"){
+                    return(
+                    <tr key={i}>
+                      <td></td>
+                      <td colSpan={1} className='text-end'><b>Total</b></td>
+                      <td  className="fs-12"><b>{commas(x.debit)} </b></td>
+                      <td  className="fs-12"><b>{commas(x.credit)}</b></td>
+                    </tr>
+                    )
+                  } 
+                  
+                  else {
+                    return (
+                    <>
+                         <tr key={i}>
+                        <td className="fs-12 text-center">{x.index}</td>
+                        <td className="blue-txt fs-12 px-5">{x.title}</td>
+                        <td className="fs-12">{commas(x.debit)}</td>
+                        <td className="fs-12">{commas(x.credit)}</td>
+                      </tr>
+                        
+                      </>
+                    )
+                }
+                
+                
+                })}   
+
+                <tr>
+                  <td></td>
+                  <td className='text-end'><b>Profit & Loss {"( Total )"}:</b></td>
+                  <td className='fs-12'><b>{commas(total.debit) || '0.00'}</b></td>
+                  <td className='fs-12'><b>{commas(total.credit>=0? total.credit : total.credit*-1) || '0.00'}</b></td>
+                </tr>
+            
+   
+              </tbody>
+            </Table>
+          </div>
+ 
         </div>
+        
+        
+        
+        
+        
+        
+        </>
+        
+        
+        
+        }
       </div>
     )
   }
