@@ -289,7 +289,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             </>}
           </>}
           <SelectSearchComp register={register} name='fd' control={control} label='Final Destination *' disabled={getStatus(approved)} width={"100%"}
-            options={ports.ports}
+            options={destinations}
           /><Space />
           <div className='custom-link mt-2' onClick={() => pageLinking("vendor", forwarderId)} >Forwarder/Coloader *</div>
           <SelectSearchComp register={register} name='forwarderId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
