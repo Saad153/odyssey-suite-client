@@ -156,7 +156,13 @@ const initialState = {
   const excelDataFormatter = (records, set) => {
     console.log("records", records)
     let tempData = [
-      ["Sr","Job No","OperationType","VesselName", "Date", "HBL / HAWB", "MBL / MAWB", "Client", "SubType", "Shipper","Shipper/Consignee","Sales Rep","OverSeas Agent","Shipping Line", "Local Agent" ,"F. Dest","Teu", "Weight", "Revenue", "Cost","P/L", "Gain/Loss", "After Gain/Loss","CompanyName","Commodity","Packages"],
+      ["Sr","Job No","OperationType","VesselName", "Date", "HBL / HAWB", "MBL / MAWB", "Client",
+        "SubType", "Shipper","Shipper/Consignee","Sales Rep","OverSeas Agent","Shipping Line", 
+        "Local Agent" ,"F. Dest","Teu", "Weight", "Revenue", "Cost","P/L", "Gain/Loss", 
+        "After Gain/Loss","CompanyName","Commodity","Packages","POL","Buying Rate","Selling Rate",
+        "jobType","Cost Center","Nomination","Unit","Customer Ref","Sailing/Arrival Date","Sailing Date"
+
+      ],
     ];
     for (let index = 0; index < records.length; index++) {
       let companyName = 
@@ -178,9 +184,7 @@ const initialState = {
         records[index].consignee?.name ?  records[index].consignee.name  :"",
         records[index].sales_representator?.name ?  records[index].sales_representator.name  :"",
         records[index].shipping_line?.name ?  records[index].shipping_line.name  :"",
-
         records[index].overseas_agent?.name ?  records[index].overseas_agent.name  :"",
-
         records[index].local_vendor?.name ?  records[index].local_vendor.name  :"",
         records[index].fd ? records[index].fd : "",
         records[index].SE_Equipments ?records[index].SE_Equipments.teu : "",
@@ -193,6 +197,17 @@ const initialState = {
         companyName,
         records[index].commodity?.name?  records[index].commodity.name  :"",
         records[index].pcs? records[index].pcs :"",
+        records[index].pol,
+        records[index].exRate,
+        records[index].exRate,
+        records[index].jobType,
+        records[index].costCenter,    
+        records[index].nomination,
+        records[index].pkgUnit,
+        records[index].customerRef,  
+        records[index].shipDate,          
+        
+        
 
             ];
       tempData.push(data);
