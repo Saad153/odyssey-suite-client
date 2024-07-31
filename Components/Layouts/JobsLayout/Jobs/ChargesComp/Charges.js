@@ -267,7 +267,7 @@ const ChargesList = ({state, dispatch, type, append, reset, fields, chargeList, 
           }
           {(operationType=="SE"||operationType=="SI") &&
           <td style={{ padding: 3 }}> {/* DG */}
-          <SelectSearchComp register={register} name={`chargeList.${index}.dg_type`} control={control} width={95} font={13} disabled={permissions.admin?false:x.InvoiceId!=null?true:false}
+          <SelectSearchComp register={register} name={`chargeList.${index}.dg_type`} control={control} width={95} font={13} disabled={permissions?.admin?false:x.InvoiceId!=null?true:false}
             options={[
               { id: 'DG', name: 'DG' },
               { id: 'non-DG', name: 'non-DG' }
