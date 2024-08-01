@@ -6,6 +6,8 @@ import exportExcelFile from "/functions/exportExcelFile";
 import Pagination from "/Components/Shared/Pagination";
 
 const Report = ({query, result}) => {
+  console.log(query)
+  console.log(result)
 const accountlevel = query.accountLevel;
   const [ records, setRecords ] = useState([]);
   const [accLevelOneArray, setaAcLevelOneArray] = useState([]);
@@ -43,24 +45,86 @@ const accountlevel = query.accountLevel;
     let tempArray = [result.result[1], result.result[0]]
     tempArray.forEach((x)=>{
       let i = 0
-      temp.push({
-        title:x.title, type:'parent'
-      });
-      x.Parent_Accounts.forEach((y)=>{
-        if(y.Child_Accounts?.length>0){
-          // i = i + 1
-          y.Child_Accounts.forEach((z)=>{
-            i = i + 1
-            temp.push({
-              title:z.title,
-              index:i,
-              type:'child',
-              // createdAt:z.Voucher_Heads.createdAt,
-              ...makeTransaction(z.Voucher_Heads)
-            });
-          })
-        }
-      })
+      console.log(query.expense)
+      if(query.expense != null && x.title == query.expense){
+        temp.push({
+          title:x.title, type:'parent'
+        });
+        x.Parent_Accounts.forEach((y)=>{
+          if(y.Child_Accounts?.length>0){
+            y.Child_Accounts.forEach((z)=>{
+              i = i + 1
+              if(query.expense != null){
+                temp.push({
+                title:z.title,
+                index:i,
+                type:'child',
+                ...makeTransaction(z.Voucher_Heads)
+                });
+              }
+            })
+          }
+        })
+      }else if(query.revenue != null && x.title == query.revenue){
+        console.log("Bilal")
+        temp.push({
+          title:x.title, type:'parent'
+        });
+        x.Parent_Accounts.forEach((y)=>{
+          if(y.Child_Accounts?.length>0){
+            y.Child_Accounts.forEach((z)=>{
+              i = i + 1
+              if(query.revenue != null){
+                temp.push({
+                title:z.title,
+                index:i,
+                type:'child',
+                ...makeTransaction(z.Voucher_Heads)
+                });
+              }
+            })
+          }
+        })
+      }else{
+
+        temp.push({
+          title:x.title, type:'parent'
+        });
+        x.Parent_Accounts.forEach((y)=>{
+          if(y.Child_Accounts?.length>0){
+            y.Child_Accounts.forEach((z)=>{
+              i = i + 1
+              if(query.revenue != null){
+                if(query.revenue == z.title){
+                  temp.push({
+                    title:z.title,
+                    index: 1,
+                    type:'child',
+                    ...makeTransaction(z.Voucher_Heads)
+                  })
+                }
+              }else if(query.expense != null){
+                if(query.expense == z.title){
+                  temp.push({
+                    title:z.title,
+                    index: 1,
+                    type:'child',
+                    ...makeTransaction(z.Voucher_Heads)
+                  })
+                }
+              }
+              else{
+                temp.push({
+                title:z.title,
+                index:i,
+                type:'child',
+                ...makeTransaction(z.Voucher_Heads)
+                });
+              }
+            })
+          }
+        })
+      }
     })
 
     let listWithTotals = [];
@@ -103,7 +167,7 @@ const accountlevel = query.accountLevel;
     // monthWise(result)
     makeTotal(temp)
     setRecords(listWithTotals)
-    console.log("list with totals",listWithTotals)
+    // console.log("list with totals",listWithTotals)
     let accLevelOne = [
       listWithTotals.find(item => item.title === 'Expense' && item.type === 'parent'),
       listWithTotals.find(item => item.type === 'total'),
@@ -120,7 +184,7 @@ const accountlevel = query.accountLevel;
   }
 
   const monthWise = (data) => {
-    console.log(data.result)
+    // console.log(data.result)
     let dates = [];
     data.result.forEach((account)=>{
       account.Parent_Accounts.forEach((pAccount)=>{
@@ -134,7 +198,7 @@ const accountlevel = query.accountLevel;
         })
       })
     })
-    console.log(dates)
+    // console.log(dates)
   }
 
   const makeTotal = (data) => {

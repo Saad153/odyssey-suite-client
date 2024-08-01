@@ -180,6 +180,7 @@ const TrialBalance = () => {
 
             <Radio.Group onChange={(e)=>setOptions(e.target.value)} value={options}>
                 <Radio value={"exclude"}>Exclude 0 </Radio>
+                <Radio value={"excludeOpening"}>Exclude Opening</Radio>
                 <Radio value={"showall"}>Show All</Radio>
             </Radio.Group>
           </Col>

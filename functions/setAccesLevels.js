@@ -233,12 +233,12 @@ function setAccesLevels(dispatch, collapsed){
     }
   }}
 
-  console.log(reports)
+  // console.log(reports)
 
   //Adds the related parents into the items array by checking if the user has access to any of the children.
   if(levels){
     levels = levels.split(", ")
-    console.log(levels)
+    // console.log(levels)
     levels.forEach(x => {
       switch (x) {
         case "ExSea":
@@ -296,7 +296,7 @@ function setAccesLevels(dispatch, collapsed){
 
   items.unshift(dashboard)
   items.push(tasks)
-  console.log(items)
+  // console.log(items)
   return items
 }
 

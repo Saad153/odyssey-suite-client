@@ -135,15 +135,22 @@ const Report = ({query, result}) => {
               <thead>
                 <tr className="custom-width">
                   <th className="class-1"></th>
-                 {reportView =="6- Columns Simplified View"? <th className="class-1" colSpan={2}>Opening</th> :null} 
-                 {reportView =="6- Columns Simplified View"? <th className="class-1" colSpan={2}>Transaction</th>:null}
+
+                 {reportView =="6- Columns Simplified View" && option =="showall"?
+                  <th className="class-1" colSpan={2}>Opening</th> 
+                  :null} 
+                 {reportView =="6- Columns Simplified View"? 
+                 <th className="class-1" colSpan={2}>Transaction</th>
+                 :null}
                   <th className="class-1" colSpan={2}>Closing</th>
                 </tr>
                 <tr className="custom-width">
                   <th className="class-1">Account Title</th>
            
-                  {reportView =="6- Columns Simplified View"? <th className="class-1">Debit </th> :null}
-                      {reportView =="6- Columns Simplified View"?  <th className="class-1">Credit</th> :null}
+                  {reportView =="6- Columns Simplified View" && option =="showall"? <th className="class-1">Debit </th>
+                   :null}
+                      {reportView =="6- Columns Simplified View" && option =="showall"?  <th className="class-1">Credit</th>
+                       :null}
                       {reportView =="6- Columns Simplified View"?  <th className="class-1">Debit </th>:null}
                       {reportView =="6- Columns Simplified View"?  <th className="class-1">Credit</th>:null}
                   <th className="class-1">Debit </th>
@@ -152,12 +159,10 @@ const Report = ({query, result}) => {
               </thead>
               <tbody>
                 {/* exclude 0 */}
-              {reportView =="6- Columns Simplified View" && option == "exclude" &&<>
+               {reportView =="6- Columns Simplified View"  && option =="exclude" && <>
                 {                 
-                
-                currentRecords.filter(x => x.clDebit !== 0 && x.clCredit !== 0)
-                
-                .map((x, i) => {
+                currentRecords.map((x, i) => {
+             
                   if(x.type=="parent"){
                     return(
                     <tr key={i}>
@@ -165,14 +170,11 @@ const Report = ({query, result}) => {
                     </tr>
                     )
                   } else {
-                  return (
-
+                    return (
                       <tr key={i}>
                         <td className="blue-txt fs-12 px-5">{x.title}</td>
-                        {reportView =="6- Columns Simplified View"?   <td className="fs-12">{commas(x.opDebit)}</td> :null}
-                        {reportView =="6- Columns Simplified View"?  <td className="fs-12">{commas(x.opCredit)}</td>:null}
-                        {reportView =="6- Columns Simplified View"?  <td className="fs-12">{commas(x.trDebit)}</td>:null}
-                        {reportView =="6- Columns Simplified View"?  <td className="fs-12">{commas(x.trCredit)}</td>:null}
+                        {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trDebit)}</td>}
+                        {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trCredit)}</td>}
                         <td className="fs-12">{commas(x.clDebit)}</td>
                         <td className="fs-12">{commas(x.clCredit)}</td>
                       </tr>
@@ -181,7 +183,7 @@ const Report = ({query, result}) => {
                 </>
               }
                 {/* showall view */}
-              {reportView =="6- Columns Simplified View"&& <>
+              {reportView =="6- Columns Simplified View"  && option =="showall" && <>
                 {                 
                 currentRecords.map((x, i) => {
              
@@ -197,6 +199,30 @@ const Report = ({query, result}) => {
                         <td className="blue-txt fs-12 px-5">{x.title}</td>
                         {reportView =="6- Columns Simplified View" && <td className="fs-12">{commas(x.opDebit)}</td> }
                         {reportView =="6- Columns Simplified View" && <td className="fs-12">{commas(x.opCredit)}</td>}
+                        {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trDebit)}</td>}
+                        {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trCredit)}</td>}
+                        <td className="fs-12">{commas(x.clDebit)}</td>
+                        <td className="fs-12">{commas(x.clCredit)}</td>
+                      </tr>
+                    )
+                }})}
+                </>
+              }
+                {/* showall view */}
+                {reportView =="6- Columns Simplified View"  && option =="excludeOpening" && <>
+                {                 
+                currentRecords.map((x, i) => {
+             
+                  if(x.type=="parent"){
+                    return(
+                    <tr key={i}>
+                      <td colSpan={7}><b>{x.title}</b></td>
+                    </tr>
+                    )
+                  } else {
+                    return (
+                      <tr key={i}>
+                        <td className="blue-txt fs-12 px-5">{x.title}</td>
                         {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trDebit)}</td>}
                         {reportView =="6- Columns Simplified View" &&<td className="fs-12">{commas(x.trCredit)}</td>}
                         <td className="fs-12">{commas(x.clDebit)}</td>

@@ -101,6 +101,7 @@ const Ledger = () => {
       <Col md={6}>
         <b>Accounts</b>
         <Select showSearch 
+        allowClear
         style={{ width: "100%" }} 
         placeholder="Select Account" 
         value={account}
