@@ -10,7 +10,7 @@ import TextAreaComp from '/Components/Shared/Form/TextAreaComp';
 
 const BlDetail = ({control, register, state, useWatch, dispatch, reset, type}) => {
 
-  // console.log("state from bi details",state)
+
   const [roundedGross, setRoundedGross] = useState();
   const set = (a, b) => dispatch({type:'toggle', fieldName:a, payload:b});
   const allValues = useWatch({control})
@@ -217,7 +217,8 @@ return(
         <Col md={5}>
         <div>Measurement</div>
         <div className='brdr-grey mb-2'>
-          {state.Container_Infos[0]?.cbm } cbm
+          {/* {state.Container_Infos[0]?.cbm } CBM */}
+          {state.Container_Infos[0]?.cbm ? `${state.Container_Infos[0].cbm} CBM` : 0}
         </div>
         </Col>
         <Col md={7} style={{paddingRight:20}}>
