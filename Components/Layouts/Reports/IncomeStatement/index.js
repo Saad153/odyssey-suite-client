@@ -20,6 +20,7 @@ const IncomeStatement = () => {
   const [accountLevel, setAccountLevel] = useState("6");
   const [revenue, selectRevenue] = useState();
   const [expense, selectExpense] = useState();
+  const [reportType, setReportType ] = useState("");
 
   const dispatch = useDispatch()
 
@@ -78,7 +79,7 @@ const IncomeStatement = () => {
     if(revenue != null){
       Router.push({ 
         pathname: `/reports/incomeStatement/report`, 
-        query: { from: from, to: to, company: company, currency: currency, accountLevel:accountLevel, revenue:revenue } 
+        query: { from: from, to: to, company: company, currency: currency, accountLevel:accountLevel, revenue:revenue} 
       });
       dispatch(incrementTab({
         "label": "Income Statement",
@@ -97,7 +98,20 @@ const IncomeStatement = () => {
         "id": `?from=${from}&to=${to}&company=${company}&currency=${currency}&accountLevel=${accountLevel}&expense=${expense}`
       }))
 
-    }else{
+    }else if(reportType != null){
+      Router.push({ 
+        pathname: `/reports/incomeStatement/report`, 
+        query: { from: from, to: to, company: company, currency: currency, accountLevel:accountLevel, reportType:reportType  } 
+      });
+      dispatch(incrementTab({
+        "label": "Income Statement",
+        "key": "5-12",
+        "id": `?from=${from}&to=${to}&company=${company}&currency=${currency}&accountLevel=${accountLevel}&reportType=${reportType}`
+      }))
+
+    }
+    
+    else{
       
       Router.push({ 
         pathname: `/reports/incomeStatement/report`, 
@@ -357,19 +371,13 @@ const IncomeStatement = () => {
         />
 
         </Col>
-        {/* <Col md={4}>
-          <div>Account</div>
-          <Select
-            showSearch
-            style={{ width: '100%' }}
-            placeholder="Debit Account"
-            onChange={(e) => setDebitAccount(e)}
-            options={records}
-            value={debitAccount}
-            filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
-            filterSort={(a, b) => (a?.label ?? '').toLowerCase().localeCompare((b?.label ?? '').toLowerCase())}
-          />
-        </Col> */}
+           <Col md={4} style={{ border: '1px solid silver', marginLeft: 12, paddingRight: 40 }} className='py-1 mt-3'>
+            Report Types
+            <Radio.Group 
+            value={reportType} onChange={(e) => setReportType(e.target.value)}>
+              <Radio value={"pnl"}>Profit & Loss Icome Statement </Radio>
+            </Radio.Group>
+          </Col>
       </Row>
       <button className='btn-custom mt-3 px-3' onClick={handleSubmit}>
         Go

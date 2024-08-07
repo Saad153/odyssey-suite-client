@@ -190,7 +190,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             ]} />
         </Col>
         <Col md={1} className='py-1'>
-          {(type == "SE" || type == "SI") && <SelectComp register={register} name='subType' control={control} disabled={getStatus(approved) || state.selectedRecord.id != null}
+          {(type == "SE" || type == "SI") && <SelectComp register={register} name='subType' control={control} disabled={getStatus(approved) }
             label='Sub Type' width={"100%"}
             options={[
               { id: 'FCL', name: 'FCL' },
@@ -288,9 +288,18 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
               {isOpen && <AddPort isOpen={isOpen} onClose={() => setIsOpen(false)} />}
             </>}
           </>}
+
+          {(type == "AE" || type == "AI") && <>
           <SelectSearchComp register={register} name='fd' control={control} label='Final Destination *' disabled={getStatus(approved)} width={"100%"}
             options={destinations}
-          /><Space />
+          />
+          </>}
+          {(type == "SE" || type == "SI") && <>
+          <SelectSearchComp register={register} name='fd' control={control} label='Final Destination *' disabled={getStatus(approved)} width={"100%"}
+            options={ports.ports}
+          />
+          </>}
+          <Space />
           <div className='custom-link mt-2' onClick={() => pageLinking("vendor", forwarderId)} >Forwarder/Coloader *</div>
           <SelectSearchComp register={register} name='forwarderId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
             options={state.fields.vendor.forwarder} /><Space />
