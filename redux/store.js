@@ -6,6 +6,7 @@ import blCreationReducer from './BlCreation/blCreationSlice';
 import persistValuesReducer from './persistValues/persistValuesSlice';
 import { seJobValues } from './apis/seJobValues';
 import filterValuesReducer from './filters/filterSlice';
+import ledgerReducer from './ledger/ledgerSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     counter: counterReducer,
     filterValues:filterValuesReducer,
     company: companyReducer,
+    ledger: ledgerReducer,
     tabs: tabsReducer,
     blCreationValues: blCreationReducer,
     persistValues: persistValuesReducer,

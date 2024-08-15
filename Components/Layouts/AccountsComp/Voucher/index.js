@@ -57,10 +57,12 @@ const Voucher = ({ id }) => {
   }
    
   const onSubmit = async (data) => {
+    data.payTo = data?.Voucher_Heads[0]?.narration
     setLoad(true)
     let settlementAmmount = 0.00;
     let debit = 0.00, credit = 0.00;
     let voucher = { ...data }
+
     let newHeads = [...data.Voucher_Heads];
     if (voucher.ChildAccountId) {
       voucher.Voucher_Heads.map((x) => {

@@ -7,56 +7,80 @@ import { useDispatch, useSelector } from 'react-redux';
 import { incrementTab } from '/redux/tabs/tabSlice';
 import Router from 'next/router';
 import { setFilterValues } from '../../../../redux/filters/filterSlice';
+import { setFrom, setTo, setCompany, setCurrency, setRecords, setAccount, setName } from '../../../../redux/ledger/ledgerSlice';
 
 const Ledger = () => {
 
-  const [from, setFrom] = useState(moment("2023-07-01").format("YYYY-MM-DD"));
-  const [to, setTo] = useState(moment().format("YYYY-MM-DD"));
-  const [company, setCompany] = useState(1);
-  const [currency, setCurrency] = useState("PKR");
-  const [records, setRecords] = useState([]);
   const dispatch = useDispatch();
 
   const filterValues = useSelector(state => state.filterValues);
+  const { from, to, company, currency, records,account, name } = useSelector((state) => state.ledger);
+
   const filters = filterValues.find(page => page.pageName === "ledgerReport");
   const values = filters ? filters.values : null;
-  const [account, setAccount] = useState(values ? values.account : null);
 
-  const stateValues = {
-    from: from,
-    to: to,
-    company: company,
-    account: account,
-    currency: currency,
-  }
 
   const getAccounts = async () => {
-    await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_ALL_CHILD_ACCOUNTS, {
+   
+    try{  
+      const gotAccounts = await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_ALL_CHILD_ACCOUNTS, {
       headers: {
         companyid: company
-      }
-    }).then((x) => {
-      let temprecords = [];
-      x?.data?.result?.map((x) => {
-        return temprecords.push({ value: x.id, label: x.title, });
-      });
-      setRecords(temprecords);
-    })
+      } });
+
+        const {data}= gotAccounts;
+        const {result} = data
+        let temprecords=[];
+        result?.map((x) => {
+              return temprecords.push({ value: x.id, label: x.title, });
+            });
+            dispatch(setRecords(temprecords));
+            getAccountName(temprecords);
+  
+     
+    }catch(e){
+      console.log("e",e)
+
+    }
+  
+
+
+
   };
 
-  useEffect(() => { if (company != "") getAccounts(); }, [company]);
-  useEffect(()=>{
-    if(filters){
-      setFrom(values.from),
-      setTo(values.to),
-      setCompany(values.company),
-      setAccount(values.account),
-      setCurrency(values.currency)
+  const getAccountName = (temprecords) =>{
+
+    const data = temprecords || records
+    const foundAccount = data?.find(x => x.value == account);
+    console.log("found", foundAccount)
+    if (foundAccount) {
+      let acName = foundAccount?.label;
+      dispatch(setName(acName))
+          }else{
+      dispatch(setName(""))
     }
-  },[filters])
+  }
+
+  useEffect(() => { if (company != "") 
+    getAccounts();
+ 
+
+   }, [company,account]);
+
+
+  // useEffect(()=>{
+  //   if(filters){
+  //     setFrom(values.from),
+  //     setTo(values.to),
+  //     setCompany(values.company),
+  //     setAccount(values.account),
+  //     setCurrency(values.currency)
+
+  //   }
+  // },[filters])
 
   const handleAccountChange = (value) => {
-    setAccount(value);
+    dispatch(setAccount(value));
   };
 
   return (
@@ -66,18 +90,18 @@ const Ledger = () => {
       <Col md={12}><hr /></Col>
       <Col md={3} className="mt-3">
         <b>From</b>
-        <Form.Control type={"date"} size="sm" value={from} onChange={(e) => setFrom(e.target.value)} />
+        <Form.Control type={"date"} size="sm" value={from} onChange={(e) => dispatch(setFrom(e.target.value))} />
       </Col>
       <Col md={3} className="mt-3">
         <b>To</b>
-        <Form.Control type={"date"} size="sm" value={to} onChange={(e) => setTo(e.target.value)} />
+        <Form.Control type={"date"} size="sm" value={to} onChange={(e) => dispatch(setTo(e.target.value))} />
       </Col>
       <Col md={6}></Col>
       <Col md={3} className="my-3">
         <b>Company</b>
         <Radio.Group className="mt-1" 
         value={company} 
-        onChange={(e) => setCompany(e.target.value)}>
+        onChange={(e) => dispatch(setCompany(e.target.value))}>
           <Radio value={1}>SEA NET SHIPPING & LOGISTICS</Radio>
           <Radio value={2}>CARGO LINKERS</Radio>
           <Radio value={3}>AIR CARGO SERVICES</Radio>
@@ -87,7 +111,7 @@ const Ledger = () => {
       <Col md={9} className="my-3">
         <b>Currency</b><br />
         <Radio.Group className="mt-1" 
-        value={currency} onChange={(e) => setCurrency(e.target.value)}>
+        value={currency} onChange={(e) => dispatch(setCurrency(e.target.value))}>
         <Radio value={"PKR"}>PKR</Radio>
             <Radio value={"USD"}>USD</Radio>
             <Radio value={"GBP"}>GBP</Radio>
@@ -113,18 +137,14 @@ const Ledger = () => {
       </Col>
       <Col md={12}>
         <button className='btn-custom mt-3' onClick={() => {
-          dispatch(setFilterValues({ pageName: "ledgerReport", values: stateValues }));
+          // dispatch(setFilterValues({ pageName: "ledgerReport", values: stateValues }));
           if (account != "" && account != null) {
-            let name = records.filter((x) => x.value == account).map((x) => {
-              {
-                return x.label
-              }
-            })
-            Router.push({ pathname: `/reports/ledgerReport/${account}/`, query: { from: from, to: to, name: name[0], company: company, currency: currency } });
+         
+            Router.push({ pathname: `/reports/ledgerReport/${account}/`, query: { from: from, to: to, name: name, company: company, currency: currency } });
             dispatch(incrementTab({
               "label": "Ledger Report",
               "key": "5-7",
-              "id": `${account}?from=${from}&to=${to}&name=${name[0]}&company=${company}&currency=${currency}`
+              "id": `${account}?from=${from}&to=${to}&name=${name}&company=${company}&currency=${currency}`
             }))
           }
         }

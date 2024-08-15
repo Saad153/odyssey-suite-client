@@ -32,7 +32,7 @@ const MainTable = ({ ledger, closing, opening, name, company, currency, from, to
                   {opening.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") + " Dr"}
                 </span> :
                 <span className="grey-txt">
-                  {Math.abs(opening).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") + " Cr"}
+                 {Math.abs(opening).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ") + " Cr"}
                 </span>
               }
             </b>

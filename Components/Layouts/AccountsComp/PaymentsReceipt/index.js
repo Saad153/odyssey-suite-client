@@ -5,7 +5,7 @@ import { Input, List, Radio, Modal, Select } from 'antd';
 import { recordsReducer, initialState } from './states';
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementTab } from '/redux/tabs/tabSlice';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col,Table} from 'react-bootstrap';
 import Router, { useRouter } from 'next/router';
 import BillComp from './BillComp';
 import PrintTransaction from './PrintTransaction';
@@ -14,6 +14,7 @@ import axios from 'axios';
 import { AgGridReact } from 'ag-grid-react';
 import ReactToPrint from 'react-to-print';
 import DeleteVoucher from './DeleteVoucher';
+import Pagination from '../../../Shared/Pagination';
 
 const PaymentsReceipt = ({id, voucherData}) => {
 
@@ -26,6 +27,38 @@ const PaymentsReceipt = ({id, voucherData}) => {
   const router = useRouter()
   const companyId = useSelector((state) => state.company.value);
   const commas = (a) =>  { return parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")};  
+const rowData = state.oldVouchersList;
+const [query, setQuery] = useState("");
+const [currentPage, setCurrentPage] = useState(1);
+const [recordsPerPage] = useState(20);
+const indexOfLast = currentPage * recordsPerPage;
+const indexOfFirst = indexOfLast - recordsPerPage;
+const currentRecords = rowData ? rowData.slice(indexOfFirst, indexOfLast) : [];
+const noOfPages = rowData ? Math.ceil(rowData.length / recordsPerPage) : 0;
+const [showTable, setShowTable] = useState(true);
+
+useEffect(() => {
+  // Ensure companyId is available before making the request
+  if (companyId) {
+    axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS, {
+      headers: { companyid: companyId }
+    })
+    .then((response) => {
+      let tempData = [];
+      response.data?.result?.forEach((item, index) => {
+        tempData.push({
+          ...item, no: index + 1,
+          amount: (item.Voucher_Heads?.reduce((sum, cur) => sum + Number(cur.amount), 0) || 0) / Number(item.exRate)
+        });
+      });
+      setAll({ oldVouchers: false, oldVouchersList: tempData });
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+  }
+}, [companyId]); 
+
 
   useEffect(() => {
     if(router?.query?.id=='undefined') {
@@ -97,21 +130,26 @@ const PaymentsReceipt = ({id, voucherData}) => {
     }
   }, [router]);
 
+  console.log("currentRecords",currentRecords)
+
   const addNew = () => router.push("/accounts/paymentReceipt/new");
 
   useEffect(() => { searchParties() }, [state.search]);
 
-  const searchParties = async() => {
-    if(state.search.length>2){
-    await axios.post(process.env.NEXT_PUBLIC_CLIMAX_MISC_GET_PARTIES_BY_SEARCH, 
-      { search:state.search, type:state.partytype }
-    ).then((x)=> {
-      if(x.data.status=="success"){
-        setAll({partyOptions:x.data.result})
-      } else {
-        setAll({partyOptions:[]})
-      }
-    })
+  const searchParties = async () => {
+    if (state.search.length > 2) {
+      setShowTable(false); // Hide table and pagination
+      await axios.post(process.env.NEXT_PUBLIC_CLIMAX_MISC_GET_PARTIES_BY_SEARCH,
+        { search: state.search, type: state.partytype }
+      ).then((x) => {
+        if (x.data.status === "success") {
+          setAll({ partyOptions: x.data.result });
+        } else {
+          setAll({ partyOptions: [] });
+        }
+      });
+    } else {
+      setShowTable(true); // Show table and pagination if search is cleared
     }
   };
 
@@ -228,7 +266,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
             )}
           />
         }
-        <button className='btn-custom px-3' style={{fontSize:11}}
+        {/* <button className='btn-custom px-3' style={{fontSize:11}}
           onClick={() => {
             axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS,{headers:{companyid:companyId}})
             .then((x) => {
@@ -242,8 +280,8 @@ const PaymentsReceipt = ({id, voucherData}) => {
               setAll({oldVouchers:true, oldVouchersList:tempData});
             })
           }}
-        >Show Old <MdHistory /></button>
-        { id!="new" && <DeleteVoucher companyId={companyId} setAll={setAll} state={state} id={id} />}
+        >Show Old <MdHistory /></button> 
+        { id!="new" && <DeleteVoucher companyId={companyId} setAll={setAll} state={state} id={id} />} */}
       </Col>
       <Col md={6} className='mt-3'>
         {!state.selectedParty.name && <>
@@ -268,7 +306,7 @@ const PaymentsReceipt = ({id, voucherData}) => {
         </>
         }
       </Col>
-      <Col md={1} className='mt-3'>
+      {!state.tranVisible &&  <Col md={1} className='mt-3'>
         <Select disabled={state.partytype!="agent"?true:false} value={state.invoiceCurrency} size='small'
           onChange={(e)=> setAll({invoiceCurrency:e})}
           options={[
@@ -283,9 +321,77 @@ const PaymentsReceipt = ({id, voucherData}) => {
           ]}
         />
       </Col>
-      <Col md={4} className='mt-3'style={{border:'1px solid silver'}}>{state.selectedParty.name}</Col>
+}
+{!state.tranVisible && <Col md={4} className='mt-3'>
+          <div className='d-flex justify-content-end'>
+            <Input type="text" placeholder="Enter Voucher No" size='small' onChange={e => setQuery(e.target.value)} />
+          </div>
+        </Col>
+         }
+
+      {/* <Col md={4} className='mt-3'style={{border:'1px solid silver'}}>{state.selectedParty.name}</Col> */}
       <Col md={12}><hr className='p-0 my-3' /></Col>
       </Row>
+     {/* table start */}
+     {showTable && !state.tranVisible && (
+        <>
+    <div className='mt-3' style={{ maxHeight: "55vh", overflowY: 'auto', overflowX: "scroll" }}>
+        <Table className='tableFixHead'>
+          <thead>
+            <tr>
+              <th style={{width:130}}>Voucher No #</th>
+              <th style={{width:130}}>Name</th>
+              <th style={{width:130}}>Party</th>
+              <th style={{width:130}}>Type </th>
+              <th style={{width:150}}>Date </th>
+              <th style={{width:80}}>Currency </th>
+              <th style={{width:80}}>amount</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            {
+            currentRecords?.filter((x)=>{
+                return x.voucher_Id.toLowerCase().includes(query.toLowerCase()) ||
+                x?.partyName?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.partyType?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.vType?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.vType?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.createdAt?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.currency?.toLowerCase().includes(query.toLowerCase()) ||
+                x?.amount?.toString().includes(query)
+              })
+              .map((x, index) => {
+                console.log("X",x)
+                return (
+                  <tr key={index}>
+                    <td className='blue-txt fw-6 fs-12'>{x.voucher_Id}</td>
+                    <td>{x.partyName}</td>
+                    <td>{x.partyType}</td>
+                    <td>{x.vType}</td>
+                    <td>
+                      Date: <span className='blue-txt'>{x.createdAt ? moment(x.createdAt).format("YYYY-MM-DD") : "-"}</span>
+                    </td>
+                    <td>{x.currency}</td>
+                    <td>{x.amount}</td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </Table>
+      </div>
+      {(query==''||query==null) &&
+       <div className='d-flex justify-content-end items-end my-4' style={{ maxWidth: "100%" }} >
+        <Pagination noOfPages={noOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      </div>
+      }
+       </>
+      )}
+
+
+    {/* table ends */}
+
       {state.tranVisible && <BillComp companyId={companyId} state={state} dispatch={dispatch} />}
       <div className="d-none">
         <div ref={(res) => (inputRef = res)} className="px-2">
