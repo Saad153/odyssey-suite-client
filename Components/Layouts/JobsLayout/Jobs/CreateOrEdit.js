@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import dynamic from 'next/dynamic'
 import moment from 'moment';
@@ -7,6 +7,7 @@ import Routing from './Routing';
 import Cookies from 'js-cookie';
 import Router from "next/router";
 import { Spinner } from 'react-bootstrap';
+import { checkEmployeeAccess} from '/functions/checkEmployeeAccess';
 
 const Invoice = dynamic(() => import('./Invoice'), {loading: () => <p>Loading...</p>,})
 const BookingInfo = dynamic(() => import('./BookingInfo'), {loading: () => <p>Loading...</p>,})
@@ -36,6 +37,7 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
   const allValues = useWatch({control});
   const dispatchNew = useDispatch();
   const tabs = useSelector((state)=>state.tabs.tabs)
+  const [ deleteAccess, setDeleteAccess ] = useState(false);
 
   useEffect(() => {
     let tempState = {...baseValues, ...jobData};
@@ -81,6 +83,19 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
     }});
     getInvoices(tempState.id, dispatch);
     reset({...tempState});
+
+    // console.log(state.values)
+    console.log(allValues.approved)
+    console.log(checkEmployeeAccess())
+    if(allValues.approved!=1 && checkEmployeeAccess()){
+      console.log("approved")
+      setDeleteAccess(true)
+      console.log(deleteAccess)
+    }else{
+      console.log("Not Approved")
+      console.log(deleteAccess)
+    }
+
   }, [state.selectedRecord]);
 
   const onSubmit = async(data) => {
@@ -194,8 +209,21 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
       ['jobData', {id, type}],
       (x) => x?{...x,result:obj}:x
     )
-  }, [allValues, state.equipments])
 
+    console.log(state.values)
+    console.log(allValues.approved)
+    console.log(checkEmployeeAccess())
+    if(allValues.approved!=1 && checkEmployeeAccess()){
+      console.log("approved")
+      setDeleteAccess(true)
+      console.log(deleteAccess)
+    }else{
+      setDeleteAccess(false)
+      console.log("Not Approved")
+      console.log(deleteAccess)
+    }
+
+  }, [allValues, state.equipments])
   return(
   <div className='client-styles' style={{overflowY:'auto', overflowX:'hidden'}}>
     <form onSubmit={handleSubmit(state.edit?onEdit:onSubmit, onError)}>
@@ -240,8 +268,8 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
         <button type="submit" disabled={state.load?true:false} className='btn-custom mt-3'>
           {state.load?<Spinner animation="border" size='sm' className='mx-3' />:'Save Job'}
         </button>
-        <button type="button" disabled={allValues.approved==1?true:false} 
-          className={allValues.approved==1?"btn-red-disabled mt-3 mx-3":"btn-red mt-3 mx-3"}
+        <button type="button" disabled={!deleteAccess} 
+          className={!deleteAccess?"btn-red-disabled mt-3 mx-3":"btn-red mt-3 mx-3"}
           onClick={()=>{
             PopConfirm("Confirmation", "Are You Sure You Want To Delete This Job?",
               () => {
@@ -257,7 +285,7 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
                 })
             })
           }}
-        >Delete Job {allValues.approved}
+        >Delete Job
         </button>
       </div>
       }

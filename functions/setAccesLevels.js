@@ -250,10 +250,38 @@ function setAccesLevels(dispatch, collapsed){
         case "ExAir":
           items.indexOf(SeaJobs) === -1 ? items.push(SeaJobs) : null;
           break;
-        case "ImAir":
+        case "admin":
+          items = [
+            SeaJobs,
+            importJobs,
+            setup,
+            accounts,
+            reports
+        ]
+        default:
+          break;
+      }
+    })
+    levels.forEach(x => {
+      switch (x) {
         case "ImSea":
+        case "ImAir":
           items.indexOf(importJobs) === -1 ? items.push(importJobs) : null;
           break;
+        case "admin":
+          items = [
+            SeaJobs,
+            importJobs,
+            setup,
+            accounts,
+            reports
+        ]
+        default:
+          break;
+      }
+    })
+    levels.forEach(x => {
+      switch (x) {
         case "Employees":
         case "ClientList":
         case "VendorList":
@@ -262,6 +290,20 @@ function setAccesLevels(dispatch, collapsed){
         case "Voyage":
           items.indexOf(setup) === -1 ? items.push(setup) : null;
           break;
+        case "admin":
+          items = [
+            SeaJobs,
+            importJobs,
+            setup,
+            accounts,
+            reports
+        ]
+        default:
+          break;
+      }
+    })
+    levels.forEach(x => {
+      switch (x) {
         case "Charges":
         case "ChartofAccount":
         case "Invoice/Bills":
@@ -273,6 +315,20 @@ function setAccesLevels(dispatch, collapsed){
         case "OpeningInvoises":
           items.indexOf(accounts) === -1 ? items.push(accounts) : null;
           break;
+        case "admin":
+          items = [
+            SeaJobs,
+            importJobs,
+            setup,
+            accounts,
+            reports
+        ]
+        default:
+          break;
+      }
+    })
+    levels.forEach(x => {
+      switch (x) {
         case "JobBalancing":
         case "AccountActivity":
         case "BalanceSheet":
@@ -291,11 +347,62 @@ function setAccesLevels(dispatch, collapsed){
             accounts,
             reports
         ]
-          break;
         default:
           break;
       }
-    });
+    })
+    // levels.forEach(x => {
+    //   switch (x) {
+    //     case "ExSea":
+    //     case "ExAir":
+    //       items.indexOf(SeaJobs) === -1 ? items.push(SeaJobs) : null;
+    //       break;
+    //     case "ImAir":
+    //     case "ImSea":
+    //       items.indexOf(importJobs) === -1 ? items.push(importJobs) : null;
+    //       break;
+    //     case "Employees":
+    //     case "ClientList":
+    //     case "VendorList":
+    //     case "NonGLParties":
+    //     case "Commodity":
+    //     case "Voyage":
+    //       items.indexOf(setup) === -1 ? items.push(setup) : null;
+    //       break;
+    //     case "Charges":
+    //     case "ChartofAccount":
+    //     case "Invoice/Bills":
+    //     case "Payment/Reciept":
+    //     case "Voucher":
+    //     case "VoucherList":
+    //     case "OfficeVoucherList":
+    //     case "OpeningBalances":
+    //     case "OpeningInvoises":
+    //       items.indexOf(accounts) === -1 ? items.push(accounts) : null;
+    //       break;
+    //     case "JobBalancing":
+    //     case "AccountActivity":
+    //     case "BalanceSheet":
+    //     case "JobProfit/Loss":
+    //     case "Ledger":
+    //     case "AgentInvBalance":
+    //     case "TrialBalance":
+    //     case "IncomeStatement":
+    //       items.indexOf(reports) === -1 ? items.push(reports) : null;
+    //       break;
+    //     case "admin":
+    //       items = [
+    //         SeaJobs,
+    //         importJobs,
+    //         setup,
+    //         accounts,
+    //         reports
+    //     ]
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // });
     
   }
 
