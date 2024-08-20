@@ -207,7 +207,7 @@ function setAccesLevels(dispatch, collapsed){
       }):null, 
       (levels?.includes("ImSea")||levels?.includes("admin"))?getItem('Sea Import Jobs List', '8-3',<></>, null, {
         label: `Sea Import Jobs List`,
-        key: '4-3',
+        key: '4-5',
         children: `Content of Tab Pane 2`,
       }):null
     ]
