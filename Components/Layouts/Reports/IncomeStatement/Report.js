@@ -291,11 +291,27 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
       debit:0,
       credit:0
     }
+    let Exp = false
     data.forEach((x)=>{
-      if(x.type=="child"){
-        temp.debit = temp.debit + x.debit
-        temp.credit = temp.credit + x.credit
+      console.log(x)
+      if(x.type=="parent"){
+        if(x.title == "Expense"){
+          Exp = true
+        }else if(x.title == "Income/Sales"){
+          Exp = false
+        }
       }
+      console.log(Exp)
+      if(x.type=="child" && Exp){
+        console.log("Expense")
+        temp.debit += x.debit
+        temp.credit = temp.credit - x.credit
+      }else if(x.type=="child" && !Exp){
+        console.log("Income")
+        temp.debit = temp.debit - x.debit
+        temp.credit += x.credit
+      }
+      console.log(temp)
     });
     setTotal(temp)
   }
@@ -627,7 +643,7 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
                     <td></td>
                     <td className='text-end'><b>Profit & Loss {"( Total )"}:</b></td>
                     <td className='fs-12'><b>{commas(total.debit) || '0.00'}</b></td>
-                    <td className='fs-12'><b>{commas(total.credit >= 0 ? total.credit : total.credit * -1) || '0.00'}</b></td>
+                    <td className='fs-12'><b>{commas(total.credit) || '0.00'}</b></td>
                   </tr>
                 </tbody>
               </Table>
