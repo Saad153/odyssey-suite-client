@@ -127,13 +127,15 @@ const CreateOrEdit = ({appendClient, edit, setVisible, setEdit, selectedEmployee
     })
   }
   useEffect(() => {
-
-    const accessLevels = selectedEmployee.Access_Levels[0].access_name;
-    if (accessLevels == "admin") {
-        setIsAdminSelected(true)
-        setSelectedAccessLevels(['admin'])
- 
- 
+    console.log(selectedEmployee.Access_Levels)
+    if(edit){
+      const accessLevels = selectedEmployee.Access_Levels[0].access_name;
+      if (accessLevels == "admin") {
+          setIsAdminSelected(true)
+          setSelectedAccessLevels(['admin'])
+  
+  
+      }
     }
 
   }, []);
@@ -341,6 +343,7 @@ return(
   <Select.Option value={'AgentInvBalance'} disabled={isAdminSelected}>Agent Inv Balance</Select.Option>
   <Select.Option value={'TrialBalance'} disabled={isAdminSelected}>Trial Balance</Select.Option>
   <Select.Option value={'IncomeStatement'} disabled={isAdminSelected}>Income Statement</Select.Option>
+  <Select.Option value={'Delete'} disabled={isAdminSelected}>Delete</Select.Option>
   <Select.Option value={'admin'}>Admin</Select.Option>
 </Select>
         </Form.Item>

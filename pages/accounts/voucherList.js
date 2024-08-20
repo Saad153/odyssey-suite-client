@@ -25,7 +25,7 @@ export async function getServerSideProps({req, res}) {
     }
   })
   .then((x)=>x.data);
-
+  // console.log(voucherData)
   return{ 
     props: { sessionData, voucherData }
   }

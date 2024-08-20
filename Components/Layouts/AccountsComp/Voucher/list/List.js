@@ -9,6 +9,7 @@ import Router from 'next/router';
 import moment from 'moment';
 import axios from 'axios';
 import { Input } from 'antd';
+import { checkEmployeeAccess } from '../../../../../functions/checkEmployeeAccess';
 
 const commas = (a) => a == 0 ? '0' : parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ", ")
 
@@ -122,7 +123,7 @@ const ListData = ({ voucherData }) => {
                       <span className='fs-15 text-dark'><RiEdit2Fill /></span>
                     </td>
                     <td style={{cursor:"pointer"}} onClick={() => handleDelete(x.id)}>
-                      <span className='fs-15 text-danger'><RiDeleteBin2Fill /></span>
+                      {checkEmployeeAccess() && <span className='fs-15 text-danger'><RiDeleteBin2Fill /></span>}
                     </td>
                   </tr>
                 )
