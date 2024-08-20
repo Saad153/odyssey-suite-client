@@ -7,7 +7,7 @@ import persistValuesReducer from './persistValues/persistValuesSlice';
 import { seJobValues } from './apis/seJobValues';
 import filterValuesReducer from './filters/filterSlice';
 import ledgerReducer from './ledger/ledgerSlice';
-
+import profitLossReducer from './profitLoss/profitLossSlice';
 export const store = configureStore({
   reducer: {
     [seJobValues.reducerPath]: seJobValues.reducer,
@@ -15,6 +15,7 @@ export const store = configureStore({
     filterValues:filterValuesReducer,
     company: companyReducer,
     ledger: ledgerReducer,
+    profitloss:profitLossReducer,
     tabs: tabsReducer,
     blCreationValues: blCreationReducer,
     persistValues: persistValuesReducer,

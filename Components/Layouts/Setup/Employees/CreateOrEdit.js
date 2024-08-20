@@ -127,6 +127,7 @@ const CreateOrEdit = ({appendClient, edit, setVisible, setEdit, selectedEmployee
     })
   }
   useEffect(() => {
+
     console.log(selectedEmployee.Access_Levels)
     if(edit){
       const accessLevels = selectedEmployee.Access_Levels[0].access_name;
@@ -136,6 +137,7 @@ const CreateOrEdit = ({appendClient, edit, setVisible, setEdit, selectedEmployee
   
   
       }
+
     }
 
   }, []);

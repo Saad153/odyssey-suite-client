@@ -3,12 +3,12 @@ import { useController } from "react-hook-form";
 import React from 'react';
 
 const SelectSearchComp = (props) => {
-  const { control, name } = props;
+  const { control, name, label, options, disabled, width, clear, rest } = props;
   const { field: { onChange, onBlur, value, name: fieldName, ref } } = useController({ control, name });
   
   const SelectSearch =({props, rest}) => {
     let tempVal = [];
-    props.options.forEach((x) => {
+     options.forEach((x) => {
       tempVal.push({
         value:x.id,
         label:x.name,
@@ -16,8 +16,10 @@ const SelectSearchComp = (props) => {
         // country:x.country
       })
     });  
+
+
     return(
-      <Select disabled={props.disabled} style={{minWidth:props.width||200, maxWidth:props.width||200, fontSize:12}}
+      <Select disabled={disabled} style={{minWidth:width||200, maxWidth:props.width||200, fontSize:12}}
         name={fieldName} onChange={onChange} value={value} ref={ref} onBlur={onBlur} 
         showSearch 
         optionFilterProp="children"
@@ -27,7 +29,7 @@ const SelectSearchComp = (props) => {
           // ((option?.country) ?? '').toLowerCase().includes(input.toLowerCase())
         }
         options={tempVal}
-        allowClear={props.clear}
+        allowClear={clear}
         {...rest}
       />
     )
@@ -35,8 +37,8 @@ const SelectSearchComp = (props) => {
 
   return(
   <>
-    <div className="">{props.label}</div>
-    <SelectSearch props={props} rest={props.rest} />
+    <div className="">{label}</div>
+    <SelectSearch props={props} rest={rest} />
   </>
 )}
 
