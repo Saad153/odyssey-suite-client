@@ -10,26 +10,15 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Router from "next/router";
 import { setFilterValues } from '/redux/filters/filterSlice';
+import { setFrom, setTo, setCompany, setClient,setJobType,setOverSeasagent,setReportType,setSalesRepresentative,setSubType } from '../../../../redux/profitLoss/profitLossSlice';
 
 const JobPL = () => {
   const dispatchNew = useDispatch();
+
   const [state, dispatch] = useReducer(recordsReducer, initialState);
   const set = (obj) => dispatch({ type: 'set', payload: obj });
-  const [ jobType, setJobType ] = useState(['SE','SI','AE','AI']);
-  const [ company, setCompany ] = useState(4);
-  const [ subType, setSubtype ] = useState([]);
 
-  const stateValues = {
-    from: state.from,
-    to: state.to,
-    jobType: jobType,
-    company: company,
-    subType:state.subType,
-    salesRepresentative: state.salesrepresentative,
-    overSeasagent: state.overseasagent,
-    client: state.client,
-    reportType: state.reportType,
-  }
+  const { from, to, jobType,company,subType,salesRepresentative,overSeasagent,client,reportType  } = useSelector((state) => state.profitloss);
 
 
 
@@ -63,15 +52,8 @@ const JobPL = () => {
   }, [filters]);
 
   const handleChange = (event) => {
-    setCompany(event);
+   dispatchNew(setCompany(event)) ;
   };
-
-  // const handleSubtypeChange = (event) => {
-  //   console.log("e",event)
-  //     setSubtype(event);
-  // };
-
-
 
   return (
     <>
@@ -79,21 +61,21 @@ const JobPL = () => {
         <Row>
           <Col md={3}>
             <div>Start Date</div>
-            <Form.Control type={"date"} size="sm" value={state.from} onChange={(e) => set({ from: e.target.value })} />
+            <Form.Control type={"date"} size="sm" value={state.from} onChange={(e) => dispatchNew(setFrom(e.target.value))} />
           </Col>
           <Col md={3}>
             <div>End Date</div>
-            <Form.Control type={"date"} size="sm" value={state.to} onChange={(e) => set({ to: e.target.value })} />
+            <Form.Control type={"date"} size="sm" value={state.to} onChange={(e) => dispatchNew(setTo(e.target.value))} />
           </Col>
         </Row>
         <Row className='mt-3'>
           <Col md={2}>
             <div>Job Types</div>
-            <Checkbox.Group options={plainOptions} value={jobType} onChange={(e) => setJobType(e)} />
+            <Checkbox.Group options={plainOptions} value={jobType} onChange={(e) => dispatchNew(setJobType(e))} />
           </Col>
           <Col md={2}>
             <div>Sub Types</div>
-            <Checkbox.Group options={typeOptions} value={subType} onChange={(e) => setSubtype(e)} />
+            <Checkbox.Group options={typeOptions} value={subType} onChange={(e) => dispatchNew(setSubType(e)) } />
           </Col>
           
         </Row>
@@ -115,24 +97,24 @@ const JobPL = () => {
         <Row className='mt-3'>
           <Col md={3}>
             <div>Sales Representative</div>
-            <Search getChild={(value) => set({ salesrepresentative: value })} placeholder={"Search"} style={{ width: "100%" }} type={"representative"} />
+            <Search getChild={(value) => dispatchNew(setSalesRepresentative(value))} placeholder={"Search"} style={{ width: "100%" }} type={"representative"} />
           </Col>
         </Row>
         <Row className='mt-3'>
           <Col md={3}>
             <div>Overseas Agent</div>
-            <Search getChild={(value) => set({ overseasagent: value })} placeholder={"Search"} style={{ width: "100%" }} type={"agent"} />
+            <Search getChild={(value) => dispatchNew(setOverSeasagent(value))} placeholder={"Search"} style={{ width: "100%" }} type={"agent"} />
           </Col>
         </Row>
         <Row className='mt-3'>
           <Col md={3}>
             <div>Client</div>
-            <AdvanceSearch getChild={(value) => set({ client: value })} placeholder={"Search"} value={state.client} style={{ width: "100%" }} type={"client"} />
+            <AdvanceSearch getChild={(value) => dispatchNew(setClient(value))} placeholder={"Search"} value={state.client} style={{ width: "100%" }} type={"client"} />
           </Col>
           <Col md={8}></Col>
           <Col md={2} style={{ border: '1px solid silver', marginLeft: 12, paddingRight: 40 }} className='py-1 mt-3'>
             Report Types
-            <Radio.Group onChange={(e) => set({ reportType: e.target.value })} value={state.reportType}>
+            <Radio.Group onChange={(e) => dispatchNew(setReportType(e.target.value))} value={state.reportType}>
               <Radio value={"viewer"}>Viewer</Radio>
               <Radio value={"grid"}>Grid</Radio>
             </Radio.Group>
@@ -140,12 +122,6 @@ const JobPL = () => {
         </Row>
         <button className='btn-custom mt-3'
           onClick={() => {
-            //handleSubmit(set,state)
-            const { to, from, client, overseasagent, salesrepresentative, reportType } = state
-            dispatchNew(setFilterValues({
-              pageName:"jobPLreport",
-              values:stateValues    
-            }));
             Router.push({
               pathname: `/reports/jobPLReport/report`,
               query: {
@@ -155,24 +131,23 @@ const JobPL = () => {
                 company: company,
                 subtype:subType,
                 jobtype: jobType,
-                overseasagent: overseasagent,
-                salesrepresentative: salesrepresentative,
+                overseasagent: overSeasagent,
+                salesrepresentative: salesRepresentative,
                 report: reportType
               }
             });
-            let url = `?to=${state.to}&from=${state.from}`;
+            let url = `?to=${to}&from=${from}`;
             client? url = url + `&client=${client}`: null;
             company? url = url + `&company=${company}`: null;
             subType? url = url + `&subtype=${subType}`: null;
             jobType? url = url + `&jobtype=${jobType}`: null;
-            salesrepresentative? url = url + `&salesrepresentative=${salesrepresentative}`: null;
+            salesRepresentative? url = url + `&salesrepresentative=${salesRepresentative}`: null;
             reportType? url = url + `&report=${reportType}`: null;
-            overseasagent? url = url + `&overseasagent=${overseasagent}`: null;
-            overseasagent? url = url + `&overseasagent=${overseasagent}`: null;
+            overSeasagent? url = url + `&overseasagent=${overSeasagent}`: null;
             
             dispatchNew(incrementTab({
               "label": "Job Profit & Loss", "key": "5-4-1",
-              "id": url //`?to=${state.to}&from=${state.from}&client=${state.client}&company=${state.company}&jobtype=${state.jobType}&overseasagent=${state.overseasagent}&salesrepresentative=${state.salesrepresentative}&report=${state.reportType}`
+              "id": url 
             }));
           }}
           disabled={state.load}

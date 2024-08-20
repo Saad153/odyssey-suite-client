@@ -34,6 +34,7 @@ const EquipmentInfo = ({state, dispatch}) => {
         <tr className='f' key={i}>
           <td>
           <Select style={{width:width}} value={x.size}
+          allowClear
             onChange={(e)=>{
               let tempState = [...state.equipments];
               tempState[i].size = e;
@@ -82,6 +83,7 @@ const EquipmentInfo = ({state, dispatch}) => {
           </td>
           <td>
             <InputNumber placeholder="Basic usage" value={x.qty} style={{width:width}}
+            allowClear
               min={1}
               onChange={(e)=>{
                 let tempState = [...state.equipments];
@@ -108,6 +110,7 @@ const EquipmentInfo = ({state, dispatch}) => {
           </td>
           <td>
             <Select style={{ width: width }} value={x.dg}
+            allowClear
               onChange={(e)=>{
                 let tempState = [...state.equipments];
                 tempState[i].dg = e;

@@ -139,11 +139,15 @@ useEffect(() => {
   const searchParties = async () => {
     if (state.search.length > 2) {
       setShowTable(false); // Hide table and pagination
+      
       await axios.post(process.env.NEXT_PUBLIC_CLIMAX_MISC_GET_PARTIES_BY_SEARCH,
         { search: state.search, type: state.partytype }
       ).then((x) => {
         if (x.data.status === "success") {
+     
           setAll({ partyOptions: x.data.result });
+         
+
         } else {
           setAll({ partyOptions: [] });
         }
@@ -172,8 +176,8 @@ useEffect(() => {
               {shallow:true}
             );
             dispatchNew(incrementTab({
-              "label": "Payment / Receipt",
-              "key": "3-4",
+              "label": "Payment/ Reciept Details",
+              "key": "3-13",
               "id":`new?name=${item.name}&partyid=${item.id}&type=${state.partytype}&paytype=${state.payType}&currency=${state.invoiceCurrency}`
             }))
             setAll({selectedParty:{id:item.id, name:item.name}, tranVisible:true, search:""});

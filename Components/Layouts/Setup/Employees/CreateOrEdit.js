@@ -128,7 +128,7 @@ const CreateOrEdit = ({appendClient, edit, setVisible, setEdit, selectedEmployee
   }
   useEffect(() => {
 
-    const accessLevels = selectedEmployee.Access_Levels[0].access_name;
+    const accessLevels = selectedEmployee?.Access_Levels?.[0]?.access_name;
     if (accessLevels == "admin") {
         setIsAdminSelected(true)
         setSelectedAccessLevels(['admin'])

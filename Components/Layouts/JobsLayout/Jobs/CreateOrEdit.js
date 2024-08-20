@@ -131,20 +131,23 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
   };
 
   const onEdit = async(data) => {
+
     data.equipments = state.equipments
     data.customAgentId = data.customCheck.length>0?data.customAgentId:null;
     data.transporterId = data.transportCheck.length>0?data.transporterId:null;
     data.VoyageId = data.VoyageId!=""?data.VoyageId:null;
-    data.ClientId = data.ClientId!=""?data.ClientId:null;
-    data.shippingLineId = data.shippingLineId!=""?data.shippingLineId:null;
-    data.shipperId = data.shipperId!=""?data.shipperId:null;
-    data.consigneeId = data.consigneeId!=""?data.consigneeId:null;
-    data.overseasAgentId = data.overseasAgentId!=""?data.overseasAgentId:null;
-    data.salesRepresentatorId = data.salesRepresentatorId!=""?data.salesRepresentatorId:null;
-    data.forwarderId = data.forwarderId!=""?data.forwarderId:null;
-    data.localVendorId = data.localVendorId!=""?data.localVendorId:null;
-    data.commodityId = data.commodityId!=""?data.commodityId:null;
-    data.shippingLineId = data.shippingLineId!=""?data.shippingLineId:null;
+
+    data.ClientId = data.ClientId !== undefined && data.ClientId!=""?data.ClientId:null;
+    data.shippingLineId = data.shippingLineId !== undefined &&  data.shippingLineId!=""?data.shippingLineId:null;
+    data.shipperId = data.shipperId !== undefined && data.shipperId!=""?data.shipperId:null;
+    data.consigneeId = data.consigneeId !== undefined && data.consigneeId !== "" ? data.consigneeId : null;
+
+    data.overseasAgentId = data.overseasAgentId !== undefined && data.overseasAgentId!=""?data.overseasAgentId:null;
+    data.salesRepresentatorId = data.salesRepresentatorId !== undefined &&data.salesRepresentatorId!=""?data.salesRepresentatorId:null;
+    data.forwarderId = data.forwarderId !== undefined &&data.forwarderId!=""?data.forwarderId:null;
+    data.localVendorId = data.localVendorId !== undefined &&data.localVendorId!=""?data.localVendorId:null;
+    data.commodityId = data.commodityId !== undefined &&data.commodityId!=""?data.commodityId:null;
+    data.shippingLineId = data.shippingLineId !== undefined &&data.shippingLineId!=""?data.shippingLineId:null;
     data.approved = data.approved[0]=="1"?true:false;
     data.companyId = companyId;
   
