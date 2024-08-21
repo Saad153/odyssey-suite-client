@@ -133,32 +133,32 @@ const JobBalancingReport = ({ result, query }) => {
             <thead>
               <tr>
                 <th className='text-center'>#</th>
-                <th className='text-center'>Inv. No</th>
-                <th className='text-center'>Job. No</th>
-                <th className='text-center'>Job. Date</th>
-                <th className='text-center'>Date</th>
-                <th className='text-center'>HBL/HAWB</th>
-                <th className='text-center'>MBL/MAWB</th>
+                <th className='text-center' style={{ minWidth: 100 }}>Inv. No</th>
+                <th className='text-center' style={{ minWidth: 50 }}>Job. No</th>
+                <th className='text-center' style={{ minWidth: 90 }}>Job. Date</th>
+                <th className='text-center' style={{ minWidth: 90 }}>Date</th>
+                <th className='text-center' style={{ minWidth: 100 }}>HBL/HAWB</th>
+                <th className='text-center' style={{ minWidth: 100 }}>MBL/MAWB</th>
 
-                <th className='text-center'>Sailing Date</th>
-                <th className='text-center'>Arrival Date</th>
-                <th className='text-center'>Name</th>
-                <th className='text-center'>Client Code</th>
-                <th className='text-center'>Shipper</th>
-                <th className='text-center'>Consignee</th>
-                <th className='text-center'>Sales Representator</th>
-                <th className='text-center'>Shipping Line</th>
-                <th className='text-center'>Vessel</th>
-                <th className='text-center'>F. Dest</th>
+                <th className='text-center' style={{ minWidth: 100 }}>Sailing Date</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Arrival Date</th>
+                <th className='text-center'style={{ minWidth: 200 }}>Name</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Client Code</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Shipper</th>
+                <th className='text-center' style={{ minWidth: 100 }}>Consignee</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Sales Representator</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Shipping Line</th>
+                <th className='text-center' style={{ minWidth: 100 }}>Vessel</th>
+                <th className='text-center'style={{ minWidth: 100 }}>F. Dest</th>
                 <th className='text-center'>J/Tp</th>
                 <th className='text-center'>F/Tp</th>
                 <th className='text-center'>Weight</th>
                 <th className='text-center'>Volume</th>
                 <th className='text-center'>Currency</th>
-                <th className='text-center'>Debit</th>
-                <th className='text-center'>Credit</th>
-                <th className='text-center'>Paid/Rcvd</th>
-                <th className='text-center'>Balance</th>
+                <th className='text-center' style={{ minWidth: 100 }}>Debit</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Credit</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Paid/Rcvd</th>
+                <th className='text-center'style={{ minWidth: 100 }}>Balance</th>
                 <th className='text-center'>Age</th>
               </tr>
             </thead>

@@ -117,18 +117,18 @@ const InvoiceBalancingReport = ({ result, query }) => {
                   <thead>
                     <tr>
                       <th className='text-center'>#</th>
-                      <th className='text-center'>Inv. No</th>
-                      <th className='text-center'>Job. No</th>
-                      <th className='text-center'>Date</th>
-                      <th className='text-center'>HBL/HAWB</th>
-                      <th className='text-center'>Name</th>
-                      <th className='text-center'>F. Dest</th>
+                      <th className='text-center'style={{ minWidth: 100 }}>Inv. No</th>
+                      <th className='text-center'style={{ minWidth: 100 }}>Job. No</th>
+                      <th className='text-center' style={{ minWidth: 100 }}>Date</th>
+                      <th className='text-center' >HBL/HAWB</th>
+                      <th className='text-center'style={{ minWidth: 200 }}>Name</th>
+                      <th className='text-center' style={{ minWidth: 100 }}>F. Dest</th>
                       <th className='text-center'>F/Tp</th>
                       <th className='text-center'>Curr</th>
-                      <th className='text-center'>Debit</th>
-                      <th className='text-center'>Credit</th>
-                      <th className='text-center'>Paid/Rcvd</th>
-                      <th className='text-center'>Balance</th>
+                      <th className='text-center'style={{ minWidth: 100 }}>Debit</th>
+                      <th className='text-center'style={{ minWidth: 100 }}>Credit</th>
+                      <th className='text-center'style={{ minWidth: 100 }}>Paid/Rcvd</th>
+                      <th className='text-center'style={{ minWidth: 100 }}>Balance</th>
                       <th className='text-center'>Age</th>
                     </tr>
                   </thead>
