@@ -6,7 +6,7 @@ import moment from 'moment';
     to: moment().format("YYYY-MM-DD"),
     company: 4,
     jobType: ['SE','SI','AE','AI'],
-    subType: ["FCL","LCL"],
+    subType: ["FCL","LCL","AIR"],
     reportType: "viewer",
     salesRepresentative:"",
     overSeasagent: "",
