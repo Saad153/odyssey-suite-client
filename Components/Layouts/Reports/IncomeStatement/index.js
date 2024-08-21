@@ -372,10 +372,10 @@ const IncomeStatement = () => {
 
         </Col>
            <Col md={4} style={{ border: '1px solid silver', marginLeft: 12, paddingRight: 40 }} className='py-1 mt-3'>
-            Report Types
+            Report Types 
             <Radio.Group 
             value={reportType} onChange={(e) => setReportType(e.target.value)}>
-              <Radio value={"pnl"}>Profit & Loss Icome Statement </Radio>
+              <Radio value={"pnl"}>Profit & Loss Income Statement </Radio>
             </Radio.Group>
           </Col>
       </Row>
