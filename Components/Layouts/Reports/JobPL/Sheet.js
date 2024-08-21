@@ -20,26 +20,27 @@ const Sheet = ({state, overflow, fontSize}) => {
     const recordState = state?.records;
   return (
     <div>
-    <div className='' style={{maxHeight:overflow ? 600 : "100%", overflowY:'auto'}}>
+    <div className='' style={{maxHeight:overflow ? 600 : "100%", overflowY:'auto', overflowX:'auto'}}>
         <Table className='tableFixHead vertical' bordered>
         <thead>
             <tr className='fs-10 text-center'>
                 <th>#</th>
-                <th>Job No</th>
-                <th style={{width:45}}>Date</th>
-                <th style={{width:200}}>Client</th>
-                <th style={{width:200}}>SubType</th>
-                <th style={{width:200}}> HBL/HAWB</th>
-                <th>F. Dest</th>
-                <th>Shipper</th>
-                <th>Local Agent</th>
-                <th>Type</th>
+                <th style={{ minWidth: 100 }}>Job No</th> 
+                <th >Date</th>
+                <th style={{ minWidth:200 }}>Client</th>
+                <th>SubType</th>
+                <th > HBL/HAWB</th>
                 <th>Weight</th>
-                <th>Revenue</th>
-                <th>Cost</th>
-                <th>P/L</th>
-                <th>Gain/Loss</th>
-                <th>After Gain/Loss</th>
+                <th style={{ minWidth:90 }}>Revenue</th>
+                <th style={{ minWidth:90 }}>Cost</th>
+                <th style={{ minWidth:90 }}>P/L</th>
+                <th style={{ minWidth:90 }}>Gain/Loss</th>
+                <th style={{ minWidth:90 }}>After Gain/Loss</th>
+                <th style={{ minWidth:150 }}>F. Dest</th>
+                <th style={{ minWidth:150 }}>Shipper</th>
+                <th style={{ minWidth:100 }}>Local Agent</th>
+                <th>Type</th>
+
             </tr>
         </thead>
         <tbody>
@@ -48,7 +49,7 @@ const Sheet = ({state, overflow, fontSize}) => {
         <tr key={index} className='f fs-10 text-center'>
             <td>{index + 1}</td>
             <td className='row-hov blue-txt'
-                onClick={()=>{
+                    onClick={()=>{
                     let type = x.operation;
                     dispatch(incrementTab({
                         "label":type=="SE"?"SE JOB":type=="SI"?"SI JOB":type=="AE"?"AE JOB":"AI JOB",
@@ -64,13 +65,7 @@ const Sheet = ({state, overflow, fontSize}) => {
             <td>{x.Client.name}</td>
             <td>{x.subType}</td>
             <td>{x.Bl?.hbl}</td>
-            <td style={{width:80}}>{x.fd}</td>
-            <td style={{width:80}}>{x.shipper?.name}</td>
-            <td style={{width:80}}>{x.local_vendor?.name}</td>
-            <td style={{width:80}}>{x.jobType}</td>
-
-
-            <td style={{width:80}}>{x.weight}</td>
+            <td>{x.weight}</td>
             <td>{setCommas(x.revenue)}</td>
             <td>{setCommas(x.cost)}</td>
             <td>{setCommas(x.actual)}</td>
@@ -78,16 +73,35 @@ const Sheet = ({state, overflow, fontSize}) => {
                 {setCommas(x.gainLoss<0?x.gainLoss*-1:x.gainLoss)}
             </td>
             <td>{setCommas(x.after)}</td>
+
+            <td >{x.fd}</td>
+            <td>{x.shipper?.name}</td>
+            <td >{x.local_vendor?.name}</td>
+            <td >{x.jobType}</td>
+        
+  
+            
         </tr>
         )})}
         <tr className='f fs-11 text-center'>
-            <td colSpan={7}></td>
+            <td colSpan={6}></td>
             <td>Total: </td>
             <td>{setCommas(state.totalRevenue)}</td>
-            {/* <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.revenue) + x},0)||0)}</td> */}
-            {/* <td>{setCommas(state.totalCost)}</td> */}
-            <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.cost) + x},0)||0)}</td>
-            <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.actual) + x},0)||0)}</td>
+            <td>
+  {setCommas(
+    Array.isArray(state.records)
+      ? state.records.reduce((x, c) => Number(c.cost) + x, 0)
+      : 0
+  )}
+</td>  
+<td>         
+{setCommas(
+    Array.isArray(state.records)
+      ? state.records.reduce((x, c) => Number(c.actual) + x, 0)
+      : 0
+  )}
+</td>   
+ {/* <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.actual) + x},0)||0)}</td> */}
             {/* <td>{setCommas(state.totalActual)}</td> */}
             <td>{setCommas(state.totalgainLoss)}</td>
             <td>{setCommas(state.totalAfter)}</td>

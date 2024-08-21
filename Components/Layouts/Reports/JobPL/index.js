@@ -109,12 +109,12 @@ const JobPL = () => {
         <Row className='mt-3'>
           <Col md={3}>
             <div>Client</div>
-            <AdvanceSearch getChild={(value) => dispatchNew(setClient(value))} placeholder={"Search"} value={state.client} style={{ width: "100%" }} type={"client"} />
+            <AdvanceSearch getChild={(value) => dispatchNew(setClient(value))} placeholder={"Search"} value={client} style={{ width: "100%" }} type={"client"} />
           </Col>
           <Col md={8}></Col>
           <Col md={2} style={{ border: '1px solid silver', marginLeft: 12, paddingRight: 40 }} className='py-1 mt-3'>
             Report Types
-            <Radio.Group onChange={(e) => dispatchNew(setReportType(e.target.value))} value={state.reportType}>
+            <Radio.Group onChange={(e) => dispatchNew(setReportType(e.target.value))} value={reportType}>
               <Radio value={"viewer"}>Viewer</Radio>
               <Radio value={"grid"}>Grid</Radio>
             </Radio.Group>
