@@ -86,8 +86,21 @@ const Sheet = ({state, overflow, fontSize}) => {
             <td>{setCommas(state.totalRevenue)}</td>
             {/* <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.revenue) + x},0)||0)}</td> */}
             {/* <td>{setCommas(state.totalCost)}</td> */}
-            <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.cost) + x},0)||0)}</td>
-            <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.actual) + x},0)||0)}</td>
+            <td>
+  {setCommas(
+    Array.isArray(state.records)
+      ? state.records.reduce((x, c) => Number(c.cost) + x, 0)
+      : 0
+  )}
+</td>  
+<td>         
+{setCommas(
+    Array.isArray(state.records)
+      ? state.records.reduce((x, c) => Number(c.actual) + x, 0)
+      : 0
+  )}
+</td>   
+ {/* <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.actual) + x},0)||0)}</td> */}
             {/* <td>{setCommas(state.totalActual)}</td> */}
             <td>{setCommas(state.totalgainLoss)}</td>
             <td>{setCommas(state.totalAfter)}</td>
