@@ -323,6 +323,7 @@ const MainLayout = ({children}) => {
     else if(x.key=='3-2'){ Router.push('/accounts/accountActivity') }
     else if(x.key=='3-3'){ Router.push('/accounts/invoiceAndBills') }
     else if(x.key=='3-4'){ Router.push(`/accounts/paymentReceipt/${setKey(x)}`) }
+    else if(x.key=='3-13'){ Router.push(`/accounts/paymentReceipt/${setKey(x)}`) }
     else if(x.key=='3-5'){ 
       //console.log(x);
       if(x.id){

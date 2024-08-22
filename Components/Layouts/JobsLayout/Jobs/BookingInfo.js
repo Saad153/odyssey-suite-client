@@ -46,6 +46,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
   const [isOpen, setIsOpen] = useState(false);
   const Space = () => <div className='mt-2' />
 
+
   useEffect(() => {
     if (allValues.freightType == "Prepaid") {
       reset({ ...allValues, freightPaybleAt: 'Karachi, Pakistan' });
@@ -124,13 +125,20 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
     Router.push(route);
   };
 
+
   const ShipperComp = () => {
+
     return (
       <>
         <div className='custom-link mt-2' onClick={() => pageLinking("client", shipperId)}>
           Shipper *
         </div>
-        <SelectSearchComp register={register} name='shipperId' control={control} label=''
+        <SelectSearchComp register={register}
+          name='shipperId'
+
+          control={control}
+          clear={true}
+          label=''
           disabled={getStatus(approved)} width={"100%"}
           options={state.fields.party.shipper}
         />
@@ -138,7 +146,6 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
       </>
     )
   }
-  // console.log(state)
   return (
     <>
       <Row style={{ fontSize: 12 }}>
@@ -190,7 +197,7 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             ]} />
         </Col>
         <Col md={1} className='py-1'>
-          {(type == "SE" || type == "SI") && <SelectComp register={register} name='subType' control={control} disabled={getStatus(approved) }
+          {(type == "SE" || type == "SI") && <SelectComp register={register} name='subType' control={control} disabled={getStatus(approved)}
             label='Sub Type' width={"100%"}
             options={[
               { id: 'FCL', name: 'FCL' },
@@ -259,17 +266,27 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
       <Row style={{ fontSize: 12 }}>
         <Col md={3} className=''>
           <div className='custom-link mt-2' onClick={() => pageLinking("client", ClientId)} >Client *</div>
-          <SelectSearchComp register={register} name='ClientId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
+          <SelectSearchComp register={register}
+            clear={true}
+            name='ClientId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
             options={state.fields.party.client} />
           {(type == "SE" || type == "AE") && <ShipperComp />}
-          <div className='custom-link mt-2' onClick={() => pageLinking("client", consigneeId)} >Consignee *</div>
-          <SelectSearchComp register={register} name='consigneeId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
+          <div className='custom-link mt-2'
+            onClick={() => pageLinking("client", consigneeId)} >Consignee *</div>
+          <SelectSearchComp register={register} clear={true}
+
+            name='consigneeId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
             options={state.fields.party.consignee} /><Space />
           {(type == "SI" || type == "AI") && <ShipperComp />}
           {(type == "SE" || type == "SI") && <>
-            <SelectSearchComp register={register} name='pol' control={control} label='Port Of Loading' disabled={getStatus(approved)} width={"100%"}
+            <SelectSearchComp register={register}
+              name='pol'
+              clear={true}
+              control={control} label='Port Of Loading' disabled={getStatus(approved)} width={"100%"}
               options={ports.ports} /><Space />
-            <SelectSearchComp register={register} name='pod' control={control} label='Port Of Discharge *' disabled={getStatus(approved)} width={"100%"}
+            <SelectSearchComp register={register}
+              clear={true}
+              name='pod' control={control} label='Port Of Discharge *' disabled={getStatus(approved)} width={"100%"}
               options={ports.ports} />
             <FaPlus onClick={() => setIsOpen(true)} style={{ cursor: "pointer" }} />
             <Space />
@@ -278,57 +295,84 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
           }
           {(type == "AE" || type == "AI") && <>
             {type == "AI" && <>
-              <SelectSearchComp register={register} name='pol' control={control} label='Air Port Of Loading' disabled={getStatus(approved)} width={"100%"}
+              <SelectSearchComp register={register}
+                clear={true}
+                name='pol' control={control} label='Air Port Of Loading' disabled={getStatus(approved)} width={"100%"}
                 options={airports} /><Space />
-              <SelectSearchComp register={register} name='pod' control={control} label='Air Port Of Discharge *' disabled={getStatus(approved)} width={"100%"}
+              <SelectSearchComp register={register}
+                clear={true}
+                name='pod' control={control} label='Air Port Of Discharge *' disabled={getStatus(approved)} width={"100%"}
                 options={airports} />
-                
+
               <FaPlus onClick={() => setIsOpen(true)} style={{ cursor: "pointer" }} />
               <Space />
               {isOpen && <AddPort isOpen={isOpen} onClose={() => setIsOpen(false)} />}
             </>}
           </>}
-
           {(type == "AE" || type == "AI") && <>
-          <SelectSearchComp register={register} name='fd' control={control} label='Final Destination *' disabled={getStatus(approved)} width={"100%"}
-            options={destinations}
-          />
+            <SelectSearchComp register={register}
+              clear={true}
+              name='fd' control={control} label='Final Destination *' disabled={getStatus(approved)} width={"100%"}
+              options={destinations}
+            />
           </>}
           {(type == "SE" || type == "SI") && <>
-          <SelectSearchComp register={register} name='fd' control={control} label='Final Destination *' disabled={getStatus(approved)} width={"100%"}
-            options={ports.ports}
-          />
+            <SelectSearchComp register={register}
+              clear={true}
+              name='fd' control={control} label='Final Destination *' disabled={getStatus(approved)} width={"100%"}
+              options={ports.ports}
+            />
           </>}
           <Space />
           <div className='custom-link mt-2' onClick={() => pageLinking("vendor", forwarderId)} >Forwarder/Coloader *</div>
-          <SelectSearchComp register={register} name='forwarderId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
+          <SelectSearchComp register={register}
+            clear={true}
+
+            name='forwarderId' control={control} label='' disabled={getStatus(approved)} width={"100%"}
             options={state.fields.vendor.forwarder} /><Space />
-          <SelectSearchComp register={register} name='salesRepresentatorId' control={control} label='Sales Representator' disabled={getStatus(approved)}
+          <SelectSearchComp register={register}
+            clear={true}
+
+            name='salesRepresentatorId' control={control} label='Sales Representator' disabled={getStatus(approved)}
             options={state.fields.sr} width={"100%"} />
         </Col>
-        
         <Col md={3}><Space />
           <div className='custom-link mt-2' onClick={() => pageLinking("vendor", overseasAgentId)} >Overseas Agent *</div>
-          <SelectSearchComp register={register} name='overseasAgentId' control={control} label='' disabled={getStatus(approved)} options={state.fields.vendor.overseasAgent} width={"100%"} />
+          <SelectSearchComp register={register}
+            clear={true}
+
+            name='overseasAgentId' control={control} label='' disabled={getStatus(approved)} options={state.fields.vendor.overseasAgent} width={"100%"} />
 
           <div className='custom-link mt-2' onClick={() => pageLinking("vendor", localVendorId)} >Local Vendor *</div>
-          <SelectSearchComp register={register} name='localVendorId' control={control} label=''
+          <SelectSearchComp register={register}
+            clear={true}
+
+            name='localVendorId' control={control} label=''
             disabled={getStatus(approved)} options={state.fields.vendor.localVendor} width={"100%"}
           />
           {(type == "SE" || type == "SI") && <>
             <div className='custom-link mt-2' onClick={() => pageLinking("vendor", shippingLineId)} >Sline/Carrier</div>
-            <SelectSearchComp register={register} name='shippingLineId' control={control} label='' disabled={getStatus(approved)} options={state.fields.vendor.sLine} width={"100%"} />
+            <SelectSearchComp register={register}
+              clear={true}
+
+              name='shippingLineId' control={control} label='' disabled={getStatus(approved)} options={state.fields.vendor.sLine} width={"100%"} />
           </>}
           {(type == "AE" || type == "AI") && <>
             <div className='custom-link mt-2' onClick={() => pageLinking("vendor", airLineId)} >Air line *</div>
-            <SelectSearchComp register={register} name='airLineId' control={control} label='' disabled={getStatus(approved)} options={state.fields.vendor.airLine} width={"100%"} />
+            <SelectSearchComp register={register}
+              clear={true}
+
+              name='airLineId' control={control} label='' disabled={getStatus(approved)} options={state.fields.vendor.airLine} width={"100%"} />
           </>}
           <Carrier state={state} register={register} control={control} pageLinking={pageLinking} dispatch={dispatch}
             getStatus={getStatus} approved={approved} VoyageId={VoyageId} vesselId={vesselId} type={type}
           />
         </Col>
         <Col md={3}><Space />
-          <SelectSearchComp register={register} name='commodityId' control={control} label='Commodity *' disabled={getStatus(approved)} width={"100%"}
+          <SelectSearchComp register={register}
+            clear={true}
+
+            name='commodityId' control={control} label='Commodity *' disabled={getStatus(approved)} width={"100%"}
             options={state.fields.commodity}
           />
           <div className='mt-2' />
@@ -342,7 +386,10 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             </Col>
             <Col>.</Col>
           </Row>
-          <SelectSearchComp register={register} name='transporterId' control={control} label=''
+          <SelectSearchComp register={register}
+            clear={true}
+
+            name='transporterId' control={control} label=''
             options={state.fields.vendor.transporter} disabled={getStatus(approved) || transportCheck.length == 0} width={"100%"} />
           <div className='mt-2'></div>
           <Row>
@@ -355,7 +402,10 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
             </Col>
             <Col>.</Col>
           </Row>
-          <SelectSearchComp register={register} name='customAgentId' control={control} label='' width={"100%"}
+          <SelectSearchComp register={register}
+            clear={true}
+
+            name='customAgentId' control={control} label='' width={"100%"}
             options={state.fields.vendor.chaChb} disabled={getStatus(approved) || customCheck.length == 0}
           />
           <div style={{ marginTop: 13 }}></div>
@@ -415,11 +465,11 @@ const BookingInfo = ({ handleSubmit, onEdit, companyId, register, control, error
               <button type="button" className="btn-custom">Invoice/Bills {`(${state.InvoiceList.length})`}</button>
             </Popover>
 
-            {(type=="AE" || type=="SE") && 
-            <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { loadingProgram: 1, tabState: "6" } })}
-            >Loading Program</button>}
+            {(type == "AE" || type == "SE") &&
+              <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { loadingProgram: 1, tabState: "6" } })}
+              >Loading Program</button>}
 
-            {(type=="AI" || type=="SI") && <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { do: 1, tabState: "7" } })}>
+            {(type == "AI" || type == "SI") && <button className='btn-custom px-4' type='button' onClick={() => dispatch({ type: 'set', payload: { do: 1, tabState: "7" } })}>
               DO
             </button>}
           </div>}
