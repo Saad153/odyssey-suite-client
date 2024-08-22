@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const CreateOrEdit = ({state, dispatch, getAccounts}) => {
-
+    console.log(state)
     const companyId = useSelector((state) => state.company.value);
 
     const handleSubmit = async() => {
