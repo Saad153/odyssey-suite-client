@@ -23,6 +23,7 @@ export async function getServerSideProps({req,res}){
       }
   }).then((x)=>x.data);
   const accountsData = await accountRequest
+  console.log(accountsData.result[0].Parent_Accounts)
 
   return{
       props: { accountsData:accountsData }
