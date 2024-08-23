@@ -16,6 +16,7 @@ import ReactToPrint from 'react-to-print';
 import DeleteVoucher from './DeleteVoucher';
 import Pagination from '../../../Shared/Pagination';
 
+const commas = (a) => a == 0 ? '0' : parseFloat(a).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 const PaymentsReceipt = ({id, voucherData}) => {
 
   let inputRef = useRef(null);
@@ -223,6 +224,11 @@ useEffect(() => {
     dispatchNew(incrementTab({"label": "Payment / Receipt","key": "3-4","id":e.data.id}))
     Router.push(`/accounts/paymentReceipt/${e.data.id}`)
   }, []);
+  
+  const cellClickListener = useCallback((e)=> {
+    dispatchNew(incrementTab({"label": "Payment / Receipt","key": "3-4","id":e.id}))
+    Router.push(`/accounts/paymentReceipt/${e.id}`)
+  }, []);
 
   return (
     <div className='base-page-layout'>
@@ -270,7 +276,7 @@ useEffect(() => {
             )}
           />
         }
-        {/* <button className='btn-custom px-3' style={{fontSize:11}}
+        <button className='btn-custom px-3' style={{fontSize:11}}
           onClick={() => {
             axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_OLD_PAY_REC_VOUCHERS,{headers:{companyid:companyId}})
             .then((x) => {
@@ -285,11 +291,11 @@ useEffect(() => {
             })
           }}
         >Show Old <MdHistory /></button> 
-        { id!="new" && <DeleteVoucher companyId={companyId} setAll={setAll} state={state} id={id} />} */}
+        { id!="new" && <DeleteVoucher companyId={companyId} setAll={setAll} state={state} id={id} />}
       </Col>
       <Col md={6} className='mt-3'>
         {!state.selectedParty.name && <>
-          <Input placeholder="Search" size='small'
+          <Input placeholder="Search type" size='small'
             suffix={state.search.length>2?<CloseCircleOutlined onClick={()=>setAll({search:""})} />:<SearchOutlined/>} 
             value={state.search} onChange={(e)=>setAll({search:e.target.value})}
           />
@@ -328,7 +334,7 @@ useEffect(() => {
 }
 {!state.tranVisible && <Col md={4} className='mt-3'>
           <div className='d-flex justify-content-end'>
-            <Input type="text" placeholder="Enter Voucher No" size='small' onChange={e => setQuery(e.target.value)} />
+            <Input type="text" placeholder="Search..." size='small' onChange={e => setQuery(e.target.value)} />
           </div>
         </Col>
          }
@@ -343,11 +349,11 @@ useEffect(() => {
         <Table className='tableFixHead'>
           <thead>
             <tr>
-              <th style={{width:130}}>Voucher No #</th>
-              <th style={{width:130}}>Name</th>
-              <th style={{width:130}}>Party</th>
-              <th style={{width:130}}>Type </th>
-              <th style={{width:150}}>Date </th>
+              <th style={{width:70}}>Voucher No #</th>
+              <th style={{width:150}}>Name</th>
+              <th style={{width:50}}>Party</th>
+              <th style={{width:50}}>Type </th>
+              <th style={{width:70}}>Date </th>
               <th style={{width:80}}>Currency </th>
               <th style={{width:80}}>amount</th>
              
@@ -368,8 +374,8 @@ useEffect(() => {
               .map((x, index) => {
                 console.log("X",x)
                 return (
-                  <tr key={index}>
-                    <td className='blue-txt fw-6 fs-12'>{x.voucher_Id}</td>
+                  <tr onClick={()=>cellClickListener(x)} key={index} style={{cursor:'pointer'}}>
+                    <td className='blue-txt fw-6 fs-12' >{x.voucher_Id}</td>
                     <td>{x.partyName}</td>
                     <td>{x.partyType}</td>
                     <td>{x.vType}</td>
@@ -377,7 +383,7 @@ useEffect(() => {
                       Date: <span className='blue-txt'>{x.createdAt ? moment(x.createdAt).format("YYYY-MM-DD") : "-"}</span>
                     </td>
                     <td>{x.currency}</td>
-                    <td>{x.amount}</td>
+                    <td>{commas(x.amount)}</td>
                   </tr>
                 )
               })

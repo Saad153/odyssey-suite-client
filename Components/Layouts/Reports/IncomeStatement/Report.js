@@ -70,7 +70,7 @@ const accountlevel = query.accountLevel;
     // let AdminExpArray=[];
   
 
-    let tempArray = [result.result[1], result.result[0]]
+    let tempArray = [result.result[0], result.result[1]]
     tempArray.forEach((x)=>{
       let i = 0
       if(query.expense != null && x.title == query.expense){
@@ -263,13 +263,11 @@ const accountlevel = query.accountLevel;
   }, []);
   
 const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
-// console.log(revenue)
   const checkMonth = (date) => {
     return moment(date).format("MMM, YYYY")
   }
 
   const monthWise = (data) => {
-    // console.log(data.result)
     let dates = [];
     data.result.forEach((account)=>{
       account.Parent_Accounts.forEach((pAccount)=>{
@@ -283,7 +281,6 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
         })
       })
     })
-    // console.log(dates)
   }
 
   const makeTotal = (data) => {
@@ -338,12 +335,9 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
       temp.credit = temp.credit + x.credit
     });
     setTotalAdminExp(temp)
-    // console.log("total",totalAdminExp)
   }
 
   const exportData = () => {
-    // console.log(records[0])
-    // console.log(records[1])
     let temp = [...records];
     temp.push({title:'', ...total})
     exportExcelFile(
@@ -369,7 +363,6 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
         <div className="">
         <div className="d-flex justify-content-end">
         <button 
-          //onClick={exportData}
           className="btn-custom mx-2 px-3 fs-11 text-center" 
         >
           To Excel
