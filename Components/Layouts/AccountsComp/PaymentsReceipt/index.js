@@ -145,6 +145,7 @@ useEffect(() => {
         { search: state.search, type: state.partytype }
       ).then((x) => {
         if (x.data.status === "success") {
+        
      
           setAll({ partyOptions: x.data.result });
          
@@ -165,7 +166,9 @@ useEffect(() => {
       bordered 
       dataSource={data}
       renderItem={(item)=>
+    
         <List.Item key={item.id} className='searched-item' 
+       
           onClick={() => {
             Router.push({
               pathname:"/accounts/paymentReceipt/new", 
@@ -183,7 +186,7 @@ useEffect(() => {
             }))
             setAll({selectedParty:{id:item.id, name:item.name}, tranVisible:true, search:""});
           }}
-        >{item.name}</List.Item>
+        >{`${item.code} ${item.name}`}</List.Item>
       }
     />
   )};

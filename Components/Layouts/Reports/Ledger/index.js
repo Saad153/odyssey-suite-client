@@ -32,7 +32,8 @@ const Ledger = () => {
         const {result} = data
         let temprecords=[];
         result?.map((x) => {
-              return temprecords.push({ value: x.id, label: x.title, });
+          console.log("x",x)
+              return temprecords.push({ value: x.id, label: `(${x.code}) ${x.title}`, });
             });
             dispatch(setRecords(temprecords));
             getAccountName(temprecords);

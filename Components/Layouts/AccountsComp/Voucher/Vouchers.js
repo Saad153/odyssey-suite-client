@@ -26,7 +26,7 @@ import { FaHistory } from "react-icons/fa";
 import { CiBoxList } from "react-icons/ci";
 
 const Vouchers = ({ register, control, errors, CompanyId, child, settlement, reset, voucherData, setSettlement, setChild, id }) => {
-
+console.log("settlement",settlement)
   let inputRef = useRef(null);
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
@@ -252,7 +252,7 @@ const Vouchers = ({ register, control, errors, CompanyId, child, settlement, res
           </Col>
           <Col md={12}>
             <SelectSearchComp className="form-select" name="ChildAccountId" label="Settlement Account" register={register} control={control} width={"100%"}
-              options={settlement.length > 0 ? settlement.map((x) => { return { id: x?.id, name: x?.title } }) : []}
+              options={settlement.length > 0 ? settlement.map((x) => { return { id: x?.id, name: `(${x.code}) ${x?.title}` } }) : []}
               disabled={(allValues.vType == "CPV" || allValues.vType == "CRV" || allValues.vType == "BRV" || allValues.vType == "BPV" || allValues.vType == "TV") ? false : true}
             />
           </Col>

@@ -76,12 +76,7 @@ const Vendor = ({sessionData, vendorData}) => {
     }});
   }
 
-  // const onSearch = (event) => {
-  //   const data = searchBy == 'name' ? allVendors.filter((x) => x.name.toLowerCase().includes(event.target.value.toLowerCase())) : allVendors .filter((x) => x.code.includes(event.target.value))
-  //   dispatch({type:'toggle', fieldName:'records', payload:data});
-  // }
-
-  const onSearch = (event) => {
+    const onSearch = (event) => {
     const searchValue = event.target.value.toLowerCase();
     const data = allVendors.filter((x) => 
    

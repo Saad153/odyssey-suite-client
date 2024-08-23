@@ -63,7 +63,7 @@ const AccountActivity = () => {
     }).then((x) => {
       let temprecords = [];
       x.data.result.forEach((x) => {
-        temprecords.push({ value: x.id, label: x.title });
+        temprecords.push({ value: x.id, label: `(${x.code}) ${x.title}` });
       })
       setRecords(temprecords);
     })
@@ -96,10 +96,10 @@ const AccountActivity = () => {
   const currentRecords = voucherRecords ? voucherRecords.slice(indexOfFirst, indexOfLast) : [];
   const noOfPages = voucherRecords ? Math.ceil(voucherRecords.length / recordsPerPage) : 0;
 
-  console.log("currentPage:", currentPage);
-  console.log("indexOfLast:", indexOfLast);
-  console.log("indexOfFirst:", indexOfFirst);
-  console.log("currentRecords:", currentRecords);
+  // console.log("currentPage:", currentPage);
+  // console.log("indexOfLast:", indexOfLast);
+  // console.log("indexOfFirst:", indexOfFirst);
+  console.log("Records:", records);
 
   return (
     <div className='base-page-layout'>

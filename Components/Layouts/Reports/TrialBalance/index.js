@@ -60,7 +60,7 @@ const TrialBalance = () => {
     }).then((x) => {
       let temprecords = [];
       x.data.result.forEach((x) => {
-        temprecords.push({ value: x.id, label: x.title });
+        temprecords.push({ value: x.id, label: `(${x.code}) ${x.title}` });
       })
       setRecords(temprecords);
     })
