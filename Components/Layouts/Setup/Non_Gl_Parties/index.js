@@ -75,11 +75,18 @@ const Index = ({ clientData, sessionData}) => {
     }});
   }
 
-
 const onSearch = (event) => {
-  const data = searchBy == 'name' ? allClients.filter((x) => x.name.toLowerCase().includes(event.target.value.toLowerCase())) : allClients.filter((x) => x.code.includes(event.target.value))
+  const searchValue = event.target.value.toLowerCase();
+  const data = allClients.filter((x) => 
+ 
+    x.name.toLowerCase().includes(searchValue) || 
+    x?.code?.toLowerCase().includes(searchValue)
+  );
+
   dispatch({type:'toggle', fieldName:'records', payload:data});
 }
+  
+
 
   return (
     <div className='base-page-layout'>

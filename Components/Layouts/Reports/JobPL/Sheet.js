@@ -31,13 +31,14 @@ const Sheet = ({state, overflow, fontSize}) => {
                 <th>SubType</th>
                 <th > HBL/HAWB</th>
                 <th>Weight</th>
-                <th style={{ minWidth:90 }}>Revenue</th>
-                <th style={{ minWidth:90 }}>Cost</th>
-                <th style={{ minWidth:90 }}>P/L</th>
-                <th style={{ minWidth:90 }}>Gain/Loss</th>
-                <th style={{ minWidth:90 }}>After Gain/Loss</th>
+                <th style={{ minWidth:120 }}>Revenue</th>
+                <th style={{ minWidth:120 }}>Cost</th>
+                <th style={{ minWidth:120 }}>P/L</th>
+                <th style={{ minWidth:120 }}>Gain/Loss</th>
+                <th style={{ minWidth:120 }}>After Gain/Loss</th>
                 <th style={{ minWidth:150 }}>F. Dest</th>
                 <th style={{ minWidth:150 }}>Shipper</th>
+                <th style={{ minWidth:150 }}>Sales Representative</th>
                 <th style={{ minWidth:100 }}>Local Agent</th>
                 <th>Type</th>
 
@@ -76,6 +77,7 @@ const Sheet = ({state, overflow, fontSize}) => {
 
             <td >{x.fd}</td>
             <td>{x.shipper?.name}</td>
+            <td>{x.sales_representator?.name}</td>
             <td >{x.local_vendor?.name}</td>
             <td >{x.jobType}</td>
         
@@ -85,10 +87,9 @@ const Sheet = ({state, overflow, fontSize}) => {
         )})}
         <tr className='f fs-11 text-center'>
             <td colSpan={6}></td>
-            <td>Total: </td>
-            <td>{setCommas(state.totalRevenue)}</td>
-            <td>
-  {setCommas(
+            <td >Total: </td>
+            <td style={{ minWidth:120 }}>{setCommas(state.totalRevenue)}</td>
+            <td style={{ minWidth:120 }}>{setCommas(
     Array.isArray(state.records)
       ? state.records.reduce((x, c) => Number(c.cost) + x, 0)
       : 0
@@ -101,8 +102,7 @@ const Sheet = ({state, overflow, fontSize}) => {
       : 0
   )}
 </td>   
- {/* <td>{setCommas(state.records?.reduce((x, c) => {return Number(c.actual) + x},0)||0)}</td> */}
-            {/* <td>{setCommas(state.totalActual)}</td> */}
+
             <td>{setCommas(state.totalgainLoss)}</td>
             <td>{setCommas(state.totalAfter)}</td>
         </tr>

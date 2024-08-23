@@ -85,9 +85,15 @@ const Client = ({sessionData, clientData}) => {
 
 
   const onSearch = (event) => {
-    const data = searchBy == 'name' ? allClients.filter((x) => x.name.toLowerCase().includes(event.target.value.toLowerCase())) : allClients .filter((x) => x.code.includes(event.target.value))
-    dispatch({type:'toggle', fieldName:'records', payload:data});
-  }
+    const searchValue = event.target.value.toLowerCase();
+    const data = allClients.filter((x) => 
+   
+      x.name.toLowerCase().includes(searchValue) || 
+      x?.code?.toLowerCase().includes(searchValue)
+    );
+  
+    dispatch({ type: 'toggle', fieldName: 'records', payload: data });
+  };
 
   return (
   <div className='base-page-layout'>
@@ -95,7 +101,14 @@ const Client = ({sessionData, clientData}) => {
     <Col md={3}><h5>Clients</h5></Col>
     <Col md={7} style={{display:"inline-block"}}><span>Search By :</span>
       <Select placeholder="Search" onChange={(e) => setSearchBy(e)} style={{width:"150px", marginLeft:"5px",borderRadius:"8px"}}
-        options={[{value : "name", label:"Name"}]} defaultValue={"name"}
+        options={
+          [
+            {value : "name", label:"Name"},
+            {value : "code", label:"Code"}
+          ]
+        
+        } defaultValue={"name"}
+
       />
       <Input style={{width:"290px", marginLeft:"5px", borderRadius:"5px"}} placeholder={searchBy == 'name' ? "Type Name" : "Type Code"}
         onChange={(e) => onSearch(e)}

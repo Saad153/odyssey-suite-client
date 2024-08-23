@@ -133,7 +133,7 @@ const JobBalancingReport = ({ result, query }) => {
             <thead>
               <tr>
                 <th className='text-center'>#</th>
-                <th className='text-center' style={{ minWidth: 100 }}>Inv. No</th>
+                <th className='text-center' style={{ minWidth: 110 }}>Inv. No</th>
                 <th className='text-center' style={{ minWidth: 50 }}>Job. No</th>
                 <th className='text-center' style={{ minWidth: 90 }}>Job. Date</th>
                 <th className='text-center' style={{ minWidth: 90 }}>Date</th>

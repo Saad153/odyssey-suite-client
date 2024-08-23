@@ -37,6 +37,7 @@ const PartySearch = ({state, dispatch, reset, useWatch, control}) => {
     return(
     <>
       {props.data.filter((x)=>{
+        console.log("x",x)
         if(
           x?.name?.toLowerCase().includes(searchTerm.toLowerCase())||
           x?.code?.toLowerCase().includes(searchTerm.toLowerCase())||
@@ -84,6 +85,8 @@ const PartySearch = ({state, dispatch, reset, useWatch, control}) => {
         }
       }}>
         <td className='pt-1 text-center px-3'> {x.check?<CheckCircleOutlined style={{color:'green', position:'relative', bottom:2}} />:i+1 } </td>
+        <td className='pt-1' style={{whiteSpace:"nowrap"}}><strong>{x.code}</strong></td>
+
         <td className='pt-1' style={{whiteSpace:"nowrap"}}><strong>{x.name}</strong></td>
         <td className='pt-1 text-center'>
           {x.types?.split(", ").map((y, i2)=>{
@@ -110,12 +113,13 @@ const PartySearch = ({state, dispatch, reset, useWatch, control}) => {
         partyType=="vendor"?setPartyType("client"):setPartyType("vendor")
       }}
     /><span className='mx-2'><b>{partyType}</b></span>
-    <Input style={{width:200}} placeholder='Type Name' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
+    <Input style={{width:200}} placeholder='Search by Code or Name' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
     <div className='table-sm-1 mt-4' style={{maxHeight:300, overflowY:'auto'}}>
       <Table className='tableFixHead'>
       <thead>
         <tr>
           <th className='text-center'>#</th>
+          <th className='text-center'>Code</th>
           <th className='text-center'>Name</th>
           <th className='text-center'>Types</th>
           <th className='text-center'>City</th>
