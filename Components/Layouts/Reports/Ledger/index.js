@@ -61,6 +61,24 @@ const Ledger = () => {
     }
   }
 
+  async function getLedger(){
+
+    try{
+      const result = await axios.get(process.env.NEXT_PUBLIC_CLIMAX_GET_VOUCEHR_LEDGER, {
+        headers: {
+          id: account,
+          currency: currency,
+          from: from,
+          to: to,
+        }
+      });
+      console.log(result.data)
+      return result.data
+    }catch(e){
+      console.error(e)
+    }
+  }
+
   useEffect(() => { if (company != "") 
     getAccounts();
  
@@ -136,16 +154,28 @@ const Ledger = () => {
         />
       </Col>
       <Col md={12}>
-        <button className='btn-custom mt-3' onClick={() => {
-          // dispatch(setFilterValues({ pageName: "ledgerReport", values: stateValues }));
+        <button className='btn-custom mt-3' onClick={async () => {
           if (account != "" && account != null) {
-         
+            await getLedger();
             Router.push({ pathname: `/reports/ledgerReport/${account}/`, query: { from: from, to: to, name: name, company: company, currency: currency } });
             dispatch(incrementTab({
               "label": "Ledger Report",
               "key": "5-7",
-              "id": `${account}?from=${from}&to=${to}&name=${name}&company=${company}&currency=${currency}`
+              "id": `${account}?from=${from}&to=${to}&name=${name}&company=${company}&currency=${currency}`,
+              'data': getLedger()
             }))
+          }else{
+            Router.push({
+              pathname: `/reports/ledgerReport/`,  
+              query: { from: from, to: to, name: name, company: company, currency: currency }
+            });
+            
+            dispatch(incrementTab({
+              "label": "Ledger Report",
+              "key": "5-7",
+              "id": `from=${from}&to=${to}&name=${name}&company=${company}&currency=${currency}`  // Removed ${account} from id
+            }));
+            
           }
         }
         }> Go </button>

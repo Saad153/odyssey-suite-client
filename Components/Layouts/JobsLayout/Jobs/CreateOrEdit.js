@@ -277,6 +277,7 @@ const CreateOrEdit = ({state, dispatch, companyId, jobData, id, type, refetch}) 
                   id:allValues.id
                 }).then(async(x)=>{
                   let oldTabs = await type=="SE"?tabs.filter((x)=> {return x.key!="4-3" }):
+                  console.log(oldTabs)
                   await type=="SI"?tabs.filter((x)=> {return x.key!="4-6" }):
                   await type=="AE"?tabs.filter((x)=> {return x.key!="7-2" }):
                   await tabs.filter((x)=> {return x.key!="7-5" })

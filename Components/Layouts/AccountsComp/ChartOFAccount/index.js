@@ -57,13 +57,11 @@ const initialState = {
 };
 
 const ChartOFAccount = ({accountsData}) => {
-    // console.log(accountsData)
 
     const [ state, dispatch ] = useReducer(recordsReducer, initialState);
     const { records, visible } = state;
     useEffect(() => { 
         getAccounts(accountsData)
-        // updateCodeParents()
      }, []);
 
     async function getAccounts(data){
@@ -93,12 +91,9 @@ const ChartOFAccount = ({accountsData}) => {
     
         for (let x of tempState) {
             p = parseInt(x.id * 100);
-            console.log(Cookies.get('companyId'))
             for (let y of x.Parent_Accounts) {
                 p++;
                 let codeP = Cookies.get('companyId').toString() + p.toString();
-                console.log(codeP);
-                console.log(y);
                 try {
                     const response = await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_CODE_PARENT_ACCOUNT, {
                         id: y.id,
@@ -107,18 +102,15 @@ const ChartOFAccount = ({accountsData}) => {
                         CompanyId: Cookies.get('companyId'),
                         code: codeP.toString()
                     });
-                    // console.log(response.data);
                 } catch (error) {
                     console.error("Error updating parent account:", error);
                 }
     
-                // console.log("Updated");
     
                 c = p * 10000;
                 for (let z of y.Child_Accounts) {
                     c++;
                     let codeC = Cookies.get('companyId').toString() + c.toString();
-                    console.log(codeC);
                     try {
                         const response = await axios.post(process.env.NEXT_PUBLIC_CLIMAX_POST_CODE_CHILD_ACCOUNT, {
                             id: z.id,
@@ -127,11 +119,9 @@ const ChartOFAccount = ({accountsData}) => {
                             CompanyId: Cookies.get('companyId'),
                             code: codeC.toString()
                         });
-                        // console.log(response.data);
                     } catch (error) {
                         console.error("Error updating child account:", error);
                     }
-                    console.log(c);
                 }
     
                 c = 0;
@@ -140,8 +130,6 @@ const ChartOFAccount = ({accountsData}) => {
             p = 0;
         }
     
-        // Dispatch the updated state if needed
-        // dispatch({ type: 'toggle', fieldName: 'records', payload: tempState });
     };
     
 
@@ -152,9 +140,9 @@ return (
         <Row>
             <Col><h5>Accounts</h5></Col>
             <Col>   
-                <button className='btn-custom right' onClick={()=>updateCodeParents()}>
+                {/* <button className='btn-custom right' onClick={()=>updateCodeParents()}>
                     Update Codes
-                </button>           
+                </button>            */}
                 <button className='btn-custom right' onClick={()=>{ dispatch({ type: 'create'}) }}>
                     Create
                 </button>
@@ -164,7 +152,6 @@ return (
         <Row style={{maxHeight:'69vh',overflowY:'auto', overflowX:'hidden'}}>
         {
         records.map((x, index)=>{
-            console.log(x)
         return(
             <div key={x.id} className='parent'>
             <div className='child icon' onClick={()=>{
@@ -185,7 +172,6 @@ return (
                 <div key={y.id} className='mx-4 parent'>
                 <div className='child icon' onClick={()=>{
                     let tempState = [...records];
-                    console.log(y.title)
                     tempState[index].Parent_Accounts.forEach((j)=>{
                         if(j.id==y.id){
                             j.check=!j.check

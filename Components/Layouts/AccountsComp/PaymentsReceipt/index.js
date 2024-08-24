@@ -62,6 +62,7 @@ useEffect(() => {
 
 
   useEffect(() => {
+    setAll({ partytype: 'client' });
     if(router?.query?.id=='undefined') {
       Router.push({pathname:"/accounts/paymentReceipt/new"}, undefined,{shallow:true});
       dispatchNew(incrementTab({
@@ -157,7 +158,8 @@ useEffect(() => {
       setShowTable(true); // Show table and pagination if search is cleared
     }
   };
-
+console.log(state.transVisible)
+console.log(showTable)
   const ListComp = ({data}) => {
   return(
     <List 
@@ -253,7 +255,7 @@ useEffect(() => {
             search:"", payType:value, invoiceCurrency:TempInvoiceCurrency
           })
         }}>
-          <Radio value={"client"}>Client</Radio>
+          <Radio value={"client"} defaultChecked>Client</Radio>
           <Radio value={"vendor"}>Vendor</Radio>
           <Radio value={"agent"} >Agent </Radio>
         </Radio.Group>
@@ -291,7 +293,7 @@ useEffect(() => {
             })
           }}
         >Show Old <MdHistory /></button> 
-        { id!="new" && <DeleteVoucher companyId={companyId} setAll={setAll} state={state} id={id} />}
+        { id!="new" && <DeleteVoucher companyId={companyId} setAll={setAll} state={state} id={id} setShowTable={setShowTable} />}
       </Col>
       <Col md={6} className='mt-3'>
         {!state.selectedParty.name && <>
@@ -372,7 +374,7 @@ useEffect(() => {
                 x?.amount?.toString().includes(query)
               })
               .map((x, index) => {
-                console.log("X",x)
+                // console.log("X",x)
                 return (
                   <tr onClick={()=>cellClickListener(x)} key={index} style={{cursor:'pointer'}}>
                     <td className='blue-txt fw-6 fs-12' >{x.voucher_Id}</td>

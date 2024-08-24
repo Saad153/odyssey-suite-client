@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import MainTable from "./MainTable";
+import Router from 'next/router';
+import { removeTab } from '/redux/tabs/tabSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-const LedgerReport = ({ voucherData, from, to, name, company, currency }) => {
+
+const LedgerReport = ({ voucherData, account, from, to, name, company, currency }) => {
   const [ledger, setLedger] = useState([]);
   const [opening, setOpening] = useState(0.0);
   const [closing, setClosing] = useState(0.0);
+  const dispatch = useDispatch();
   
   useEffect(() => {
+    console.log(voucherData)
+    console.log(voucherData.result.length)
+    if(voucherData.result.length==0){
+      // dispatch(removeTab('2'))
+      // Router.push('/reports/ledger')
+    }
     if (name && voucherData.status == "success") {
       let openingBalance = 0.0, closingBalance = 0.0, tempArray = [], prevBalance = 0, isDone = false, finalClosing = 0;
       voucherData.result.forEach((y) => {
