@@ -532,7 +532,7 @@ console.log(accLevelOneArray)
 
   const TableComponent = ({ overFlow }) => {
     // Determine if we should render the alternative content
-    const shouldRenderAlternative = accountlevel && report && <ProfitLossReport accountLevel={accountlevel} report={report} overFlow={overFlow} />;
+    const shouldRenderAlternative = accountlevel && report=='pnl' && <ProfitLossReport accountLevel={accountlevel} report={report} overFlow={overFlow} />;
   
     if (shouldRenderAlternative) {
       return shouldRenderAlternative;
