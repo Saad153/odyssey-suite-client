@@ -7,8 +7,7 @@ import Pagination from "/Components/Shared/Pagination";
 import { Row, Col } from 'react-bootstrap';
 
 const Report = ({query, result}) => {
-  // console.log(query)
-  // console.log(result)
+  console.log(result)
 const report = query.reportType;  
 const accountlevel = query.accountLevel;
   const [ records, setRecords ] = useState([]);
@@ -73,11 +72,15 @@ const accountlevel = query.accountLevel;
     let tempArray = [result.result[0], result.result[1]]
     tempArray.forEach((x)=>{
       let i = 0
+      console.log("x",x.title)
+      console.log(query.expense)
+      console.log(query.revenue)
       if(query.expense != null && x.title == query.expense){
         temp.push({
           title:x.title, type:'parent'
         });
         x.Parent_Accounts.forEach((y)=>{
+          console.log("y",y)
           if(y.Child_Accounts?.length>0){
             y.Child_Accounts.forEach((z)=>{
               i = i + 1
@@ -98,8 +101,10 @@ const accountlevel = query.accountLevel;
           title:x.title, type:'parent'
         });
         x.Parent_Accounts.forEach((y)=>{
+          console.log("y",y)
           if(y.Child_Accounts?.length>0){
             y.Child_Accounts.forEach((z)=>{
+              console.log("z",z)
               i = i + 1
               if(query.revenue != null){
                 temp.push({
@@ -147,7 +152,7 @@ const accountlevel = query.accountLevel;
                 ...makeTransaction(exp.Voucher_Heads)
               })
 
-                console.log("AdminExpArray",AdminExpArray)
+                // console.log("AdminExpArray",AdminExpArray)
                
 
             })
@@ -164,8 +169,10 @@ const accountlevel = query.accountLevel;
         x.Parent_Accounts.forEach((y)=>{
           if(y.Child_Accounts?.length>0){
             y.Child_Accounts.forEach((z)=>{
+              console.log("z",z)
               i = i + 1
               if(query.revenue != null){
+                // console.log(query.revenue, z.title)
                 if(query.revenue == z.title){
                   temp.push({
                     title:z.title,
@@ -176,6 +183,7 @@ const accountlevel = query.accountLevel;
                 }
               }else if(query.expense != null){
                 if(query.expense == z.title){
+                  // console.log(query.expense, z.title)
                   temp.push({
                     title:z.title,
                     index: 1,
@@ -245,24 +253,29 @@ const accountlevel = query.accountLevel;
     // console.log(incomeTotal)
     
     // monthWise(result)
+    console.log(temp)
     makeTotal(temp)
     makeCogsTotal(cogsArray)
     makeAdminExpTotal(AdminExpArray)
     setRecords(listWithTotals)
-    // console.log("list with totals",listWithTotals)
+    console.log("list with totals",listWithTotals)
     let accLevelOne = [
       listWithTotals.find(item => item.title === 'Expense' && item.type === 'parent'),
       listWithTotals.find(item => item.type === 'total'),
       listWithTotals.find(item => item.title === 'Income/Sales' && item.type === 'parent'),
-      listWithTotals.filter(item => item.type === 'total')[1]
+      listWithTotals.filter(item => item.type === 'total')[0],
   ];
 
   setaAcLevelOneArray(accLevelOne)
-
+  
+  // const profitLoss = (revenue - (totalCogs?.debit || 0) - (totalAdminExp?.debit || 0)).toFixed(2);
+  // const formattedProfitLoss = profitLoss < 0 ? `(${Math.abs(profitLoss)})` : profitLoss;
+  console.log(profitLoss)
 
   }, []);
-  
+
 const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
+console.log(accLevelOneArray)
   const checkMonth = (date) => {
     return moment(date).format("MMM, YYYY")
   }
@@ -290,7 +303,6 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
     }
     let Exp = false
     data.forEach((x)=>{
-      console.log(x)
       if(x.type=="parent"){
         if(x.title == "Expense"){
           Exp = true
@@ -298,19 +310,21 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
           Exp = false
         }
       }
-      console.log(Exp)
+      // console.log(Exp)
       if(x.type=="child" && Exp){
-        console.log("Expense")
+        // console.log("Expense")
         temp.debit += x.debit
         temp.credit = temp.credit - x.credit
       }else if(x.type=="child" && !Exp){
-        console.log("Income")
+        // console.log("Income")
         temp.debit = temp.debit - x.debit
         temp.credit += x.credit
       }
-      console.log(temp)
+      // console.log(temp)
     });
+    // console.log(temp)
     setTotal(temp)
+    setTotalCogs(temp)
   }
 
   const makeCogsTotal =(data)=> {
@@ -353,10 +367,13 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
       ]
     )
   }
-
+  console.log(revenue)
+  console.log(total)
+  console.log(totalCogs)
+  console.log(totalAdminExp)
   const profitLoss = (revenue - (totalCogs?.debit || 0) - (totalAdminExp?.debit || 0)).toFixed(2);
   const formattedProfitLoss = profitLoss < 0 ? `(${Math.abs(profitLoss)})` : profitLoss;
-
+  console.log(profitLoss) 
   const ProfitLossReport = ({ accountLevel, report, overFlow }) => {
     if ((accountLevel === "6" || accountLevel === "1") && report === "pnl") {
       return (
@@ -395,18 +412,18 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
 
               <Col style={{lineHeight:1.75}} md={6} >
                <div>
-               {/* {filteredTempData.map((item) => (
+               {filteredTempData.map((item) => (
                     <div key={item.index}>
                         {item.title}
                     </div>
-                ))} */}
+                ))}
                   </div>
                           
               Total for Revenue
               </Col>
        
               <Col style={{lineHeight:1.75}} md={6} className='text-end'>
-              {/* <div className='text-end'>
+              <div className='text-end'>
              
                 {filteredTempData.map((item) => (
                     <div key={item.index}>
@@ -415,7 +432,7 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
                 ))}
            
             
-               </div> */}
+               </div>
               {revenue} 
               </Col>
               </>
@@ -434,7 +451,7 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
               <b>Gross Profit</b> 
               </Col>
               <Col style={{lineHeight:1.75}} md={6} className='text-end'>
-          {(revenue - totalCogs?.debit ).toFixed(2)} 
+          {(total.credit - totalCogs?.debit ).toFixed(2)} 
               </Col>
 
               <Row md={12}>
@@ -452,25 +469,25 @@ const revenue = accLevelOneArray?.[3]?.credit.toFixed(2);
 
               {accountLevel === "6" && <> 
               <Col md={6}>
-              {/* <div>
+              <div>
                {AdminExpArray.map((item) => (
                     <div key={item.index}>
                         {item.title}
                     </div>
                 ))}
-                  </div> */}
+                  </div>
 
 
                 <div> Total for Admin Expense </div> 
               </Col>
               <Col style={{lineHeight:1.75}} md={6} className='text-end'>
-              {/* <div>
+              <div>
                {AdminExpArray.map((ele) => (
                     <div key={ele.index}>
                         {ele.debit}
                     </div>
                 ))}
-                  </div> */}
+                  </div>
 
 
               <div> {totalAdminExp?.debit?.toFixed(2)} 

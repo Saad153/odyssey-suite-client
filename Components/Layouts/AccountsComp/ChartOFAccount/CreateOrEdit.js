@@ -18,6 +18,7 @@ const CreateOrEdit = ({state, dispatch, getAccounts}) => {
             }).then((x)=>{
                 if(x.data.status=='success'){
                     getAccounts(x.data);
+                    state.visible = false
                     openNotification('Success', `Account ${state.title} Created!`, 'green')
                 }else{
                     openNotification('Failure', `A Similar Account With Name ${state.title} Already Exists!`, 'red')
@@ -32,6 +33,7 @@ const CreateOrEdit = ({state, dispatch, getAccounts}) => {
             }).then((x)=>{
                 if(x.data.status=='success'){
                     getAccounts(x.data);
+                    state.visible = false
                     openNotification('Success', `Account ${state.title} Created!`, 'green')
                 }else{
                     openNotification('Failure', `A Similar Account With Name ${state.title} Already Exists!`, 'red')
