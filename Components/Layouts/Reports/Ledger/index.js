@@ -163,21 +163,22 @@ const Ledger = () => {
               "label": "Ledger Report",
               "key": "5-7",
               "id": `${account}?from=${from}&to=${to}&name=${name}&company=${company}&currency=${currency}`,
-              'data': getLedger()
+              // 'data': getLedger()
             }))
-          }else{
-            Router.push({
-              pathname: `/reports/ledgerReport/`,  
-              query: { from: from, to: to, name: name, company: company, currency: currency }
-            });
-            
-            dispatch(incrementTab({
-              "label": "Ledger Report",
-              "key": "5-7",
-              "id": `from=${from}&to=${to}&name=${name}&company=${company}&currency=${currency}`  // Removed ${account} from id
-            }));
-            
           }
+          // else{
+          //   Router.push({
+          //     pathname: `/reports/ledgerReport/`,  
+          //     query: { from: from, to: to, name: name, company: company, currency: currency }
+          //   });
+            
+          //   dispatch(incrementTab({
+          //     "label": "Ledger Report",
+          //     "key": "5-7",
+          //     "id": `from=${from}&to=${to}&name=${name}&company=${company}&currency=${currency}`  // Removed ${account} from id
+          //   }));
+            
+          // }
         }
         }> Go </button>
       </Col>
